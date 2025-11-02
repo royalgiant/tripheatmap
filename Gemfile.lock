@@ -151,6 +151,8 @@ GEM
     encryptor (3.0.0)
     erb (5.0.1)
     erubi (1.13.1)
+    et-orbi (1.4.0)
+      tzinfo
     event_stream_parser (1.0.0)
     factory_bot (6.5.3)
       activesupport (>= 6.1.0)
@@ -176,6 +178,9 @@ GEM
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
     foreman (0.87.2)
+    fugit (1.12.1)
+      et-orbi (~> 1.4)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -330,6 +335,7 @@ GEM
     public_suffix (6.0.2)
     puma (6.6.0)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.8.1)
     rack (3.1.16)
     rack-cors (3.0.0)
@@ -453,6 +459,10 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.19.0)
+    sidekiq-cron (1.12.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -581,6 +591,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-context (~> 1.2, >= 1.2.2)
   sidekiq (~> 7.2.2)
+  sidekiq-cron (~> 1.12)
   simplecov
   sitemap_generator
   sprockets-rails

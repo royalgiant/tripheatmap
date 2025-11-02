@@ -1,0 +1,5 @@
+fetch_reddit_posts:
+  cron: "0 0 */5 * *"
+  class: FetchRedditPostsWorker
+  queue: default
+  description: "Fetch new Reddit posts about police corruption and bribes"
