@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     
     mail(
       to: @user.email,
-      subject: 'Welcome to YourApp - Your Account Details'
+      subject: 'Welcome to TripHeatMap - Your Account Details'
     )
   end
 
@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
     
     mail(
       to: @user.email,
-      subject: 'YourApp - Your Temporary Password'
+      subject: 'TripHeatMap - Your Temporary Password'
     )
   end
 end

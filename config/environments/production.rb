@@ -63,7 +63,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "pifuglow_production"
+  # config.active_job.queue_name_prefix = "tripheatmap_production"
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
@@ -84,7 +84,7 @@ Rails.application.configure do
   }
   config.action_mailer.mailgun_settings = {
     api_key: Rails.application.credentials.dig(Rails.env.to_sym, :mailgun, :MG_API_KEY),
-    domain: 'mg.pifuglow.com',
+    domain: 'mg.tripheatmap.com',
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
     # timeout: 20 # Default depends on rest-client, whose default is 60s. Added in 1.2.3.
   }

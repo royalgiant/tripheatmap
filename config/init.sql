@@ -1,2 +1,2 @@
 # config/init.sql
-CREATE DATABASE pifuglow_production;
+CREATE DATABASE tripheatmap_production;

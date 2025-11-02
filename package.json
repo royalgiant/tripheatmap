@@ -1,5 +1,5 @@
 {
-  "name": "pifuglow",
+  "name": "tripheatmap",
   "private": true,
   "dependencies": {
     "@hotwired/turbo-rails": "^8.0.10",

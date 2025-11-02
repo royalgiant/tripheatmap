@@ -50,7 +50,7 @@ Rails.application.configure do
   # }
   config.action_mailer.mailgun_settings = {
     api_key: Rails.application.credentials.dig(Rails.env.to_sym, :mailgun, :MG_API_KEY),
-    domain: 'mg.pifuglow.com',
+    domain: 'mg.tripheatmap.com',
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
     # timeout: 20 # Default depends on rest-client, whose default is 60s. Added in 1.2.3.
   }
