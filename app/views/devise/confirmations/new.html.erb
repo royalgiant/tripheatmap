@@ -1,0 +1,17 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="row justify-content-center">
+    <h2 class="text-5xl text-center mt-5">Resend confirmation instructions</h2>
+    <%= form_for(resource, as: resource_name, url: user_confirmation_path(resource_name), data: { turbolinks: false }, html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="my-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "w-full p-3 border border-gray-300 rounded"%>
+      </div>
+
+      <div class="my-3">
+        <%= f.submit "Resend confirmation instructions", class: "w-full p-3 text-white bg-blue-600 rounded hover:bg-blue-700" %>
+      </div>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

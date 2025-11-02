@@ -1,0 +1,114 @@
+<div class="flex h-full flex-col bg-gray-900 text-white">
+
+<header class="py-10">
+  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="relative z-50 flex justify-between">
+      <div class="flex items-center md:gap-x-12">
+        <%= link_to root_path, aria: { label: "Home" } do %>
+          <div class="flex-auto lg:col-start-6 lg:row-start-1 xl:col-span-8 xl:col-start-5 font-bold text-2xl text-white">
+            YourApp
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="bg-gray-900 py-20">
+  <h1 class="mx-auto max-w-5xl font-display text-4xl text-center font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+    Welcome to Your App
+  </h1>
+  <p class="mx-auto mt-6 max-w-2xl text-lg text-center tracking-tight text-gray-400 font-light">
+    A modern Rails application template with authentication, background jobs, and more.
+  </p>
+  <div class="mt-8 flex justify-center gap-x-6">
+    <% if user_signed_in? %>
+      <%= link_to "Dashboard", root_path, class: "inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200" %>
+    <% else %>
+      <%= link_to "Sign Up", signup_path, class: "inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200" %>
+      <%= link_to "Log In", login_path, class: "inline-flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200" %>
+    <% end %>
+  </div>
+</div>
+
+<section id="features" class="bg-gray-900 py-20">
+  <div class="mx-auto max-w-5xl md:text-center px-3 sm:px-6 lg:px-8">
+    <h2 class="font-display text-3xl tracking-tight text-center text-white sm:text-5xl">
+      Features
+    </h2>
+    <p class="mt-4 text-lg tracking-tight text-center text-gray-400">
+      Everything you need to get started quickly.
+    </p>
+  </div>
+
+  <div class="container mx-auto lg:max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div class="flex flex-col items-center text-center bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:bg-gray-750 transition-all duration-300">
+        <div class="mb-4">
+          <i class="fa-solid fa-lock fa-3x text-indigo-400"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white">Authentication</h3>
+        <p class="mt-4 text-sm text-gray-300">
+          Built-in user authentication with Devise, including email confirmation and OAuth support.
+        </p>
+      </div>
+
+      <div class="flex flex-col items-center text-center bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:bg-gray-750 transition-all duration-300">
+        <div class="mb-4">
+          <i class="fa-solid fa-gears fa-3x text-indigo-400"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white">Background Jobs</h3>
+        <p class="mt-4 text-sm text-gray-300">
+          Sidekiq integration for processing background jobs with Redis.
+        </p>
+      </div>
+
+      <div class="flex flex-col items-center text-center bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:bg-gray-750 transition-all duration-300">
+        <div class="mb-4">
+          <i class="fa-solid fa-palette fa-3x text-indigo-400"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white">Modern UI</h3>
+        <p class="mt-4 text-sm text-gray-300">
+          Tailwind CSS for beautiful, responsive designs out of the box.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 sm:py-22 bg-gray-900">
+  <div class="md:text-center px-3 sm:px-6 lg:px-8">
+    <h2 class="font-display font-bold text-3xl tracking-tight text-center text-white sm:text-5xl">
+      Ready to get started?
+    </h2>
+    <div class="mt-8 flex justify-center gap-x-6">
+      <% if user_signed_in? %>
+        <%= link_to "Go to Dashboard", root_path, class: "inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200" %>
+      <% else %>
+        <%= link_to "Sign Up Now", signup_path, class: "inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-900">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-16">
+      <nav class="mt-10 text-md" aria-label="quick links">
+        <div class="-my-1 flex justify-center gap-x-6">
+          <%= link_to "Features", "#features", class: "text-gray-400 hover:text-white" %>
+          <%= link_to "Terms & Conditions", terms_path, target: "_blank", class: "text-gray-400 hover:text-white" %>
+          <%= link_to "Privacy Policy", privacy_path, target: "_blank", class: "text-gray-400 hover:text-white" %>
+          <%= link_to "Contact", contact_path, class: "text-gray-400 hover:text-white" %>
+        </div>
+      </nav>
+    </div>
+    <div class="flex flex-col items-center border-t border-gray-600 py-10 sm:flex-row-reverse sm:justify-between">
+      <p class="mt-6 text-sm text-gray-400 sm:mt-0">
+        Copyright &copy; <%= Time.current.year %> YourApp. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
