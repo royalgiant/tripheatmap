@@ -34,12 +34,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_020121) do
     t.datetime "created_utc"
     t.string "context"
     t.string "city"
+    t.string "neighborhood"
     t.string "state"
     t.string "country"
     t.float "lat"
     t.float "lon"
     t.float "confidence"
     t.string "risk_level"
+    t.float "risk_score"
+    t.string "incident_type"
+    t.text "summary"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

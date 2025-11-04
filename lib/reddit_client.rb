@@ -14,7 +14,8 @@ class RedditClient
         restrict_sr: 1,
         sort: "new",
         t: "year",
-        limit: limit
+        limit: limit,
+        syntax: "cloudsearch"
       })
 
       if response.status == 200

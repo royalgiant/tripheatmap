@@ -9,12 +9,16 @@ class CreateRedditPosts < ActiveRecord::Migration[7.1]
       t.datetime :created_utc
       t.string :context
       t.string :city
+      t.string :neighborhood
       t.string :state
       t.string :country
       t.float :lat
       t.float :lon
       t.float :confidence
       t.string :risk_level
+      t.float :risk_score
+      t.string :incident_type
+      t.text :summary
       t.string :status, default: "pending"
       t.timestamps
     end
