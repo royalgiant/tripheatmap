@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  get 'maps/index'
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
   
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
     get "logout", to: "devise/sessions#destroy"
   end
 
-  root to: "static#landing"
+  root "maps#index"
 
   scope controller: :static do
     get :terms
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :error_logs, only: [:create]
+      resources :reddit_posts, only: [:index]
     end
   end
 

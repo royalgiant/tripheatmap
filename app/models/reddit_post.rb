@@ -15,7 +15,7 @@ class RedditPost < ApplicationRecord
   scope :analyzed, -> { where(status: "analyzed") }
   scope :skipped, -> { where(status: "skipped") }
   
-  scope :with_neighborhood, -> { where.not(neighborhood: nil) }
+  scope :with_neighborhood, -> (neighborhood) { where.not(neighborhood: neighborhood) }
   scope :without_neighborhood, -> { where(neighborhood: nil) }
   scope :with_city, -> { where.not(city: nil) }
   scope :without_city, -> { where(city: nil) }
