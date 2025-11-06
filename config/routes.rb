@@ -3,6 +3,7 @@ require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   get 'maps/index'
+  get 'maps/city/:city', to: 'maps#city', as: 'city_map'
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
   

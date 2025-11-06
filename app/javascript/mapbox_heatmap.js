@@ -17,98 +17,60 @@ async function initMap() {
   });
 
   const response = await fetch(sourceUrl);
-  const neighborhoods = await response.json();
-
-  const geojson = {
-    type: "FeatureCollection",
-    features: neighborhoods.map(n => ({
-      type: "Feature",
-      geometry: { type: "Point", coordinates: [n.lon, n.lat] },
-      properties: {
-        city: n.city,
-        neighborhood: n.neighborhood,
-        risk_level: n.risk_level,
-        risk_score: n.risk_score,
-        post_count: n.post_count,
-        summaries: n.summaries ? n.summaries.join(' • ') : ''
-      }
-    }))
-  };
+  const geojson = await response.json();
 
   map.on("load", () => {
-    map.addSource("neighborhoods", { type: "geojson", data: geojson });
+    // Add source with clustering
+    map.addSource("incidents", {
+      type: "geojson",
+      data: geojson,
+      cluster: true,
+      clusterRadius: 60,
+      clusterMaxZoom: 14
+    });
 
-    // Add heatmap layer for density visualization
+    // Clusters
     map.addLayer({
-      id: "neighborhood-heatmap",
-      type: "heatmap",
-      source: "neighborhoods",
+      id: "clusters",
+      type: "circle",
+      source: "incidents",
+      filter: ["has", "point_count"],
       paint: {
-        // Increase weight for higher risk scores
-        "heatmap-weight": [
-          "interpolate",
-          ["linear"],
-          ["get", "risk_score"],
-          0, 0.2,
-          5, 0.5,
-          10, 1
+        "circle-color": "#FFD700",
+        "circle-radius": [
+          "step",
+          ["get", "point_count"],
+          15, 5, 20, 10, 25
         ],
-        // Increase intensity as you zoom in
-        "heatmap-intensity": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          0, 0.5,
-          9, 1.5
-        ],
-        // Color ramp for heatmap - green to yellow to red
-        "heatmap-color": [
-          "interpolate",
-          ["linear"],
-          ["heatmap-density"],
-          0, "rgba(0, 0, 0, 0)",
-          0.2, "rgba(0, 255, 127, 0.3)",
-          0.4, "rgba(173, 255, 47, 0.5)",
-          0.6, "rgba(255, 215, 0, 0.6)",
-          0.8, "rgba(255, 140, 0, 0.7)",
-          1, "rgba(255, 69, 0, 0.8)"
-        ],
-        // Adjust radius by zoom level
-        "heatmap-radius": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          0, 15,
-          5, 30,
-          9, 50
-        ],
-        // Fade out heatmap at higher zoom levels
-        "heatmap-opacity": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          3, 0.9,
-          9, 0.6,
-          12, 0.3
-        ]
+        "circle-opacity": 0.7,
+        "circle-stroke-width": 2,
+        "circle-stroke-color": "#fff"
       }
     });
 
-    // Add large semi-transparent circles to represent neighborhood zones
+    // Cluster count
     map.addLayer({
-      id: "neighborhood-zones",
-      type: "circle",
-      source: "neighborhoods",
+      id: "cluster-count",
+      type: "symbol",
+      source: "incidents",
+      filter: ["has", "point_count"],
+      layout: {
+        "text-field": ["get", "point_count_abbreviated"],
+        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+        "text-size": 12
+      },
       paint: {
-        // Size based on number of posts (indicates data density)
-        "circle-radius": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          3, ["*", ["sqrt", ["get", "post_count"]], 3],
-          9, ["*", ["sqrt", ["get", "post_count"]], 10],
-          12, ["*", ["sqrt", ["get", "post_count"]], 20]
-        ],
+        "text-color": "#ffffff"
+      }
+    });
+
+    // Individual points
+    map.addLayer({
+      id: "unclustered-point",
+      type: "circle",
+      source: "incidents",
+      filter: ["!", ["has", "point_count"]],
+      paint: {
         "circle-color": [
           "match",
           ["get", "risk_level"],
@@ -117,97 +79,80 @@ async function initMap() {
           "dangerous", "#FF4500",
           "#888888"
         ],
-        "circle-opacity": 0.3,
-        "circle-blur": 0.8,
+        "circle-radius": 8,
+        "circle-opacity": 0.8,
         "circle-stroke-width": 2,
-        "circle-stroke-color": [
-          "match",
-          ["get", "risk_level"],
-          "safe", "#00FF7F",
-          "caution", "#FFD700",
-          "dangerous", "#FF4500",
-          "#888888"
-        ],
-        "circle-stroke-opacity": 0.6
-      }
-    });
-
-    // Add smaller markers on top for precise locations
-    map.addLayer({
-      id: "neighborhood-markers",
-      type: "circle",
-      source: "neighborhoods",
-      minzoom: 8,
-      paint: {
-        "circle-radius": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          8, 4,
-          12, 8
-        ],
-        "circle-color": [
-          "match",
-          ["get", "risk_level"],
-          "safe", "#00FF7F",
-          "caution", "#FFD700",
-          "dangerous", "#FF4500",
-          "#888888"
-        ],
-        "circle-opacity": 0.95,
-        "circle-stroke-width": 2,
-        "circle-stroke-color": "#ffffff"
+        "circle-stroke-color": "#fff"
       }
     });
 
     const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
-    // Popup interactions for zones
-    map.on("mouseenter", "neighborhood-zones", e => {
+    // Click clusters to zoom
+    map.on("click", "clusters", e => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ["clusters"] });
+      const clusterId = features[0].properties.cluster_id;
+      map.getSource("incidents").getClusterExpansionZoom(clusterId, (err, zoom) => {
+        if (err) return;
+        map.easeTo({
+          center: features[0].geometry.coordinates,
+          zoom: zoom
+        });
+      });
+    });
+
+    // Hover clusters
+    map.on("mouseenter", "clusters", e => {
       map.getCanvas().style.cursor = "pointer";
-      const f = e.features[0];
-      const { city, neighborhood, risk_level, risk_score, post_count, summaries } = f.properties;
+      const feature = e.features[0];
       popup
-        .setLngLat(f.geometry.coordinates)
+        .setLngLat(feature.geometry.coordinates)
         .setHTML(`
-          <div style="font-size:14px; max-width: 300px;">
-            <b style="font-size:16px;">${city}${neighborhood ? " – " + neighborhood : ""}</b><br/>
-            <div style="margin: 8px 0;">
-              Risk Level: <b style="text-transform:capitalize; color: ${
-                risk_level === 'dangerous' ? '#FF4500' : 
-                risk_level === 'caution' ? '#FFD700' : '#00FF7F'
-              }">${risk_level}</b> (Score: ${risk_score})
-            </div>
-            <small style="color: #aaa;">${post_count} incident${post_count > 1 ? 's' : ''} reported</small>
-            ${summaries ? `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;"><small>${summaries}</small></div>` : ''}
+          <div style="font-size:14px;">
+            <b>${feature.properties.point_count} incidents</b><br/>
+            <small>Click to zoom in</small>
           </div>
         `)
         .addTo(map);
     });
 
-    map.on("mouseleave", "neighborhood-zones", () => {
+    map.on("mouseleave", "clusters", () => {
       map.getCanvas().style.cursor = "";
       popup.remove();
     });
 
-    // Also add popup for markers
-    map.on("mouseenter", "neighborhood-markers", e => {
+    // Click individual points to open city page
+    map.on("click", "unclustered-point", e => {
+      const { city } = e.features[0].properties;
+      const cityUrl = `/maps/city/${encodeURIComponent(city)}`;
+      window.open(cityUrl, '_blank');
+    });
+
+    // Hover individual points
+    map.on("mouseenter", "unclustered-point", e => {
       map.getCanvas().style.cursor = "pointer";
-      const f = e.features[0];
-      const { city, neighborhood, risk_level, risk_score, post_count } = f.properties;
+      const { city, neighborhood, risk_level, risk_score, summary } = e.features[0].properties;
       popup
-        .setLngLat(f.geometry.coordinates)
+        .setLngLat(e.features[0].geometry.coordinates)
         .setHTML(`
-          <div style="font-size:14px;">
-            <b>${city}${neighborhood ? " – " + neighborhood : ""}</b><br/>
-            Risk: <b style="text-transform:capitalize">${risk_level}</b> (${risk_score})<br/>
-            <small>${post_count} incident${post_count > 1 ? 's' : ''}</small>
+          <div style="font-size:14px; max-width: 300px;">
+            <b style="font-size:16px;">${city}${neighborhood && neighborhood !== city ? " – " + neighborhood : ""}</b><br/>
+            <div style="margin: 8px 0;">
+              Risk: <b style="text-transform:capitalize; color: ${
+                risk_level === 'dangerous' ? '#FF4500' : 
+                risk_level === 'caution' ? '#FFD700' : '#00FF7F'
+              }">${risk_level}</b> (${risk_score})
+            </div>
+            ${summary ? `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;"><small>${summary}</small></div>` : ''}
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
+              <small style="color: #60A5FA;">Click to view all ${city} incidents →</small>
+            </div>
           </div>
         `)
         .addTo(map);
     });
 
-    map.on("mouseleave", "neighborhood-markers", () => {
+    map.on("mouseleave", "unclustered-point", () => {
       map.getCanvas().style.cursor = "";
       popup.remove();
     });

@@ -1,0 +1,69 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold mb-2"><%= @city %></h1>
+    <p class="text-gray-400"><%= @posts.size %> incident<%= @posts.size != 1 ? 's' : '' %> reported</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <% @posts.each do |post| %>
+      <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="text-xl font-semibold mb-2">
+              <%= post.neighborhood.present? ? "#{post.neighborhood}" : post.city %>
+            </h3>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-3 py-1 rounded-full text-sm font-semibold <%= 
+                case post.risk_level
+                when 'safe' then 'bg-green-500 text-white'
+                when 'caution' then 'bg-yellow-500 text-black'
+                when 'dangerous' then 'bg-red-500 text-white'
+                else 'bg-gray-500 text-white'
+                end
+              %>">
+                <%= post.risk_level.titleize %>
+              </span>
+              <span class="text-sm text-gray-400">
+                Risk Score: <%= post.risk_score %>
+              </span>
+            </div>
+            <% if post.incident_type.present? %>
+              <span class="text-sm text-gray-400">
+                <%= post.incident_type.humanize %>
+              </span>
+            <% end %>
+          </div>
+        </div>
+
+        <% if post.summary.present? %>
+          <p class="text-gray-300 mb-4 leading-relaxed">
+            <%= post.summary %>
+          </p>
+        <% end %>
+
+        <div class="flex items-center justify-between pt-4 border-t border-gray-700">
+          <span class="text-sm text-gray-400">
+            <%= time_ago_in_words(post.created_utc) %> ago
+          </span>
+          <% if post.url.present? %>
+            <a href="<%= post.url %>" target="_blank" rel="noopener noreferrer" 
+               class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+              View on Reddit →
+            </a>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @posts.empty? %>
+    <div class="text-center py-12">
+      <p class="text-gray-400 text-lg">No incidents reported for <%= @city %></p>
+    </div>
+  <% end %>
+
+  <div class="mt-8">
+    <%= link_to "← Back to Map", root_path, class: "text-blue-400 hover:text-blue-300 font-medium" %>
+  </div>
+</div>
+
