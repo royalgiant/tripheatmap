@@ -87,37 +87,16 @@ async function initPlacesMap() {
 
     console.log('Added neighborhood-borders layer');
 
-    // Highlighted border on hover
-    map.addLayer({
-      id: "neighborhood-borders-hover",
-      type: "line",
-      source: "neighborhoods",
-      filter: ["==", "id", ""],
-      paint: {
-        "line-color": "#00ffff",
-        "line-width": 2,
-        "line-opacity": 1
-      }
-    });
-
     const popup = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: false
     });
-
-    let hoveredNeighborhoodId = null;
 
     // Hover effects
     map.on("mousemove", "neighborhood-fills", (e) => {
       map.getCanvas().style.cursor = "pointer";
 
       if (e.features.length > 0) {
-        if (hoveredNeighborhoodId !== null) {
-          map.setFilter("neighborhood-borders-hover", ["==", "id", ""]);
-        }
-
-        hoveredNeighborhoodId = e.features[0].properties.id;
-        map.setFilter("neighborhood-borders-hover", ["==", "id", hoveredNeighborhoodId]);
 
         const props = e.features[0].properties;
 
@@ -161,11 +140,6 @@ async function initPlacesMap() {
     map.on("mouseleave", "neighborhood-fills", () => {
       map.getCanvas().style.cursor = "";
       popup.remove();
-
-      if (hoveredNeighborhoodId !== null) {
-        map.setFilter("neighborhood-borders-hover", ["==", "id", ""]);
-      }
-      hoveredNeighborhoodId = null;
     });
 
     // Click to zoom to neighborhood
@@ -215,7 +189,7 @@ async function initPlacesMap() {
         0-2: Very Low
       </div>
       <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #444; font-size: 11px; color: #888;">
-        Based on restaurants, cafes & bars per 1k residents · Hover for details · Click to zoom
+        Based on density, diversity & volume · Hover for details · Click to zoom
       </div>
     `;
     el.appendChild(legend);

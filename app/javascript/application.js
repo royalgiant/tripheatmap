@@ -3,5 +3,6 @@
 
 import { Turbo } from "@hotwired/turbo-rails"
 import "mapbox_heatmap"
+import "places_map"
 
 Turbo.start()

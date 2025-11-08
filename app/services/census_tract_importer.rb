@@ -10,16 +10,21 @@ class CensusTractImporter
 
   attr_reader :state_fips, :county_fips, :city_name, :county_name, :errors
 
-  def initialize(state:, county: nil, city_name: nil, county_name: nil)
+  def initialize(state:, county: nil, city_name: nil, county_name: nil, enrich_names: true)
     @state_fips = normalize_fips(state)
     @county_fips = county ? normalize_fips(county) : nil
     @city_name = city_name
     @county_name = county_name
+    @enrich_names = enrich_names
     @errors = []
+    @last_geocode_time = nil
   end
 
   def import_tracts
     Rails.logger.info "Importing census tracts for state #{state_fips}#{county_fips ? ", county #{county_fips}" : ""}"
+    if @enrich_names
+      Rails.logger.info "Neighborhood name enrichment enabled - will use reverse geocoding for actual names"
+    end
 
     features = fetch_tract_features
     return 0 if features.empty?
@@ -126,9 +131,32 @@ class CensusTractImporter
     centroid = geometry.centroid
     state_name = get_state_name(props["STATE"])
 
+    # Get neighborhood name via reverse geocoding if enabled
+    neighborhood_name = if @enrich_names
+      lat = centroid.y
+      lon = centroid.x
+
+      # Respect rate limit for geocoding
+      respect_geocode_rate_limit
+
+      hood_name = get_neighborhood_name(lat, lon)
+      if hood_name
+        Rails.logger.debug "Found neighborhood name: #{hood_name} for tract #{geoid}"
+        hood_name
+      else
+        # Fallback to tract name if geocoding fails
+        tract_name = props["NAME"].to_s.sub(/^Census Tract\s+/i, '')
+        "Tract #{tract_name}"
+      end
+    else
+      # Use simple tract name if enrichment disabled
+      tract_name = props["NAME"].to_s.sub(/^Census Tract\s+/i, '')
+      "Tract #{tract_name}"
+    end
+
     Neighborhood.create!(
       geoid: geoid,
-      name: "Census Tract #{props["NAME"]}",
+      name: neighborhood_name,
       city: @city_name || @county_name,
       county: @county_name,
       state: state_name,
@@ -180,5 +208,59 @@ class CensusTractImporter
   def get_state_name(fips)
     state = self.class.state_configs[fips]
     state ? state['abbreviation'] : fips
+  end
+
+  # Get neighborhood name via reverse geocoding
+  def get_neighborhood_name(lat, lon)
+    return nil unless @enrich_names
+
+    params = {
+      lat: lat,
+      lon: lon,
+      format: 'json',
+      addressdetails: 1,
+      zoom: 16, # neighborhood level
+      'accept-language': 'en'
+    }
+
+    response = Faraday.get(
+      "https://nominatim.openstreetmap.org/reverse",
+      params
+    ) do |req|
+      req.headers['User-Agent'] = 'NeighborhoodVibrancyMap/1.0'
+      req.options.timeout = 10
+    end
+
+    return nil unless response.success?
+
+    data = JSON.parse(response.body)
+    address = data['address']
+    return nil unless address
+
+    # Try different address components in order of specificity
+    [
+      address['neighbourhood'],
+      address['suburb'],
+      address['city_district'],
+      address['hamlet'],
+      address['quarter'],
+      address['residential']
+    ].compact.first
+  rescue => e
+    Rails.logger.error "Reverse geocoding failed for #{lat},#{lon}: #{e.message}"
+    nil
+  end
+
+  # Respect Nominatim rate limit (1 request/second)
+  def respect_geocode_rate_limit
+    return unless @enrich_names
+
+    if @last_geocode_time
+      time_since_last = Time.now - @last_geocode_time
+      if time_since_last < 1.1
+        sleep(1.1 - time_since_last)
+      end
+    end
+    @last_geocode_time = Time.now
   end
 end

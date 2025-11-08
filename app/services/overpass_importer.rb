@@ -20,7 +20,9 @@ class OverpassImporter
 
   # Import amenity counts for all neighborhoods in a city
   def import_for_city(city_name)
-    neighborhoods = Neighborhood.where(city: city_name).with_geom
+    # Normalize city name to lowercase for consistent querying
+    normalized_city = city_name.to_s.downcase
+    neighborhoods = Neighborhood.for_city(normalized_city).with_geom
     total = neighborhoods.count
 
     puts "Importing places data for #{total} neighborhoods in #{city_name}..."
@@ -49,7 +51,7 @@ class OverpassImporter
 
     # Calculate total and vibrancy index
     total = counts.values.sum
-    vibrancy_index = calculate_vibrancy_index(counts, neighborhood.population)
+    vibrancy_index = calculate_vibrancy_index(counts, neighborhood)
 
     # Create or update stats
     stat = neighborhood.neighborhood_places_stat || neighborhood.build_neighborhood_places_stat
@@ -155,17 +157,100 @@ class OverpassImporter
   end
 
   # Calculate vibrancy index (0-10 scale)
-  # Based on amenities per 1,000 residents
-  def calculate_vibrancy_index(counts, population)
-    return 0 if population.nil? || population <= 0
-
+  # Combines density, diversity, and volume for a holistic vibrancy score
+  #
+  # Formula:
+  #   vibrancy = (0.5 * density_factor) + (0.3 * diversity_factor) + (0.2 * volume_factor)
+  #
+  # Where:
+  #   - density_factor: Amenities per km², capped at 100/km² = full vibrancy
+  #   - diversity_factor: Mix of restaurant/cafe/bar types (Shannon entropy)
+  #   - volume_factor: Absolute count with diminishing returns
+  #
+  def calculate_vibrancy_index(counts, neighborhood)
     total_amenities = counts.values.sum
-    amenities_per_1k = (total_amenities.to_f / population) * 1000
+    return 0 if total_amenities == 0
 
-    # Scale to 0-10 range
-    # Assuming 20 amenities per 1k residents = very vibrant (10)
-    # Anything above 20 is capped at 10
-    index = (amenities_per_1k / 20.0) * 10
-    [[index, 0].max, 10].min
+    # Get area in square kilometers
+    area_sq_km = get_area_sq_km(neighborhood)
+
+    # Step 1: Density Factor (0-1)
+    # Adaptive saturation point based on neighborhood size
+    # Smaller areas (compact urban) need higher saturation
+    # Larger areas (suburban census tracts) need lower saturation
+    density_factor = if area_sq_km && area_sq_km > 0
+      density = total_amenities.to_f / area_sq_km
+
+      # Adaptive saturation: smaller areas = higher threshold
+      # < 0.5 km² (micro neighborhood): 150/km² saturation
+      # 0.5-2 km² (compact urban): 80/km² saturation
+      # 2-5 km² (standard tract): 40/km² saturation
+      # 5+ km² (large suburban): 20/km² saturation
+      saturation = case area_sq_km
+                   when 0...0.5 then 150.0
+                   when 0.5...2.0 then 80.0
+                   when 2.0...5.0 then 40.0
+                   else 20.0
+                   end
+
+      [density / saturation, 1.0].min  # Cap at 1.0
+    else
+      # For missing/invalid areas, use a moderate default
+      0.5
+    end
+
+    # Step 2: Diversity Factor (0-1)
+    # Rewards balanced mix of restaurant, cafe, bar
+    # Uses Shannon entropy normalized to 0-1 range
+    diversity_factor = calculate_diversity_factor(counts)
+
+    # Step 3: Volume Factor (0-1)
+    # Rewards total count with diminishing returns
+    # Prevents tiny neighborhoods from maxing out with just a few venues
+    volume_factor = 1 - Math.exp(-total_amenities / 20.0)
+
+    # Step 4: Weighted Combination (0-10 scale)
+    # Weights adjusted for census tracts (larger areas):
+    # 40% density, 30% volume, 30% diversity
+    vibrancy_index = (
+      (0.4 * density_factor) +
+      (0.3 * volume_factor) +
+      (0.3 * diversity_factor)
+    ) * 10.0
+
+    vibrancy_index.round(2)
+  end
+
+  # Calculate diversity factor using Shannon entropy
+  # Returns 0 for single type, up to 1.0 for evenly mixed
+  def calculate_diversity_factor(counts)
+    total = counts.values.sum.to_f
+    return 0 if total == 0
+
+    # Calculate Shannon entropy
+    entropy = counts.values.reduce(0) do |sum, count|
+      next sum if count == 0
+      share = count / total
+      sum - (share * Math.log(share))
+    end
+
+    # Normalize to 0-1 range
+    # Max entropy for 3 categories = ln(3) ≈ 1.099
+    max_entropy = Math.log(3)
+    (entropy / max_entropy).round(3)
+  end
+
+  # Get neighborhood area in square kilometers
+  def get_area_sq_km(neighborhood)
+    result = ActiveRecord::Base.connection.execute("
+      SELECT ST_Area(geom::geography) / 1000000.0 as area_sq_km
+      FROM neighborhoods
+      WHERE id = #{neighborhood.id}
+    ").first
+
+    result['area_sq_km'].to_f
+  rescue => e
+    Rails.logger.error "Failed to calculate area for neighborhood #{neighborhood.id}: #{e.message}"
+    nil
   end
 end

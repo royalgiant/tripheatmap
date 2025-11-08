@@ -13,10 +13,12 @@ class MapsController < ApplicationController
   end
 
   def places
-    @city = params[:city] || 'Dallas'
+    # Normalize city name to lowercase for consistent querying
+    @city = (params[:city] || 'dallas').downcase
+    @city_display = @city.titleize
     @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
 
-    @neighborhoods = Neighborhood.where(city: @city)
+    @neighborhoods = Neighborhood.for_city(@city)
     @total_amenities = NeighborhoodPlacesStat.joins(:neighborhood)
       .where(neighborhoods: { city: @city })
       .sum(:total_amenities)

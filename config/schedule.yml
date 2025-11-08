@@ -3,3 +3,50 @@ fetch_reddit_posts:
   class: FetchRedditPostsWorker
   queue: default
   description: "Fetch new Reddit posts about police corruption and bribes"
+
+# City Data Import Jobs
+# Cron format: minute hour day month day_of_week
+# Examples: '0 2 * * *' = daily at 2 AM, '0 2 * * 0' = Sunday at 2 AM
+
+# Update places data for all cities weekly (Sunday at 2 AM)
+# Places data changes as restaurants/cafes/bars open or close
+update_all_places_weekly:
+  cron: '0 2 * * 0'
+  class: UpdatePlacesJob
+  description: 'Update places/amenity data for all cities weekly'
+  queue: default
+
+# Import full data for Dallas daily (for testing/development)
+import_dallas_daily:
+  cron: '0 3 * * *'
+  class: ImportCityDataJob
+  args: ['dallas']
+  description: 'Full import for Dallas (boundaries + places) daily'
+  queue: default
+  enabled: false  # Set to true to enable
+
+# Import full data for Chicago weekly
+import_chicago_weekly:
+  cron: '0 4 * * 0'
+  class: ImportCityDataJob
+  args: ['chicago']
+  description: 'Full import for Chicago weekly'
+  queue: default
+  enabled: false  # Set to true to enable
+
+# Import full data for Miami weekly
+import_miami_weekly:
+  cron: '0 5 * * 0'
+  class: ImportCityDataJob
+  args: ['miami']
+  description: 'Full import for Miami weekly'
+  queue: default
+  enabled: false  # Set to true to enable
+
+# Monthly full refresh for all cities (1st of month at 1 AM)
+import_all_cities_monthly:
+  cron: '0 1 1 * *'
+  class: ImportAllCitiesJob
+  description: 'Full import for all cities monthly'
+  queue: default
+  enabled: false  # Set to true to enable in production
