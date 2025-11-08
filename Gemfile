@@ -97,6 +97,11 @@ gem 'mailgun-ruby', '~>1.2.14'
 
 gem 'roo', '~> 2.10'
 
+# Geospatial + JSON
+gem "activerecord-postgis-adapter"
+gem "rgeo"
+gem "rgeo-geojson"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

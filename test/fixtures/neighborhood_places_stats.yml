@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  neighborhood: one
+  restaurant_count: 1
+  cafe_count: 1
+  bar_count: 1
+  total_amenities: 1
+  vibrancy_index: 9.99
+  last_updated: 2025-11-08 14:49:41
+
+two:
+  neighborhood: two
+  restaurant_count: 1
+  cafe_count: 1
+  bar_count: 1
+  total_amenities: 1
+  vibrancy_index: 9.99
+  last_updated: 2025-11-08 14:49:41

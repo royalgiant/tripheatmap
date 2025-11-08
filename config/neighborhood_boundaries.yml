@@ -1,0 +1,134 @@
+# Consolidated city configuration
+# Includes FIPS codes, neighborhood boundary endpoints, and metadata for all supported cities
+
+# State FIPS codes mapping
+states:
+  '06':
+    abbreviation: 'CA'
+    name: 'California'
+  '12':
+    abbreviation: 'FL'
+    name: 'Florida'
+  '17':
+    abbreviation: 'IL'
+    name: 'Illinois'
+  '48':
+    abbreviation: 'TX'
+    name: 'Texas'
+
+# City configurations
+
+dallas:
+  # City metadata
+  name: "Dallas"
+  state_name: "Texas"
+  state: "TX"
+  county: "Dallas"
+  
+  # FIPS codes for census data
+  state_fips: '48'
+  county_fips: '113'
+  
+  # Neighborhood boundary data source
+  # Note: Dallas endpoint currently returns 404 - disabled until we find correct endpoint
+  endpoint: "https://www.dallasopendata.com/resource/nbtk-97k4.geojson"
+  type: "geojson"
+  enabled: false
+  field_mappings:
+    name: "AREA_NAME"
+    geoid: "OBJECTID"
+  population_source: "census"
+
+chicago:
+  # City metadata
+  name: "Chicago"
+  state_name: "Illinois"
+  state: "IL"
+  county: "Cook"
+  
+  # FIPS codes for census data
+  state_fips: '17'
+  county_fips: '031'
+  
+  # Neighborhood boundary data source
+  endpoint: "https://data.cityofchicago.org/resource/igwz-8jzy.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "community"
+    geoid: "area_numbe"
+  population_source: "census"
+
+austin:
+  # City metadata
+  name: "Austin"
+  state_name: "Texas"
+  state: "TX"
+  county: "Travis"
+  
+  # FIPS codes for census data
+  state_fips: '48'
+  county_fips: '453'
+  
+  # No official neighborhood boundaries available - uses census tracts
+  enabled: false
+
+miami:
+  # City metadata
+  name: "Miami"
+  state_name: "Florida"
+  state: "FL"
+  county: "Miami-Dade"
+  
+  # FIPS codes for census data
+  state_fips: '12'
+  county_fips: '086'
+  
+  # Neighborhood boundary data source
+  endpoint: "https://opendata.miamidade.gov/resource/niyx-j4w3.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME"
+    geoid: "ID"
+  population_source: "census"
+
+sacramento:
+  # City metadata
+  name: "Sacramento"
+  state_name: "California"
+  state: "CA"
+  county: "Sacramento"
+  
+  # FIPS codes for census data
+  state_fips: '06'
+  county_fips: '067'
+  
+  # No official neighborhood boundaries available - uses census tracts
+  enabled: false
+
+# Template for adding new states (add to 'states' section above):
+# 'XX':
+#   abbreviation: 'XX'       # 2-letter state abbreviation
+#   name: 'State Name'       # Full state name
+
+# Template for adding new cities:
+# city_key:
+#   # City metadata
+#   name: "City Name"
+#   state_name: "State Name"
+#   state: "XX"              # 2-letter state abbreviation
+#   county: "County Name"
+#   
+#   # FIPS codes for census data
+#   state_fips: 'XX'         # 2-digit state FIPS code (must exist in 'states' section)
+#   county_fips: 'XXX'       # 3-digit county FIPS code
+#   
+#   # Neighborhood boundary data source (optional)
+#   endpoint: "https://..."  # GeoJSON endpoint URL
+#   type: "geojson"
+#   enabled: true            # or false to use census tracts only
+#   field_mappings:
+#     name: "FIELD_NAME"     # Name field in source data
+#     geoid: "FIELD_ID"      # ID field in source data
+#   population_source: "census"

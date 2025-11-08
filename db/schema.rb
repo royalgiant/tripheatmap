@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_02_020121) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_08_204941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "error_logs", force: :cascade do |t|
     t.string "context", null: false
@@ -23,6 +24,35 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_020121) do
     t.datetime "updated_at", null: false
     t.index ["context"], name: "index_error_logs_on_context"
     t.index ["created_at"], name: "index_error_logs_on_created_at"
+  end
+
+  create_table "neighborhood_places_stats", force: :cascade do |t|
+    t.bigint "neighborhood_id", null: false
+    t.integer "restaurant_count"
+    t.integer "cafe_count"
+    t.integer "bar_count"
+    t.integer "total_amenities"
+    t.decimal "vibrancy_index"
+    t.datetime "last_updated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["neighborhood_id"], name: "index_neighborhood_places_stats_on_neighborhood_id"
+  end
+
+  create_table "neighborhoods", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "city"
+    t.string "county"
+    t.string "state"
+    t.string "geoid"
+    t.integer "population"
+    t.geography "geom", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.geography "centroid", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
+    t.index ["geoid"], name: "index_neighborhoods_on_geoid"
+    t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist
   end
 
   create_table "reddit_posts", force: :cascade do |t|
@@ -76,4 +106,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_020121) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "neighborhood_places_stats", "neighborhoods"
 end
