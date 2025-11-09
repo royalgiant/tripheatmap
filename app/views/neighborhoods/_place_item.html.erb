@@ -1,0 +1,71 @@
+<li class="border-b pb-3 mb-3 transition-colors duration-500" id="place-<%= place.id %>">
+  <div class="font-medium text-base">
+    <a href="#" class="place-name-link hover:text-blue-600 cursor-pointer" data-place-id="<%= place.id %>">
+      <%= place.name %>
+    </a>
+  </div>
+
+  <!-- Address -->
+  <% if place.address.present? %>
+    <div class="text-sm text-gray-600 mt-1"><%= place.address %></div>
+  <% end %>
+
+  <!-- Additional Info -->
+  <div class="mt-2 space-y-1 text-xs">
+    <!-- Cuisine -->
+    <% if place.tags['cuisine'].present? %>
+      <div class="inline-block bg-gray-100 px-2 py-0.5 rounded mr-2">
+        <span class="text-gray-700">🍴 <%= place.tags['cuisine'].titleize %></span>
+      </div>
+    <% end %>
+
+    <!-- Delivery/Takeaway -->
+    <% if place.tags['delivery'] == 'yes' || place.tags['takeaway'] == 'yes' %>
+      <div class="inline-block bg-green-50 px-2 py-0.5 rounded mr-2">
+        <% if place.tags['delivery'] == 'yes' && place.tags['takeaway'] == 'yes' %>
+          <span class="text-green-700">🚗 Delivery & Takeaway</span>
+        <% elsif place.tags['delivery'] == 'yes' %>
+          <span class="text-green-700">🚗 Delivery</span>
+        <% else %>
+          <span class="text-green-700">🥡 Takeaway</span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- Phone -->
+    <% if place.tags['phone'].present? %>
+      <div class="text-gray-600 mt-1">
+        📞 <a href="tel:<%= place.tags['phone'] %>" class="hover:underline"><%= place.tags['phone'] %></a>
+      </div>
+    <% end %>
+
+    <!-- Website -->
+    <% if place.tags['website'].present? %>
+      <div class="text-gray-600 mt-1">
+        🌐 <a href="<%= place.tags['website'] %>" target="_blank" rel="noopener" class="hover:underline text-blue-600">Website</a>
+      </div>
+    <% end %>
+
+    <!-- Opening Hours -->
+    <% if place.tags['opening_hours'].present? %>
+      <div class="text-gray-600 mt-1">
+        🕒 <%= place.tags['opening_hours'] %>
+      </div>
+    <% end %>
+
+    <!-- Directions Link -->
+    <div class="mt-2">
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=<%= place.lat %>,<%= place.lon %>"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        Get Directions
+      </a>
+    </div>
+  </div>
+</li>

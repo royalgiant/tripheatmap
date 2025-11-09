@@ -45,9 +45,15 @@ class OverpassImporter
   # Import amenity counts for a single neighborhood
   def import_for_neighborhood(neighborhood)
     bounds = get_bounding_box(neighborhood)
-    counts = query_amenities(bounds)
+    result = query_amenities(bounds)
 
-    return false unless counts
+    return false unless result
+
+    counts = result[:counts]
+    elements = result[:elements]
+
+    # Save individual places
+    save_places(neighborhood, elements)
 
     # Calculate total and vibrancy index
     total = counts.values.sum
@@ -92,7 +98,7 @@ class OverpassImporter
     }
   end
 
-  # Query Overpass API for amenity counts
+  # Query Overpass API for amenity counts and elements
   def query_amenities(bounds)
     query = build_overpass_query(bounds)
 
@@ -104,7 +110,7 @@ class OverpassImporter
     end
 
     data = JSON.parse(response.body)
-    parse_counts(data)
+    parse_amenities(data)
   rescue Faraday::Error => e
     Rails.logger.error "Overpass API request failed: #{e.message}"
     nil
@@ -129,31 +135,89 @@ class OverpassImporter
       (
         #{query_parts.join("\n  ")}
       );
-      out tags;
+      out center tags;
     QUERY
   end
 
-  # Parse counts from Overpass response
-  def parse_counts(data)
+  # Parse amenities from Overpass response
+  # Returns both counts and full elements with coordinates
+  def parse_amenities(data)
     counts = { restaurant: 0, cafe: 0, bar: 0 }
+    elements = []
 
-    return counts unless data['elements']
+    return { counts: counts, elements: elements } unless data['elements']
 
     data['elements'].each do |element|
       amenity = element.dig('tags', 'amenity')
       next unless amenity
 
-      case amenity
-      when 'restaurant'
-        counts[:restaurant] += 1
-      when 'cafe'
-        counts[:cafe] += 1
-      when 'bar', 'pub'  # OSM uses 'bar' and 'pub'
-        counts[:bar] += 1
-      end
+      # Normalize place type (bar/pub -> bar)
+      place_type = case amenity
+                   when 'restaurant' then 'restaurant'
+                   when 'cafe' then 'cafe'
+                   when 'bar', 'pub' then 'bar'
+                   else next
+                   end
+
+      # Update counts
+      counts[place_type.to_sym] += 1
+
+      # Add to elements array with normalized type
+      elements << element.merge('place_type' => place_type)
     end
 
-    counts
+    { counts: counts, elements: elements }
+  end
+
+  # Save individual places to database
+  # Uses 2 queries total: 1 DELETE + 1 bulk INSERT
+  def save_places(neighborhood, elements)
+    # Hard delete existing places for this neighborhood (1 query)
+    Place.where(neighborhood_id: neighborhood.id).delete_all
+
+    return if elements.empty?
+
+    places_to_create = []
+    current_time = Time.current
+
+    elements.each do |element|
+      # Extract coordinates
+      # For nodes: lat/lon are directly on the element
+      # For ways: lat/lon are in the 'center' object
+      lat = element['lat'] || element.dig('center', 'lat')
+      lon = element['lon'] || element.dig('center', 'lon')
+
+      next unless lat && lon
+
+      # Extract name and other tags
+      tags = element['tags'] || {}
+      name = tags['name'] || 'Unnamed'
+      address = build_address(tags)
+
+      places_to_create << {
+        neighborhood_id: neighborhood.id,
+        name: name,
+        place_type: element['place_type'],
+        lat: lat,
+        lon: lon,
+        address: address,
+        tags: tags,
+        created_at: current_time,
+        updated_at: current_time
+      }
+    end
+
+    # Bulk insert for performance (1 query)
+    Place.insert_all(places_to_create) if places_to_create.any?
+  end
+
+  # Build address string from OSM tags
+  def build_address(tags)
+    parts = []
+    parts << tags['addr:housenumber'] if tags['addr:housenumber']
+    parts << tags['addr:street'] if tags['addr:street']
+    parts << tags['addr:city'] if tags['addr:city']
+    parts.join(', ').presence
   end
 
   # Calculate vibrancy index (0-10 scale)

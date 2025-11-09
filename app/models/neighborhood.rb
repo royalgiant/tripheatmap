@@ -1,5 +1,6 @@
 class Neighborhood < ApplicationRecord
   has_one :neighborhood_places_stat, dependent: :destroy
+  has_many :places, dependent: :destroy
 
   # Normalize city names to lowercase before validation
   before_validation :normalize_city_name

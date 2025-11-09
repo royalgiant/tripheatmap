@@ -1,0 +1,84 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold mb-2"><%= @neighborhood.name %></h1>
+    <p class="text-gray-600 mb-4"><%= @neighborhood.city.titleize %></p>
+
+    <% if @stats %>
+      <div class="flex gap-4 text-sm">
+        <span class="bg-blue-100 px-3 py-1 rounded">
+          <strong><%= @stats.restaurant_count %></strong> Restaurants
+        </span>
+        <span class="bg-green-100 px-3 py-1 rounded">
+          <strong><%= @stats.cafe_count %></strong> Cafes
+        </span>
+        <span class="bg-purple-100 px-3 py-1 rounded">
+          <strong><%= @stats.bar_count %></strong> Bars
+        </span>
+        <span class="bg-gray-100 px-3 py-1 rounded">
+          <strong>Vibrancy Score:</strong> <%= @stats.vibrancy_index.round(1) %>/10
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Two Column Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Left Column: Places List -->
+    <div id="places-list" class="bg-white rounded-lg shadow p-6 overflow-y-auto" style="max-height: 800px; scroll-behavior: smooth;">
+      <h2 class="text-2xl font-bold mb-4">Places</h2>
+
+      <% if @places.any? %>
+        <!-- Restaurants -->
+        <% if @restaurants.any? %>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-3 text-blue-600">
+              Restaurants (<%= @restaurants.count %>)
+            </h3>
+            <ul>
+              <%= render partial: 'place_item', collection: @restaurants, as: :place %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Cafes -->
+        <% if @cafes.any? %>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-3 text-green-600">
+              Cafes (<%= @cafes.count %>)
+            </h3>
+            <ul>
+              <%= render partial: 'place_item', collection: @cafes, as: :place %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Bars -->
+        <% if @bars.any? %>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-3 text-purple-600">
+              Bars (<%= @bars.count %>)
+            </h3>
+            <ul>
+              <%= render partial: 'place_item', collection: @bars, as: :place %>
+            </ul>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-gray-500">No places data available for this neighborhood yet.</p>
+      <% end %>
+    </div>
+
+    <!-- Right Column: Map -->
+    <div class="bg-white rounded-lg shadow">
+      <div
+        id="neighborhood-detail-map"
+        class="w-full rounded-lg"
+        style="height: 800px;"
+        data-mapbox-token="<%= @mapbox_token %>"
+        data-places="<%= @places.to_json(only: [:id, :name, :place_type, :lat, :lon, :address]) %>"
+        data-neighborhood="<%= @neighborhood.to_json(only: [:id, :name, :city]) %>">
+      </div>
+    </div>
+  </div>
+</div>

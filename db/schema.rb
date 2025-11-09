@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_08_204941) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_09_205803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -53,6 +53,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_08_204941) do
     t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
     t.index ["geoid"], name: "index_neighborhoods_on_geoid"
     t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.bigint "neighborhood_id", null: false
+    t.string "name"
+    t.string "place_type"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lon", precision: 10, scale: 6
+    t.string "address"
+    t.jsonb "tags", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
+    t.index ["neighborhood_id"], name: "index_places_on_neighborhood_id"
+    t.index ["place_type"], name: "index_places_on_place_type"
   end
 
   create_table "reddit_posts", force: :cascade do |t|
@@ -107,4 +122,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_08_204941) do
   end
 
   add_foreign_key "neighborhood_places_stats", "neighborhoods"
+  add_foreign_key "places", "neighborhoods"
 end

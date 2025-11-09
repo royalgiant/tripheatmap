@@ -202,14 +202,14 @@ async function initPlacesMap() {
       popup.remove();
     });
 
-    // Click to zoom to neighborhood
+    // Click to open neighborhood detail page in new tab
     map.on("click", "neighborhood-fills", async (e) => {
-      // Zoom to neighborhood
-      const bounds = new mapboxgl.LngLatBounds();
-      e.features[0].geometry.coordinates[0].forEach(coord => {
-        bounds.extend(coord);
-      });
-      map.fitBounds(bounds, { padding: 50 });
+      if (e.features.length > 0) {
+        const neighborhoodId = e.features[0].properties.id;
+        if (neighborhoodId) {
+          window.open(`/neighborhoods/${neighborhoodId}`, '_blank');
+        }
+      }
     });
 
     // Add legend

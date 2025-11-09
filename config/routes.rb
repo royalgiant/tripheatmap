@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :neighborhoods, only: [:show]
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'
   get 'maps/places/:city', to: 'maps#places', as: 'places_map'
