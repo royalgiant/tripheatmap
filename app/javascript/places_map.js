@@ -9,7 +9,7 @@ async function initPlacesMap() {
     }
 
     const token = el.dataset.mapboxToken;
-    const city = el.dataset.city || 'Dallas';
+    const city = el.dataset.city_display || 'New York';
 
     console.log('Initializing places map for city:', city);
     console.log('Mapbox token present:', !!token);
@@ -19,12 +19,57 @@ async function initPlacesMap() {
       return;
     }
 
+    // Add loading indicator
+    const loadingDiv = document.createElement('div');
+    loadingDiv.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      color: white;
+      font-family: Arial, sans-serif;
+    `;
+    loadingDiv.innerHTML = `
+      <div style="text-align: center;">
+        <div style="border: 4px solid rgba(255, 255, 255, 0.3); border-top: 4px solid white; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+        <div style="font-size: 18px; font-weight: bold;">Loading ${city} neighborhoods...</div>
+        <div style="font-size: 14px; color: #aaa; margin-top: 8px;">Fetching vibrancy data</div>
+      </div>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    `;
+    el.appendChild(loadingDiv);
+
     mapboxgl.accessToken = token;
+
+    // City coordinates mapping
+    const cityCoordinates = {
+      'new york': [-74.00, 40.71],
+      'dallas': [-96.8, 32.78],
+      'chicago': [-87.65, 41.85],
+      'miami': [-80.19, 25.76],
+      'austin': [-97.74, 30.27],
+      'sacramento': [-121.49, 38.58],
+      'buenos aires': [-58.38, -34.60]
+    };
+
+    const defaultCenter = cityCoordinates[city.toLowerCase()] || [-74.00, 40.71];
 
     const map = new mapboxgl.Map({
       container: el,
       style: "mapbox://styles/mapbox/dark-v11",
-      center: [-96.8, 32.78], // Dallas default
+      center: defaultCenter,
       zoom: 10
     });
 
@@ -50,6 +95,21 @@ async function initPlacesMap() {
       type: "geojson",
       data: neighborhoodsData
     });
+
+    // Auto-fit map to show all neighborhoods
+    if (neighborhoodsData.features && neighborhoodsData.features.length > 0) {
+      const bounds = new mapboxgl.LngLatBounds();
+      neighborhoodsData.features.forEach(feature => {
+        if (feature.geometry && feature.geometry.type === 'MultiPolygon') {
+          feature.geometry.coordinates.forEach(polygon => {
+            polygon[0].forEach(coord => bounds.extend(coord));
+          });
+        } else if (feature.geometry && feature.geometry.type === 'Polygon') {
+          feature.geometry.coordinates[0].forEach(coord => bounds.extend(coord));
+        }
+      });
+      map.fitBounds(bounds, { padding: 50, duration: 1000 });
+    }
 
     // Choropleth layer - color neighborhoods by vibrancy index (0-10)
     // Higher index = more vibrant (more restaurants, cafes, bars per capita)
@@ -195,14 +255,27 @@ async function initPlacesMap() {
     el.appendChild(legend);
 
     console.log('Places map fully initialized with', neighborhoodsData.features?.length, 'neighborhoods');
+
+    // Remove loading indicator
+    loadingDiv.remove();
   });
 
   map.on('error', (e) => {
     console.error('Mapbox error:', e);
+    // Remove loading indicator on error too
+    if (loadingDiv && loadingDiv.parentNode) {
+      loadingDiv.remove();
+    }
   });
 
   } catch (error) {
     console.error('Error initializing places map:', error);
+    // Remove loading indicator on error
+    const el = document.getElementById("places-map");
+    if (el) {
+      const loadingDiv = el.querySelector('div[style*="z-index: 1000"]');
+      if (loadingDiv) loadingDiv.remove();
+    }
   }
 }
 

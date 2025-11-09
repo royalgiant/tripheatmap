@@ -44,7 +44,9 @@ class NeighborhoodBoundaryImporter
       errors: []
     }
 
-    # Try city-specific neighborhoods first
+    fips = self.class.city_configs[city_key]
+
+    # Try city-specific neighborhoods first (custom open data portals)
     if CityNeighborhoodImporter.available_for_city?(city_key)
       Rails.logger.info "City-specific neighborhoods available for #{city_key}, importing..."
       begin
@@ -58,14 +60,30 @@ class NeighborhoodBoundaryImporter
         @errors << "City import failed: #{e.message}"
         results[:errors] << e.message
       end
+    elsif fips[:zillow] == true
+      Rails.logger.info "Using Zillow neighborhoods for #{city_key}..."
+      begin
+        city_name = fips[:city] || fips[:name]
+        state = fips[:state]
+        county = fips[:county]
+
+        importer = ZillowNeighborhoodImporter.new(city_name: city_name, state: state, county: county)
+        count = importer.import_neighborhoods
+        results[:city_neighborhoods] = count
+        results[:method] = 'zillow'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Zillow neighborhoods: #{e.message}"
+        @errors << "Zillow import failed: #{e.message}"
+        results[:errors] << e.message
+      end
     else
-      Rails.logger.info "No city-specific neighborhoods for #{city_key}, using census tracts..."
+      Rails.logger.info "No city-specific or Zillow neighborhoods for #{city_key}, will use census tracts..."
       results[:method] = 'census_fallback'
     end
 
     # Import census tracts (as primary for unsupported cities, or as additional data)
     # Skip for non-US cities that don't have FIPS codes
-    fips = self.class.city_configs[city_key]
     if fips[:state_fips].present? && fips[:county_fips].present?
       begin
         importer = CensusTractImporter.new(

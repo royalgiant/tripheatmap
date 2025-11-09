@@ -8,27 +8,48 @@
 class CityDataImporter
   attr_reader :city_key, :city_name, :errors, :results
 
+  # Load city configurations from YAML and generate city names mapping
+  # Works for both US cities and international cities (Buenos Aires, Medellin, etc.)
+  def self.city_configs
+    @city_configs ||= begin
+      config = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml'))
+      config.except('states')  # Remove states section
+    end
+  end
+
   # Map city keys to lowercase city names (stored in DB)
   # City names are always stored lowercase in the database for consistency
-  CITY_NAMES = {
-    'dallas' => 'dallas',
-    'chicago' => 'chicago',
-    'miami' => 'miami',
-    'austin' => 'austin',
-    'sacramento' => 'sacramento',
-    'buenos aires' => 'buenos aires',
-    'buenosaires' => 'buenos aires'  # Alias
-  }.freeze
+  # Supports both US and international cities
+  def self.city_names
+    @city_names ||= begin
+      names = {}
+      city_configs.each do |city_key, config|
+        next if config.nil?
+        # Use 'city' field if available, otherwise use 'name' field, lowercase for DB storage
+        city_name = (config['city'] || config['name']).to_s.downcase
+        names[city_key.downcase] = city_name
+      end
+      names
+    end
+  end
+  CITY_NAMES = city_names
 
-  # Display names for UI (capitalized)
-  DISPLAY_NAMES = {
-    'dallas' => 'Dallas',
-    'chicago' => 'Chicago',
-    'miami' => 'Miami',
-    'austin' => 'Austin',
-    'sacramento' => 'Sacramento',
-    'buenos aires' => 'Buenos Aires'
-  }.freeze
+  # Display names for UI (properly capitalized)
+  # Supports both US and international cities
+  def self.display_names
+    @display_names ||= begin
+      names = {}
+      city_configs.each do |city_key, config|
+        next if config.nil?
+        # Use 'name' field for display (proper capitalization)
+        city_name = (config['city'] || config['name']).to_s.downcase
+        display_name = config['name'] || config['city']
+        names[city_name] = display_name
+      end
+      names
+    end
+  end
+  DISPLAY_NAMES = display_names
 
   def initialize(city_key, skip_boundaries: false, skip_places: false)
     @city_key = city_key.to_s.downcase

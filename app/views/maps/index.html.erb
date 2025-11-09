@@ -1,5 +1,14 @@
-<div id="map"
-     data-mapbox-token="<%= @mapbox_token %>"
-     data-source-url="/api/v1/reddit_posts"
-     style="height: 90vh; width: 100%; border-radius: 8px;">
+<div class="container mx-auto px-4 py-4">
+  <div class="mb-4">
+    <h1 class="text-3xl font-bold mb-2"><%= @city_display %> Neighborhood Vibrancy Map</h1>
+    <p class="text-gray-400">
+      <%= @neighborhoods.count %> neighborhoods · <%= @total_amenities %> restaurants, cafes & bars
+    </p>
+  </div>
+
+  <div id="places-map"
+       data-mapbox-token="<%= @mapbox_token %>"
+       data-city="<%= @city %>"
+       style="height: 85vh; width: 100%; border-radius: 8px;">
+  </div>
 </div>

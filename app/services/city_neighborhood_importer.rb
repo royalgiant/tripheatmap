@@ -39,11 +39,12 @@ class CityNeighborhoodImporter
     imported_count
   end
 
-  # Check if a city has neighborhood boundaries available
+  # Check if a city has neighborhood boundaries available from a custom endpoint
+  # Only returns true if city has an endpoint configured AND is not disabled
   def self.available_for_city?(city_key)
     config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
     city_config = config[city_key.to_s.downcase]
-    city_config && city_config["enabled"] != false
+    city_config && city_config["endpoint"].present? && city_config["enabled"] != false
   rescue
     false
   end

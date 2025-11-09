@@ -1,112 +1,9 @@
 # Consolidated city configuration
 # Includes FIPS codes, neighborhood boundary endpoints, and metadata for all supported cities
 
-# State FIPS codes mapping
-states:
-  '06':
-    abbreviation: 'CA'
-    name: 'California'
-  '12':
-    abbreviation: 'FL'
-    name: 'Florida'
-  '17':
-    abbreviation: 'IL'
-    name: 'Illinois'
-  '48':
-    abbreviation: 'TX'
-    name: 'Texas'
-
-# City configurations
-
-dallas:
-  # City metadata
-  name: "Dallas"
-  state_name: "Texas"
-  state: "TX"
-  county: "Dallas"
-  
-  # FIPS codes for census data
-  state_fips: '48'
-  county_fips: '113'
-  
-  # Neighborhood boundary data source
-  # Note: Dallas endpoint currently returns 404 - disabled until we find correct endpoint
-  endpoint: "https://www.dallasopendata.com/resource/nbtk-97k4.geojson"
-  type: "geojson"
-  enabled: false
-  field_mappings:
-    name: "AREA_NAME"
-    geoid: "OBJECTID"
-  population_source: "census"
-
-chicago:
-  # City metadata
-  name: "Chicago"
-  state_name: "Illinois"
-  state: "IL"
-  county: "Cook"
-  
-  # FIPS codes for census data
-  state_fips: '17'
-  county_fips: '031'
-  
-  # Neighborhood boundary data source
-  endpoint: "https://data.cityofchicago.org/resource/igwz-8jzy.geojson"
-  type: "geojson"
-  enabled: true
-  field_mappings:
-    name: "community"
-    geoid: "area_numbe"
-  population_source: "census"
-
-austin:
-  # City metadata
-  name: "Austin"
-  state_name: "Texas"
-  state: "TX"
-  county: "Travis"
-  
-  # FIPS codes for census data
-  state_fips: '48'
-  county_fips: '453'
-  
-  # No official neighborhood boundaries available - uses census tracts
-  enabled: false
-
-miami:
-  # City metadata
-  name: "Miami"
-  state_name: "Florida"
-  state: "FL"
-  county: "Miami-Dade"
-  
-  # FIPS codes for census data
-  state_fips: '12'
-  county_fips: '086'
-  
-  # Neighborhood boundary data source
-  endpoint: "https://opendata.miamidade.gov/resource/niyx-j4w3.geojson"
-  type: "geojson"
-  enabled: true
-  field_mappings:
-    name: "NAME"
-    geoid: "ID"
-  population_source: "census"
-
-sacramento:
-  # City metadata
-  name: "Sacramento"
-  state_name: "California"
-  state: "CA"
-  county: "Sacramento"
-  state_fips: '06'
-  county_fips: '067'
-  # No official neighborhood boundaries available - uses census tracts
-  enabled: false
-
 'buenos aires':
   name: "Buenos Aires"
-  city: "Buenos Aires"  # For compatibility with importer code
+  city: "Buenos Aires"
   state_name: "Ciudad Autónoma de Buenos Aires"
   state: "CABA"
   county: "Buenos Aires"
@@ -118,6 +15,559 @@ sacramento:
     name: "nombre"  # Spanish for "name"
     geoid: "id"
   population_source: "manual"  # No US Census data for Argentina
+
+# State FIPS codes mapping
+states:
+  '04':
+    abbreviation: 'AZ'
+    name: 'Arizona'
+  '06':
+    abbreviation: 'CA'
+    name: 'California'
+  '08':
+    abbreviation: 'CO'
+    name: 'Colorado'
+  '11':
+    abbreviation: 'DC'
+    name: 'District of Columbia'
+  '12':
+    abbreviation: 'FL'
+    name: 'Florida'
+  '13':
+    abbreviation: 'GA'
+    name: 'Georgia'
+  '15':
+    abbreviation: 'HI'
+    name: 'Hawaii'
+  '17':
+    abbreviation: 'IL'
+    name: 'Illinois'
+  '18':
+    abbreviation: 'IN'
+    name: 'Indiana'
+  '20':
+    abbreviation: 'KS'
+    name: 'Kansas'
+  '21':
+    abbreviation: 'KY'
+    name: 'Kentucky'
+  '22':
+    abbreviation: 'LA'
+    name: 'Louisiana'
+  '24':
+    abbreviation: 'MD'
+    name: 'Maryland'
+  '25':
+    abbreviation: 'MA'
+    name: 'Massachusetts'
+  '26':
+    abbreviation: 'MI'
+    name: 'Michigan'
+  '27':
+    abbreviation: 'MN'
+    name: 'Minnesota'
+  '29':
+    abbreviation: 'MO'
+    name: 'Missouri'
+  '31':
+    abbreviation: 'NE'
+    name: 'Nebraska'
+  '32':
+    abbreviation: 'NV'
+    name: 'Nevada'
+  '34':
+    abbreviation: 'NJ'
+    name: 'New Jersey'
+  '35':
+    abbreviation: 'NM'
+    name: 'New Mexico'
+  '36':
+    abbreviation: 'NY'
+    name: 'New York'
+  '37':
+    abbreviation: 'NC'
+    name: 'North Carolina'
+  '39':
+    abbreviation: 'OH'
+    name: 'Ohio'
+  '40':
+    abbreviation: 'OK'
+    name: 'Oklahoma'
+  '41':
+    abbreviation: 'OR'
+    name: 'Oregon'
+  '42':
+    abbreviation: 'PA'
+    name: 'Pennsylvania'
+  '47':
+    abbreviation: 'TN'
+    name: 'Tennessee'
+  '48':
+    abbreviation: 'TX'
+    name: 'Texas'
+  '51':
+    abbreviation: 'VA'
+    name: 'Virginia'
+  '53':
+    abbreviation: 'WA'
+    name: 'Washington'
+  '55':
+    abbreviation: 'WI'
+    name: 'Wisconsin'
+
+# ============================================================================
+# TOP 75 US CITIES - Using EPA/Zillow Neighborhoods Database
+# ============================================================================
+
+'new york':
+  name: "New York"
+  city: "New York"
+  state: "NY"
+  zillow: true
+
+'los angeles':
+  name: "Los Angeles"
+  city: "Los Angeles"
+  state: "CA"
+  zillow: true
+
+houston:
+  name: "Houston"
+  city: "Houston"
+  state: "TX"
+  zillow: true
+
+phoenix:
+  name: "Phoenix"
+  city: "Phoenix"
+  state: "AZ"
+  zillow: true
+
+philadelphia:
+  name: "Philadelphia"
+  city: "Philadelphia"
+  state: "PA"
+  zillow: true
+
+'san antonio':
+  name: "San Antonio"
+  city: "San Antonio"
+  state: "TX"
+  zillow: true
+
+'san diego':
+  name: "San Diego"
+  city: "San Diego"
+  state: "CA"
+  zillow: true
+
+'fort worth':
+  name: "Fort Worth"
+  city: "Fort Worth"
+  state: "TX"
+  zillow: true
+
+jacksonville:
+  name: "Jacksonville"
+  city: "Jacksonville"
+  state: "FL"
+  zillow: true
+
+'san jose':
+  name: "San Jose"
+  city: "San Jose"
+  state: "CA"
+  zillow: true
+
+charlotte:
+  name: "Charlotte"
+  city: "Charlotte"
+  state: "NC"
+  zillow: true
+
+columbus:
+  name: "Columbus"
+  city: "Columbus"
+  state: "OH"
+  zillow: true
+
+indianapolis:
+  name: "Indianapolis"
+  city: "Indianapolis"
+  state: "IN"
+  zillow: true
+
+'san francisco':
+  name: "San Francisco"
+  city: "San Francisco"
+  state: "CA"
+  zillow: true
+
+seattle:
+  name: "Seattle"
+  city: "Seattle"
+  state: "WA"
+  zillow: true
+
+denver:
+  name: "Denver"
+  city: "Denver"
+  state: "CO"
+  zillow: true
+
+'oklahoma city':
+  name: "Oklahoma City"
+  city: "Oklahoma City"
+  state: "OK"
+  zillow: true
+
+washington:
+  name: "Washington"
+  city: "Washington"
+  state: "DC"
+  zillow: true
+
+nashville:
+  name: "Nashville"
+  city: "Nashville"
+  state: "TN"
+  zillow: true
+
+dallas:
+  name: "Dallas"
+  city: "Dallas"
+  state: "TX"
+  zillow: true
+
+chicago:
+  name: "Chicago"
+  city: "Chicago"
+  state: "IL"
+  zillow: true
+
+austin:
+  name: "Austin"
+  city: "Austin"
+  state: "TX"
+  zillow: true
+
+miami:
+  name: "Miami"
+  city: "Miami"
+  state: "FL"
+  zillow: true
+
+sacramento:
+  name: "Sacramento"
+  city: "Sacramento"
+  state: "CA"
+  zillow: true
+
+'las vegas':
+  name: "Las Vegas"
+  city: "Las Vegas"
+  state: "NV"
+  zillow: true
+
+'el paso':
+  name: "El Paso"
+  city: "El Paso"
+  state: "TX"
+  zillow: true
+
+boston:
+  name: "Boston"
+  city: "Boston"
+  state: "MA"
+  zillow: true
+
+detroit:
+  name: "Detroit"
+  city: "Detroit"
+  state: "MI"
+  zillow: true
+
+louisville:
+  name: "Louisville"
+  city: "Louisville"
+  state: "KY"
+  zillow: true
+
+portland:
+  name: "Portland"
+  city: "Portland"
+  state: "OR"
+  zillow: true
+
+memphis:
+  name: "Memphis"
+  city: "Memphis"
+  state: "TN"
+  zillow: true
+
+baltimore:
+  name: "Baltimore"
+  city: "Baltimore"
+  state: "MD"
+  zillow: true
+
+milwaukee:
+  name: "Milwaukee"
+  city: "Milwaukee"
+  state: "WI"
+  zillow: true
+
+albuquerque:
+  name: "Albuquerque"
+  city: "Albuquerque"
+  state: "NM"
+  zillow: true
+
+tucson:
+  name: "Tucson"
+  city: "Tucson"
+  state: "AZ"
+  zillow: true
+
+fresno:
+  name: "Fresno"
+  city: "Fresno"
+  state: "CA"
+  zillow: true
+
+atlanta:
+  name: "Atlanta"
+  city: "Atlanta"
+  state: "GA"
+  zillow: true
+
+mesa:
+  name: "Mesa"
+  city: "Mesa"
+  state: "AZ"
+  zillow: true
+
+'kansas city':
+  name: "Kansas City"
+  city: "Kansas City"
+  state: "MO"
+  zillow: true
+
+raleigh:
+  name: "Raleigh"
+  city: "Raleigh"
+  state: "NC"
+  zillow: true
+
+'colorado springs':
+  name: "Colorado Springs"
+  city: "Colorado Springs"
+  state: "CO"
+  zillow: true
+
+omaha:
+  name: "Omaha"
+  city: "Omaha"
+  state: "NE"
+  zillow: true
+
+'virginia beach':
+  name: "Virginia Beach"
+  city: "Virginia Beach"
+  state: "VA"
+  zillow: true
+
+'long beach':
+  name: "Long Beach"
+  city: "Long Beach"
+  state: "CA"
+  zillow: true
+
+oakland:
+  name: "Oakland"
+  city: "Oakland"
+  state: "CA"
+  zillow: true
+
+minneapolis:
+  name: "Minneapolis"
+  city: "Minneapolis"
+  state: "MN"
+  zillow: true
+
+tampa:
+  name: "Tampa"
+  city: "Tampa"
+  state: "FL"
+  zillow: true
+
+bakersfield:
+  name: "Bakersfield"
+  city: "Bakersfield"
+  state: "CA"
+  zillow: true
+
+tulsa:
+  name: "Tulsa"
+  city: "Tulsa"
+  state: "OK"
+  zillow: true
+
+aurora:
+  name: "Aurora"
+  city: "Aurora"
+  state: "CO"
+  zillow: true
+
+arlington:
+  name: "Arlington"
+  city: "Arlington"
+  state: "TX"
+  zillow: true
+
+wichita:
+  name: "Wichita"
+  city: "Wichita"
+  state: "KS"
+  zillow: true
+
+cleveland:
+  name: "Cleveland"
+  city: "Cleveland"
+  state: "OH"
+  zillow: true
+
+henderson:
+  name: "Henderson"
+  city: "Henderson"
+  state: "NV"
+  zillow: true
+
+'new orleans':
+  name: "New Orleans"
+  city: "New Orleans"
+  state: "LA"
+  zillow: true
+
+honolulu:
+  name: "Honolulu"
+  city: "Honolulu"
+  state: "HI"
+  zillow: true
+
+anaheim:
+  name: "Anaheim"
+  city: "Anaheim"
+  state: "CA"
+  zillow: true
+
+orlando:
+  name: "Orlando"
+  city: "Orlando"
+  state: "FL"
+  zillow: true
+
+lexington:
+  name: "Lexington"
+  city: "Lexington"
+  state: "KY"
+  zillow: true
+
+stockton:
+  name: "Stockton"
+  city: "Stockton"
+  state: "CA"
+  zillow: true
+
+riverside:
+  name: "Riverside"
+  city: "Riverside"
+  state: "CA"
+  zillow: true
+
+irvine:
+  name: "Irvine"
+  city: "Irvine"
+  state: "CA"
+  zillow: true
+
+newark:
+  name: "Newark"
+  city: "Newark"
+  state: "NJ"
+  zillow: true
+
+'santa ana':
+  name: "Santa Ana"
+  city: "Santa Ana"
+  state: "CA"
+  zillow: true
+
+'corpus christi':
+  name: "Corpus Christi"
+  city: "Corpus Christi"
+  state: "TX"
+  zillow: true
+
+cincinnati:
+  name: "Cincinnati"
+  city: "Cincinnati"
+  state: "OH"
+  zillow: true
+
+greensboro:
+  name: "Greensboro"
+  city: "Greensboro"
+  state: "NC"
+  zillow: true
+
+pittsburgh:
+  name: "Pittsburgh"
+  city: "Pittsburgh"
+  state: "PA"
+  zillow: true
+
+durham:
+  name: "Durham"
+  city: "Durham"
+  state: "NC"
+  zillow: true
+
+'st paul':
+  name: "St. Paul"
+  city: "St. Paul"
+  state: "MN"
+  zillow: true
+
+'jersey city':
+  name: "Jersey City"
+  city: "Jersey City"
+  state: "NJ"
+  zillow: true
+
+lincoln:
+  name: "Lincoln"
+  city: "Lincoln"
+  state: "NE"
+  zillow: true
+
+'north las vegas':
+  name: "North Las Vegas"
+  city: "North Las Vegas"
+  state: "NV"
+  zillow: true
+
+plano:
+  name: "Plano"
+  city: "Plano"
+  state: "TX"
+  zillow: true
+
+gilbert:
+  name: "Gilbert"
+  city: "Gilbert"
+  state: "AZ"
+  zillow: true
 
 # Template for adding new states (add to 'states' section above):
 # 'XX':
