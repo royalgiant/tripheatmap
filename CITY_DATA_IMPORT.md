@@ -90,6 +90,7 @@ ImportAllCitiesJob.perform_async
 | Miami | `miami` | Official city neighborhoods available |
 | Austin | `austin` | Census tracts (no official neighborhoods) |
 | Sacramento | `sacramento` | Census tracts (no official neighborhoods) |
+| Buenos Aires | `buenos aires` | Official barrios (neighborhoods) available |
 
 ## Data Sources
 

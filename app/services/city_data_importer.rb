@@ -15,7 +15,9 @@ class CityDataImporter
     'chicago' => 'chicago',
     'miami' => 'miami',
     'austin' => 'austin',
-    'sacramento' => 'sacramento'
+    'sacramento' => 'sacramento',
+    'buenos aires' => 'buenos aires',
+    'buenosaires' => 'buenos aires'  # Alias
   }.freeze
 
   # Display names for UI (capitalized)
@@ -24,7 +26,8 @@ class CityDataImporter
     'chicago' => 'Chicago',
     'miami' => 'Miami',
     'austin' => 'Austin',
-    'sacramento' => 'Sacramento'
+    'sacramento' => 'Sacramento',
+    'buenos aires' => 'Buenos Aires'
   }.freeze
 
   def initialize(city_key, skip_boundaries: false, skip_places: false)

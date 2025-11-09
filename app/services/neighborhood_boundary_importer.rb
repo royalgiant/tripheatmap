@@ -64,21 +64,26 @@ class NeighborhoodBoundaryImporter
     end
 
     # Import census tracts (as primary for unsupported cities, or as additional data)
+    # Skip for non-US cities that don't have FIPS codes
     fips = self.class.city_configs[city_key]
-    begin
-      importer = CensusTractImporter.new(
-        state: fips[:state_fips],
-        county: fips[:county_fips],
-        city_name: fips[:name] || fips['name'],
-        county_name: fips[:county] || fips['county']
-      )
-      count = importer.import_tracts
-      results[:census_tracts] = count
-      @errors.concat(importer.errors)
-    rescue => e
-      Rails.logger.error "Failed to import census tracts: #{e.message}"
-      @errors << "Census import failed: #{e.message}"
-      results[:errors] << e.message
+    if fips[:state_fips].present? && fips[:county_fips].present?
+      begin
+        importer = CensusTractImporter.new(
+          state: fips[:state_fips],
+          county: fips[:county_fips],
+          city_name: fips[:name] || fips['name'],
+          county_name: fips[:county] || fips['county']
+        )
+        count = importer.import_tracts
+        results[:census_tracts] = count
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import census tracts: #{e.message}"
+        @errors << "Census import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    else
+      Rails.logger.info "Skipping US Census tracts (not applicable for #{city_key})"
     end
 
     results[:total] = results[:city_neighborhoods] + results[:census_tracts]

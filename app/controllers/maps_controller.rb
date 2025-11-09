@@ -14,8 +14,9 @@ class MapsController < ApplicationController
 
   def places
     # Normalize city name to lowercase for consistent querying
-    @city = (params[:city] || 'dallas').downcase
-    @city_display = @city.titleize
+    city_param = (params[:city] || 'dallas').downcase.gsub('-', ' ')
+    @city = CityDataImporter::CITY_NAMES[city_param] || city_param
+    @city_display = CityDataImporter::DISPLAY_NAMES[@city] || @city.titleize
     @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
 
     @neighborhoods = Neighborhood.for_city(@city)

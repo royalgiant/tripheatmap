@@ -99,13 +99,25 @@ sacramento:
   state_name: "California"
   state: "CA"
   county: "Sacramento"
-  
-  # FIPS codes for census data
   state_fips: '06'
   county_fips: '067'
-  
   # No official neighborhood boundaries available - uses census tracts
   enabled: false
+
+'buenos aires':
+  name: "Buenos Aires"
+  city: "Buenos Aires"  # For compatibility with importer code
+  state_name: "Ciudad Autónoma de Buenos Aires"
+  state: "CABA"
+  county: "Buenos Aires"
+  country: "Argentina"
+  endpoint: "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ministerio-de-educacion/barrios/barrios.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "nombre"  # Spanish for "name"
+    geoid: "id"
+  population_source: "manual"  # No US Census data for Argentina
 
 # Template for adding new states (add to 'states' section above):
 # 'XX':

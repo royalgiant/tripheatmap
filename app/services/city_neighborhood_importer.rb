@@ -19,7 +19,7 @@ class CityNeighborhoodImporter
   # Import neighborhoods for the configured city
   # Returns the number of neighborhoods imported
   def import_neighborhoods
-    Rails.logger.info "Importing neighborhoods for #{config['city']}, #{config['state']}"
+    Rails.logger.info "Importing neighborhoods for #{city_name}, #{config['state']}"
 
     features = fetch_neighborhood_features
     return 0 if features.empty?
@@ -35,7 +35,7 @@ class CityNeighborhoodImporter
       end
     end
 
-    Rails.logger.info "Imported #{imported_count} neighborhoods for #{config['city']} (#{failed_count} failed)"
+    Rails.logger.info "Imported #{imported_count} neighborhoods for #{city_name} (#{failed_count} failed)"
     imported_count
   end
 
@@ -57,6 +57,11 @@ class CityNeighborhoodImporter
   end
 
   private
+
+  # Get city name from config (supports both 'city' and 'name' fields)
+  def city_name
+    @city_name ||= config['city'] || config['name']
+  end
 
   # Load configuration for the specified city
   def load_config
@@ -82,7 +87,7 @@ class CityNeighborhoodImporter
       data = JSON.parse(response.body)
       features = data["features"] || []
 
-      Rails.logger.info "Fetched #{features.size} neighborhood features from #{config['city']}"
+      Rails.logger.info "Fetched #{features.size} neighborhood features from #{city_name}"
       features
     rescue => e
       Rails.logger.error "Error fetching city neighborhoods: #{e.message}"
@@ -132,7 +137,7 @@ class CityNeighborhoodImporter
     Neighborhood.create!(
       geoid: geoid,
       name: name,
-      city: config["city"],
+      city: city_name,
       county: config["county"],
       state: config["state"],
       population: nil, # Will need to be populated from census data later
@@ -150,8 +155,7 @@ class CityNeighborhoodImporter
 
   # Parse GeoJSON geometry using RGeo
   def parse_geometry(geojson)
-    # Use simple_mercator factory which is more forgiving with self-intersecting polygons
-    factory = RGeo::Geographic.simple_factory(srid: 4326)
+    factory = RGeo::Geographic.spherical_factory(srid: 4326)
     geometry = RGeo::GeoJSON.decode(geojson.to_json, geo_factory: factory)
 
     # Ensure it's a MultiPolygon (convert Polygon to MultiPolygon if needed)
