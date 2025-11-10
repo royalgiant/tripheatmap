@@ -19,6 +19,13 @@ async function initNeighborhoodDetailMap() {
 
     console.log('Initializing neighborhood detail map with', placesData.length, 'places');
 
+    // Track active filters (all active by default)
+    const activeFilters = {
+      restaurant: true,
+      cafe: true,
+      bar: true
+    };
+
     if (placesData.length === 0) {
       el.innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: #666;">
@@ -53,6 +60,13 @@ async function initNeighborhoodDetailMap() {
 
       // Store markers by place ID for list item clicks
       const markersByPlaceId = {};
+      
+      // Store markers by place type for filtering
+      const markersByType = {
+        restaurant: [],
+        cafe: [],
+        bar: []
+      };
 
       // Track currently open popup
       let currentPopup = null;
@@ -101,6 +115,11 @@ async function initNeighborhoodDetailMap() {
 
         // Store marker reference for list item clicks
         markersByPlaceId[place.id] = { marker, popup, lat, lon };
+        
+        // Store marker by type for filtering
+        if (markersByType[place.place_type]) {
+          markersByType[place.place_type].push(marker);
+        }
 
         // Listen for popup open to track it and close others
         popup.on('open', () => {
@@ -210,6 +229,63 @@ async function initNeighborhoodDetailMap() {
       el.appendChild(legend);
 
       console.log('Neighborhood detail map fully initialized with', placesData.length, 'markers');
+      
+      // Add filter toggle functionality
+      setupFilterToggles();
+      
+      function setupFilterToggles() {
+        const filterButtons = document.querySelectorAll('.place-type-filter');
+        
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const placeType = button.dataset.placeType;
+            
+            // Toggle the filter state
+            activeFilters[placeType] = !activeFilters[placeType];
+            
+            // Update button styling
+            updateButtonStyle(button, activeFilters[placeType]);
+            
+            // Show/hide places in list
+            togglePlacesList(placeType, activeFilters[placeType]);
+            
+            // Show/hide markers on map
+            toggleMarkers(placeType, activeFilters[placeType]);
+          });
+        });
+      }
+      
+      function updateButtonStyle(button, isActive) {
+        if (isActive) {
+          // Active state - normal colors
+          button.style.opacity = '1';
+          button.style.borderColor = '';
+          button.classList.remove('opacity-40');
+        } else {
+          // Inactive state - grayed out
+          button.style.opacity = '0.4';
+          button.classList.add('opacity-40');
+        }
+      }
+      
+      function togglePlacesList(placeType, show) {
+        const section = document.querySelector(`.places-section[data-place-type="${placeType}"]`);
+        if (section) {
+          section.style.display = show ? 'block' : 'none';
+        }
+      }
+      
+      function toggleMarkers(placeType, show) {
+        const markers = markersByType[placeType];
+        if (markers) {
+          markers.forEach(marker => {
+            const element = marker.getElement();
+            if (element) {
+              element.style.display = show ? 'block' : 'none';
+            }
+          });
+        }
+      }
     });
 
     map.on('error', (e) => {

@@ -123,450 +123,600 @@ states:
   name: "New York"
   city: "New York"
   state: "NY"
+  state_fips: '36'
+  county_fips: '061'  # New York County (Manhattan) - also covers other boroughs via multi-county
   zillow: true
 
 'los angeles':
   name: "Los Angeles"
   city: "Los Angeles"
   state: "CA"
+  state_fips: '06'
+  county_fips: '037'  # Los Angeles County
   zillow: true
 
 houston:
   name: "Houston"
   city: "Houston"
   state: "TX"
+  state_fips: '48'
+  county_fips: '201'  # Harris County
   zillow: true
 
 phoenix:
   name: "Phoenix"
   city: "Phoenix"
   state: "AZ"
+  state_fips: '04'
+  county_fips: '013'  # Maricopa County
   zillow: true
 
 philadelphia:
   name: "Philadelphia"
   city: "Philadelphia"
   state: "PA"
+  state_fips: '42'
+  county_fips: '101'  # Philadelphia County
   zillow: true
 
 'san antonio':
   name: "San Antonio"
   city: "San Antonio"
   state: "TX"
+  state_fips: '48'
+  county_fips: '029'  # Bexar County
   zillow: true
 
 'san diego':
   name: "San Diego"
   city: "San Diego"
   state: "CA"
+  state_fips: '06'
+  county_fips: '073'  # San Diego County
   zillow: true
 
 'fort worth':
   name: "Fort Worth"
   city: "Fort Worth"
   state: "TX"
+  state_fips: '48'
+  county_fips: '439'  # Tarrant County
   zillow: true
 
 jacksonville:
   name: "Jacksonville"
   city: "Jacksonville"
   state: "FL"
+  state_fips: '12'
+  county_fips: '031'  # Duval County
   zillow: true
 
 'san jose':
   name: "San Jose"
   city: "San Jose"
   state: "CA"
+  state_fips: '06'
+  county_fips: '085'  # Santa Clara County
   zillow: true
 
 charlotte:
   name: "Charlotte"
   city: "Charlotte"
   state: "NC"
+  state_fips: '37'
+  county_fips: '119'  # Mecklenburg County
   zillow: true
 
 columbus:
   name: "Columbus"
   city: "Columbus"
   state: "OH"
+  state_fips: '39'
+  county_fips: '049'  # Franklin County
   zillow: true
 
 indianapolis:
   name: "Indianapolis"
   city: "Indianapolis"
   state: "IN"
+  state_fips: '18'
+  county_fips: '097'  # Marion County
   zillow: true
 
 'san francisco':
   name: "San Francisco"
   city: "San Francisco"
   state: "CA"
+  state_fips: '06'
+  county_fips: '075'  # San Francisco County
   zillow: true
 
 seattle:
   name: "Seattle"
   city: "Seattle"
   state: "WA"
+  state_fips: '53'
+  county_fips: '033'  # King County
   zillow: true
 
 denver:
   name: "Denver"
   city: "Denver"
   state: "CO"
+  state_fips: '08'
+  county_fips: '031'  # Denver County
   zillow: true
 
 'oklahoma city':
   name: "Oklahoma City"
   city: "Oklahoma City"
   state: "OK"
+  state_fips: '40'
+  county_fips: '109'  # Oklahoma County
   zillow: true
 
 washington:
   name: "Washington"
   city: "Washington"
   state: "DC"
+  state_fips: '11'
+  county_fips: '001'  # District of Columbia
   zillow: true
 
 nashville:
   name: "Nashville"
   city: "Nashville"
   state: "TN"
+  state_fips: '47'
+  county_fips: '037'  # Davidson County
   zillow: true
 
 dallas:
   name: "Dallas"
   city: "Dallas"
   state: "TX"
+  state_fips: '48'
+  county_fips: '113'  # Dallas County
   zillow: true
 
 chicago:
   name: "Chicago"
   city: "Chicago"
   state: "IL"
+  state_fips: '17'
+  county_fips: '031'  # Cook County
   zillow: true
 
 austin:
   name: "Austin"
   city: "Austin"
   state: "TX"
+  state_fips: '48'
+  county_fips: '453'  # Travis County
   zillow: true
 
 miami:
   name: "Miami"
   city: "Miami"
   state: "FL"
+  state_fips: '12'
+  county_fips: '086'  # Miami-Dade County
   zillow: true
 
 sacramento:
   name: "Sacramento"
   city: "Sacramento"
   state: "CA"
+  state_fips: '06'
+  county_fips: '067'  # Sacramento County
   zillow: true
 
 'las vegas':
   name: "Las Vegas"
   city: "Las Vegas"
   state: "NV"
+  state_fips: '32'
+  county_fips: '003'  # Clark County
   zillow: true
 
 'el paso':
   name: "El Paso"
   city: "El Paso"
   state: "TX"
+  state_fips: '48'
+  county_fips: '141'  # El Paso County
   zillow: true
 
 boston:
   name: "Boston"
   city: "Boston"
   state: "MA"
+  state_fips: '25'
+  county_fips: '025'  # Suffolk County
   zillow: true
 
 detroit:
   name: "Detroit"
   city: "Detroit"
   state: "MI"
+  state_fips: '26'
+  county_fips: '163'  # Wayne County
   zillow: true
 
 louisville:
   name: "Louisville"
   city: "Louisville"
   state: "KY"
+  state_fips: '21'
+  county_fips: '111'  # Jefferson County
   zillow: true
 
 portland:
   name: "Portland"
   city: "Portland"
   state: "OR"
+  state_fips: '41'
+  county_fips: '051'  # Multnomah County
   zillow: true
 
 memphis:
   name: "Memphis"
   city: "Memphis"
   state: "TN"
+  state_fips: '47'
+  county_fips: '157'  # Shelby County
   zillow: true
 
 baltimore:
   name: "Baltimore"
   city: "Baltimore"
   state: "MD"
+  state_fips: '24'
+  county_fips: '510'  # Baltimore City
   zillow: true
 
 milwaukee:
   name: "Milwaukee"
   city: "Milwaukee"
   state: "WI"
+  state_fips: '55'
+  county_fips: '079'  # Milwaukee County
   zillow: true
 
 albuquerque:
   name: "Albuquerque"
   city: "Albuquerque"
   state: "NM"
+  state_fips: '35'
+  county_fips: '001'  # Bernalillo County
   zillow: true
 
 tucson:
   name: "Tucson"
   city: "Tucson"
   state: "AZ"
+  state_fips: '04'
+  county_fips: '019'  # Pima County
   zillow: true
 
 fresno:
   name: "Fresno"
   city: "Fresno"
   state: "CA"
+  state_fips: '06'
+  county_fips: '019'  # Fresno County
   zillow: true
 
 atlanta:
   name: "Atlanta"
   city: "Atlanta"
   state: "GA"
+  state_fips: '13'
+  county_fips: '121'  # Fulton County
   zillow: true
 
 mesa:
   name: "Mesa"
   city: "Mesa"
   state: "AZ"
+  state_fips: '04'
+  county_fips: '013'  # Maricopa County
   zillow: true
 
 'kansas city':
   name: "Kansas City"
   city: "Kansas City"
   state: "MO"
+  state_fips: '29'
+  county_fips: '095'  # Jackson County
   zillow: true
 
 raleigh:
   name: "Raleigh"
   city: "Raleigh"
   state: "NC"
+  state_fips: '37'
+  county_fips: '183'  # Wake County
   zillow: true
 
 'colorado springs':
   name: "Colorado Springs"
   city: "Colorado Springs"
   state: "CO"
+  state_fips: '08'
+  county_fips: '041'  # El Paso County
   zillow: true
 
 omaha:
   name: "Omaha"
   city: "Omaha"
   state: "NE"
+  state_fips: '31'
+  county_fips: '055'  # Douglas County
   zillow: true
 
 'virginia beach':
   name: "Virginia Beach"
   city: "Virginia Beach"
   state: "VA"
+  state_fips: '51'
+  county_fips: '810'  # Virginia Beach City
   zillow: true
 
 'long beach':
   name: "Long Beach"
   city: "Long Beach"
   state: "CA"
+  state_fips: '06'
+  county_fips: '037'  # Los Angeles County
   zillow: true
 
 oakland:
   name: "Oakland"
   city: "Oakland"
   state: "CA"
+  state_fips: '06'
+  county_fips: '001'  # Alameda County
   zillow: true
 
 minneapolis:
   name: "Minneapolis"
   city: "Minneapolis"
   state: "MN"
+  state_fips: '27'
+  county_fips: '053'  # Hennepin County
   zillow: true
 
 tampa:
   name: "Tampa"
   city: "Tampa"
   state: "FL"
+  state_fips: '12'
+  county_fips: '057'  # Hillsborough County
   zillow: true
 
 bakersfield:
   name: "Bakersfield"
   city: "Bakersfield"
   state: "CA"
+  state_fips: '06'
+  county_fips: '029'  # Kern County
   zillow: true
 
 tulsa:
   name: "Tulsa"
   city: "Tulsa"
   state: "OK"
+  state_fips: '40'
+  county_fips: '143'  # Tulsa County
   zillow: true
 
 aurora:
   name: "Aurora"
   city: "Aurora"
   state: "CO"
+  state_fips: '08'
+  county_fips: '001'  # Adams County
   zillow: true
 
 arlington:
   name: "Arlington"
   city: "Arlington"
   state: "TX"
+  state_fips: '48'
+  county_fips: '439'  # Tarrant County
   zillow: true
 
 wichita:
   name: "Wichita"
   city: "Wichita"
   state: "KS"
+  state_fips: '20'
+  county_fips: '173'  # Sedgwick County
   zillow: true
 
 cleveland:
   name: "Cleveland"
   city: "Cleveland"
   state: "OH"
+  state_fips: '39'
+  county_fips: '035'  # Cuyahoga County
   zillow: true
 
 henderson:
   name: "Henderson"
   city: "Henderson"
   state: "NV"
+  state_fips: '32'
+  county_fips: '003'  # Clark County
   zillow: true
 
 'new orleans':
   name: "New Orleans"
   city: "New Orleans"
   state: "LA"
+  state_fips: '22'
+  county_fips: '071'  # Orleans Parish
   zillow: true
 
 honolulu:
   name: "Honolulu"
   city: "Honolulu"
   state: "HI"
+  state_fips: '15'
+  county_fips: '003'  # Honolulu County
   zillow: true
 
 anaheim:
   name: "Anaheim"
   city: "Anaheim"
   state: "CA"
+  state_fips: '06'
+  county_fips: '059'  # Orange County
   zillow: true
 
 orlando:
   name: "Orlando"
   city: "Orlando"
   state: "FL"
+  state_fips: '12'
+  county_fips: '095'  # Orange County
   zillow: true
 
 lexington:
   name: "Lexington"
   city: "Lexington"
   state: "KY"
+  state_fips: '21'
+  county_fips: '067'  # Fayette County
   zillow: true
 
 stockton:
   name: "Stockton"
   city: "Stockton"
   state: "CA"
+  state_fips: '06'
+  county_fips: '077'  # San Joaquin County
   zillow: true
 
 riverside:
   name: "Riverside"
   city: "Riverside"
   state: "CA"
+  state_fips: '06'
+  county_fips: '065'  # Riverside County
   zillow: true
 
 irvine:
   name: "Irvine"
   city: "Irvine"
   state: "CA"
+  state_fips: '06'
+  county_fips: '059'  # Orange County
   zillow: true
 
 newark:
   name: "Newark"
   city: "Newark"
   state: "NJ"
+  state_fips: '34'
+  county_fips: '013'  # Essex County
   zillow: true
 
 'santa ana':
   name: "Santa Ana"
   city: "Santa Ana"
   state: "CA"
+  state_fips: '06'
+  county_fips: '059'  # Orange County
   zillow: true
 
 'corpus christi':
   name: "Corpus Christi"
   city: "Corpus Christi"
   state: "TX"
+  state_fips: '48'
+  county_fips: '355'  # Nueces County
   zillow: true
 
 cincinnati:
   name: "Cincinnati"
   city: "Cincinnati"
   state: "OH"
+  state_fips: '39'
+  county_fips: '061'  # Hamilton County
   zillow: true
 
 greensboro:
   name: "Greensboro"
   city: "Greensboro"
   state: "NC"
+  state_fips: '37'
+  county_fips: '081'  # Guilford County
   zillow: true
 
 pittsburgh:
   name: "Pittsburgh"
   city: "Pittsburgh"
   state: "PA"
+  state_fips: '42'
+  county_fips: '003'  # Allegheny County
   zillow: true
 
 durham:
   name: "Durham"
   city: "Durham"
   state: "NC"
+  state_fips: '37'
+  county_fips: '063'  # Durham County
   zillow: true
 
 'st paul':
   name: "St. Paul"
   city: "St. Paul"
   state: "MN"
+  state_fips: '27'
+  county_fips: '123'  # Ramsey County
   zillow: true
 
 'jersey city':
   name: "Jersey City"
   city: "Jersey City"
   state: "NJ"
+  state_fips: '34'
+  county_fips: '017'  # Hudson County
   zillow: true
 
 lincoln:
   name: "Lincoln"
   city: "Lincoln"
   state: "NE"
+  state_fips: '31'
+  county_fips: '109'  # Lancaster County
   zillow: true
 
 'north las vegas':
   name: "North Las Vegas"
   city: "North Las Vegas"
   state: "NV"
+  state_fips: '32'
+  county_fips: '003'  # Clark County
   zillow: true
 
 plano:
   name: "Plano"
   city: "Plano"
   state: "TX"
+  state_fips: '48'
+  county_fips: '085'  # Collin County
   zillow: true
 
 gilbert:
   name: "Gilbert"
   city: "Gilbert"
   state: "AZ"
+  state_fips: '04'
+  county_fips: '013'  # Maricopa County
   zillow: true
 
 # Template for adding new states (add to 'states' section above):

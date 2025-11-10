@@ -6,15 +6,27 @@
 
     <% if @stats %>
       <div class="flex gap-4 text-sm">
-        <span class="bg-blue-100 px-3 py-1 rounded">
+        <button 
+          id="filter-restaurant"
+          data-place-type="restaurant"
+          class="place-type-filter bg-blue-100 hover:bg-blue-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-blue-100"
+        >
           <strong><%= @stats.restaurant_count %></strong> Restaurants
-        </span>
-        <span class="bg-green-100 px-3 py-1 rounded">
+        </button>
+        <button 
+          id="filter-cafe"
+          data-place-type="cafe"
+          class="place-type-filter bg-green-100 hover:bg-green-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-green-100"
+        >
           <strong><%= @stats.cafe_count %></strong> Cafes
-        </span>
-        <span class="bg-purple-100 px-3 py-1 rounded">
+        </button>
+        <button 
+          id="filter-bar"
+          data-place-type="bar"
+          class="place-type-filter bg-purple-100 hover:bg-purple-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-purple-100"
+        >
           <strong><%= @stats.bar_count %></strong> Bars
-        </span>
+        </button>
         <span class="bg-gray-100 px-3 py-1 rounded">
           <strong>Vibrancy Score:</strong> <%= @stats.vibrancy_index.round(1) %>/10
         </span>
@@ -31,7 +43,7 @@
       <% if @places.any? %>
         <!-- Restaurants -->
         <% if @restaurants.any? %>
-          <div class="mb-6">
+          <div class="mb-6 places-section" data-place-type="restaurant">
             <h3 class="text-xl font-semibold mb-3 text-blue-600">
               Restaurants (<%= @restaurants.count %>)
             </h3>
@@ -43,7 +55,7 @@
 
         <!-- Cafes -->
         <% if @cafes.any? %>
-          <div class="mb-6">
+          <div class="mb-6 places-section" data-place-type="cafe">
             <h3 class="text-xl font-semibold mb-3 text-green-600">
               Cafes (<%= @cafes.count %>)
             </h3>
@@ -55,7 +67,7 @@
 
         <!-- Bars -->
         <% if @bars.any? %>
-          <div class="mb-6">
+          <div class="mb-6 places-section" data-place-type="bar">
             <h3 class="text-xl font-semibold mb-3 text-purple-600">
               Bars (<%= @bars.count %>)
             </h3>

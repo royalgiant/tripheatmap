@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resources :error_logs, only: [:create]
       resources :reddit_posts, only: [:index]
       resources :neighborhoods, only: [:index, :show]
+      resources :cities, only: [:index]
     end
   end
 
