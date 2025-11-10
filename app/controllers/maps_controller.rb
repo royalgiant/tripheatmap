@@ -20,7 +20,6 @@ class MapsController < ApplicationController
 
   private
 
-  # Normalize city parameter from URL (e.g., 'buenos-aires' -> 'buenos aires')
   def normalize_city_param
     (params[:city] || 'new york').downcase.gsub('-', ' ')
   end

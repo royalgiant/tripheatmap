@@ -62,7 +62,10 @@ async function initPlacesMap() {
       'miami': [-80.19, 25.76],
       'austin': [-97.74, 30.27],
       'sacramento': [-121.49, 38.58],
-      'buenos aires': [-58.38, -34.60]
+      'buenos aires': [-58.38, -34.60],
+      'marciaga': [10.73, 45.59],
+      'costermano sul garda': [10.72, 45.60],
+      'verona': [10.99, 45.44]
     };
 
     const defaultCenter = cityCoordinates[city.toLowerCase()] || [-74.00, 40.71];

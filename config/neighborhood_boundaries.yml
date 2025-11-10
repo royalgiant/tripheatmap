@@ -1,6 +1,10 @@
 # Consolidated city configuration
 # Includes FIPS codes, neighborhood boundary endpoints, and metadata for all supported cities
 
+# ============================================================================
+# INTERNATIONAL CITIES
+# ============================================================================
+
 'buenos aires':
   name: "Buenos Aires"
   city: "Buenos Aires"
@@ -15,6 +19,38 @@
     name: "nombre"  # Spanish for "name"
     geoid: "id"
   population_source: "manual"  # No US Census data for Argentina
+
+# Italy - Using ISTAT administrative boundaries
+# ISTAT codes (Codice ISTAT): Italian equivalent of FIPS codes
+# Source: https://www.istat.it/it/archivio/222527
+marciaga:
+  name: "Marciaga"
+  city: "Marciaga"
+  state: "Veneto"
+  county: "Verona"
+  country: "Italy"
+  istat_code: "023029" 
+  population_source: "istat"
+
+'costermano sul garda':
+  name: "Costermano sul Garda"
+  city: "Costermano sul Garda"
+  state: "Veneto"
+  county: "Verona"
+  country: "Italy"
+  istat_code: "023029"
+  population_source: "istat"
+  # endpoint: "https://www.istat.it/storage/cartografia/confini_amministrativi/generalizzati/Limiti01012023_g.zip"
+
+verona:
+  name: "Verona"
+  city: "Verona"
+  state: "Veneto"
+  county: "Verona"
+  country: "Italy"
+  istat_code: "023091"
+  population_source: "istat"
+  # endpoint: "https://www.istat.it/storage/cartografia/confini_amministrativi/generalizzati/Limiti01012023_g.zip"
 
 # State FIPS codes mapping
 states:
