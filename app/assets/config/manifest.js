@@ -3,4 +3,5 @@
 //= link application.js
 //= link places_map.js
 //= link mapbox_heatmap.js
+//= link city_selector.js
 //= link_tree ../builds

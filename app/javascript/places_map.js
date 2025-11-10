@@ -9,9 +9,10 @@ async function initPlacesMap() {
     }
 
     const token = el.dataset.mapboxToken;
-    const city = el.dataset.city_display || 'New York';
+    const city = el.dataset.city || 'new york';
+    const cityDisplay = el.dataset.cityDisplay || 'New York';
 
-    console.log('Initializing places map for city:', city);
+    console.log('Initializing places map for city:', cityDisplay);
     console.log('Mapbox token present:', !!token);
 
     if (!token) {
@@ -39,7 +40,7 @@ async function initPlacesMap() {
     loadingDiv.innerHTML = `
       <div style="text-align: center;">
         <div style="border: 4px solid rgba(255, 255, 255, 0.3); border-top: 4px solid white; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
-        <div style="font-size: 18px; font-weight: bold;">Loading ${city} neighborhoods...</div>
+        <div style="font-size: 18px; font-weight: bold;">Loading ${cityDisplay} neighborhoods...</div>
         <div style="font-size: 14px; color: #aaa; margin-top: 8px;">Fetching vibrancy data</div>
       </div>
       <style>
