@@ -92,11 +92,11 @@ aliases:
 # Use accessory services (secrets come from .kamal/secrets).
 #
 accessories:
-  # Reuse db from keepviews
+  # Separate database for tripheatmap (port 5433 to avoid conflict with keepviews-db on 5432)
   db:
-    image: postgres:16
+    image: postgis/postgis:16-3.4
     host: 95.216.161.144
-    port: 5432
+    port: "5433:5432"  # Map host port 5433 to container's PostgreSQL port 5432
     env:
       clear:
         POSTGRES_USER: postgres
