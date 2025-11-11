@@ -38,21 +38,34 @@ class NeighborhoodBoundaryImporter
 
     results = {
       city: city_key,
-      city_neighborhoods: 0,
-      census_tracts: 0,
+      neighborhoods: 0,
       method: nil,
       errors: []
     }
 
     fips = self.class.city_configs[city_key]
 
-    # Try city-specific neighborhoods first (custom open data portals)
-    if CityNeighborhoodImporter.available_for_city?(city_key)
+    # Try Italian neighborhoods (national dataset filtered by ISTAT code)
+    if ItalyNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "Italian municipality data available for #{city_key}, importing..."
+      begin
+        importer = ItalyNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'italy_istat'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Italian neighborhoods: #{e.message}"
+        @errors << "Italy import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try city-specific neighborhoods (custom open data portals like Buenos Aires)
+    elsif CityNeighborhoodImporter.available_for_city?(city_key)
       Rails.logger.info "City-specific neighborhoods available for #{city_key}, importing..."
       begin
         importer = CityNeighborhoodImporter.new(city_key)
         count = importer.import_neighborhoods
-        results[:city_neighborhoods] = count
+        results[:neighborhoods] = count
         results[:method] = 'city_specific'
         @errors.concat(importer.errors)
       rescue => e
@@ -60,6 +73,7 @@ class NeighborhoodBoundaryImporter
         @errors << "City import failed: #{e.message}"
         results[:errors] << e.message
       end
+    # Try Zillow neighborhoods (US cities with EPA/Zillow data)
     elsif fips[:zillow] == true
       Rails.logger.info "Using Zillow neighborhoods for #{city_key}..."
       begin
@@ -69,7 +83,7 @@ class NeighborhoodBoundaryImporter
 
         importer = ZillowNeighborhoodImporter.new(city_name: city_name, state: state, county: county)
         count = importer.import_neighborhoods
-        results[:city_neighborhoods] = count
+        results[:neighborhoods] = count
         results[:method] = 'zillow'
         @errors.concat(importer.errors)
       rescue => e
@@ -78,40 +92,16 @@ class NeighborhoodBoundaryImporter
         results[:errors] << e.message
       end
     else
-      Rails.logger.info "No city-specific or Zillow neighborhoods for #{city_key}, will use census tracts..."
-      results[:method] = 'census_fallback'
+      Rails.logger.warn "No neighborhood data source configured for #{city_key}"
+      results[:method] = 'none'
     end
 
-    # Import census tracts (as primary for unsupported cities, or as additional data)
-    # Skip for non-US cities that don't have FIPS codes
-    if fips[:state_fips].present? && fips[:county_fips].present?
-      begin
-        importer = CensusTractImporter.new(
-          state: fips[:state_fips],
-          county: fips[:county_fips],
-          city_name: fips[:name] || fips['name'],
-          county_name: fips[:county] || fips['county']
-        )
-        count = importer.import_tracts
-        results[:census_tracts] = count
-        @errors.concat(importer.errors)
-      rescue => e
-        Rails.logger.error "Failed to import census tracts: #{e.message}"
-        @errors << "Census import failed: #{e.message}"
-        results[:errors] << e.message
-      end
-    else
-      Rails.logger.info "Skipping US Census tracts (not applicable for #{city_key})"
-    end
-
-    results[:total] = results[:city_neighborhoods] + results[:census_tracts]
     results[:errors] = @errors
 
     Rails.logger.info "=" * 80
     Rails.logger.info "Import complete for #{city_key}:"
-    Rails.logger.info "  City neighborhoods: #{results[:city_neighborhoods]}"
-    Rails.logger.info "  Census tracts: #{results[:census_tracts]}"
-    Rails.logger.info "  Total: #{results[:total]}"
+    Rails.logger.info "  Neighborhoods: #{results[:neighborhoods]}"
+    Rails.logger.info "  Method: #{results[:method]}"
     Rails.logger.info "  Errors: #{@errors.size}"
     Rails.logger.info "=" * 80
 
@@ -134,26 +124,22 @@ class NeighborhoodBoundaryImporter
     Rails.logger.info "IMPORT SUMMARY FOR ALL CITIES"
     Rails.logger.info "=" * 80
 
-    total_city_neighborhoods = 0
-    total_census_tracts = 0
+    total_neighborhoods = 0
     total_errors = 0
 
     results.each do |city, stats|
       Rails.logger.info "#{city.capitalize}:"
-      Rails.logger.info "  City neighborhoods: #{stats[:city_neighborhoods]}"
-      Rails.logger.info "  Census tracts: #{stats[:census_tracts]}"
+      Rails.logger.info "  Neighborhoods: #{stats[:neighborhoods]}"
+      Rails.logger.info "  Method: #{stats[:method]}"
       Rails.logger.info "  Errors: #{stats[:errors].size}"
 
-      total_city_neighborhoods += stats[:city_neighborhoods]
-      total_census_tracts += stats[:census_tracts]
+      total_neighborhoods += stats[:neighborhoods]
       total_errors += stats[:errors].size
     end
 
     Rails.logger.info "-" * 80
     Rails.logger.info "TOTALS:"
-    Rails.logger.info "  City neighborhoods: #{total_city_neighborhoods}"
-    Rails.logger.info "  Census tracts: #{total_census_tracts}"
-    Rails.logger.info "  Grand total: #{total_city_neighborhoods + total_census_tracts}"
+    Rails.logger.info "  Total neighborhoods: #{total_neighborhoods}"
     Rails.logger.info "  Total errors: #{total_errors}"
     Rails.logger.info "=" * 80
 

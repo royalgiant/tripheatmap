@@ -23,14 +23,32 @@
 # Italy - Using ISTAT administrative boundaries
 # ISTAT codes (Codice ISTAT): Italian equivalent of FIPS codes
 # Source: https://www.istat.it/it/archivio/222527
+#
+# NOTE: ISTAT does not provide direct GeoJSON REST endpoints like US open data portals.
+# Data is available as bulk downloads (shapefiles/ZIP) that require manual processing:
+# - Confini amministrativi: https://www.istat.it/storage/cartografia/confini_amministrativi/
+# - Format: Generalizzati (simplified) or Non generalizzati (detailed)
+#
+# To enable these cities, you need to either:
+# 1. Find municipal-level open data portals with GeoJSON APIs
+# 2. Download shapefiles, extract municipality data, convert to GeoJSON, and host it
+# 3. Create an IstatNeighborhoodImporter service that processes downloaded shapefiles
+# 4. Use OpenStreetMap boundaries as a fallback (less official but available)
+#
 marciaga:
   name: "Marciaga"
   city: "Marciaga"
   state: "Veneto"
   county: "Verona"
   country: "Italy"
-  istat_code: "023029" 
+  istat_code: "023029"
   population_source: "istat"
+  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "COMUNE"
+    geoid: "PRO_COM"
 
 'costermano sul garda':
   name: "Costermano sul Garda"
@@ -40,7 +58,12 @@ marciaga:
   country: "Italy"
   istat_code: "023029"
   population_source: "istat"
-  # endpoint: "https://www.istat.it/storage/cartografia/confini_amministrativi/generalizzati/Limiti01012023_g.zip"
+  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "COMUNE"
+    geoid: "PRO_COM"
 
 verona:
   name: "Verona"
@@ -50,10 +73,18 @@ verona:
   country: "Italy"
   istat_code: "023091"
   population_source: "istat"
-  # endpoint: "https://www.istat.it/storage/cartografia/confini_amministrativi/generalizzati/Limiti01012023_g.zip"
+  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "COMUNE"
+    geoid: "PRO_COM"
 
 # State FIPS codes mapping
 states:
+  '02':
+    abbreviation: 'AK'
+    name: 'Alaska'
   '04':
     abbreviation: 'AZ'
     name: 'Arizona'
@@ -135,12 +166,18 @@ states:
   '42':
     abbreviation: 'PA'
     name: 'Pennsylvania'
+  '45':
+    abbreviation: 'SC'
+    name: 'South Carolina'
   '47':
     abbreviation: 'TN'
     name: 'Tennessee'
   '48':
     abbreviation: 'TX'
     name: 'Texas'
+  '49':
+    abbreviation: 'UT'
+    name: 'Utah'
   '51':
     abbreviation: 'VA'
     name: 'Virginia'
@@ -753,6 +790,102 @@ gilbert:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  zillow: true
+
+charleston:
+  name: "Charleston"
+  city: "Charleston"
+  state: "SC"
+  state_fips: '45'
+  county_fips: '019'  # Charleston County
+  zillow: true
+
+savannah:
+  name: "Savannah"
+  city: "Savannah"
+  state: "GA"
+  state_fips: '13'
+  county_fips: '051'  # Chatham County
+  zillow: true
+
+sedona:
+  name: "Sedona"
+  city: "Sedona"
+  state: "AZ"
+  state_fips: '04'
+  county_fips: '025'  # Yavapai County (primarily, also extends into Coconino County)
+  zillow: true
+
+aspen:
+  name: "Aspen"
+  city: "Aspen"
+  state: "CO"
+  state_fips: '08'
+  county_fips: '097'  # Pitkin County
+  zillow: true
+
+scottsdale:
+  name: "Scottsdale"
+  city: "Scottsdale"
+  state: "AZ"
+  state_fips: '04'
+  county_fips: '013'  # Maricopa County
+  zillow: true
+
+'salt lake city':
+  name: "Salt Lake City"
+  city: "Salt Lake City"
+  state: "UT"
+  state_fips: '49'
+  county_fips: '035'  # Salt Lake County
+  zillow: true
+
+'santa fe':
+  name: "Santa Fe"
+  city: "Santa Fe"
+  state: "NM"
+  state_fips: '35'
+  county_fips: '049'  # Santa Fe County
+  zillow: true
+
+'st louis':
+  name: "St. Louis"
+  city: "St. Louis"
+  state: "MO"
+  state_fips: '29'
+  county_fips: '510'  # St. Louis City (independent city)
+  zillow: true
+
+anchorage:
+  name: "Anchorage"
+  city: "Anchorage"
+  state: "AK"
+  state_fips: '02'
+  county_fips: '020'  # Anchorage Municipality
+  zillow: true
+
+boulder:
+  name: "Boulder"
+  city: "Boulder"
+  state: "CO"
+  state_fips: '08'
+  county_fips: '013'  # Boulder County
+  zillow: true
+
+napa:
+  name: "Napa"
+  city: "Napa"
+  state: "CA"
+  state_fips: '06'
+  county_fips: '055'  # Napa County
+  zillow: true
+
+calistoga:
+  name: "Calistoga"
+  city: "Calistoga"
+  state: "CA"
+  state_fips: '06'
+  county_fips: '055'  # Napa County
   zillow: true
 
 # Template for adding new states (add to 'states' section above):
