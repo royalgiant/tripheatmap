@@ -51,17 +51,20 @@ class CityDataImporter
   end
   DISPLAY_NAMES = display_names
 
-  def initialize(city_key, skip_boundaries: false, skip_places: false)
+  def initialize(city_key, skip_boundaries: false, skip_places: false, force: false)
     @city_key = city_key.to_s.downcase
     @city_name = CITY_NAMES[@city_key]
     @skip_boundaries = skip_boundaries
     @skip_places = skip_places
+    @force = force
     @errors = []
     @results = {
       city: @city_name,
       boundaries_imported: 0,
       places_imported: 0,
       duration: 0,
+      skipped: false,
+      skip_reason: nil,
       errors: []
     }
 
@@ -75,6 +78,18 @@ class CityDataImporter
     start_time = Time.current
 
     log_header("Starting full import for #{display_name}")
+
+    # Check if city data is fresh (skip if imported within last 90 days)
+    unless @force
+      if city_data_is_fresh?
+        skip_reason = "City data was updated within the last 90 days (last update: #{last_update_date})"
+        Rails.logger.info "⏭️  SKIPPING: #{skip_reason}"
+        @results[:skipped] = true
+        @results[:skip_reason] = skip_reason
+        @results[:duration] = (Time.current - start_time).round(2)
+        return @results
+      end
+    end
 
     # Step 1: Import neighborhood boundaries
     unless @skip_boundaries
@@ -105,14 +120,12 @@ class CityDataImporter
     begin
       boundary_results = NeighborhoodBoundaryImporter.import_for_city(city_key)
 
-      @results[:boundaries_imported] = boundary_results[:total]
+      @results[:boundaries_imported] = boundary_results[:neighborhoods] || 0
       @results[:boundary_method] = boundary_results[:method]
-      @results[:city_neighborhoods] = boundary_results[:city_neighborhoods]
-      @results[:census_tracts] = boundary_results[:census_tracts]
 
       @errors.concat(boundary_results[:errors]) if boundary_results[:errors].any?
 
-      Rails.logger.info "✅ Imported #{boundary_results[:total]} neighborhoods"
+      Rails.logger.info "✅ Imported #{@results[:boundaries_imported]} neighborhoods"
     rescue => e
       error_msg = "Boundary import failed: #{e.message}"
       Rails.logger.error error_msg
@@ -155,12 +168,12 @@ class CityDataImporter
   end
 
   # Class method to import all supported cities
-  def self.import_all_cities(skip_boundaries: false, skip_places: false)
+  def self.import_all_cities(skip_boundaries: false, skip_places: false, force: false)
     results = {}
 
     CITY_NAMES.each do |city_key, city_name|
       Rails.logger.info "\n\n"
-      importer = new(city_key, skip_boundaries: skip_boundaries, skip_places: skip_places)
+      importer = new(city_key, skip_boundaries: skip_boundaries, skip_places: skip_places, force: force)
       results[city_key] = importer.import_all
     end
 
@@ -172,6 +185,34 @@ class CityDataImporter
 
   def display_name
     DISPLAY_NAMES[@city_key] || @city_name
+  end
+
+  # Check if city data was updated within the last 90 days
+  def city_data_is_fresh?
+    last_update = last_neighborhood_update || last_places_update
+    return false unless last_update
+
+    last_update > 90.days.ago
+  end
+
+  # Get the most recent update date for neighborhoods or places
+  def last_update_date
+    last_update = last_neighborhood_update || last_places_update
+    return "never" unless last_update
+
+    last_update.strftime("%Y-%m-%d")
+  end
+
+  # Get the most recent neighborhood update for this city
+  def last_neighborhood_update
+    Neighborhood.for_city(city_name).maximum(:updated_at)
+  end
+
+  # Get the most recent places data update for this city
+  def last_places_update
+    NeighborhoodPlacesStat.joins(:neighborhood)
+      .where(neighborhoods: { city: city_name })
+      .maximum(:updated_at)
   end
 
   def log_header(message)
@@ -191,11 +232,16 @@ class CityDataImporter
   def log_summary
     log_header("Import Complete for #{display_name}")
 
+    if @results[:skipped]
+      Rails.logger.info "⏭️  SKIPPED: #{@results[:skip_reason]}"
+      Rails.logger.info "Duration: #{@results[:duration]}s"
+      Rails.logger.info "=" * 80
+      return
+    end
+
     Rails.logger.info "Boundaries imported: #{@results[:boundaries_imported]}"
     if @results[:boundary_method]
       Rails.logger.info "  Method: #{@results[:boundary_method]}"
-      Rails.logger.info "  City neighborhoods: #{@results[:city_neighborhoods]}"
-      Rails.logger.info "  Census tracts: #{@results[:census_tracts]}"
     end
 
     Rails.logger.info "Places imported: #{@results[:places_imported]}"
@@ -222,24 +268,33 @@ class CityDataImporter
     total_places = 0
     total_errors = 0
     total_duration = 0
+    skipped_count = 0
 
     results.each do |city_key, stats|
       Rails.logger.info ""
-      Rails.logger.info "#{stats[:city]}:"
-      Rails.logger.info "  Boundaries: #{stats[:boundaries_imported]}"
-      Rails.logger.info "  Places: #{stats[:places_imported]}"
-      Rails.logger.info "  Duration: #{stats[:duration]}s"
-      Rails.logger.info "  Errors: #{stats[:errors].size}"
+      if stats[:skipped]
+        Rails.logger.info "#{stats[:city]}: ⏭️  SKIPPED (#{stats[:skip_reason]&.split('(')&.first&.strip})"
+        skipped_count += 1
+      else
+        Rails.logger.info "#{stats[:city]}:"
+        Rails.logger.info "  Boundaries: #{stats[:boundaries_imported]}"
+        Rails.logger.info "  Places: #{stats[:places_imported]}"
+        Rails.logger.info "  Duration: #{stats[:duration]}s"
+        Rails.logger.info "  Errors: #{stats[:errors].size}"
 
-      total_boundaries += stats[:boundaries_imported]
-      total_places += stats[:places_imported]
-      total_errors += stats[:errors].size
+        total_boundaries += stats[:boundaries_imported]
+        total_places += stats[:places_imported]
+        total_errors += stats[:errors].size
+      end
       total_duration += stats[:duration]
     end
 
     Rails.logger.info ""
     Rails.logger.info "-" * 80
     Rails.logger.info "TOTALS:"
+    Rails.logger.info "  Cities processed: #{results.size}"
+    Rails.logger.info "  Cities skipped: #{skipped_count}"
+    Rails.logger.info "  Cities imported: #{results.size - skipped_count}"
     Rails.logger.info "  Boundaries: #{total_boundaries}"
     Rails.logger.info "  Places: #{total_places}"
     Rails.logger.info "  Total Duration: #{total_duration.round(2)}s"

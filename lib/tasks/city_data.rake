@@ -1,17 +1,18 @@
 namespace :city do
   desc "Import all data (boundaries + places) for a specific city"
-  task :import, [:city] => :environment do |t, args|
+  task :import, [:city, :force] => :environment do |t, args|
     city = args[:city]
+    force = args[:force] == 'true' || ENV['FORCE'] == 'true'
 
     unless city
       puts "Error: City parameter required"
-      puts "Usage: rake city:import[dallas]"
+      puts "Usage: rake city:import[dallas] or rake city:import[dallas,true] to force reimport"
       puts "Available cities: dallas, chicago, miami, austin, sacramento"
       exit 1
     end
 
     begin
-      importer = CityDataImporter.new(city)
+      importer = CityDataImporter.new(city, force: force)
       importer.import_all
     rescue ArgumentError => e
       puts "Error: #{e.message}"
@@ -20,17 +21,18 @@ namespace :city do
   end
 
   desc "Import boundaries only for a specific city"
-  task :import_boundaries, [:city] => :environment do |t, args|
+  task :import_boundaries, [:city, :force] => :environment do |t, args|
     city = args[:city]
+    force = args[:force] == 'true' || ENV['FORCE'] == 'true'
 
     unless city
       puts "Error: City parameter required"
-      puts "Usage: rake city:import_boundaries[dallas]"
+      puts "Usage: rake city:import_boundaries[dallas] or rake city:import_boundaries[dallas,true] to force reimport"
       exit 1
     end
 
     begin
-      importer = CityDataImporter.new(city, skip_places: true)
+      importer = CityDataImporter.new(city, skip_places: true, force: force)
       importer.import_all
     rescue ArgumentError => e
       puts "Error: #{e.message}"
@@ -39,17 +41,18 @@ namespace :city do
   end
 
   desc "Import places data only for a specific city (requires boundaries to exist)"
-  task :import_places, [:city] => :environment do |t, args|
+  task :import_places, [:city, :force] => :environment do |t, args|
     city = args[:city]
+    force = args[:force] == 'true' || ENV['FORCE'] == 'true'
 
     unless city
       puts "Error: City parameter required"
-      puts "Usage: rake city:import_places[dallas]"
+      puts "Usage: rake city:import_places[dallas] or rake city:import_places[dallas,true] to force reimport"
       exit 1
     end
 
     begin
-      importer = CityDataImporter.new(city, skip_boundaries: true)
+      importer = CityDataImporter.new(city, skip_boundaries: true, force: force)
       importer.import_all
     rescue ArgumentError => e
       puts "Error: #{e.message}"
@@ -57,15 +60,27 @@ namespace :city do
     end
   end
 
-  desc "Import data for all supported cities"
+  desc "Import data for all supported cities (skips cities updated within 90 days unless FORCE=true)"
   task :import_all => :environment do
-    CityDataImporter.import_all_cities
+    force = ENV['FORCE'] == 'true'
+    if force
+      puts "⚠️  FORCE mode enabled - will reimport all cities regardless of last update date"
+    else
+      puts "ℹ️  Skipping cities updated within last 90 days (use FORCE=true to override)"
+    end
+    CityDataImporter.import_all_cities(force: force)
   end
 
-  desc "Update places data for all cities (skip boundaries import)"
+  desc "Update places data for all cities (skip boundaries import, skips fresh data unless FORCE=true)"
   task :update_places => :environment do
+    force = ENV['FORCE'] == 'true'
+    if force
+      puts "⚠️  FORCE mode enabled - will reimport all cities regardless of last update date"
+    else
+      puts "ℹ️  Skipping cities updated within last 90 days (use FORCE=true to override)"
+    end
     puts "Updating places data for all cities..."
-    CityDataImporter.import_all_cities(skip_boundaries: true)
+    CityDataImporter.import_all_cities(skip_boundaries: true, force: force)
   end
 
   desc "Show statistics for a city"
@@ -201,11 +216,15 @@ namespace :city do
     puts "=" * 80
     puts ""
     puts "Commands:"
-    puts "  rake city:import[CITY]           - Import all data for a city"
-    puts "  rake city:import_places[CITY]    - Import only places data"
+    puts "  rake city:import[CITY]           - Import all data for a city (skips if updated within 90 days)"
+    puts "  rake city:import[CITY,true]      - Force import (ignores 90-day freshness check)"
+    puts "  rake city:import_places[CITY]    - Import only places data (skips if updated within 90 days)"
     puts "  rake city:enrich_names[CITY]     - Enrich census tract names with actual neighborhood names"
     puts "  rake city:stats[CITY]            - Show statistics for a city"
-    puts "  rake city:import_all             - Import all cities"
+    puts "  rake city:import_all             - Import all cities (skips fresh data)"
+    puts "  FORCE=true rake city:import_all  - Force import all cities (ignores freshness)"
+    puts ""
+    puts "Freshness: Cities updated within 90 days are automatically skipped unless force=true"
     puts ""
   end
 end
