@@ -37,7 +37,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :mailgun, :MG_MAIL_HOST), protocol: 'https' }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :mailgun, :MG_MAIL_HOST) || 'localhost:3000', protocol: 'https' }
   config.action_mailer.delivery_method = :mailgun
   # config.action_mailer.smtp_settings = {
   #   user_name:      Rails.application.credentials[Rails.env.to_sym][:mailgun][:MG_USERNAME],

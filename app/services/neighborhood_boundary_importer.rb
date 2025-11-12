@@ -91,6 +91,30 @@ class NeighborhoodBoundaryImporter
         @errors << "Zillow import failed: #{e.message}"
         results[:errors] << e.message
       end
+    # Fall back to Census Tracts (US cities with FIPS codes but no custom source)
+    elsif fips[:state_fips] && fips[:county_fips]
+      Rails.logger.info "Falling back to Census Tracts for #{city_key}..."
+      begin
+        city_name = fips[:city] || fips[:name]
+        state = fips[:state]
+        county_name = fips[:county]
+
+        importer = CensusTractImporter.new(
+          state: fips[:state_fips],
+          county: fips[:county_fips],
+          city_name: city_name,
+          county_name: county_name,
+          enrich_names: true
+        )
+        count = importer.import_tracts
+        results[:neighborhoods] = count
+        results[:method] = 'census_tracts'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Census Tracts: #{e.message}"
+        @errors << "Census Tracts import failed: #{e.message}"
+        results[:errors] << e.message
+      end
     else
       Rails.logger.warn "No neighborhood data source configured for #{city_key}"
       results[:method] = 'none'

@@ -21,7 +21,7 @@ class MapsController < ApplicationController
   private
 
   def normalize_city_param
-    (params[:city] || 'new york').downcase.gsub('-', ' ')
+    (params[:city] || 'new york').downcase.gsub(/[.-]/, ' ')
   end
 
   # Look up canonical city name from city key

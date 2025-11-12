@@ -35,28 +35,13 @@
 # 3. Create an IstatNeighborhoodImporter service that processes downloaded shapefiles
 # 4. Use OpenStreetMap boundaries as a fallback (less official but available)
 #
-marciaga:
-  name: "Marciaga"
-  city: "Marciaga"
-  state: "Veneto"
-  county: "Verona"
-  country: "Italy"
-  istat_code: "023029"
-  population_source: "istat"
-  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
-  type: "geojson"
-  enabled: true
-  field_mappings:
-    name: "COMUNE"
-    geoid: "PRO_COM"
-
 'costermano sul garda':
   name: "Costermano sul Garda"
   city: "Costermano sul Garda"
   state: "Veneto"
   county: "Verona"
   country: "Italy"
-  istat_code: "023029"
+  istat_code: "023030"
   population_source: "istat"
   endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
   type: "geojson"
@@ -750,7 +735,6 @@ durham:
   state: "MN"
   state_fips: '27'
   county_fips: '123'  # Ramsey County
-  zillow: true
 
 'jersey city':
   name: "Jersey City"
@@ -808,22 +792,6 @@ savannah:
   county_fips: '051'  # Chatham County
   zillow: true
 
-sedona:
-  name: "Sedona"
-  city: "Sedona"
-  state: "AZ"
-  state_fips: '04'
-  county_fips: '025'  # Yavapai County (primarily, also extends into Coconino County)
-  zillow: true
-
-aspen:
-  name: "Aspen"
-  city: "Aspen"
-  state: "CO"
-  state_fips: '08'
-  county_fips: '097'  # Pitkin County
-  zillow: true
-
 scottsdale:
   name: "Scottsdale"
   city: "Scottsdale"
@@ -854,7 +822,6 @@ scottsdale:
   state: "MO"
   state_fips: '29'
   county_fips: '510'  # St. Louis City (independent city)
-  zillow: true
 
 anchorage:
   name: "Anchorage"
@@ -875,14 +842,6 @@ boulder:
 napa:
   name: "Napa"
   city: "Napa"
-  state: "CA"
-  state_fips: '06'
-  county_fips: '055'  # Napa County
-  zillow: true
-
-calistoga:
-  name: "Calistoga"
-  city: "Calistoga"
   state: "CA"
   state_fips: '06'
   county_fips: '055'  # Napa County

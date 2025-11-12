@@ -13,7 +13,7 @@ class Api::V1::CitiesController < ApplicationController
       {
         key: city,
         name: display_name,
-        slug: city.gsub(' ', '-'),
+        slug: city.gsub('.', '').gsub(' ', '-'),
         neighborhood_count: neighborhood_count
       }
     end

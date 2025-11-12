@@ -5,8 +5,7 @@
 #   ItalyNeighborhoodImporter.new('verona').import_neighborhoods
 #
 class ItalyNeighborhoodImporter
-  # National Italy municipal boundaries dataset (all 7,904 municipalities)
-  NATIONAL_GEOJSON_URL = "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
+  NATIONAL_GEOJSON_URL = "https://services9.arcgis.com/UILu2wREgFBEuDZW/arcgis/rest/services/Com01012019_WGS84/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson"
 
   attr_reader :city_key, :config, :errors
 
@@ -107,7 +106,7 @@ class ItalyNeighborhoodImporter
         pro_com = feature.dig("properties", "PRO_COM")
         # Match on last 6 digits (municipal code) since PRO_COM format is PPPCCC
         # where PPP is province code and CCC is municipality code
-        pro_com == istat_code
+        normalize_pro_com(pro_com) == istat_code
       end
 
       Rails.logger.info "Filtered to #{filtered_features.size} features matching ISTAT code #{istat_code}"
@@ -132,7 +131,8 @@ class ItalyNeighborhoodImporter
     geoid_field = config.dig("field_mappings", "geoid") || "PRO_COM"
 
     name = props[name_field]
-    geoid = "IT_#{props[geoid_field]}"  # Prefix with IT_ to distinguish from US GEOIDs
+    normalized_geoid = normalize_pro_com(props[geoid_field]) || props[geoid_field]
+    geoid = "IT_#{normalized_geoid}"  # Prefix with IT_ to distinguish from US GEOIDs
 
     unless name
       Rails.logger.warn "Municipality missing name field '#{name_field}', skipping"
@@ -199,5 +199,10 @@ class ItalyNeighborhoodImporter
   rescue => e
     Rails.logger.error "Geometry parse error: #{e.message}"
     nil
+  end
+
+  def normalize_pro_com(value)
+    return nil if value.nil?
+    value.to_s.rjust(6, "0")
   end
 end
