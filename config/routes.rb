@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'
   get 'maps/places/:city', to: 'maps#places', as: 'places_map'
   get 'maps/places', to: 'maps#places'
+  get 'where-to-stay/:city', to: 'where_to_stay#show', as: 'where_to_stay'
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
   

@@ -1,0 +1,138 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+  <header class="space-y-6">
+    <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold">TripHeatmap · Data-backed stays</p>
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900"><%= @page.hero_heading %></h1>
+    <p class="text-lg text-gray-700"><%= @page.hero_summary %></p>
+    <% if @page.city_intro.present? %>
+      <p class="text-base text-gray-600"><%= @page.city_intro %></p>
+    <% end %>
+    <div class="flex flex-wrap gap-3">
+      <% @page.quick_summary.each do |pill| %>
+        <span class="px-4 py-1 rounded-full bg-blue-50 text-sm text-blue-700 border border-blue-200"><%= pill %></span>
+      <% end %>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center">
+      <%= link_to "Open the interactive map", @page.map_url, class: "inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 text-sm font-semibold text-white hover:bg-blue-700 transition", target: "_blank", rel: "noopener" %>
+    </div>
+  </header>
+
+  <section class="grid gap-4 md:grid-cols-3">
+    <div class="p-5 rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <p class="text-sm text-gray-600 uppercase tracking-wide font-semibold">Vibrancy Index</p>
+      <p class="mt-2 text-base text-gray-700">0-10 score sourced from TripHeatmap's density × diversity × volume formula.</p>
+    </div>
+    <div class="p-5 rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <p class="text-sm text-gray-600 uppercase tracking-wide font-semibold">Amenity Density</p>
+      <p class="mt-2 text-base text-gray-700">Restaurants, bars, and cafés normalized per km² (same approach as the vibrancy index).</p>
+    </div>
+    <div class="p-5 rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <p class="text-sm text-gray-600 uppercase tracking-wide font-semibold">Real Places</p>
+      <p class="mt-2 text-base text-gray-700">Each card links to actual venues, so you can see the real places that make up the ranking.</p>
+    </div>
+  </section>
+
+  <section class="space-y-6">
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900">
+          <% if @page.neighborhood_cards.size < @page.neighborhood_count %>
+            Top <%= @page.neighborhood_cards.size %> neighborhoods
+          <% else %>
+            Neighborhood rankings
+          <% end %>
+        </h2>
+        <p class="text-gray-600">
+          Sorted by vibrancy score, enriched with amenity density per square kilometer.
+          <% if @page.neighborhood_cards.size < @page.neighborhood_count %>
+            View all <%= @page.neighborhood_count %> on the <%= link_to "interactive map", @page.map_url, class: "text-blue-600 hover:text-blue-700 underline font-medium", target: "_blank", rel: "noopener" %>.
+          <% end %>
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-8">
+      <% @page.neighborhood_cards.each do |card| %>
+        <article class="rounded-3xl border border-gray-200 bg-white overflow-hidden shadow-lg">
+          <div class="grid gap-6 md:grid-cols-12 p-6">
+            <div class="md:col-span-4 space-y-4">
+              <p class="text-sm text-gray-500 font-medium">#<%= card[:rank] %></p>
+              <h3 class="text-2xl font-bold text-gray-900"><%= card[:name] %></h3>
+              <p class="text-sm text-gray-600">Vibrancy Score · <span class="text-gray-900 font-bold"><%= card[:vibrancy_score] %></span></p>
+              <% if card[:area_sq_km].present? %>
+                <p class="text-sm text-gray-500">Area: <%= number_with_precision(card[:area_sq_km], precision: 2) %> km²</p>
+              <% end %>
+              <p class="text-gray-700"><%= card[:description] %></p>
+              <div class="flex flex-wrap gap-2">
+                <% card[:tags].each_with_index do |tag, index| %>
+                  <% tag_colors = ["bg-emerald-100 text-emerald-700 border-emerald-300", "bg-purple-100 text-purple-700 border-purple-300", "bg-amber-100 text-amber-700 border-amber-300", "bg-pink-100 text-pink-700 border-pink-300"] %>
+                  <span class="px-3 py-1 rounded-full text-xs font-medium border <%= tag_colors[index % tag_colors.length] %>"><%= tag %></span>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="rounded-2xl bg-emerald-50 p-4 border border-emerald-200 flex flex-col items-center">
+                  <p class="text-xs uppercase text-emerald-600 tracking-wide font-semibold">Restaurants</p>
+                  <p class="text-2xl font-bold text-emerald-900"><%= card[:amenities][:restaurants] %></p>
+                </div>
+                <div class="rounded-2xl bg-amber-50 p-4 border border-amber-200 flex flex-col items-center">
+                  <p class="text-xs uppercase text-amber-600 tracking-wide font-semibold">Cafés</p>
+                  <p class="text-2xl font-bold text-amber-900"><%= card[:amenities][:cafes] %></p>
+                </div>
+                <div class="rounded-2xl bg-pink-50 p-4 border border-pink-200 flex flex-col items-center">
+                  <p class="text-xs uppercase text-pink-600 tracking-wide font-semibold">Bars</p>
+                  <p class="text-2xl font-bold text-pink-900"><%= card[:amenities][:bars] %></p>
+                </div>
+              </div>
+
+              <% if card[:highlights].present? %>
+                <div class="rounded-2xl border border-gray-200 bg-gray-50 p-4 space-y-3">
+                  <p class="text-xs uppercase text-gray-600 tracking-wide font-semibold">Sample spots</p>
+                  <ul class="space-y-2 text-sm text-gray-700">
+                    <% card[:highlights].each do |highlight| %>
+                      <li>
+                        <span class="font-semibold text-gray-900"><%= highlight[:name] %></span>
+                        <% if highlight[:type].present? %>
+                          <span class="text-gray-500">· <%= highlight[:type].titleize %></span>
+                        <% end %>
+                        <% if highlight[:address].present? %>
+                          <div class="text-xs text-gray-500"><%= highlight[:address] %></div>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="md:col-span-4 space-y-4">
+              <% if card[:map_image_url].present? %>
+                <img src="<%= card[:map_image_url] %>" alt="Map preview for <%= card[:name] %>" class="w-full rounded-2xl border border-gray-200 object-cover" loading="lazy" />
+              <% else %>
+                <div class="w-full h-48 rounded-2xl border border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-sm">
+                  Map snapshot unavailable
+                </div>
+              <% end %>
+              <%= link_to "View neighborhood guide", card[:neighborhood_path], class: "inline-flex items-center justify-center w-full px-4 py-2 rounded-full bg-white border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition" %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+
+  <% if @page.faq_items.any? %>
+    <section class="space-y-6">
+      <h2 class="text-2xl font-bold text-gray-900">Where to stay FAQ</h2>
+      <div class="space-y-4">
+        <% @page.faq_items.each do |faq| %>
+          <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-5 space-y-2">
+            <p class="text-sm uppercase tracking-wide text-gray-600 font-semibold"><%= faq[:question] %></p>
+            <p class="text-base text-gray-700"><%= faq[:answer] %></p>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>

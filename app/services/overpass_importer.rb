@@ -59,6 +59,10 @@ class OverpassImporter
     total = counts.values.sum
     vibrancy_index = calculate_vibrancy_index(counts, neighborhood)
 
+    # Calculate vibrancy densities (amenities per km²)
+    area_sq_km = get_area_sq_km(neighborhood)
+    densities = calculate_densities(counts, area_sq_km)
+
     # Create or update stats
     stat = neighborhood.neighborhood_places_stat || neighborhood.build_neighborhood_places_stat
     stat.update!(
@@ -67,6 +71,9 @@ class OverpassImporter
       bar_count: counts[:bar],
       total_amenities: total,
       vibrancy_index: vibrancy_index,
+      restaurants_vibrancy: densities[:restaurants],
+      cafes_vibrancy: densities[:cafes],
+      bars_vibrancy: densities[:bars],
       last_updated: Time.current
     )
 
@@ -316,5 +323,23 @@ class OverpassImporter
   rescue => e
     Rails.logger.error "Failed to calculate area for neighborhood #{neighborhood.id}: #{e.message}"
     nil
+  end
+
+  # Calculate amenity densities per km²
+  # Returns hash with :restaurants, :cafes, :bars vibrancy (per km²)
+  def calculate_densities(counts, area_sq_km)
+    if area_sq_km.nil? || area_sq_km <= 0
+      return {
+        restaurants: 0.0,
+        cafes: 0.0,
+        bars: 0.0
+      }
+    end
+
+    {
+      restaurants: (counts[:restaurant].to_f / area_sq_km).round(3),
+      cafes: (counts[:cafe].to_f / area_sq_km).round(3),
+      bars: (counts[:bar].to_f / area_sq_km).round(3)
+    }
   end
 end

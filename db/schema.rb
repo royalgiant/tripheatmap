@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_09_205803) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_15_005752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -36,6 +36,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_09_205803) do
     t.datetime "last_updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "bars_vibrancy"
+    t.decimal "restaurants_vibrancy"
+    t.decimal "cafes_vibrancy"
     t.index ["neighborhood_id"], name: "index_neighborhood_places_stats_on_neighborhood_id"
   end
 
@@ -50,6 +53,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_09_205803) do
     t.geography "centroid", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "wikipedia_image_url"
+    t.datetime "wikipedia_image_checked_at"
     t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
     t.index ["geoid"], name: "index_neighborhoods_on_geoid"
     t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist

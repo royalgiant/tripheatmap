@@ -4,12 +4,15 @@ class Api::V1::CitiesController < ApplicationController
   # GET /api/v1/cities
   # Returns list of available cities with neighborhood data
   def index
-    cities = Neighborhood.distinct.pluck(:city).compact.sort
-    
-    cities_data = cities.map do |city|
+    city_counts = Neighborhood
+      .where.not(city: nil)
+      .group(:city)
+      .count
+      .sort_by { |city, _count| city }
+
+    cities_data = city_counts.map do |city, neighborhood_count|
       display_name = lookup_display_name(city)
-      neighborhood_count = Neighborhood.where(city: city).count
-      
+
       {
         key: city,
         name: display_name,
