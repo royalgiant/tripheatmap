@@ -1,5 +1,9 @@
 class WhereToStayController < ApplicationController
-  before_action :set_city_context
+  before_action :set_city_context, only: [:show]
+
+  def index
+    @cities = get_cities
+  end
 
   def show
     @page = WhereToStay::PagePresenter.new(
