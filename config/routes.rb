@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get "logout", to: "devise/sessions#destroy"
   end
 
-  root "maps#index"
+  root "where_to_stay#index"
 
   scope controller: :static do
     get :terms

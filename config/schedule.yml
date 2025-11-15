@@ -50,3 +50,10 @@ import_all_cities_monthly:
   description: 'Full import for all cities monthly'
   queue: default
   enabled: false  # Set to true to enable in production
+
+# Refresh sitemap monthly (last day of month at 11 PM)
+refresh_sitemap_monthly:
+  cron: '0 23 1 * *'
+  class: RefreshSitemapWorker
+  description: 'Regenerate sitemap.xml with latest pages'
+  queue: default
