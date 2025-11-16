@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'where-to-stay/:city', to: 'where_to_stay#show', as: 'where_to_stay'
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
+  get 'pricing', to: 'pricing#index'
   
   devise_scope :user do
     # authentication logic routes
@@ -39,6 +40,14 @@ Rails.application.routes.draw do
       resources :cities, only: [:index]
     end
   end
+
+  namespace :purchase do
+    resources :checkouts
+    get "success", to: "checkouts#success"
+  end
+  resources :webhooks, only: :create
+  resources :subscriptions
+  resources :billings, only: :create
 
   # For sidekiq dashboard
   sidekiq_creds = Rails.application.credentials.dig(Rails.env.to_sym, :sidekiqweb)

@@ -1,0 +1,50 @@
+<% featured = plan[:featured] %>
+<div class="relative flex flex-col rounded-3xl border <%= featured ? 'border-blue-600 bg-white shadow-2xl shadow-blue-100' : 'border-gray-200 bg-white shadow-sm' %> p-8">
+  <% if featured %>
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Most Popular</div>
+  <% end %>
+
+  <div class="space-y-4">
+    <div>
+      <p class="text-sm font-semibold text-blue-600 mb-2"><%= plan[:tagline] %></p>
+      <h3 class="text-2xl font-bold text-gray-900 mb-2"><%= plan[:name] %></h3>
+      <p class="text-gray-600 text-sm mb-2"><%= plan[:description] %></p>
+    </div>
+
+    <div class="flex items-baseline gap-2">
+      <span class="text-4xl font-bold text-gray-900"><%= plan[:price] %></span>
+      <span class="text-gray-500"><%= plan[:cadence] %></span>
+    </div>
+  </div>
+
+  <ul class="mt-6 space-y-3 text-sm text-gray-700 flex-1">
+    <% plan[:highlights].each do |highlight| %>
+      <li class="flex items-start gap-3">
+        <span class="mt-1 h-2 w-2 rounded-full <%= featured ? 'bg-blue-600' : 'bg-gray-300' %>"></span>
+        <span><%= highlight %></span>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if current_user.present? && current_user&.subscribed? %>
+    <div class="text-center mt-8">
+      <div>
+        <%= button_to("Manage billing", billings_path, data: {turbo: false}, class: "cursor-pointer w-full rounded-xl bg-gray-900 text-white border border-gray-900 hover:bg-gray-800 px-5 py-3 text-sm font-semibold") %>
+      </div>
+    </div>
+  <% elsif current_user.present? %>
+    <div class="mt-8">
+      <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
+        <input type="hidden" name="price_id" value="<%= plan[:price_id] %>" />
+        <%= submit_tag plan[:cta_label], data: { disable_with: "Hold please..." }, class: "cursor-pointer w-full rounded-xl #{featured ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-900 text-white hover:bg-gray-800'} px-5 py-3 font-semibold" %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="mt-8 space-y-3">
+      <%= link_to plan[:cta_label], signup_path, class: "block w-full rounded-xl px-5 py-3 text-center font-semibold #{featured ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-900 text-white hover:bg-gray-800'}" %>
+      <% if plan[:secondary_label].present? && plan[:secondary_path].present? %>
+        <%= link_to plan[:secondary_label], plan[:secondary_path], class: "block w-full rounded-xl px-5 py-3 text-center font-semibold #{featured ? 'text-blue-700 bg-blue-50 hover:bg-blue-100' : 'text-gray-700 bg-gray-100 hover:bg-gray-200'}" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
