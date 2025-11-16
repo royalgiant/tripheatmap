@@ -52,10 +52,6 @@
     <%= yield :head %>
   </head>
 
-  <div class="text-center mx-5">
-    <%= render partial: 'layouts/flash_messages' %>
-  </div>
-
   <body class="h-full bg-gradient-to-b from-indigo-50 to-gray-100 bg-white text-black">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5STGX9DT"
@@ -63,6 +59,10 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <%= render 'layouts/city_selector' %>
+
+    <div class="text-center mx-5">
+      <%= render partial: 'layouts/flash_messages' %>
+    </div>
     
     <div class="min-h-screen">
       <%= yield %>

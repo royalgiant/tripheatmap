@@ -7,42 +7,87 @@
         <span class="text-gray-500">|</span>
         <span class="text-sm text-gray-400">Explore neighborhoods by vibrancy</span>
       </div>
-      
-      <!-- City Search -->
-      <div class="relative w-80" id="city-selector-container">
-        <div class="relative">
-          <input 
-            type="text" 
-            id="city-search-input"
-            placeholder="Search cities..."
-            autocomplete="off"
-            class="w-full px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-          />
-          <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-        </div>
-        
-        <!-- Dropdown Results -->
-        <div 
-          id="city-dropdown" 
-          class="absolute top-full left-0 right-0 mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl max-h-96 overflow-y-auto z-50 hidden"
-        >
-          <div id="city-results" class="py-2">
-            <!-- Results populated by JavaScript -->
-          </div>
-          <div id="city-loading" class="hidden py-4 px-4 text-center text-gray-400">
-            <svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+
+      <div class="flex items-center gap-4">
+        <!-- City Search -->
+        <div class="relative w-80" id="city-selector-container">
+          <div class="relative">
+            <input
+              type="text"
+              id="city-search-input"
+              placeholder="Search cities..."
+              autocomplete="off"
+              class="w-full px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            />
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <div id="city-no-results" class="hidden py-4 px-4 text-center text-gray-400">
-            No cities found
+
+          <!-- Dropdown Results -->
+          <div
+            id="city-dropdown"
+            class="absolute top-full left-0 right-0 mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl max-h-96 overflow-y-auto z-50 hidden"
+          >
+            <div id="city-results" class="py-2">
+              <!-- Results populated by JavaScript -->
+            </div>
+            <div id="city-loading" class="hidden py-4 px-4 text-center text-gray-400">
+              <svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <div id="city-no-results" class="hidden py-4 px-4 text-center text-gray-400">
+              No cities found
+            </div>
           </div>
         </div>
+
+        <!-- User Menu / Auth Buttons -->
+        <% if current_user.present? %>
+          <!-- Profile dropdown -->
+          <div class="relative">
+            <button type="button" class="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">Open user menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="h-8 w-8 rounded-full">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+            </button>
+            <div class="absolute right-0 z-10 mt-2 w-48 text-center origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <div class="flex flex-col items-center">
+                <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 w-full' %>
+                <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 w-full cursor-pointer" %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <!-- Login/Signup buttons -->
+          <div class="flex items-center gap-3">
+            <%= link_to 'Login', new_user_session_path, class: 'text-gray-300 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 text-sm font-medium transition-colors' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Toggle the user menu
+    $('#user-menu-button').click(function(e){
+      e.stopPropagation();
+      $('#user-menu').toggleClass('hidden');
+    });
+
+    // Close menu when clicking outside
+    $(document).click(function(e) {
+      if (!$(e.target).closest('#user-menu-button').length && !$(e.target).closest('#user-menu').length) {
+        $('#user-menu').addClass('hidden');
+      }
+    });
+  });
+</script>
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -83,12 +81,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     uri = URI('https://challenges.cloudflare.com/turnstile/v0/siteverify')
     secret_key = Rails.application.credentials.dig(Rails.env.to_sym, :cloudflare, :captcha, :secret_key)
 
-    response = Net::HTTP.post_form(uri, {
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    # In development, skip SSL verification due to macOS certificate issues
+    http.verify_mode = Rails.env.development? ? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER
+
+    http_request = Net::HTTP::Post.new(uri.path)
+    http_request.set_form_data({
       secret: secret_key,
       response: token,
       remoteip: request.remote_ip
     })
 
+    response = http.request(http_request)
     result = JSON.parse(response.body)
     result['success'] == true
   end
