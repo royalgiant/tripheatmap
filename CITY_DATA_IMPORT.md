@@ -8,6 +8,7 @@ This guide explains how to import neighborhood boundaries and places data for th
 
 ```bash
 # Full import (boundaries + places)
+kamal app exec -i "bundle exec rake 'city:import[las vegas,true]'"
 rake city:import[dallas]
 
 # Or use the service directly

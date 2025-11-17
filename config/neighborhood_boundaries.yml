@@ -847,6 +847,42 @@ napa:
   county_fips: '055'  # Napa County
   zillow: true
 
+# ============================================================================
+# SMALL CITIES - Using Open Data Portals for City Limits
+# ============================================================================
+# These cities are too small for Zillow neighborhood data, so we use their
+# city limits from open data portals as the neighborhood boundary
+
+sedona:
+  name: "Sedona"
+  city: "Sedona"
+  state: "AZ"
+  state_fips: '04'
+  county: "Yavapai"
+  county_fips: '025'  # Yavapai County
+  endpoint: "https://services.arcgis.com/ZzrwjTRez6FJiOq4/arcgis/rest/services/City_Boundary_Data/FeatureServer/0/query?where=CITY_NAME='Sedona'&outFields=*&outSR=4326&f=geojson"
+  type: "geojson"
+  enabled: false  # Disabled until we find working endpoint
+  field_mappings:
+    name: "CITY_NAME"
+    geoid: "OBJECTID"
+  population_source: "census"
+
+aspen:
+  name: "Aspen"
+  city: "Aspen"
+  state: "CO"
+  state_fips: '08'
+  county: "Pitkin"
+  county_fips: '097'  # Pitkin County
+  endpoint: "https://data.colorado.gov/resource/u943-ics6.geojson?municipality=Aspen"
+  type: "geojson"
+  enabled: false  # Disabled until we find working endpoint
+  field_mappings:
+    name: "municipality"
+    geoid: "objectid"
+  population_source: "census"
+
 # Template for adding new states (add to 'states' section above):
 # 'XX':
 #   abbreviation: 'XX'       # 2-letter state abbreviation
