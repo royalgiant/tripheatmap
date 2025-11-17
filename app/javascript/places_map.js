@@ -270,6 +270,12 @@ async function initPlacesMap() {
                 <div style="margin-bottom: 4px; font-size: 13px;">
                   Bars: <b>${props.bar_count || 0}</b>
                 </div>
+                <div style="margin-bottom: 4px; font-size: 13px;">
+                  Airbnb: <b>${props.airbnb_count || 0}</b>
+                </div>
+                <div style="margin-bottom: 4px; font-size: 13px;">
+                  VRBO: <b>${props.vrbo_count || 0}</b>
+                </div>
                 ${props.vibrancy_index ? `
                   <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
                     Vibrancy Index: <b style="color: ${

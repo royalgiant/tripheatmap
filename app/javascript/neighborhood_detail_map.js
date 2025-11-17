@@ -23,7 +23,9 @@ async function initNeighborhoodDetailMap() {
     const activeFilters = {
       restaurant: true,
       cafe: true,
-      bar: true
+      bar: true,
+      airbnb: true,
+      vrbo: true
     };
 
     if (placesData.length === 0) {
@@ -55,7 +57,9 @@ async function initNeighborhoodDetailMap() {
       const markerColors = {
         restaurant: '#3B82F6',  // Blue
         cafe: '#10B981',        // Green
-        bar: '#A855F7'          // Purple
+        bar: '#A855F7',         // Purple
+        airbnb: '#FF5A5F',      // Airbnb Red
+        vrbo: '#003D79'         // VRBO Blue
       };
 
       // Store markers by place ID for list item clicks
@@ -65,20 +69,48 @@ async function initNeighborhoodDetailMap() {
       const markersByType = {
         restaurant: [],
         cafe: [],
-        bar: []
+        bar: [],
+        airbnb: [],
+        vrbo: []
       };
 
       // Track currently open popup
       let currentPopup = null;
 
+      // Track coordinates to detect duplicates and offset them
+      const coordinateMap = {};
+
       // Add markers for each place
       placesData.forEach(place => {
-        const lat = parseFloat(place.lat);
-        const lon = parseFloat(place.lon);
+        const originalLat = parseFloat(place.lat);
+        const originalLon = parseFloat(place.lon);
 
-        if (isNaN(lat) || isNaN(lon)) {
+        if (isNaN(originalLat) || isNaN(originalLon)) {
           console.warn('Invalid coordinates for place:', place.name);
           return;
+        }
+
+        // Start with original coordinates
+        let lat = originalLat;
+        let lon = originalLon;
+
+        // Create a coordinate key to detect duplicates
+        const coordKey = `${originalLat.toFixed(6)},${originalLon.toFixed(6)}`;
+
+        // If this coordinate already exists, offset slightly
+        if (coordinateMap[coordKey]) {
+          // Offset by a small amount (about 5-10 meters)
+          const offsetCount = coordinateMap[coordKey];
+          const offsetDistance = 0.00005; // roughly 5 meters
+
+          // Offset in a circular pattern around the original point
+          const angle = (offsetCount * 60) * (Math.PI / 180); // 60 degrees apart
+          lon += offsetDistance * Math.cos(angle);
+          lat += offsetDistance * Math.sin(angle);
+
+          coordinateMap[coordKey]++;
+        } else {
+          coordinateMap[coordKey] = 1;
         }
 
         // Create custom marker
@@ -93,19 +125,35 @@ async function initNeighborhoodDetailMap() {
           cursor: pointer;
         `;
 
-        // Create popup
-        const popup = new mapboxgl.Popup({ offset: 15 })
-          .setHTML(`
-            <div style="font-size:14px; max-width: 250px;">
-              <b style="font-size:15px;">${place.name}</b><br/>
-              <div style="margin: 6px 0; color: #666;">
-                <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColors[place.place_type]}; color: white; font-size: 12px;">
-                  ${place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1)}
-                </span>
-              </div>
-              ${place.address ? `<div style="font-size: 13px; color: #888;">${place.address}</div>` : ''}
+        // Create popup HTML with booking button if available
+        let popupHTML = `
+          <div style="font-size:14px; max-width: 250px;">
+            <b style="font-size:15px;">${place.name}</b><br/>
+            <div style="margin: 6px 0; color: #666;">
+              <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColors[place.place_type]}; color: white; font-size: 12px;">
+                ${place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1)}
+              </span>
             </div>
-          `);
+            ${place.address ? `<div style="font-size: 13px; color: #888; margin-bottom: 8px;">${place.address}</div>` : ''}
+        `;
+
+        if (place.booking_url) {
+          popupHTML += `
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb;">
+              <a href="${place.booking_url}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; color: #059669; text-decoration: none; font-weight: 600; font-size: 13px; padding: 4px 8px; background: #d1fae5; border-radius: 4px;">
+                <svg style="width: 14px; height: 14px; margin-right: 4px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Book Now
+              </a>
+            </div>
+          `;
+        }
+
+        popupHTML += `</div>`;
+
+        const popup = new mapboxgl.Popup({ offset: 15 })
+          .setHTML(popupHTML);
 
         // Create marker with popup
         const marker = new mapboxgl.Marker(markerEl)
@@ -221,9 +269,17 @@ async function initNeighborhoodDetailMap() {
           <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
           Cafes
         </div>
-        <div>
+        <div style="margin-bottom: 4px;">
           <span style="display:inline-block; width:12px; height:12px; background:#A855F7; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
           Bars
+        </div>
+        <div style="margin-bottom: 4px;">
+          <span style="display:inline-block; width:12px; height:12px; background:#FF5A5F; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          Airbnb
+        </div>
+        <div>
+          <span style="display:inline-block; width:12px; height:12px; background:#003D79; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          VRBO
         </div>
       `;
       el.appendChild(legend);

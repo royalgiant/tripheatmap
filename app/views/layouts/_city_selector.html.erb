@@ -58,6 +58,9 @@
             <div class="absolute right-0 z-10 mt-2 w-48 text-center origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <div class="flex flex-col items-center">
                 <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 w-full' %>
+                <% if current_user.subscribed? || current_user.role == 'admin' %>
+                  <%= link_to 'My Rentals', rentals_path, class: 'block px-4 py-2 text-sm text-gray-700 w-full' %>
+                <% end %>
                 <%= link_to !current_user&.subscribed? ? "Pricing" : "Manage Subscription", pricing_path, class: "block px-4 py-2 text-sm text-gray-700 w-full cursor-pointer" %>
                 <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 w-full cursor-pointer" %>
               </div>

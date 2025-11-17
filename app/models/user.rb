@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates_presence_of :last_name, unless: :skip_validation
 
   has_many :subscriptions, dependent: :destroy
+  has_many :places, dependent: :destroy
 
   EARLY_ADOPTER = "early_adopter".freeze
   ADMIN = "admin"

@@ -1,0 +1,66 @@
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-2xl mx-auto">
+    <div class="bg-white shadow rounded-lg p-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-6">Edit Rental</h1>
+
+      <%= form_with(model: @rental, url: rental_path(@rental), method: :patch, local: true, class: "space-y-6") do |form| %>
+        <% if @rental.errors.any? %>
+          <div class="bg-red-50 border border-red-200 rounded-md p-4">
+            <h3 class="text-sm font-medium text-red-800">
+              <%= pluralize(@rental.errors.count, "error") %> prohibited this rental from being saved:
+            </h3>
+            <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+              <% @rental.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div>
+          <label for="rental_type" class="block text-sm font-medium text-gray-700 mb-2">Rental Type</label>
+          <%= select_tag 'place[rental_type]',
+              options_for_select([['Airbnb', 'airbnb'], ['VRBO', 'vrbo']], @rental.place_type),
+              class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 text-gray-900" %>
+        </div>
+
+        <div>
+          <%= form.label :name, "Property Name", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= form.text_field :name, placeholder: "e.g., Cozy Downtown Loft",
+              class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
+        </div>
+
+        <div>
+          <%= form.label :address, "Full Address", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= form.text_field :address, placeholder: "123 Main St, New York, NY 10001",
+              class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <%= form.label :lat, "Latitude", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= form.number_field :lat, step: :any, placeholder: "40.7128",
+                class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
+          </div>
+
+          <div>
+            <%= form.label :lon, "Longitude", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= form.number_field :lon, step: :any, placeholder: "-74.0060",
+                class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :booking_url, "Booking URL", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= form.url_field :booking_url, placeholder: "https://airbnb.com/rooms/12345",
+              class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
+        </div>
+
+        <div class="flex gap-4">
+          <%= form.submit "Update Rental", class: "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors cursor-pointer" %>
+          <%= link_to "Cancel", rentals_path, class: "flex-1 text-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,8 @@ class NeighborhoodsController < ApplicationController
     @restaurants = @places.restaurants
     @cafes = @places.cafes
     @bars = @places.bars
+    @airbnbs = @places.where(place_type: 'airbnb')
+    @vrbos = @places.where(place_type: 'vrbo')
 
     # Get stats for summary
     @stats = @neighborhood.neighborhood_places_stat

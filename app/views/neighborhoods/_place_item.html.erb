@@ -53,8 +53,8 @@
       </div>
     <% end %>
 
-    <!-- Directions Link -->
-    <div class="mt-2">
+    <!-- Directions and Booking Links -->
+    <div class="mt-2 flex gap-4">
       <a
         href="https://www.google.com/maps/search/?api=1&query=<%= place.lat %>,<%= place.lon %>"
         target="_blank"
@@ -66,6 +66,19 @@
         </svg>
         Get Directions
       </a>
+
+      <% if place.booking_url.present? %>
+        <a
+          href="<%= place.booking_url %>"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center text-green-600 hover:text-green-800 font-medium">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          Book Now
+        </a>
+      <% end %>
     </div>
   </div>
 </li>

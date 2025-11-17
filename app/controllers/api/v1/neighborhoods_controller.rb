@@ -19,6 +19,14 @@ class Api::V1::NeighborhoodsController < ApplicationController
 
     features = neighborhoods.map do |neighborhood|
       places_stat = neighborhood.neighborhood_places_stat
+      
+      # Calculate rental counts dynamically
+      airbnb_count = neighborhood.places.where(place_type: 'airbnb').count
+      vrbo_count = neighborhood.places.where(place_type: 'vrbo').count
+      
+      # Calculate total including rentals
+      base_amenities = places_stat&.total_amenities || 0
+      total_amenities = base_amenities + airbnb_count + vrbo_count
 
       {
         type: "Feature",
@@ -35,7 +43,9 @@ class Api::V1::NeighborhoodsController < ApplicationController
           restaurant_count: places_stat&.restaurant_count || 0,
           cafe_count: places_stat&.cafe_count || 0,
           bar_count: places_stat&.bar_count || 0,
-          total_amenities: places_stat&.total_amenities || 0,
+          airbnb_count: airbnb_count,
+          vrbo_count: vrbo_count,
+          total_amenities: total_amenities,
           vibrancy_index: places_stat&.vibrancy_index&.to_f || 0.0
         }
       }

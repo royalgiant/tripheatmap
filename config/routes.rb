@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   resources :webhooks, only: :create
   resources :subscriptions
   resources :billings, only: :create
+  resources :rentals
 
   # For sidekiq dashboard
   sidekiq_creds = Rails.application.credentials.dig(Rails.env.to_sym, :sidekiqweb)
