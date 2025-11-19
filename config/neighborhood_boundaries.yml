@@ -5,6 +5,615 @@
 # INTERNATIONAL CITIES
 # ============================================================================
 
+# ============================================================================
+# UNITED KINGDOM - Using Open Data Portals
+# ============================================================================
+
+london:
+  name: "London"
+  city: "London"
+  state: "England"
+  county: "Greater London"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by this field to get only London wards
+  parent_names:
+    - "Barking and Dagenham"
+    - "Barnet"
+    - "Bexley"
+    - "Brent"
+    - "Bromley"
+    - "Camden"
+    - "Croydon"
+    - "Ealing"
+    - "Enfield"
+    - "Greenwich"
+    - "Hackney"
+    - "Hammersmith and Fulham"
+    - "Haringey"
+    - "Harrow"
+    - "Havering"
+    - "Hillingdon"
+    - "Hounslow"
+    - "Islington"
+    - "Kensington and Chelsea"
+    - "Kingston upon Thames"
+    - "Lambeth"
+    - "Lewisham"
+    - "Merton"
+    - "Newham"
+    - "Redbridge"
+    - "Richmond upon Thames"
+    - "Southwark"
+    - "Sutton"
+    - "Tower Hamlets"
+    - "Waltham Forest"
+    - "Wandsworth"
+    - "Westminster"
+    - "City of London"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. Filter by NAME_3='London' or matching borough names."
+
+birmingham:
+  name: "Birmingham"
+  city: "Birmingham"
+  state: "England"
+  county: "West Midlands"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Birmingham'
+  parent_names:
+    - "Birmingham"
+    - "City of Birmingham"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+manchester:
+  name: "Manchester"
+  city: "Manchester"
+  state: "England"
+  county: "Greater Manchester"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Manchester'
+  parent_names:
+    - "Manchester"
+    - "City of Manchester"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+liverpool:
+  name: "Liverpool"
+  city: "Liverpool"
+  state: "England"
+  county: "Merseyside"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Liverpool'
+  parent_names:
+    - "Liverpool"
+    - "City of Liverpool"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+leeds:
+  name: "Leeds"
+  city: "Leeds"
+  state: "England"
+  county: "West Yorkshire"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Leeds'
+  parent_names:
+    - "Leeds"
+    - "City of Leeds"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+sheffield:
+  name: "Sheffield"
+  city: "Sheffield"
+  state: "England"
+  county: "South Yorkshire"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Sheffield'
+  parent_names:
+    - "Sheffield"
+    - "City of Sheffield"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+bristol:
+  name: "Bristol"
+  city: "Bristol"
+  state: "England"
+  county: "Bristol"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Bristol, City of'
+  parent_names:
+    - "Bristol"
+    - "Bristol, City of"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint. Note: May be 'Bristol, City of' in NAME_3."
+
+glasgow:
+  name: "Glasgow"
+  city: "Glasgow"
+  state: "Scotland"
+  county: "Glasgow City"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Glasgow City'
+  parent_names:
+    - "Glasgow City"
+    - "Glasgow"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+edinburgh:
+  name: "Edinburgh"
+  city: "Edinburgh"
+  state: "Scotland"
+  county: "City of Edinburgh"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='City of Edinburgh'
+  parent_names:
+    - "City of Edinburgh"
+    - "Edinburgh"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+cardiff:
+  name: "Cardiff"
+  city: "Cardiff"
+  state: "Wales"
+  county: "Cardiff"
+  country: "United Kingdom"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_4"
+    geoid: "GID_4"
+    parent_name: "NAME_3"  # Filter by NAME_3='Cardiff'
+  parent_names:
+    - "Cardiff"
+    - "City of Cardiff"
+  population_source: "manual"
+  notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
+
+# ============================================================================
+# IRELAND - Using Government Open Data Portals
+# ============================================================================
+
+dublin:
+  name: "Dublin"
+  city: "Dublin"
+  state: "Leinster"
+  county: "Dublin"
+  country: "Ireland"
+  endpoint: "https://data.gov.ie"  # Placeholder - Ireland's Open Data Portal
+  type: "geojson"
+  enabled: false  # Needs verification from data.gov.ie or Dublin City Council
+  field_mappings:
+    name: "name"
+    geoid: "code"
+  population_source: "manual"
+  notes: "Dublin electoral divisions or small areas - check data.gov.ie or Dublin City Council Open Data portal."
+
+# ============================================================================
+# CANADA - Using Open Data Portals
+# ============================================================================
+
+toronto:
+  name: "Toronto"
+  city: "Toronto"
+  state: "ON"
+  county: "Toronto"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 43.4
+      max_lat: 44.0
+      min_lon: -79.8
+      max_lon: -79.0
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Filtering via bounding box around metro Toronto."
+
+vancouver:
+  name: "Vancouver"
+  city: "Vancouver"
+  state: "BC"
+  county: "Metro Vancouver"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 49.0
+      max_lat: 49.4
+      min_lon: -123.3
+      max_lon: -122.8
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Metro Vancouver."
+
+montreal:
+  name: "Montreal"
+  city: "Montreal"
+  state: "QC"
+  county: "Montreal"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 45.35
+      max_lat: 45.65
+      min_lon: -73.95
+      max_lon: -73.35
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Montreal CMA."
+
+calgary:
+  name: "Calgary"
+  city: "Calgary"
+  state: "AB"
+  county: "Calgary"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 50.8
+      max_lat: 51.2
+      min_lon: -114.3
+      max_lon: -113.8
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Calgary."
+
+ottawa:
+  name: "Ottawa"
+  city: "Ottawa"
+  state: "ON"
+  county: "Ottawa"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 45.2
+      max_lat: 45.6
+      min_lon: -76.2
+      max_lon: -75.1
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Ottawa-Gatineau."
+
+edmonton:
+  name: "Edmonton"
+  city: "Edmonton"
+  state: "AB"
+  county: "Edmonton"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 53.3
+      max_lat: 53.7
+      min_lon: -113.8
+      max_lon: -113.2
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Edmonton."
+
+# ============================================================================
+# AUSTRALIA - Using Open Data Portals and GitHub
+# ============================================================================
+
+sydney:
+  name: "Sydney"
+  city: "Sydney"
+  state: "NSW"
+  county: "Sydney"
+  country: "Australia"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -34.2
+      max_lat: -33.4
+      min_lon: 150.5
+      max_lon: 151.6
+  population_source: "manual"
+  notes: "GADM ADM2 - Australian suburbs. Bounding box covers Greater Sydney."
+
+melbourne:
+  name: "Melbourne"
+  city: "Melbourne"
+  state: "VIC"
+  county: "Melbourne"
+  country: "Australia"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -38.4
+      max_lat: -37.5
+      min_lon: 144.4
+      max_lon: 145.6
+  population_source: "manual"
+  notes: "GADM ADM2 - Australian suburbs. Bounding box covers Greater Melbourne."
+
+brisbane:
+  name: "Brisbane"
+  city: "Brisbane"
+  state: "QLD"
+  county: "Brisbane"
+  country: "Australia"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -27.8
+      max_lat: -26.9
+      min_lon: 152.5
+      max_lon: 153.5
+  population_source: "manual"
+  notes: "GADM ADM2 - Australian suburbs. Bounding box covers Greater Brisbane."
+
+perth:
+  name: "Perth"
+  city: "Perth"
+  state: "WA"
+  county: "Perth"
+  country: "Australia"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -32.4
+      max_lat: -31.4
+      min_lon: 115.5
+      max_lon: 116.2
+  population_source: "manual"
+  notes: "GADM ADM2 - Australian suburbs. Bounding box covers Greater Perth."
+
+adelaide:
+  name: "Adelaide"
+  city: "Adelaide"
+  state: "SA"
+  county: "Adelaide"
+  country: "Australia"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -35.2
+      max_lat: -34.6
+      min_lon: 138.4
+      max_lon: 138.9
+  population_source: "manual"
+  notes: "GADM ADM2 - Australian suburbs. Bounding box covers Greater Adelaide."
+
+# ============================================================================
+# NEW ZEALAND - Using Stats NZ and Local Councils
+# ============================================================================
+
+auckland:
+  name: "Auckland"
+  city: "Auckland"
+  state: "Auckland"
+  county: "Auckland"
+  country: "New Zealand"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -37.2
+      max_lat: -36.6
+      min_lon: 174.4
+      max_lon: 175.1
+  population_source: "manual"
+  notes: "GADM ADM3 - New Zealand suburbs. Bounding box around Auckland."
+
+wellington:
+  name: "Wellington"
+  city: "Wellington"
+  state: "Wellington"
+  county: "Wellington"
+  country: "New Zealand"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -41.4
+      max_lat: -40.9
+      min_lon: 174.6
+      max_lon: 175.1
+  population_source: "manual"
+  notes: "GADM ADM3 - New Zealand suburbs. Bounding box around Wellington."
+
+christchurch:
+  name: "Christchurch"
+  city: "Christchurch"
+  state: "Canterbury"
+  county: "Christchurch"
+  country: "New Zealand"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: -43.7
+      max_lat: -43.3
+      min_lon: 172.4
+      max_lon: 173.2
+  population_source: "manual"
+  notes: "GADM ADM3 - New Zealand suburbs. Bounding box around Christchurch."
+
+# ============================================================================
+# SINGAPORE - Using Government Open Data Portal
+# ============================================================================
+
+singapore:
+  name: "Singapore"
+  city: "Singapore"
+  state: "Singapore"
+  county: "Singapore"
+  country: "Singapore"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Singapore_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  population_source: "manual"
+  notes: "GADM ADM2 - Singapore planning areas. City-state so no filtering needed."
+
+# ============================================================================
+# UNITED ARAB EMIRATES - Using Bayanat Open Data Portal
+# ============================================================================
+
+dubai:
+  name: "Dubai"
+  city: "Dubai"
+  state: "Dubai"
+  county: "Dubai"
+  country: "United Arab Emirates"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_3"
+    geoid: "GID_3"
+    parent_name: "NAME_1"  # Filter by NAME_1='Dubai' or 'Dubayy'
+  population_source: "manual"
+  notes: "GADM Level 3 - UAE neighborhoods. Filters all Dubai neighborhoods."
+
+'abu dhabi':
+  name: "Abu Dhabi"
+  city: "Abu Dhabi"
+  state: "Abu Dhabi"
+  county: "Abu Dhabi"
+  country: "United Arab Emirates"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "NAME_3"
+    geoid: "GID_3"
+    parent_name: "NAME_1"  # Filter by NAME_1='Abu Dhabi' or 'Abu Zaby'
+  population_source: "manual"
+  notes: "GADM Level 3 - UAE neighborhoods. Filters all Abu Dhabi neighborhoods."
+
+# ============================================================================
+# SOUTH AMERICA
+# ============================================================================
+
 'buenos aires':
   name: "Buenos Aires"
   city: "Buenos Aires"
@@ -43,7 +652,6 @@
   country: "Italy"
   istat_code: "023030"
   population_source: "istat"
-  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
   type: "geojson"
   enabled: true
   field_mappings:
@@ -58,7 +666,6 @@ verona:
   country: "Italy"
   istat_code: "023091"
   population_source: "istat"
-  endpoint: "https://f005.backblazeb2.com/file/tripheatmap/italy_2019_arcgis.geojson"
   type: "geojson"
   enabled: true
   field_mappings:

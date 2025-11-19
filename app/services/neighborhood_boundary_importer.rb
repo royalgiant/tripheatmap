@@ -45,8 +45,92 @@ class NeighborhoodBoundaryImporter
 
     fips = self.class.city_configs[city_key]
 
+    # Try UK neighborhoods (national GADM Level 4 dataset filtered by parent city)
+    if UkNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "UK ward data available for #{city_key}, importing..."
+      begin
+        importer = UkNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'uk_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import UK neighborhoods: #{e.message}"
+        @errors << "UK import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try Australian neighborhoods (national GADM ADM2 dataset filtered by state)
+    elsif AustraliaNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "Australian suburb data available for #{city_key}, importing..."
+      begin
+        importer = AustraliaNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'australia_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Australian neighborhoods: #{e.message}"
+        @errors << "Australia import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try Canadian neighborhoods (national GADM ADM3 dataset filtered by municipality)
+    elsif CanadaNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "Canadian subdivision data available for #{city_key}, importing..."
+      begin
+        importer = CanadaNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'canada_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Canadian neighborhoods: #{e.message}"
+        @errors << "Canada import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try New Zealand neighborhoods (national GADM ADM3 dataset filtered by territorial authority)
+    elsif NewZealandNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "New Zealand suburb data available for #{city_key}, importing..."
+      begin
+        importer = NewZealandNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'new_zealand_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import New Zealand neighborhoods: #{e.message}"
+        @errors << "New Zealand import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try Singapore neighborhoods (GADM ADM2 dataset - all planning areas)
+    elsif SingaporeNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "Singapore planning area data available for #{city_key}, importing..."
+      begin
+        importer = SingaporeNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'singapore_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import Singapore neighborhoods: #{e.message}"
+        @errors << "Singapore import failed: #{e.message}"
+        results[:errors] << e.message
+      end
+    # Try UAE neighborhoods (GADM Level 3 dataset filtered by emirate)
+    elsif UaeNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "UAE neighborhood data available for #{city_key}, importing..."
+      begin
+        importer = UaeNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'uae_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import UAE neighborhoods: #{e.message}"
+        @errors << "UAE import failed: #{e.message}"
+        results[:errors] << e.message
+      end
     # Try Italian neighborhoods (national dataset filtered by ISTAT code)
-    if ItalyNeighborhoodImporter.available_for_city?(city_key)
+    elsif ItalyNeighborhoodImporter.available_for_city?(city_key)
       Rails.logger.info "Italian municipality data available for #{city_key}, importing..."
       begin
         importer = ItalyNeighborhoodImporter.new(city_key)
