@@ -1,6 +1,6 @@
 class NeighborhoodsController < ApplicationController
   def show
-    @neighborhood = Neighborhood.find(params[:id])
+    @neighborhood = Neighborhood.find_by!(slug: params[:slug])
     @places = @neighborhood.places.order(:place_type, :name)
 
     # Group places by type for display

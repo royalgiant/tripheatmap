@@ -299,9 +299,9 @@ async function initPlacesMap() {
     // Click to open neighborhood detail page in new tab
     map.on("click", "neighborhood-fills", async (e) => {
       if (e.features.length > 0) {
-        const neighborhoodId = e.features[0].properties.id;
-        if (neighborhoodId) {
-          window.open(`/neighborhoods/${neighborhoodId}`, '_blank');
+        const slug = e.features[0].properties.slug;
+        if (slug) {
+          window.open(`/neighborhoods/${slug}`, '_blank');
         }
       }
     });

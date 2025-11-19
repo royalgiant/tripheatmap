@@ -39,6 +39,7 @@ class Api::V1::NeighborhoodsController < ApplicationController
           county: neighborhood.county,
           state: neighborhood.state,
           population: neighborhood.population,
+          slug: neighborhood.slug,
           # Vibrancy statistics
           restaurant_count: places_stat&.restaurant_count || 0,
           cafe_count: places_stat&.cafe_count || 0,

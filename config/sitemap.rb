@@ -31,4 +31,9 @@ SitemapGenerator::Sitemap.create do
     add where_to_stay_path(slug), changefreq: "weekly", priority: 0.8
     add places_map_path(slug), changefreq: "weekly", priority: 0.7
   end
+
+  # Add all neighborhood pages
+  Neighborhood.find_each do |neighborhood|
+    add neighborhood_path(neighborhood), changefreq: "weekly", priority: 0.6
+  end
 end
