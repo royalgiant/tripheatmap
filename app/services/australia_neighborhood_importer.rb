@@ -5,6 +5,7 @@
 #   AustraliaNeighborhoodImporter.new('sydney').import_neighborhoods
 #
 class AustraliaNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
 
   attr_reader :city_key, :config, :errors
@@ -265,6 +266,8 @@ class AustraliaNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # Australian population data would need separate source (ABS)
       geom: geometry,
       centroid: centroid

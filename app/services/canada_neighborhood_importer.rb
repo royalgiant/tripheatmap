@@ -5,6 +5,7 @@
 #   CanadaNeighborhoodImporter.new('toronto').import_neighborhoods
 #
 class CanadaNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
 
   attr_reader :city_key, :config, :errors
@@ -266,6 +267,8 @@ class CanadaNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # Canadian population data would need separate source (StatCan)
       geom: geometry,
       centroid: centroid

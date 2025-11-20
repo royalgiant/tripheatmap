@@ -5,6 +5,7 @@
 #   UkNeighborhoodImporter.new('london').import_neighborhoods
 #
 class UkNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
 
   attr_reader :city_key, :config, :errors
@@ -197,6 +198,8 @@ class UkNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # UK population data would need separate source (ONS)
       geom: geometry,
       centroid: centroid

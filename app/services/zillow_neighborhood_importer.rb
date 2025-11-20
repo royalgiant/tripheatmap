@@ -138,6 +138,8 @@ class ZillowNeighborhoodImporter
       city: city_name,
       county: county,
       state: state_abbr,
+      country: "United States",
+      continent: "North America",
       population: nil, # Zillow data doesn't include population
       geom: geometry,
       centroid: centroid

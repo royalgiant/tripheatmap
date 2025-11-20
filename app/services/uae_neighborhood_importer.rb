@@ -5,6 +5,7 @@
 #   UaeNeighborhoodImporter.new('dubai').import_neighborhoods
 #
 class UaeNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json"
 
   attr_reader :city_key, :config, :errors
@@ -187,6 +188,8 @@ class UaeNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # UAE population data would need separate source
       geom: geometry,
       centroid: centroid

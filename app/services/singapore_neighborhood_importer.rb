@@ -5,6 +5,7 @@
 #   SingaporeNeighborhoodImporter.new('singapore').import_neighborhoods
 #
 class SingaporeNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://tripheatmap.s3.us-east-005.backblazeb2.com/Singapore_ADM2_simplified.simplified.geojson"
 
   attr_reader :city_key, :config, :errors
@@ -149,6 +150,8 @@ class SingaporeNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # Singapore population data would need separate source
       geom: geometry,
       centroid: centroid

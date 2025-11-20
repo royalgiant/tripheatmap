@@ -5,6 +5,7 @@
 #   ItalyNeighborhoodImporter.new('verona').import_neighborhoods
 #
 class ItalyNeighborhoodImporter
+  include ContinentHelper
   NATIONAL_GEOJSON_URL = "https://services9.arcgis.com/UILu2wREgFBEuDZW/arcgis/rest/services/Com01012019_WGS84/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson"
 
   attr_reader :city_key, :config, :errors
@@ -169,6 +170,8 @@ class ItalyNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # Italian population data would need separate source (ISTAT API)
       geom: geometry,
       centroid: centroid

@@ -5,6 +5,8 @@
 #   CityNeighborhoodImporter.new('dallas').import_neighborhoods
 #
 class CityNeighborhoodImporter
+  include ContinentHelper
+
   attr_reader :city_key, :config, :errors
 
   def initialize(city_key)
@@ -141,6 +143,8 @@ class CityNeighborhoodImporter
       city: city_name,
       county: config["county"],
       state: config["state"],
+      country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil, # Will need to be populated from census data later
       geom: geometry,
       centroid: centroid
