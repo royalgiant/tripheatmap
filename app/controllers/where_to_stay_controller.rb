@@ -3,6 +3,7 @@ class WhereToStayController < ApplicationController
 
   def index
     @cities = get_cities
+    @cities_grouped = get_cities_grouped_by_location
   end
 
   def show

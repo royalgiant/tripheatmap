@@ -5,34 +5,153 @@
     <p class="text-xl text-gray-700">Data-driven neighborhood rankings for <%= @cities.size %> cities. Find the best place to book based on vibrancy scores, restaurant/bar/café density, and real venue data.</p>
   </header>
 
-  <section class="space-y-8">
+  <section class="space-y-12">
     <h2 class="text-2xl font-bold text-gray-900">Browse All City Guides</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% @cities.each do |city| %>
-        <%= link_to where_to_stay_path(city[:slug]), class: "group" do %>
-          <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="space-y-3">
-              <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                Where to Stay in <%= city[:name] %>
-              </h3>
-              <p class="text-sm text-gray-600">
-                <%= city[:neighborhood_count] %> neighborhoods ranked by vibrancy
-              </p>
-              <div class="pt-2">
-                <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
-                  View guide
-                  <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
+    <% @cities_grouped.each do |continent, countries| %>
+      <div class="space-y-6">
+        <!-- Continent Header -->
+        <h3 class="text-xl font-bold text-gray-800 border-b-2 border-blue-600 pb-2">
+          <%= continent %>
+        </h3>
+
+        <% countries.each_with_index do |(country, cities), country_index| %>
+          <% country_id = "country-#{continent.parameterize}-#{country.parameterize}" %>
+          <% visible_cities = cities.first(9) %>
+          <% hidden_cities = cities[9..-1] || [] %>
+          <% has_more = hidden_cities.any? %>
+          <% is_us = country == "United States" %>
+
+          <div class="space-y-4">
+            <!-- Country Header (Clickable) -->
+            <button
+              type="button"
+              onclick="toggleCountry('<%= country_id %>')"
+              class="flex items-center justify-between w-full text-left pl-4 pr-4 py-2 hover:bg-gray-50 rounded-lg transition-colors group"
+            >
+              <h4 class="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
+                <%= country %> (<%= cities.size %>)
+              </h4>
+              <svg
+                id="<%= country_id %>-icon"
+                class="w-5 h-5 text-gray-500 transform transition-transform duration-200 <%= 'rotate-180' if is_us %>"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Cities Container (Initially Hidden, except US) -->
+            <div id="<%= country_id %>" class="<%= 'hidden' unless is_us %> pl-8 space-y-4">
+              <!-- First 9 Cities -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% visible_cities.each do |city| %>
+                  <%= link_to where_to_stay_path(city[:slug]), class: "group" do %>
+                    <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                      <div class="space-y-3">
+                        <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                          <%= city[:name] %>
+                        </h5>
+                        <p class="text-sm text-gray-600">
+                          <%= city[:neighborhood_count] %> neighborhoods ranked by vibrancy
+                        </p>
+                        <div class="pt-2">
+                          <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                            View guide
+                            <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
+
+              <% if has_more %>
+                <!-- Hidden Cities (Shown after "See More") -->
+                <div id="<%= country_id %>-more" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <% hidden_cities.each do |city| %>
+                    <%= link_to where_to_stay_path(city[:slug]), class: "group" do %>
+                      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="space-y-3">
+                          <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            <%= city[:name] %>
+                          </h5>
+                          <p class="text-sm text-gray-600">
+                            <%= city[:neighborhood_count] %> neighborhoods ranked by vibrancy
+                          </p>
+                          <div class="pt-2">
+                            <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                              View guide
+                              <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <!-- See More Button -->
+                <button
+                  type="button"
+                  onclick="toggleMoreCities('<%= country_id %>')"
+                  id="<%= country_id %>-more-btn"
+                  class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                >
+                  <span id="<%= country_id %>-more-text">See <%= hidden_cities.size %> More Cities</span>
+                  <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              <% end %>
             </div>
           </div>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </section>
+
+  <script>
+    function toggleCountry(countryId) {
+      const $content = $('#' + countryId);
+      const $icon = $('#' + countryId + '-icon');
+
+      if ($content.hasClass('hidden')) {
+        $content.removeClass('hidden');
+        $icon.addClass('rotate-180');
+      } else {
+        $content.addClass('hidden');
+        $icon.removeClass('rotate-180');
+      }
+    }
+
+    function toggleMoreCities(countryId) {
+      const $moreContent = $('#' + countryId + '-more');
+      const $moreText = $('#' + countryId + '-more-text');
+
+      if ($moreContent.hasClass('hidden')) {
+        $moreContent.removeClass('hidden');
+        $moreText.text('Show Less');
+      } else {
+        $moreContent.addClass('hidden');
+        $moreText.text($moreText.data('original-text'));
+      }
+    }
+
+    // Store original text for "See More" buttons
+    $(document).ready(function() {
+      $('[id$="-more-text"]').each(function() {
+        $(this).data('original-text', $(this).text());
+      });
+    });
+  </script>
 
   <section class="bg-blue-50 rounded-3xl p-8 border border-blue-100">
     <div class="space-y-4">
