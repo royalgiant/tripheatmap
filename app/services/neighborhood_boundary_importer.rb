@@ -59,6 +59,20 @@ class NeighborhoodBoundaryImporter
         @errors << "UK import failed: #{e.message}"
         results[:errors] << e.message
       end
+    # Try European GADM datasets (Germany, France, etc.)
+    elsif GadmEuropeNeighborhoodImporter.available_for_city?(city_key)
+      Rails.logger.info "European GADM data available for #{city_key}, importing..."
+      begin
+        importer = GadmEuropeNeighborhoodImporter.new(city_key)
+        count = importer.import_neighborhoods
+        results[:neighborhoods] = count
+        results[:method] = 'europe_gadm'
+        @errors.concat(importer.errors)
+      rescue => e
+        Rails.logger.error "Failed to import European neighborhoods: #{e.message}"
+        @errors << "Europe import failed: #{e.message}"
+        results[:errors] << e.message
+      end
     # Try Australian neighborhoods (national GADM ADM2 dataset filtered by state)
     elsif AustraliaNeighborhoodImporter.available_for_city?(city_key)
       Rails.logger.info "Australian suburb data available for #{city_key}, importing..."
