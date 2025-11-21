@@ -54,6 +54,79 @@ module WhereToStay
       @total_neighborhoods
     end
 
+    # SEO Methods
+    def seo_title
+      "Where to Stay in #{@city_name}#{state_suffix} 2025 | Best Neighborhoods Ranked"
+    end
+
+    def seo_description
+      return "" unless available?
+
+      top_hood = neighborhood_cards.first
+      "Find the best neighborhoods in #{@city_name}#{state_suffix}. #{top_hood[:name]} ranks #1 with #{top_hood[:amenities][:restaurants]} restaurants, #{top_hood[:amenities][:cafes]} cafés, #{top_hood[:amenities][:bars]} bars. Data-driven rankings of #{@total_neighborhoods} areas."
+    end
+
+    def canonical_url
+      "https://tripheatmap.com/where-to-stay/#{@url_slug}"
+    end
+
+    def og_image_url
+      neighborhood_cards.first&.dig(:map_image_url) || "https://tripheatmap.com/og-default.jpg"
+    end
+
+    def structured_data
+      {
+        faq_schema: faq_schema,
+        itemlist_schema: itemlist_schema
+      }
+    end
+
+    private
+
+    def state_suffix
+      @state.present? ? ", #{@state}" : ""
+    end
+
+    def faq_schema
+      return nil unless @faq_items.any?
+
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": @faq_items.map do |faq|
+          {
+            "@type": "Question",
+            "name": faq[:question],
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq[:answer]
+            }
+          }
+        end
+      }
+    end
+
+    def itemlist_schema
+      return nil unless neighborhood_cards.any?
+
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Best Neighborhoods in #{@city_name}#{state_suffix}",
+        "description": seo_description,
+        "numberOfItems": neighborhood_cards.size,
+        "itemListElement": neighborhood_cards.first(10).map do |card|
+          {
+            "@type": "ListItem",
+            "position": card[:rank],
+            "name": card[:name],
+            "description": card[:description],
+            "url": "https://tripheatmap.com#{card[:neighborhood_path]}"
+          }
+        end
+      }
+    end
+
     private
 
     def build_page_data

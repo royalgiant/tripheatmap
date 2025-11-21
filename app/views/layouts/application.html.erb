@@ -2,7 +2,6 @@
 <html>
   <head>
     <link rel="icon" type="image/png" href="<%= asset_path('favicon.ico') %>">
-    <title>TripHeatMap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -53,6 +52,10 @@
           })
       </script>
       <!-- End Posthog Code -->
+    <% end %>
+    <% unless content_for?(:head) %>
+      <title>TripHeatMap - Data-Driven Neighborhood Rankings for Travelers</title>
+      <meta name="description" content="Find the best neighborhoods to stay in cities worldwide using our data-driven vibrancy rankings based on restaurant, bar, and café density.">
     <% end %>
     <%= yield :head %>
   </head>

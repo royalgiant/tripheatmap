@@ -1,3 +1,37 @@
+<% content_for :head do %>
+  <!-- SEO Meta Tags -->
+  <title><%= @page.seo_title %></title>
+  <meta name="description" content="<%= @page.seo_description %>">
+  <link rel="canonical" href="<%= @page.canonical_url %>">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="<%= @page.seo_title %>">
+  <meta property="og:description" content="<%= @page.seo_description %>">
+  <meta property="og:url" content="<%= @page.canonical_url %>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="<%= @page.og_image_url %>">
+
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @page.seo_title %>">
+  <meta name="twitter:description" content="<%= @page.seo_description %>">
+  <meta name="twitter:image" content="<%= @page.og_image_url %>">
+
+  <!-- Structured Data - FAQ Schema -->
+  <% if @page.structured_data[:faq_schema].present? %>
+    <script type="application/ld+json">
+      <%= raw @page.structured_data[:faq_schema].to_json %>
+    </script>
+  <% end %>
+
+  <!-- Structured Data - ItemList Schema -->
+  <% if @page.structured_data[:itemlist_schema].present? %>
+    <script type="application/ld+json">
+      <%= raw @page.structured_data[:itemlist_schema].to_json %>
+    </script>
+  <% end %>
+<% end %>
+
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
   <header class="space-y-6">
     <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold">TripHeatmap · Data-backed stays</p>
@@ -108,13 +142,13 @@
 
             <div class="md:col-span-4 space-y-4">
               <% if card[:map_image_url].present? %>
-                <img src="<%= card[:map_image_url] %>" alt="Map preview for <%= card[:name] %>" class="w-full rounded-2xl border border-gray-200 object-cover" loading="lazy" />
+                <img src="<%= card[:map_image_url] %>" alt="<%= card[:name] %> neighborhood map showing <%= card[:amenities][:restaurants] %> restaurants, <%= card[:amenities][:cafes] %> cafés, and <%= card[:amenities][:bars] %> bars" class="w-full rounded-2xl border border-gray-200 object-cover" loading="lazy" />
               <% else %>
                 <div class="w-full h-48 rounded-2xl border border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-sm">
                   Map snapshot unavailable
                 </div>
               <% end %>
-              <%= link_to "View neighborhood guide", card[:neighborhood_path], class: "inline-flex items-center justify-center w-full px-4 py-2 rounded-full bg-white border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition" %>
+              <%= link_to "View #{card[:name]} neighborhood guide", card[:neighborhood_path], class: "inline-flex items-center justify-center w-full px-4 py-2 rounded-full bg-white border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition" %>
             </div>
           </div>
         </article>
