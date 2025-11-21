@@ -29,10 +29,17 @@ class WhereToStayController < ApplicationController
     @supported_city_configs ||= NeighborhoodBoundaryImporter.city_configs.each_with_object({}) do |(key, config), memo|
       next unless config.is_a?(Hash)
       next if key.to_s == 'states'
+      next if config[:enabled] == false
 
-      if config[:state_fips].present? && config[:state].present?
-        memo[key.to_s] = config
-      end
+      normalized_key = normalize_slug(key)
+      memo[normalized_key] = config if normalized_key.present?
+
+      city_name = normalize_slug(config[:city])
+      memo[city_name] = config if city_name.present?
     end
+  end
+
+  def normalize_slug(value)
+    value.to_s.downcase.tr('-', ' ').tr('_', ' ').squish
   end
 end

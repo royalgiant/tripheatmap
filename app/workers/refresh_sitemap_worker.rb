@@ -6,8 +6,12 @@ class RefreshSitemapWorker
   def perform
     Rails.logger.info "Starting sitemap refresh..."
 
+    # Load rake tasks if not already loaded
+    Rails.application.load_tasks unless defined?(Rake::Task)
+
     # Run the rake task to refresh sitemap
-    system("bundle exec rake sitemap:refresh")
+    Rake::Task["sitemap:refresh"].reenable
+    Rake::Task["sitemap:refresh"].invoke
 
     Rails.logger.info "Sitemap refresh completed successfully"
   rescue => e

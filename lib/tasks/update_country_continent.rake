@@ -77,15 +77,17 @@ namespace :neighborhoods do
 
   def self.determine_continent(country)
     case country
-    when "United Kingdom", "Ireland", "Italy"
+    when "United Kingdom", "Ireland", "Italy", "Germany", "Netherlands", "Switzerland",
+         "Sweden", "Denmark", "Belgium", "France", "Austria", "Norway", "Spain",
+         "Portugal", "Greece"
       "Europe"
-    when "Canada", "United States"
+    when "Canada", "United States", "Mexico"
       "North America"
     when "Australia", "New Zealand"
       "Oceania"
-    when "Singapore", "Hong Kong SAR", "United Arab Emirates"
+    when "Singapore", "Hong Kong SAR", "United Arab Emirates", "Japan", "Thailand", "Vietnam"
       "Asia"
-    when "Argentina"
+    when "Argentina", "Brazil"
       "South America"
     else
       nil
