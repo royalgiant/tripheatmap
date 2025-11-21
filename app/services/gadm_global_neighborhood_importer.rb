@@ -3,7 +3,7 @@
 # France, Austria, Norway). Each city entry in config/neighborhood_boundaries.yml
 # provides the endpoint plus optional bounding-box filters.
 
-class GadmEuropeNeighborhoodImporter
+class GadmGlobalNeighborhoodImporter
   SUPPORTED_COUNTRIES = {
     "Germany" => "DE",
     "Netherlands" => "NL",
@@ -13,7 +13,16 @@ class GadmEuropeNeighborhoodImporter
     "Belgium" => "BE",
     "France" => "FR",
     "Austria" => "AT",
-    "Norway" => "NO"
+    "Norway" => "NO",
+    "Japan" => "JP",
+    "Spain" => "ES",
+    "Italy" => "IT",
+    "Portugal" => "PT",
+    "Greece" => "GR",
+    "Thailand" => "TH",
+    "Vietnam" => "VN",
+    "Mexico" => "MX",
+    "Brazil" => "BR"
   }.freeze
 
   attr_reader :city_key, :config, :errors

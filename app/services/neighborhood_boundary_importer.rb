@@ -60,13 +60,13 @@ class NeighborhoodBoundaryImporter
         results[:errors] << e.message
       end
     # Try European GADM datasets (Germany, France, etc.)
-    elsif GadmEuropeNeighborhoodImporter.available_for_city?(city_key)
+    elsif GadmGlobalNeighborhoodImporter.available_for_city?(city_key)
       Rails.logger.info "European GADM data available for #{city_key}, importing..."
       begin
-        importer = GadmEuropeNeighborhoodImporter.new(city_key)
+        importer = GadmGlobalNeighborhoodImporter.new(city_key)
         count = importer.import_neighborhoods
         results[:neighborhoods] = count
-        results[:method] = 'europe_gadm'
+        results[:method] = 'global_gadm'
         @errors.concat(importer.errors)
       rescue => e
         Rails.logger.error "Failed to import European neighborhoods: #{e.message}"
@@ -141,20 +141,6 @@ class NeighborhoodBoundaryImporter
       rescue => e
         Rails.logger.error "Failed to import UAE neighborhoods: #{e.message}"
         @errors << "UAE import failed: #{e.message}"
-        results[:errors] << e.message
-      end
-    # Try Italian neighborhoods (national dataset filtered by ISTAT code)
-    elsif ItalyNeighborhoodImporter.available_for_city?(city_key)
-      Rails.logger.info "Italian municipality data available for #{city_key}, importing..."
-      begin
-        importer = ItalyNeighborhoodImporter.new(city_key)
-        count = importer.import_neighborhoods
-        results[:neighborhoods] = count
-        results[:method] = 'italy_istat'
-        @errors.concat(importer.errors)
-      rescue => e
-        Rails.logger.error "Failed to import Italian neighborhoods: #{e.message}"
-        @errors << "Italy import failed: #{e.message}"
         results[:errors] << e.message
       end
     # Try city-specific neighborhoods (custom open data portals like Buenos Aires)

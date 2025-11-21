@@ -35,7 +35,7 @@ bundle exec rake "city:import[stuttgart,true]" &&
 bundle exec rake "city:import[dusseldorf,true]" &&
 bundle exec rake "city:import[amsterdam,true]" &&
 bundle exec rake "city:import[rotterdam,true]" &&
-bundle exec rake "city:import['the hague',true]" &&
+bundle exec rake "city:import[the hague,true]" &&
 bundle exec rake "city:import[utrecht,true]" &&
 bundle exec rake "city:import[eindhoven,true]" &&
 bundle exec rake "city:import[zurich,true]" &&
@@ -60,7 +60,6 @@ bundle exec rake "city:import[paris,true]" &&
 bundle exec rake "city:import[lyon,true]" &&
 bundle exec rake "city:import[marseille,true]" &&
 bundle exec rake "city:import[nice,true]" &&
-bundle exec rake "city:import[bordeaux,true]" &&
 bundle exec rake "city:import[toulouse,true]" &&
 bundle exec rake "city:import[lille,true]" &&
 bundle exec rake "city:import[vienna,true]" &&
@@ -70,4 +69,34 @@ bundle exec rake "city:import[linz,true]" &&
 bundle exec rake "city:import[oslo,true]" &&
 bundle exec rake "city:import[bergen,true]" &&
 bundle exec rake "city:import[trondheim,true]" &&
-bundle exec rake "city:import[stavanger,true]"
+bundle exec rake "city:import[stavanger,true]" &&
+bundle exec rake "city:import[tokyo,true]" &&
+bundle exec rake "city:import[osaka,true]" &&
+bundle exec rake "city:import[kyoto,true]" &&
+bundle exec rake "city:import[yokohama,true]" &&
+bundle exec rake "city:import[madrid,true]" &&
+bundle exec rake "city:import[barcelona,true]" &&
+bundle exec rake "city:import[valencia,true]" &&
+bundle exec rake "city:import[seville,true]" &&
+bundle exec rake "city:import[rome,true]" &&
+bundle exec rake "city:import[milan,true]" &&
+bundle exec rake "city:import[naples,true]" &&
+bundle exec rake "city:import[venice,true]" &&
+bundle exec rake "city:import[lisbon,true]" &&
+bundle exec rake "city:import[porto,true]" &&
+bundle exec rake "city:import[athens,true]" &&
+bundle exec rake "city:import[thessaloniki,true]" &&
+bundle exec rake "city:import[bangkok,true]" &&
+bundle exec rake "city:import[chiang mai,true]" &&
+bundle exec rake "city:import[phuket,true]" &&
+bundle exec rake "city:import[ho chi minh city,true]" &&
+bundle exec rake "city:import[hanoi,true]" &&
+bundle exec rake "city:import[da nang,true]" &&
+bundle exec rake "city:import[mexico city,true]" &&
+bundle exec rake "city:import[guadalajara,true]" &&
+bundle exec rake "city:import[monterrey,true]" &&
+bundle exec rake "city:import[cancun,true]" &&
+bundle exec rake "city:import[sao paulo,true]" &&
+bundle exec rake "city:import[rio de janeiro,true]" &&
+bundle exec rake "city:import[salvador,true]" &&
+bundle exec rake "city:import[brasilia,true]"
