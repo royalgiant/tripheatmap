@@ -105,6 +105,11 @@ class CityDataImporter
       Rails.logger.info "Skipping places import (skip_places=true)"
     end
 
+    # Step 3: Generate AI content (descriptions and city content)
+    unless @skip_places  # Only generate if we have places data
+      generate_ai_content
+    end
+
     @results[:duration] = (Time.current - start_time).round(2)
     @results[:errors] = @errors
 
@@ -164,6 +169,82 @@ class CityDataImporter
       Rails.logger.error error_msg
       @errors << error_msg
       @results[:places_imported] = 0
+    end
+  end
+
+  # Generate AI content for neighborhoods and city
+  def generate_ai_content
+    log_section("Generating AI Content (Descriptions & City Content)")
+
+    begin
+      neighborhoods_with_stats = Neighborhood
+        .for_city(city_name)
+        .includes(:neighborhood_places_stat)
+        .where.not(neighborhood_places_stats: { vibrancy_index: nil })
+        .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC"))
+
+      if neighborhoods_with_stats.empty?
+        Rails.logger.warn "No neighborhoods with stats found. Skipping AI content generation."
+        @results[:ai_generated] = 0
+        return
+      end
+
+      Rails.logger.info "Generating AI content for #{neighborhoods_with_stats.size} neighborhoods (1 call per neighborhood)..."
+
+      city_config = self.class.city_configs[@city_key]
+      state = city_config&.dig('state')
+      country = city_config&.dig('country')
+      total_neighborhoods = Neighborhood.for_city(city_name).count
+      generated_count = 0
+
+      # Loop through each neighborhood and make 1 API call per neighborhood
+      neighborhoods_with_stats.each_with_index do |neighborhood, index|
+        next if neighborhood.description.present?  # Skip if already has content
+
+        stats = neighborhood.neighborhood_places_stat
+        next unless stats
+
+        begin
+          Rails.logger.info "  [#{index + 1}/#{neighborhoods_with_stats.size}] Generating content for #{neighborhood.name}..."
+
+          content = AiContentGenerator.generate_neighborhood_content(
+            neighborhood: neighborhood,
+            stats: {
+              restaurant_count: stats.restaurant_count,
+              cafe_count: stats.cafe_count,
+              bar_count: stats.bar_count,
+              vibrancy_index: stats.vibrancy_index
+            },
+            city_name: display_name,
+            state: state,
+            country: country,
+            total_neighborhoods: total_neighborhoods
+          )
+
+          if content
+            neighborhood.update_columns(
+              description: content[:description],
+              about: content[:about],
+              time_to_visit: content[:time_to_visit],
+              getting_around: content[:getting_around]
+            )
+            generated_count += 1
+            Rails.logger.info "  ✅ Generated all content for #{neighborhood.name}"
+          end
+        rescue => e
+          Rails.logger.warn "  Failed to generate content for #{neighborhood.name}: #{e.message}"
+        end
+
+        sleep(0.5)
+      end
+
+      @results[:ai_generated] = generated_count
+      Rails.logger.info "✅ Generated AI content for #{generated_count} neighborhoods"
+    rescue => e
+      error_msg = "AI content generation failed: #{e.message}"
+      Rails.logger.error error_msg
+      @errors << error_msg
+      @results[:ai_generated] = 0
     end
   end
 

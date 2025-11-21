@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_20_142940) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_21_220239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -58,6 +58,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_20_142940) do
     t.string "slug"
     t.string "country"
     t.string "continent"
+    t.text "description"
+    t.text "about"
+    t.text "time_to_visit"
+    t.text "getting_around"
     t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
     t.index ["continent"], name: "index_neighborhoods_on_continent"
     t.index ["country"], name: "index_neighborhoods_on_country"

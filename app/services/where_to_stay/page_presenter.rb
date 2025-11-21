@@ -6,7 +6,8 @@ module WhereToStay
       "cafe" => 2
     }.freeze
 
-    attr_reader :city_name, :state, :neighborhood_cards, :city_intro, :total_neighborhoods
+    attr_reader :city_name, :state, :neighborhood_cards, :city_intro, :total_neighborhoods,
+                :city_about, :city_time_to_visit, :city_getting_around
 
     def initialize(city_slug:, city_config:, url_slug:)
       @city_slug = city_slug
@@ -18,6 +19,9 @@ module WhereToStay
       @faq_items = []
       @city_intro = ""
       @total_neighborhoods = 0
+      @city_about = nil
+      @city_time_to_visit = nil
+      @city_getting_around = nil
 
       build_page_data
     end
@@ -79,6 +83,32 @@ module WhereToStay
         faq_schema: faq_schema,
         itemlist_schema: itemlist_schema
       }
+    end
+
+    def related_cities
+      return [] unless available?
+
+      first_neighborhood = Neighborhood.for_city(@city_slug).first
+      return [] unless first_neighborhood&.country
+
+      # Find other cities in the same country
+      related = Neighborhood
+        .where(country: first_neighborhood.country)
+        .where.not("LOWER(city) = ?", @city_slug.downcase)
+        .select(:city, :country)
+        .group(:city, :country)
+        .having("COUNT(*) > 0")
+        .order(:city)
+        .limit(6)
+        .pluck(:city, :country)
+
+      related.map do |city, country|
+        {
+          city: city,
+          country: country,
+          url: Rails.application.routes.url_helpers.where_to_stay_path(city.parameterize)
+        }
+      end
     end
 
     private
@@ -146,6 +176,12 @@ module WhereToStay
       @neighborhood_cards = build_cards(top_metrics, tag_assigner)
       @city_intro = build_city_intro
       @faq_items = build_faq_items(metrics)
+
+      # Load city-level content from first neighborhood (all neighborhoods in city share same city content)
+      first_neighborhood = metrics.first[:neighborhood]
+      @city_about = first_neighborhood.about
+      @city_time_to_visit = first_neighborhood.time_to_visit
+      @city_getting_around = first_neighborhood.getting_around
     end
 
     def fetch_neighborhoods
@@ -224,7 +260,10 @@ module WhereToStay
           map_image_url: map_image_url_for(neighborhood),
           highlights: build_highlights(neighborhood.id),
           neighborhood_path: Rails.application.routes.url_helpers.neighborhood_path(neighborhood),
-          description: build_description(neighborhood.name, metric)
+          description: build_description(neighborhood.name, metric),
+          about: neighborhood.about,
+          time_to_visit: neighborhood.time_to_visit,
+          getting_around: neighborhood.getting_around
         }
       end
     end
@@ -296,10 +335,15 @@ module WhereToStay
     end
 
     def build_description(name, metric)
+      neighborhood = metric[:neighborhood]
+
+      # Use AI-generated description if available, otherwise fallback to template
+      return neighborhood.description if neighborhood.description.present?
+
+      # Fallback to template description
       restaurants = metric[:counts][:restaurants]
       bars = metric[:counts][:bars]
       cafes = metric[:counts][:cafes]
-      dens = metric[:densities][:restaurants]
 
       "#{name} mixes #{restaurants} restaurants, #{cafes} cafés, and #{bars} bars packed into #{metric[:area_sq_km].round(2)} km², making it a reliable base for visitors chasing real energy."
     end
