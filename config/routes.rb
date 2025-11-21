@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   scope controller: :static do
     get :terms
     get :privacy
+    get :about
     match :contact, via: [:get, :post]
   end
 
