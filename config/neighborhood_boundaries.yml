@@ -231,29 +231,6 @@ cardiff:
   notes: "GADM Level 4 - UK wards. All UK cities share the same endpoint."
 
 # ============================================================================
-# IRELAND - Using Government Open Data Portals
-# ============================================================================
-
-dublin:
-  name: "Dublin"
-  city: "Dublin"
-  state: "Leinster"
-  county: "Dublin"
-  country: "Ireland"
-  endpoint: "https://data.gov.ie"  # Placeholder - Ireland's Open Data Portal
-  type: "geojson"
-  enabled: false  # Needs verification from data.gov.ie or Dublin City Council
-  field_mappings:
-    name: "name"
-    geoid: "code"
-  population_source: "manual"
-  notes: "Dublin electoral divisions or small areas - check data.gov.ie or Dublin City Council Open Data portal."
-
-# ============================================================================
-# CANADA - Using Open Data Portals
-# ============================================================================
-
-# ============================================================================
 # GERMANY - Using GADM ADM3 (Kreise/Stadtkreise)
 # ============================================================================
 
@@ -2218,22 +2195,6 @@ dubai:
     parent_name: "NAME_1"  # Filter by NAME_1='Dubai' or 'Dubayy'
   population_source: "manual"
   notes: "GADM Level 3 - UAE neighborhoods. Filters all Dubai neighborhoods."
-
-'abu dhabi':
-  name: "Abu Dhabi"
-  city: "Abu Dhabi"
-  state: "Abu Dhabi"
-  county: "Abu Dhabi"
-  country: "United Arab Emirates"
-  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json"
-  type: "geojson"
-  enabled: true
-  field_mappings:
-    name: "NAME_3"
-    geoid: "GID_3"
-    parent_name: "NAME_1"  # Filter by NAME_1='Abu Dhabi' or 'Abu Zaby'
-  population_source: "manual"
-  notes: "GADM Level 3 - UAE neighborhoods. Filters all Abu Dhabi neighborhoods."
 
 # ============================================================================
 # SOUTH AMERICA

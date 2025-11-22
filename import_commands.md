@@ -8,7 +8,6 @@ bundle exec rake "city:import[bristol,true]" &&
 bundle exec rake "city:import[glasgow,true]" &&
 bundle exec rake "city:import[edinburgh,true]" &&
 bundle exec rake "city:import[cardiff,true]" &&
-bundle exec rake "city:import[dublin,true]" 
 bundle exec rake "city:import[toronto,true]" &&
 bundle exec rake "city:import[vancouver,true]" &&
 bundle exec rake "city:import[montreal,true]" &&
@@ -25,7 +24,6 @@ bundle exec rake "city:import[wellington,true]" &&
 bundle exec rake "city:import[christchurch,true]" &&
 bundle exec rake "city:import[singapore,true]" &&
 bundle exec rake "city:import[dubai,true]" &&
-bundle exec rake "city:import[abu dhabi,true]" &&
 bundle exec rake "city:import[berlin,true]" &&
 bundle exec rake "city:import[munich,true]" &&
 bundle exec rake "city:import[hamburg,true]" &&

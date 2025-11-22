@@ -85,8 +85,6 @@ class UaeNeighborhoodImporter
       case city_key
       when 'dubai'
         names << 'Dubai' << 'Dubayy'
-      when 'abu dhabi'
-        names << 'Abu Dhabi' << 'Abu Zaby'
       end
 
       names.compact.uniq

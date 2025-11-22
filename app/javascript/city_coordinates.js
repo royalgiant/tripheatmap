@@ -132,7 +132,6 @@ const cityCoordinates = {
   // Asia / Middle East
   'singapore': [103.8198, 1.3521],
   'dubai': [55.2708, 25.2048],
-  'abu dhabi': [54.3773, 24.4539],
 
   // Germany
   'berlin': [13.4050, 52.5200],
