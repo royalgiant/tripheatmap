@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_21_220239) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_22_192953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_21_220239) do
     t.decimal "restaurants_vibrancy"
     t.decimal "cafes_vibrancy"
     t.index ["neighborhood_id"], name: "index_neighborhood_places_stats_on_neighborhood_id"
+    t.index ["vibrancy_index"], name: "index_neighborhood_places_stats_on_vibrancy_index"
   end
 
   create_table "neighborhoods", force: :cascade do |t|
@@ -62,8 +63,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_21_220239) do
     t.text "about"
     t.text "time_to_visit"
     t.text "getting_around"
+    t.decimal "area_sq_km", precision: 10, scale: 2
     t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
+    t.index ["city"], name: "index_neighborhoods_on_city"
     t.index ["continent"], name: "index_neighborhoods_on_continent"
+    t.index ["country", "city"], name: "index_neighborhoods_on_country_and_city"
     t.index ["country"], name: "index_neighborhoods_on_country"
     t.index ["geoid"], name: "index_neighborhoods_on_geoid"
     t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist
@@ -83,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_21_220239) do
     t.string "booking_url"
     t.bigint "user_id"
     t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
+    t.index ["neighborhood_id", "place_type"], name: "index_places_on_neighborhood_id_and_place_type"
     t.index ["neighborhood_id"], name: "index_places_on_neighborhood_id"
     t.index ["place_type"], name: "index_places_on_place_type"
     t.index ["user_id"], name: "index_places_on_user_id"

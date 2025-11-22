@@ -7,7 +7,7 @@ module WhereToStay
     }.freeze
 
     attr_reader :city_name, :state, :neighborhood_cards, :city_intro, :total_neighborhoods,
-                :city_about, :city_time_to_visit, :city_getting_around
+                :city_about, :city_time_to_visit, :city_getting_around, :country
 
     def initialize(city_slug:, city_config:, url_slug:)
       @city_slug = city_slug
@@ -86,28 +86,25 @@ module WhereToStay
     end
 
     def related_cities
-      return [] unless available?
+      @related_cities ||= begin
+        return [] unless available?
+        return [] unless @country
 
-      first_neighborhood = Neighborhood.for_city(@city_slug).first
-      return [] unless first_neighborhood&.country
+        related = Neighborhood
+          .where(country: @country)
+          .where.not(city: @city_slug)
+          .select("DISTINCT city, country")
+          .order(:city)
+          .limit(6)
+          .pluck(:city, :country)
 
-      # Find other cities in the same country
-      related = Neighborhood
-        .where(country: first_neighborhood.country)
-        .where.not("LOWER(city) = ?", @city_slug.downcase)
-        .select(:city, :country)
-        .group(:city, :country)
-        .having("COUNT(*) > 0")
-        .order(:city)
-        .limit(6)
-        .pluck(:city, :country)
-
-      related.map do |city, country|
-        {
-          city: city,
-          country: country,
-          url: Rails.application.routes.url_helpers.where_to_stay_path(city.parameterize)
-        }
+        related.map do |city, country|
+          {
+            city: city,
+            country: country,
+            url: Rails.application.routes.url_helpers.where_to_stay_path(city.parameterize)
+          }
+        end
       end
     end
 
@@ -182,6 +179,7 @@ module WhereToStay
       @city_about = first_neighborhood.about
       @city_time_to_visit = first_neighborhood.time_to_visit
       @city_getting_around = first_neighborhood.getting_around
+      @country = first_neighborhood.country
     end
 
     def fetch_neighborhoods
@@ -189,7 +187,6 @@ module WhereToStay
         .for_city(@city_slug)
         .with_geom
         .includes(:neighborhood_places_stat)
-        .select("neighborhoods.*, ST_Area(neighborhoods.geom::geography) / 1000000.0 AS area_sq_km")
         .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC NULLS LAST"))
     end
 
@@ -221,7 +218,7 @@ module WhereToStay
           counts: counts,
           densities: densities,
           vibrancy: stats.vibrancy_index.to_f,
-          area_sq_km: neighborhood.read_attribute(:area_sq_km).to_f,
+          area_sq_km: neighborhood.area_sq_km.to_f,
           total_amenities: stats.total_amenities.to_i.nonzero? || counts.values.sum
         }
       end.sort_by { |metric| [-metric[:vibrancy], metric[:neighborhood].name] }
@@ -354,9 +351,6 @@ module WhereToStay
          neighborhood.wikipedia_image_checked_at > 30.days.ago
         return neighborhood.wikipedia_image_url
       end
-
-      wiki_image = fetch_and_cache_wikipedia_image(neighborhood)
-      return wiki_image if wiki_image.present?
 
       token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
       return nil if token.blank? || neighborhood.centroid.blank?

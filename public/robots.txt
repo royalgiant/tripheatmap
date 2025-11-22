@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /users/
 Disallow: /sidekiq/
 
-Sitemap: https://tripheatmap.com/sitemap.xml.gz
+Sitemap: https://tripheatmap.com/sitemap.xml

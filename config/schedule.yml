@@ -16,42 +16,15 @@ update_all_places_weekly:
   description: 'Update places/amenity data for all cities weekly'
   queue: default
 
-# Import full data for Dallas daily (for testing/development)
-import_dallas_daily:
-  cron: '0 3 * * *'
-  class: ImportCityDataJob
-  args: ['dallas']
-  description: 'Full import for Dallas (boundaries + places) daily'
+# Fetch Wikipedia images for neighborhoods (every 3 days at 3 AM)
+# Processes 100 neighborhoods per run to avoid overwhelming Wikipedia API
+# Images are cached for 30 days before refetching
+fetch_wikipedia_images:
+  cron:  '0 3 15 * *'
+  class: FetchWikipediaImagesJob
+  description: 'Fetch and cache Wikipedia images for neighborhood pages'
   queue: default
-  enabled: false  # Set to true to enable
 
-# Import full data for Chicago weekly
-import_chicago_weekly:
-  cron: '0 4 * * 0'
-  class: ImportCityDataJob
-  args: ['chicago']
-  description: 'Full import for Chicago weekly'
-  queue: default
-  enabled: false  # Set to true to enable
-
-# Import full data for Miami weekly
-import_miami_weekly:
-  cron: '0 5 * * 0'
-  class: ImportCityDataJob
-  args: ['miami']
-  description: 'Full import for Miami weekly'
-  queue: default
-  enabled: false  # Set to true to enable
-
-# Monthly full refresh for all cities (1st of month at 1 AM)
-import_all_cities_monthly:
-  cron: '0 1 1 * *'
-  class: ImportAllCitiesJob
-  description: 'Full import for all cities monthly'
-  queue: default
-  enabled: false  # Set to true to enable in production
-
-# Refresh sitemap monthly (last day of month at 11 PM)
 refresh_sitemap_monthly:
   cron: '0 23 1 * *'
   class: RefreshSitemapWorker

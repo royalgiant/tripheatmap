@@ -1,5 +1,5 @@
 :concurrency: 5
 :queues:
   - default
-# :schedule:
-#   schedule_file: config/schedule.yml
+:schedule:
+  schedule_file: config/schedule.yml

@@ -7,6 +7,7 @@ class Neighborhood < ApplicationRecord
   # Normalize city names to lowercase before validation
   before_validation :normalize_city_name
   before_validation :generate_slug, if: :slug_should_be_generated?
+  before_save :calculate_area_sq_km, if: :should_calculate_area?
 
   scope :with_geom, -> { where.not(geom: nil) }
 
@@ -45,5 +46,17 @@ class Neighborhood < ApplicationRecord
     end
 
     self.slug = slug_candidate
+  end
+
+  def should_calculate_area?
+    geom.present? && (geom_changed? || area_sq_km.blank?)
+  end
+
+  def calculate_area_sq_km
+    # Calculate area in square kilometers from PostGIS geometry
+    result = self.class.connection.select_value(
+      "SELECT ST_Area(ST_GeomFromText('#{geom.as_text}', 4326)::geography) / 1000000.0"
+    )
+    self.area_sq_km = result.to_f if result
   end
 end
