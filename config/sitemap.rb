@@ -3,10 +3,6 @@ SitemapGenerator::Sitemap.default_host = "https://tripheatmap.com"
 # Generate a plain XML file instead of the default gzipped version
 SitemapGenerator::Sitemap.compress = false
 
-def normalized_city_slug(city_key)
-  city_key.to_s.downcase.gsub('.', '').gsub(' ', '-')
-end
-
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: "daily", priority: 1.0
 
@@ -21,7 +17,7 @@ SitemapGenerator::Sitemap.create do
       {
         key: city,
         name: display_name,
-        slug: normalized_city_slug(city),
+        slug: city.to_s.downcase.gsub('.', '').gsub(' ', '-'),
         neighborhood_count: count
       }
     end
