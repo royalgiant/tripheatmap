@@ -98,3 +98,16 @@ bundle exec rake "city:import[sao paulo,true]" &&
 bundle exec rake "city:import[rio de janeiro,true]" &&
 bundle exec rake "city:import[salvador,true]" &&
 bundle exec rake "city:import[brasilia,true]"
+kamal app exec -i "bundle exec rake 'city:import[banff,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[lake como,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[amalfi coast,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[florence,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[san miguel de allende,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[san jose del cabo,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[branson,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[bahamas,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[portland me,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[the hamptons,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[san jose costa rica,true]'" &&
+kamal app exec -i "bundle exec rake 'city:import[panama city,true]'" &&&
+kamal app exec -i "bundle exec rake 'city:import[lake george,true]'"

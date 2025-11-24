@@ -22,7 +22,14 @@ class GadmGlobalNeighborhoodImporter
     "Thailand" => "TH",
     "Vietnam" => "VN",
     "Mexico" => "MX",
-    "Brazil" => "BR"
+    "Brazil" => "BR",
+    "Panama" => "PA",
+    "Costa Rica" => "CR",
+    "Bahamas" => "BS",
+    "Argentina" => "AR",
+    "Czech Republic" => "CZ",
+    "Turkey" => "TR",
+    "Ireland" => "IE"
   }.freeze
 
   attr_reader :city_key, :config, :errors

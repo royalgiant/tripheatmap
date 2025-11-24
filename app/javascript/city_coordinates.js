@@ -91,7 +91,10 @@ const cityCoordinates = {
   'anchorage': [-149.90, 61.22],
   'boulder': [-105.27, 40.01],
   'napa': [-122.29, 38.30],
-  'calistoga': [-122.58, 38.58],
+  'branson': [-93.22, 36.64],
+  'portland me': [-70.26, 43.66],
+  'the hamptons': [-72.20, 40.93],
+  'lake george': [-73.71, 43.43],
 
   // Latin America / existing intl
   'buenos aires': [-58.38, -34.60],
@@ -128,6 +131,7 @@ const cityCoordinates = {
   'calgary': [-114.0719, 51.0447],
   'ottawa': [-75.6972, 45.4215],
   'edmonton': [-113.4909, 53.5461],
+  'banff': [-115.57, 51.18],
 
   // Asia / Middle East
   'singapore': [103.8198, 1.3521],
@@ -212,6 +216,9 @@ const cityCoordinates = {
   'milan': [9.1900, 45.4642],
   'naples': [14.2681, 40.8518],
   'venice': [12.3155, 45.4408],
+  'florence': [11.26, 43.77],
+  'lake como': [9.26, 46.00],
+  'amalfi coast': [14.60, 40.63],
 
   // Portugal
   'lisbon': [-9.1393, 38.7223],
@@ -220,6 +227,15 @@ const cityCoordinates = {
   // Greece
   'athens': [23.7275, 37.9838],
   'thessaloniki': [22.9444, 40.6401],
+
+  // Czech Republic
+  'prague': [14.4378, 50.0755],
+
+  // Ireland
+  'dublin': [-6.2603, 53.3498],
+
+  // Turkey
+  'istanbul': [28.9784, 41.0082],
 
   // Thailand
   'bangkok': [100.5018, 13.7563],
@@ -236,12 +252,21 @@ const cityCoordinates = {
   'guadalajara': [-103.3496, 20.6597],
   'monterrey': [-100.3161, 25.6866],
   'cancun': [-86.8515, 21.1619],
+  'san miguel de allende': [-100.74, 20.92],
+  'san jose del cabo': [-109.70, 23.05],
 
   // Brazil
   'sao paulo': [-46.6333, -23.5505],
   'rio de janeiro': [-43.1729, -22.9068],
   'salvador': [-38.5014, -12.9730],
-  'brasilia': [-47.8825, -15.7939]
+  'brasilia': [-47.8825, -15.7939],
+
+  // Central America
+  'san jose costa rica': [-84.09, 9.93],
+  'panama city': [-79.52, 8.98],
+
+  // Caribbean
+  'bahamas': [-77.40, 25.03]
 };
 
 export default cityCoordinates;

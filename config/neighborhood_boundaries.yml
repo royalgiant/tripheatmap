@@ -1547,6 +1547,81 @@ thessaloniki:
   notes: "Thessaloniki municipalities."
 
 # ============================================================================
+# CZECH REPUBLIC - Using GADM ADM3
+# ============================================================================
+
+prague:
+  name: "Prague"
+  city: "Prague"
+  state: "Prague"
+  county: "Prague"
+  country: "Czech Republic"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Czechia_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 49.95
+      max_lat: 50.20
+      min_lon: 14.25
+      max_lon: 14.70
+  population_source: "manual"
+  notes: "Prague districts."
+
+# ============================================================================
+# IRELAND - Using GADM ADM2
+# ============================================================================
+
+dublin:
+  name: "Dublin"
+  city: "Dublin"
+  state: "Dublin"
+  county: "Dublin"
+  country: "Ireland"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Ireland_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 53.25
+      max_lat: 53.45
+      min_lon: -6.40
+      max_lon: -6.10
+  population_source: "manual"
+  notes: "Dublin districts."
+
+# ============================================================================
+# TURKEY - Using GADM ADM2
+# ============================================================================
+
+istanbul:
+  name: "Istanbul"
+  city: "Istanbul"
+  state: "Istanbul"
+  county: "Istanbul"
+  country: "Turkey"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 40.85
+      max_lat: 41.25
+      min_lon: 28.80
+      max_lon: 29.20
+  population_source: "manual"
+  notes: "Istanbul districts."
+
+# ============================================================================
 # THAILAND - Using GADM ADM2 (Districts)
 # ============================================================================
 
@@ -1768,6 +1843,123 @@ cancun:
   population_source: "manual"
   notes: "Cancún municipality."
 
+'san miguel de allende':
+  name: "San Miguel de Allende"
+  city: "San Miguel de Allende"
+  state: "Guanajuato"
+  county: "San Miguel de Allende"
+  country: "Mexico"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 20.80
+      max_lat: 21.05
+      min_lon: -100.9
+      max_lon: -100.6
+  population_source: "manual"
+  notes: "San Miguel de Allende municipio."
+
+'san jose del cabo':
+  name: "San José del Cabo"
+  city: "San José del Cabo"
+  state: "Baja California Sur"
+  county: "Los Cabos"
+  country: "Mexico"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 22.90
+      max_lat: 23.20
+      min_lon: -109.85
+      max_lon: -109.55
+  population_source: "manual"
+  notes: "Filters Los Cabos municipio around San José del Cabo."
+
+# ============================================================================
+# PANAMA - Using GADM ADM3 (Districts)
+# ============================================================================
+
+'panama city':
+  name: "Panama City"
+  city: "Panama City"
+  state: "Panama Province"
+  county: "Panama"
+  country: "Panama"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Panama_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 8.85
+      max_lat: 9.20
+      min_lon: -79.7
+      max_lon: -79.2
+  population_source: "manual"
+  notes: "Filters Panama City corregimientos within Panama District."
+
+# ============================================================================
+# COSTA RICA - Using GADM ADM3 (Cantons)
+# ============================================================================
+
+'san jose costa rica':
+  name: "San José"
+  city: "San José"
+  state: "San José"
+  county: "San José"
+  country: "Costa Rica"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Costa_Rica_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 9.80
+      max_lat: 10.10
+      min_lon: -84.2
+      max_lon: -83.9
+  population_source: "manual"
+  notes: "San José canton neighborhoods."
+
+# ============================================================================
+# BAHAMAS - Using GADM ADM2 (Districts)
+# ============================================================================
+
+bahamas:
+  name: "Bahamas"
+  city: "Bahamas"
+  state: "Bahamas"
+  county: "Bahamas"
+  country: "Bahamas"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Bahamas_ADM2_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 20.0
+      max_lat: 27.5
+      min_lon: -80.5
+      max_lon: -72.0
+  population_source: "manual"
+  notes: "Entire Bahamas archipelago using ADM2 districts."
+
 # ============================================================================
 # BRAZIL - Using GADM ADM2 (Municípios)
 # ============================================================================
@@ -1980,6 +2172,27 @@ edmonton:
       max_lon: -113.2
   population_source: "manual"
   notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Edmonton."
+
+banff:
+  name: "Banff"
+  city: "Banff"
+  state: "AB"
+  county: "Banff"
+  country: "Canada"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 51.10
+      max_lat: 51.25
+      min_lon: -115.65
+      max_lon: -115.35
+  population_source: "manual"
+  notes: "Banff townsite and surrounding improvement district."
 
 # ============================================================================
 # AUSTRALIA - Using Open Data Portals and GitHub
@@ -2236,6 +2449,69 @@ dubai:
   population_source: "manual"
   notes: "Costermano comuni filtered via bounding box."
 
+'lake como':
+  name: "Lake Como"
+  city: "Lake Como"
+  state: "Lombardy"
+  county: "Como"
+  country: "Italy"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 45.70
+      max_lat: 46.20
+      min_lon: 8.90
+      max_lon: 9.60
+  population_source: "manual"
+  notes: "Lake Como comuni (Como and Lecco provinces)."
+
+'amalfi coast':
+  name: "Amalfi Coast"
+  city: "Amalfi Coast"
+  state: "Campania"
+  county: "Salerno"
+  country: "Italy"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 40.55
+      max_lat: 40.75
+      min_lon: 14.35
+      max_lon: 15.00
+  population_source: "manual"
+  notes: "Filters Costiera Amalfitana comuni."
+
+florence:
+  name: "Florence"
+  city: "Florence"
+  state: "Tuscany"
+  county: "Florence"
+  country: "Italy"
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 43.65
+      max_lat: 43.85
+      min_lon: 11.00
+      max_lon: 11.40
+  population_source: "manual"
+  notes: "Florence comuni boundaries."
+
 verona:
   name: "Verona"
   city: "Verona"
@@ -2298,6 +2574,9 @@ states:
   '22':
     abbreviation: 'LA'
     name: 'Louisiana'
+  '23':
+    abbreviation: 'ME'
+    name: 'Maine'
   '24':
     abbreviation: 'MD'
     name: 'Maryland'
@@ -2313,6 +2592,9 @@ states:
   '29':
     abbreviation: 'MO'
     name: 'Missouri'
+  '30':
+    abbreviation: 'MT'
+    name: 'Montana'
   '31':
     abbreviation: 'NE'
     name: 'Nebraska'
@@ -2364,6 +2646,12 @@ states:
   '55':
     abbreviation: 'WI'
     name: 'Wisconsin'
+  '56':
+    abbreviation: 'WY'
+    name: 'Wyoming'
+  '72':
+    abbreviation: 'PR'
+    name: 'Puerto Rico'
 
 # ============================================================================
 # TOP 75 US CITIES - Using EPA/Zillow Neighborhoods Database
@@ -3073,6 +3361,44 @@ aspen:
   field_mappings:
     name: "municipality"
     geoid: "objectid"
+  population_source: "census"
+
+'portland me':
+  name: "Portland (Maine)"
+  city: "Portland"
+  state: "ME"
+  state_fips: '23'
+  county: "Cumberland"
+  county_fips: '005'
+  population_source: "census"
+  notes: "Distinguishes Portland, Maine from Portland, Oregon."
+
+'the hamptons':
+  name: "The Hamptons"
+  city: "The Hamptons"
+  state: "NY"
+  state_fips: '36'
+  county: "Suffolk"
+  county_fips: '103'
+  population_source: "census"
+  notes: "Uses Suffolk County East End tracts to approximate the Hamptons."
+
+'lake george':
+  name: "Lake George"
+  city: "Lake George"
+  state: "NY"
+  state_fips: '36'
+  county: "Warren"
+  county_fips: '113'
+  population_source: "census"
+
+branson:
+  name: "Branson"
+  city: "Branson"
+  state: "MO"
+  state_fips: '29'
+  county: "Taney"
+  county_fips: '213'
   population_source: "census"
 
 # Template for adding new states (add to 'states' section above):
