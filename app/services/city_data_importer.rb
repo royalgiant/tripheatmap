@@ -51,11 +51,12 @@ class CityDataImporter
   end
   DISPLAY_NAMES = display_names
 
-  def initialize(city_key, skip_boundaries: false, skip_places: false, force: false)
+  def initialize(city_key, skip_boundaries: false, skip_places: false, skip_osm_places: false, force: false)
     @city_key = city_key.to_s.downcase
     @city_name = CITY_NAMES[@city_key]
     @skip_boundaries = skip_boundaries
     @skip_places = skip_places
+    @skip_osm_places = skip_osm_places
     @force = force
     @errors = []
     @results = {
@@ -107,7 +108,11 @@ class CityDataImporter
 
     # Step 3: Generate AI content (descriptions and city content)
     unless @skip_places  # Only generate if we have places data
-      generate_ai_content
+      if Rails.env.production?
+        generate_ai_content
+      else
+        Rails.logger.info "Skipping AI content generation (only runs in production)"
+      end
     end
 
     @results[:duration] = (Time.current - start_time).round(2)
@@ -157,13 +162,22 @@ class CityDataImporter
 
       Rails.logger.info "Found #{neighborhood_count} neighborhoods to process"
 
-      importer = OverpassImporter.new
-      success_count = importer.import_for_city(city_name)
+      unless @skip_osm_places
+        Rails.logger.info "Step 1: Importing places (amenities + accommodations) from OpenStreetMap..."
+        overpass_importer = OverpassImporter.new
+        success_count = overpass_importer.import_for_city(city_name)
 
-      @results[:places_imported] = success_count
-      @errors.concat(importer.instance_variable_get(:@errors))
+        @results[:places_imported] = success_count
+        @errors.concat(overpass_importer.instance_variable_get(:@errors))
 
-      Rails.logger.info "✅ Imported places data for #{success_count} neighborhoods"
+        Rails.logger.info "✅ Imported OSM places data for #{success_count} neighborhoods"
+      else
+        Rails.logger.info "Skipping OSM places import (skip_osm_places=true)"
+        @results[:places_imported] = 0
+      end
+
+      @results[:hotels_imported] = 0 
+
     rescue => e
       error_msg = "Places import failed: #{e.message}"
       Rails.logger.error error_msg
@@ -199,7 +213,10 @@ class CityDataImporter
 
       # Loop through each neighborhood and make 1 API call per neighborhood
       neighborhoods_with_stats.each_with_index do |neighborhood, index|
-        next if neighborhood.description.present?  # Skip if already has content
+        if neighborhood.description.present? || neighborhood.about.present? || neighborhood.time_to_visit.present? || neighborhood.getting_around.present?
+          Rails.logger.debug "  Skipping #{neighborhood.name} - already has AI content"
+          next
+        end
 
         stats = neighborhood.neighborhood_places_stat
         next unless stats
@@ -249,12 +266,17 @@ class CityDataImporter
   end
 
   # Class method to import all supported cities
-  def self.import_all_cities(skip_boundaries: false, skip_places: false, force: false)
+  def self.import_all_cities(skip_boundaries: false, skip_places: false, skip_osm_places: false, force: false)
     results = {}
 
     CITY_NAMES.each do |city_key, city_name|
       Rails.logger.info "\n\n"
-      importer = new(city_key, skip_boundaries: skip_boundaries, skip_places: skip_places, force: force)
+      importer = new(city_key,
+        skip_boundaries: skip_boundaries,
+        skip_places: skip_places,
+        skip_osm_places: skip_osm_places,
+        force: force
+      )
       results[city_key] = importer.import_all
     end
 

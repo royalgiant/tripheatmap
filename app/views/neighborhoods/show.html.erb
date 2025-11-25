@@ -28,6 +28,20 @@
           <strong><%= @stats.bar_count %></strong> Bars
         </button>
         <button
+          id="filter-hotel"
+          data-place-type="hotel"
+          class="place-type-filter bg-orange-100 hover:bg-orange-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-orange-100"
+        >
+          <strong><%= @stats.hotel_count %></strong> Hotels
+        </button>
+        <button
+          id="filter-hostel"
+          data-place-type="hostel"
+          class="place-type-filter bg-yellow-100 hover:bg-yellow-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-yellow-100"
+        >
+          <strong><%= @stats.hostel_count %></strong> Hostels
+        </button>
+        <button
           id="filter-airbnb"
           data-place-type="airbnb"
           class="place-type-filter bg-red-100 hover:bg-red-200 px-3 py-1 rounded cursor-pointer transition-all border-2 border-red-100"
@@ -87,6 +101,30 @@
             </h3>
             <ul>
               <%= render partial: 'place_item', collection: @bars, as: :place %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Hotels -->
+        <% if @hotels.any? %>
+          <div class="mb-6 places-section" data-place-type="hotel">
+            <h3 class="text-xl font-semibold mb-3 text-orange-600">
+              Hotels (<%= @hotels.count %>)
+            </h3>
+            <ul>
+              <%= render partial: 'place_item', collection: @hotels, as: :place %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Hostels -->
+        <% if @hostels.any? %>
+          <div class="mb-6 places-section" data-place-type="hostel">
+            <h3 class="text-xl font-semibold mb-3 text-yellow-600">
+              Hostels (<%= @hostels.count %>)
+            </h3>
+            <ul>
+              <%= render partial: 'place_item', collection: @hostels, as: :place %>
             </ul>
           </div>
         <% end %>

@@ -11,7 +11,9 @@ class OverpassImporter
   AMENITIES = {
     restaurant: 'restaurant',
     cafe: 'cafe',
-    bar: 'bar'
+    bar: 'bar',
+    hotel: 'hotel',
+    hostel: 'hostel'
   }.freeze
 
   def initialize
@@ -55,13 +57,14 @@ class OverpassImporter
     # Save individual places
     save_places(neighborhood, elements)
 
-    # Calculate total and vibrancy index
-    total = counts.values.sum
     vibrancy_index = calculate_vibrancy_index(counts, neighborhood)
 
     # Calculate vibrancy densities (amenities per km²)
     area_sq_km = get_area_sq_km(neighborhood)
     densities = calculate_densities(counts, area_sq_km)
+    
+    # Calculate total accommodations
+    total_accommodations = counts[:hotel] + counts[:hostel]
 
     # Create or update stats
     stat = neighborhood.neighborhood_places_stat || neighborhood.build_neighborhood_places_stat
@@ -69,7 +72,10 @@ class OverpassImporter
       restaurant_count: counts[:restaurant],
       cafe_count: counts[:cafe],
       bar_count: counts[:bar],
-      total_amenities: total,
+      hotel_count: counts[:hotel],
+      hostel_count: counts[:hostel],
+      total_accommodations: total_accommodations,
+      total_amenities: counts[:restaurant] + counts[:cafe] + counts[:bar],
       vibrancy_index: vibrancy_index,
       restaurants_vibrancy: densities[:restaurants],
       cafes_vibrancy: densities[:cafes],
@@ -130,17 +136,13 @@ class OverpassImporter
   def build_overpass_query(bounds)
     bbox = "#{bounds[:min_lat]},#{bounds[:min_lon]},#{bounds[:max_lat]},#{bounds[:max_lon]}"
 
-    query_parts = AMENITIES.values.flat_map do |amenity|
-      [
-        "node[\"amenity\"=\"#{amenity}\"](#{bbox});",
-        "way[\"amenity\"=\"#{amenity}\"](#{bbox});"
-      ]
-    end
-
     <<~QUERY
       [out:json][timeout:25];
       (
-        #{query_parts.join("\n  ")}
+        node["amenity"~"restaurant|cafe|bar|pub"](#{bbox});
+        way["amenity"~"restaurant|cafe|bar|pub"](#{bbox});
+        node["tourism"~"hotel|hostel"](#{bbox});
+        way["tourism"~"hotel|hostel"](#{bbox});
       );
       out center tags;
     QUERY
@@ -149,22 +151,34 @@ class OverpassImporter
   # Parse amenities from Overpass response
   # Returns both counts and full elements with coordinates
   def parse_amenities(data)
-    counts = { restaurant: 0, cafe: 0, bar: 0 }
+    counts = { restaurant: 0, cafe: 0, bar: 0, hotel: 0, hostel: 0 }
     elements = []
 
     return { counts: counts, elements: elements } unless data['elements']
 
     data['elements'].each do |element|
-      amenity = element.dig('tags', 'amenity')
-      next unless amenity
+      tags = element['tags'] || {}
+      amenity = tags['amenity']
+      tourism = tags['tourism']
+      
+      place_type = nil
 
-      # Normalize place type (bar/pub -> bar)
-      place_type = case amenity
-                   when 'restaurant' then 'restaurant'
-                   when 'cafe' then 'cafe'
-                   when 'bar', 'pub' then 'bar'
-                   else next
-                   end
+      if amenity
+        place_type = case amenity
+                     when 'restaurant' then 'restaurant'
+                     when 'cafe' then 'cafe'
+                     when 'bar', 'pub' then 'bar'
+                     end
+      end
+
+      if tourism && place_type.nil?
+        place_type = case tourism
+                     when 'hotel' then 'hotel'
+                     when 'hostel' then 'hostel'
+                     end
+      end
+
+      next unless place_type
 
       # Update counts
       counts[place_type.to_sym] += 1
@@ -209,6 +223,7 @@ class OverpassImporter
         lon: lon,
         address: address,
         tags: tags,
+        booking_url: tags['website'],
         created_at: current_time,
         updated_at: current_time
       }
@@ -326,20 +341,24 @@ class OverpassImporter
   end
 
   # Calculate amenity densities per km²
-  # Returns hash with :restaurants, :cafes, :bars vibrancy (per km²)
+  # Returns hash with :restaurants, :cafes, :bars, :hotels, :hostels vibrancy (per km²)
   def calculate_densities(counts, area_sq_km)
     if area_sq_km.nil? || area_sq_km <= 0
       return {
         restaurants: 0.0,
         cafes: 0.0,
-        bars: 0.0
+        bars: 0.0,
+        hotels: 0.0,
+        hostels: 0.0
       }
     end
 
     {
       restaurants: (counts[:restaurant].to_f / area_sq_km).round(3),
       cafes: (counts[:cafe].to_f / area_sq_km).round(3),
-      bars: (counts[:bar].to_f / area_sq_km).round(3)
+      bars: (counts[:bar].to_f / area_sq_km).round(3),
+      hotels: (counts[:hotel].to_f / area_sq_km).round(3),
+      hostels: (counts[:hostel].to_f / area_sq_km).round(3)
     }
   end
 end

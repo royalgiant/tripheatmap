@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_22_192953) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_27_180053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -39,6 +39,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_22_192953) do
     t.decimal "bars_vibrancy"
     t.decimal "restaurants_vibrancy"
     t.decimal "cafes_vibrancy"
+    t.integer "hotel_count", default: 0
+    t.integer "hostel_count", default: 0
+    t.integer "total_accommodations", default: 0
+    t.decimal "avg_hotel_rating", precision: 2, scale: 1
+    t.decimal "avg_hostel_rating", precision: 2, scale: 1
     t.index ["neighborhood_id"], name: "index_neighborhood_places_stats_on_neighborhood_id"
     t.index ["vibrancy_index"], name: "index_neighborhood_places_stats_on_vibrancy_index"
   end
@@ -86,10 +91,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_22_192953) do
     t.datetime "updated_at", null: false
     t.string "booking_url"
     t.bigint "user_id"
+    t.decimal "rating", precision: 2, scale: 1
+    t.integer "review_count"
+    t.string "google_place_id"
+    t.string "photo_reference"
+    t.string "price_range"
+    t.index ["google_place_id"], name: "index_places_on_google_place_id", unique: true
     t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
     t.index ["neighborhood_id", "place_type"], name: "index_places_on_neighborhood_id_and_place_type"
     t.index ["neighborhood_id"], name: "index_places_on_neighborhood_id"
     t.index ["place_type"], name: "index_places_on_place_type"
+    t.index ["price_range"], name: "index_places_on_price_range"
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 

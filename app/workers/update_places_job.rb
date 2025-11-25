@@ -11,17 +11,17 @@ class UpdatePlacesJob
 
   def perform
     Rails.logger.info "UpdatePlacesJob started for all cities"
+    if Rails.env.production?
+      results = CityDataImporter.import_all_cities(skip_boundaries: true)
+      total_errors = results.values.sum { |r| r[:errors].size }
 
-    results = CityDataImporter.import_all_cities(skip_boundaries: true)
+      if total_errors > 0
+        Rails.logger.error "UpdatePlacesJob completed with #{total_errors} total errors"
+      else
+        Rails.logger.info "UpdatePlacesJob completed successfully"
+      end
 
-    total_errors = results.values.sum { |r| r[:errors].size }
-
-    if total_errors > 0
-      Rails.logger.error "UpdatePlacesJob completed with #{total_errors} total errors"
-    else
-      Rails.logger.info "UpdatePlacesJob completed successfully"
+      results
     end
-
-    results
   end
 end

@@ -10,56 +10,13 @@ class Api::V1::NeighborhoodsController < ApplicationController
   #   include_geometry: Include full polygon geometry (default: false, only centroids)
   #
   def index
-    neighborhoods = Neighborhood.with_geom.includes(:neighborhood_places_stat)
-    # Normalize city parameter to lowercase for consistent querying
-    neighborhoods = neighborhoods.for_city(params[:city]) if params[:city].present?
-    neighborhoods = neighborhoods.where(state: params[:state]) if params[:state].present?
+    geojson = NeighborhoodGeoJsonService.call(
+      city: params[:city],
+      state: params[:state],
+      include_geometry: params[:include_geometry] == 'true'
+    )
 
-    include_geometry = params[:include_geometry] == 'true'
-
-    features = neighborhoods.map do |neighborhood|
-      places_stat = neighborhood.neighborhood_places_stat
-      
-      # Calculate rental counts dynamically
-      airbnb_count = neighborhood.places.where(place_type: 'airbnb').count
-      vrbo_count = neighborhood.places.where(place_type: 'vrbo').count
-      
-      # Calculate total including rentals
-      base_amenities = places_stat&.total_amenities || 0
-      total_amenities = base_amenities + airbnb_count + vrbo_count
-
-      {
-        type: "Feature",
-        geometry: neighborhood_geometry(neighborhood, include_geometry),
-        properties: {
-          id: neighborhood.id,
-          geoid: neighborhood.geoid,
-          name: neighborhood.name,
-          city: neighborhood.city,
-          county: neighborhood.county,
-          state: neighborhood.state,
-          population: neighborhood.population,
-          slug: neighborhood.slug,
-          # Vibrancy statistics
-          restaurant_count: places_stat&.restaurant_count || 0,
-          cafe_count: places_stat&.cafe_count || 0,
-          bar_count: places_stat&.bar_count || 0,
-          airbnb_count: airbnb_count,
-          vrbo_count: vrbo_count,
-          total_amenities: total_amenities,
-          vibrancy_index: places_stat&.vibrancy_index&.to_f || 0.0
-        }
-      }
-    end
-
-    render json: {
-      type: "FeatureCollection",
-      features: features,
-      metadata: {
-        count: features.size,
-        include_geometry: include_geometry
-      }
-    }
+    render json: geojson
   end
 
   # GET /api/v1/neighborhoods/:id
@@ -79,16 +36,5 @@ class Api::V1::NeighborhoodsController < ApplicationController
         geometry: RGeo::GeoJSON.encode(neighborhood.geom)
       }
     }
-  end
-
-  private
-
-  def neighborhood_geometry(neighborhood, include_full_geometry)
-    geom = include_full_geometry ? neighborhood.geom : neighborhood.centroid
-    return nil unless geom
-
-    # Convert RGeo geometry to GeoJSON hash
-    # The rgeo-geojson gem provides encoding support
-    RGeo::GeoJSON.encode(geom, json_parser: :json).as_json
   end
 end

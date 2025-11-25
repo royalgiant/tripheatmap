@@ -30,3 +30,12 @@ refresh_sitemap_monthly:
   class: RefreshSitemapWorker
   description: 'Regenerate sitemap.xml with latest pages'
   queue: default
+
+# Update hotels/hostels for all cities monthly (26th at 2 AM)
+# Removes hotels that went out of business and adds new ones
+# This ensures our hotel data stays fresh and accurate
+update_hotels_monthly:
+  cron: '0 2 24 * *'
+  class: UpdateHotelsJob
+  description: 'Update hotels/hostels for all cities, remove closed businesses, add new ones'
+  queue: default

@@ -7,6 +7,8 @@ class NeighborhoodsController < ApplicationController
     @restaurants = @places.restaurants
     @cafes = @places.cafes
     @bars = @places.bars
+    @hotels = @places.where(place_type: 'hotel')
+    @hostels = @places.where(place_type: 'hostel')
     @airbnbs = @places.where(place_type: 'airbnb')
     @vrbos = @places.where(place_type: 'vrbo')
 

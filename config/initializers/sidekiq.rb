@@ -4,7 +4,7 @@ require 'sidekiq-cron'
 
 Sidekiq.default_job_options = { backtrace: true }
 
-redis_config = Rails.env.development? ? { url: "redis://localhost:6379/1" } : { url: ENV['REDIS_URL'] }
+redis_config = Rails.env.development? ? { url: "redis://localhost:6379/2" } : { url: ENV['REDIS_URL'] }
 Sidekiq.configure_server do |config|
   config.redis = redis_config
 end

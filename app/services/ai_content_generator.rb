@@ -11,6 +11,10 @@ class AiContentGenerator
     )
   end
 
+  def self.generate_place_content(place:, neighborhood:)
+    new.generate_place_content(place: place, neighborhood: neighborhood)
+  end
+
   def generate_neighborhood_content(neighborhood:, stats:, city_name:, state: nil, country: nil, total_neighborhoods:)
     location = [city_name, state, country].compact.join(", ")
 
@@ -70,6 +74,41 @@ class AiContentGenerator
     parse_json_response(response)
   rescue => e
     Rails.logger.error "OpenAI API error generating neighborhood content: #{e.message}"
+    nil
+  end
+
+  def generate_place_content(place:, neighborhood:)
+    prompt = <<~PROMPT
+      You are an expert travel assistant tasked with providing concise information about places.
+
+      PLACE:
+      - Name: #{place.name}
+      - Type: #{place.place_type}
+      - Address: #{place.address || 'N/A'}
+      - Tags: #{place.tags.present? ? place.tags.to_json : 'N/A'}
+
+      NEIGHBORHOOD CONTEXT:
+      - Neighborhood Name: #{neighborhood.name}
+      - City: #{neighborhood.city}
+      - State: #{neighborhood.state}
+      - Country: #{neighborhood.country}
+
+      Based on the provided place information and neighborhood context, generate the following:
+
+      1.  **Average Rating**: A numerical rating from 1.0 to 5.0, in increments of 0.5 (e.g., 3.0, 3.5, 4.0, 4.5).
+      2.  **Price Range**: A string representing the price level using dollar signs: $, $$, $$$, or $$$$.
+
+      Return ONLY valid JSON (no markdown, no code blocks):
+      {
+        "rating": 4.0,
+        "price_range": "$$"
+      }
+    PROMPT
+
+    response = call_openai_api(prompt, max_tokens: 100) # Max tokens for a short, structured response
+    parse_json_response(response)
+  rescue => e
+    Rails.logger.error "OpenAI API error generating place content: #{e.message}"
     nil
   end
 

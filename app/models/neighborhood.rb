@@ -8,6 +8,7 @@ class Neighborhood < ApplicationRecord
   before_validation :normalize_city_name
   before_validation :generate_slug, if: :slug_should_be_generated?
   before_save :calculate_area_sq_km, if: :should_calculate_area?
+  before_save :calculate_centroid, if: :should_calculate_centroid?
 
   scope :with_geom, -> { where.not(geom: nil) }
 
@@ -53,10 +54,20 @@ class Neighborhood < ApplicationRecord
   end
 
   def calculate_area_sq_km
-    # Calculate area in square kilometers from PostGIS geometry
     result = self.class.connection.select_value(
       "SELECT ST_Area(ST_GeomFromText('#{geom.as_text}', 4326)::geography) / 1000000.0"
     )
     self.area_sq_km = result.to_f if result
+  end
+
+  def should_calculate_centroid?
+    geom.present? && (geom_changed? || centroid.blank?)
+  end
+
+  def calculate_centroid
+    result = self.class.connection.select_value(
+      "SELECT ST_Centroid(ST_GeomFromText('#{geom.as_text}', 4326)::geography)"
+    )
+    self.centroid = result if result
   end
 end

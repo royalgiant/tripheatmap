@@ -56,17 +56,20 @@ rake city:list
 ### Ruby Service
 
 ```ruby
-# Import all data for a city
+# Import all data for a city (boundaries + OSM places + hotels/hostels)
 CityDataImporter.new('dallas').import_all
 
 # Import only boundaries
 CityDataImporter.new('dallas', skip_places: true).import_all
 
-# Import only places
+# Import only places (OSM amenities + hotels/hostels)
 CityDataImporter.new('dallas', skip_boundaries: true).import_all
 
 # Import all cities
 CityDataImporter.import_all_cities
+
+# Import only places for all cities
+CityDataImporter.import_all_cities(skip_boundaries: true)
 ```
 
 ### Sidekiq Jobs (for scheduled/background execution)
@@ -75,8 +78,11 @@ CityDataImporter.import_all_cities
 # Queue a job to import a specific city
 ImportCityDataJob.perform_async('dallas')
 
-# Update places for all cities
+# Update places for all cities (OSM restaurants/bars/cafes)
 UpdatePlacesJob.perform_async
+
+# Update hotels/hostels for all cities (removes closed businesses, adds new ones via OSM)
+UpdateHotelsJob.perform_async
 
 # Full import for all cities
 ImportAllCitiesJob.perform_async
@@ -112,9 +118,10 @@ ImportAllCitiesJob.perform_async
 
 ### Places/Amenities Data
 
-- Fetched from OpenStreetMap via Overpass API
-- Counts: restaurants, cafes, bars
+**OpenStreetMap (via Overpass API)**
+- Counts: restaurants, cafes, bars, hotels, hostels
 - Free, worldwide data source
+- Used for both vibrancy index and accommodation listings
 
 ## Import Workflow
 
@@ -129,10 +136,12 @@ The import process follows these steps:
 2. **Import Places Data** (`OverpassImporter`)
    - For each neighborhood:
      - Gets bounding box
-     - Queries Overpass API for amenities
+     - Queries Overpass API for amenities AND accommodations
      - Counts restaurants, cafes, bars
+     - Counts hotels, hostels
      - Calculates vibrancy index (0-10 scale)
-     - Saves to `neighborhood_places_stats` table
+     - Saves individual places to `places` table
+     - Saves stats to `neighborhood_places_stats` table
 
 ## Scheduled Jobs (Cron)
 
@@ -140,7 +149,8 @@ Scheduled jobs are configured in `config/schedule.yml` and managed by Sidekiq-Cr
 
 ### Active Schedules
 
-- **Weekly Places Update** (Sunday 2 AM): Updates places data for all cities
+- **Weekly Places Update** (Sunday 2 AM): Updates OSM places data (restaurants/bars/cafes) for all cities
+- **Monthly Hotels Update** (26th at 2 AM): Updates hotels/hostels via OSM
 - Other schedules are disabled by default
 
 ### Enable a Schedule
@@ -207,6 +217,24 @@ This approach rewards neighborhoods with dense, diverse, walkable amenities - re
 
 ## Examples
 
+### Import Only Hotels/Hostels
+
+To update accommodations, you use the general places import (which now includes hotels/hostels):
+
+```ruby
+# Import places (includes hotels/hostels)
+CityDataImporter.new('prague', skip_boundaries: true, force: true).import_all
+```
+
+### Import Only OSM Places
+
+The standard import now fetches everything in one go (Restaurants, Bars, Cafes, Hotels, Hostels).
+
+```ruby
+# Import everything
+CityDataImporter.new('dallas', skip_boundaries: true, force: true).import_all
+```
+
 ### Initial Setup for Dallas
 
 ```bash
@@ -264,8 +292,8 @@ rake city:stats[dallas]
 ### Manual Testing
 
 ```ruby
-# Import one neighborhood for testing
-neighborhood = Neighborhood.where(city: 'Dallas').first
+# Import one neighborhood for testing (OSM places including hotels)
+neighborhood = Neighborhood.where(city: 'dallas').first
 OverpassImporter.new.import_for_neighborhood(neighborhood)
 
 # Check the result
@@ -273,7 +301,15 @@ stat = neighborhood.neighborhood_places_stat
 puts "Restaurants: #{stat.restaurant_count}"
 puts "Cafes: #{stat.cafe_count}"
 puts "Bars: #{stat.bar_count}"
+puts "Hotels: #{stat.hotel_count}"
+puts "Hostels: #{stat.hostel_count}"
 puts "Vibrancy: #{stat.vibrancy_index}"
+
+# View individual hotels
+hotels = Place.hotels.where(neighborhood_id: neighborhood.id)
+hotels.first(5).each do |hotel|
+  puts "#{hotel.name} - #{hotel.place_type}"
+end
 ```
 
 ## Troubleshooting
@@ -317,6 +353,57 @@ Neighborhood.where.not(geom: nil).find_each do |n|
 end
 ```
 
+## Working with Hotel/Hostel Data
+
+### Querying Places
+
+```ruby
+# Get all hotels in a city
+Place.hotels.joins(:neighborhood).where(neighborhoods: {city: 'prague'})
+
+# Get all accommodations (hotels + hostels)
+Place.accommodations.where(neighborhood_id: neighborhood.id)
+
+# Get budget accommodations
+Place.hostels.where(neighborhood_id: neighborhood.id)
+```
+
+### Neighborhood Stats
+
+```ruby
+neighborhood = Neighborhood.find_by(name: 'Montmartre', city: 'paris')
+stat = neighborhood.neighborhood_places_stat
+
+puts "Hotels: #{stat.hotel_count}"
+puts "Hostels: #{stat.hostel_count}"
+puts "Total accommodations: #{stat.total_accommodations}"
+
+# Compare neighborhoods by hotel density
+neighborhoods = Neighborhood.for_city('paris')
+  .joins(:neighborhood_places_stat)
+  .order('neighborhood_places_stats.hotel_count DESC')
+  .limit(10)
+```
+
+### Best Neighborhoods Algorithm
+
+Use hotel data to rank neighborhoods:
+
+```ruby
+def best_neighborhoods_for_tourists(city)
+  Neighborhood.for_city(city)
+    .joins(:neighborhood_places_stat)
+    .where('neighborhood_places_stats.hotel_count > 0')
+    .select('neighborhoods.*,
+             neighborhood_places_stats.hotel_count,
+             neighborhood_places_stats.vibrancy_index')
+    .order(Arel.sql('
+      (neighborhood_places_stats.hotel_count * 0.6) +
+      (neighborhood_places_stats.vibrancy_index * 0.4) DESC
+    '))
+end
+```
+
 ## Adding a New City
 
 1. Add city configuration to `config/neighborhood_boundaries.yml`
@@ -327,8 +414,8 @@ end
 ## Performance Notes
 
 - **Boundaries import**: 30-60 seconds per city
-- **Places import**: 1-3 seconds per neighborhood (varies by Overpass API response time)
-- **Full Dallas import**: ~5-10 minutes (300+ census tracts)
-- **Full Chicago import**: ~2-3 minutes (~80 neighborhoods)
+- **OSM Places import**: 1-3 seconds per neighborhood (varies by Overpass API response time)
+- **Full Dallas import**: ~10-15 minutes (300+ census tracts)
+- **Full Paris import**: ~15-20 minutes
 
 Use background jobs (Sidekiq) for production imports to avoid timeouts.

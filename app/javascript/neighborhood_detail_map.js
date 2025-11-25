@@ -24,6 +24,8 @@ async function initNeighborhoodDetailMap() {
       restaurant: true,
       cafe: true,
       bar: true,
+      hotel: true,
+      hostel: true,
       airbnb: true,
       vrbo: true
     };
@@ -58,6 +60,8 @@ async function initNeighborhoodDetailMap() {
         restaurant: '#3B82F6',  // Blue
         cafe: '#10B981',        // Green
         bar: '#A855F7',         // Purple
+        hotel: '#F59E0B',       // Orange
+        hostel: '#FCD34D',      // Yellow
         airbnb: '#FF5A5F',      // Airbnb Red
         vrbo: '#003D79'         // VRBO Blue
       };
@@ -70,6 +74,8 @@ async function initNeighborhoodDetailMap() {
         restaurant: [],
         cafe: [],
         bar: [],
+        hotel: [],
+        hostel: [],
         airbnb: [],
         vrbo: []
       };
@@ -272,6 +278,14 @@ async function initNeighborhoodDetailMap() {
         <div style="margin-bottom: 4px;">
           <span style="display:inline-block; width:12px; height:12px; background:#A855F7; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
           Bars
+        </div>
+        <div style="margin-bottom: 4px;">
+          <span style="display:inline-block; width:12px; height:12px; background:#F59E0B; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          Hotels
+        </div>
+        <div style="margin-bottom: 4px;">
+          <span style="display:inline-block; width:12px; height:12px; background:#FCD34D; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          Hostels
         </div>
         <div style="margin-bottom: 4px;">
           <span style="display:inline-block; width:12px; height:12px; background:#FF5A5F; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
