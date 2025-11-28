@@ -88,6 +88,16 @@
           Check Booking.com
         </a>
 
+        <% if place.trip_affiliate_url.present? %>
+          <a
+            href="<%= place.trip_affiliate_url %>"
+            target="_blank"
+            rel="noopener nofollow"
+            class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded transition-colors">
+            Check Trip.com
+          </a>
+        <% end %>
+
         <% if place.place_type == 'hostel' %>
           <a
             href="https://www.hostelworld.com/s?q=<%= CGI.escape(place.name + ' ' + place.neighborhood.city) %>"

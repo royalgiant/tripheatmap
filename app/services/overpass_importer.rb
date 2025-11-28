@@ -18,6 +18,15 @@ class OverpassImporter
 
   def initialize
     @errors = []
+    @city_configs = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml')).except('states')
+    
+    # Pre-compute city URL map for O(1) lookup
+    @city_url_map = {}
+    @city_configs.each do |_key, config|
+      next unless config['tripcomurl'].present?
+      @city_url_map[config['city'].to_s.downcase] = config['tripcomurl'] if config['city']
+      @city_url_map[config['name'].to_s.downcase] = config['tripcomurl'] if config['name']
+    end
   end
 
   # Import amenity counts for all neighborhoods in a city
@@ -224,6 +233,7 @@ class OverpassImporter
         address: address,
         tags: tags,
         booking_url: tags['website'],
+        trip_affiliate_url: get_trip_affiliate_url(neighborhood.city),
         created_at: current_time,
         updated_at: current_time
       }
@@ -231,6 +241,11 @@ class OverpassImporter
 
     # Bulk insert for performance (1 query)
     Place.insert_all(places_to_create) if places_to_create.any?
+  end
+
+  def get_trip_affiliate_url(city_name)
+    return nil unless city_name.present?
+    @city_url_map[city_name.downcase]
   end
 
   # Build address string from OSM tags

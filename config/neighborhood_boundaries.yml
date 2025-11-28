@@ -15,6 +15,7 @@ london:
   state: "England"
   county: "Greater London"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=338&display=London&optionId=338&optionType=City&optionName=London&Allianceid=7375838&SID=279148115&trip_sub1=london&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -65,6 +66,7 @@ birmingham:
   state: "England"
   county: "West Midlands"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=1270&display=Birmingham&optionId=1270&optionType=City&optionName=Birmingham&Allianceid=7375838&SID=279148115&trip_sub1=birmingham&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -84,6 +86,7 @@ manchester:
   state: "England"
   county: "Greater Manchester"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=722&display=Manchester&optionId=722&optionType=City&optionName=Manchester&Allianceid=7375838&SID=279148115&trip_sub1=manchester&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -103,6 +106,7 @@ liverpool:
   state: "England"
   county: "Merseyside"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=689&display=Liverpool&optionId=689&optionType=City&optionName=Liverpool&Allianceid=7375838&SID=279148115&trip_sub1=liverpool&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -122,6 +126,7 @@ leeds:
   state: "England"
   county: "West Yorkshire"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=1733&display=Leeds&optionId=1733&optionType=City&optionName=Leeds&Allianceid=7375838&SID=279148115&trip_sub1=leeds&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -141,6 +146,7 @@ sheffield:
   state: "England"
   county: "South Yorkshire"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=3191&display=Sheffield&optionId=3191&optionType=City&optionName=Sheffield&Allianceid=7375838&SID=279148115&trip_sub1=sheffield&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -160,6 +166,7 @@ bristol:
   state: "England"
   county: "Bristol"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=838&display=Bristol&optionId=838&optionType=City&optionName=Bristol&Allianceid=7375838&SID=279148115&trip_sub1=bristol&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -179,6 +186,7 @@ glasgow:
   state: "Scotland"
   county: "Glasgow City"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=780&display=Glasgow&optionId=780&optionType=City&optionName=Glasgow&Allianceid=7375838&SID=279148115&trip_sub1=glasgow&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -198,6 +206,7 @@ edinburgh:
   state: "Scotland"
   county: "City of Edinburgh"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=706&display=Edinburgh&optionId=706&optionType=City&optionName=Edinburgh&Allianceid=7375838&SID=279148115&trip_sub1=edinburgh&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -217,6 +226,7 @@ cardiff:
   state: "Wales"
   county: "Cardiff"
   country: "United Kingdom"
+  tripcomurl: https://www.trip.com/hotels/list?city=1475&display=Cardiff&optionId=1475&optionType=City&optionName=Cardiff&Allianceid=7375838&SID=279148115&trip_sub1=cardiff&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json"
   type: "geojson"
   enabled: true
@@ -240,6 +250,7 @@ berlin:
   state: "Berlin"
   county: "Berlin"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=193&display=Berlin&optionId=193&optionType=City&optionName=Berlin&Allianceid=7375838&SID=279148115&trip_sub1=berlin&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -261,6 +272,7 @@ munich:
   state: "Bavaria"
   county: "Upper Bavaria"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=363&display=Munich&optionId=363&optionType=City&optionName=Munich&Allianceid=7375838&SID=279148115&trip_sub1=munich&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -282,6 +294,7 @@ hamburg:
   state: "Hamburg"
   county: "Hamburg"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=763&display=Hamburg&optionId=763&optionType=City&optionName=Hamburg&Allianceid=7375838&SID=279148115&trip_sub1=hamburg&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -303,6 +316,7 @@ frankfurt:
   state: "Hesse"
   county: "Darmstadt Region"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=250&display=Frankfurt&optionId=250&optionType=City&optionName=Frankfurt&Allianceid=7375838&SID=279148115&trip_sub1=frankfurt&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -324,6 +338,7 @@ cologne:
   state: "North Rhine-Westphalia"
   county: "Cologne"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=709&display=Cologne&optionId=709&optionType=City&optionName=Cologne&Allianceid=7375838&SID=279148115&trip_sub1=cologne&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -345,6 +360,7 @@ stuttgart:
   state: "Baden-Württemberg"
   county: "Stuttgart"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=765&display=Stuttgart&optionId=765&optionType=City&optionName=Stuttgart&Allianceid=7375838&SID=279148115&trip_sub1=stuttgart&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -366,6 +382,7 @@ dusseldorf:
   state: "North Rhine-Westphalia"
   county: "Düsseldorf"
   country: "Germany"
+  tripcomurl: https://www.trip.com/hotels/list?city=762&display=Dusseldorf&optionId=762&optionType=City&optionName=Dusseldorf&Allianceid=7375838&SID=279148115&trip_sub1=dusseldorf&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -391,6 +408,7 @@ amsterdam:
   state: "North Holland"
   county: "Amsterdam"
   country: "Netherlands"
+  tripcomurl: https://www.trip.com/hotels/list?city=176&display=Amsterdam&optionId=176&optionType=City&optionName=Amsterdam&Allianceid=7375838&SID=279148115&trip_sub1=amsterdam&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -412,6 +430,7 @@ rotterdam:
   state: "South Holland"
   county: "Rotterdam"
   country: "Netherlands"
+  tripcomurl: https://www.trip.com/hotels/list?city=718&display=Rotterdam&optionId=718&optionType=City&optionName=Rotterdam&Allianceid=7375838&SID=279148115&trip_sub1=rotterdam&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -454,6 +473,7 @@ utrecht:
   state: "Utrecht"
   county: "Utrecht"
   country: "Netherlands"
+  tripcomurl: https://www.trip.com/hotels/list?city=719&display=Utrecht&optionId=719&optionType=City&optionName=Utrecht&Allianceid=7375838&SID=279148115&trip_sub1=utrecht&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -475,6 +495,7 @@ eindhoven:
   state: "North Brabant"
   county: "Eindhoven"
   country: "Netherlands"
+  tripcomurl: https://www.trip.com/hotels/list?city=1731&display=Eindhoven&optionId=1731&optionType=City&optionName=Eindhoven&Allianceid=7375838&SID=279148115&trip_sub1=eindhoven&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -500,6 +521,7 @@ zurich:
   state: "Zürich"
   county: "Zurich"
   country: "Switzerland"
+  tripcomurl: https://www.trip.com/hotels/list?city=434&display=Zurich&optionId=434&optionType=City&optionName=Zurich&Allianceid=7375838&SID=279148115&trip_sub1=zurich&trip_sub3=D7593154
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -521,6 +543,7 @@ geneva:
   state: "Geneva"
   county: "Geneva"
   country: "Switzerland"
+  tripcomurl: https://www.trip.com/hotels/list?city=666&display=Geneva&optionId=666&optionType=City&optionName=Geneva&Allianceid=7375838&SID=279148115&trip_sub1=geneva&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -542,6 +565,7 @@ basel:
   state: "Basel-Stadt"
   county: "Basel"
   country: "Switzerland"
+  tripcomurl: https://www.trip.com/hotels/list?city=806&display=Basel&optionId=806&optionType=City&optionName=Basel&Allianceid=7375838&SID=279148115&trip_sub1=basel&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -563,6 +587,7 @@ lausanne:
   state: "Vaud"
   county: "Lausanne"
   country: "Switzerland"
+  tripcomurl: https://www.trip.com/hotels/list?city=3154&display=Lausanne&optionId=3154&optionType=City&optionName=Lausanne&Allianceid=7375838&SID=279148115&trip_sub1=lausanne&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -584,6 +609,7 @@ bern:
   state: "Bern"
   county: "Bern"
   country: "Switzerland"
+  tripcomurl: https://www.trip.com/hotels/list?city=834&display=Berne&optionId=834&optionType=City&optionName=Berne&Allianceid=7375838&SID=279148115&trip_sub1=Bern&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -609,6 +635,7 @@ stockholm:
   state: "Stockholm"
   county: "Stockholm"
   country: "Sweden"
+  tripcomurl: https://www.trip.com/hotels/list?city=420&display=Stockholm&optionId=420&optionType=City&optionName=Stockholm&Allianceid=7375838&SID=279148115&trip_sub1=stockholm&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -630,6 +657,7 @@ gothenburg:
   state: "Västra Götaland"
   county: "Gothenburg"
   country: "Sweden"
+  tripcomurl: https://www.trip.com/hotels/list?city=804&display=Gothenburg&optionId=804&optionType=City&optionName=Gothenburg&Allianceid=7375838&SID=279148115&trip_sub1=gothenburg&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -651,6 +679,7 @@ malmo:
   state: "Skåne"
   county: "Malmo"
   country: "Sweden"
+  tripcomurl: https://www.trip.com/hotels/list?city=3747&display=Malmo&optionId=3747&optionType=City&optionName=Malmo&Allianceid=7375838&SID=279148115&trip_sub1=malmo&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -672,6 +701,7 @@ uppsala:
   state: "Uppsala"
   county: "Uppsala"
   country: "Sweden"
+  tripcomurl: https://www.trip.com/hotels/list?city=9167&display=Uppsala&optionId=9167&optionType=City&optionName=Uppsala&Allianceid=7375838&SID=279148115&trip_sub1=uppsala&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -697,6 +727,7 @@ copenhagen:
   state: "Capital Region"
   county: "Copenhagen"
   country: "Denmark"
+  tripcomurl: https://www.trip.com/hotels/list?city=260&display=Copenhagen&optionId=260&optionType=City&optionName=Copenhagen&Allianceid=7375838&SID=279148115&trip_sub1=copenhagen&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -718,6 +749,7 @@ aarhus:
   state: "Central Denmark"
   county: "Aarhus"
   country: "Denmark"
+  tripcomurl: https://www.trip.com/hotels/list?city=3324&display=Aarhus&optionId=3324&optionType=City&optionName=Aarhus&Allianceid=7375838&SID=279148115&trip_sub1=aarhus&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -739,6 +771,7 @@ odense:
   state: "Southern Denmark"
   county: "Odense"
   country: "Denmark"
+  tripcomurl: https://www.trip.com/hotels/list?city=781&display=Odense&optionId=781&optionType=City&optionName=Odense&Allianceid=7375838&SID=279148115&trip_sub1=odense&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -760,6 +793,7 @@ aalborg:
   state: "North Denmark"
   county: "Aalborg"
   country: "Denmark"
+  tripcomurl: https://www.trip.com/hotels/list?city=1441&display=Aalborg&optionId=1441&optionType=City&optionName=Aalborg&Allianceid=7375838&SID=279148115&trip_sub1=aalborg&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -785,6 +819,7 @@ brussels:
   state: "Brussels-Capital"
   county: "Brussels"
   country: "Belgium"
+  tripcomurl: https://www.trip.com/hotels/list?city=196&display=Brussels&optionId=196&optionType=City&optionName=Brussels&Allianceid=7375838&SID=279148115&trip_sub1=brussels&trip_sub3=D7597578
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -806,6 +841,7 @@ antwerp:
   state: "Flemish Region"
   county: "Antwerp"
   country: "Belgium"
+  tripcomurl: https://www.trip.com/hotels/list?city=1767&display=Antwerp&optionId=1767&optionType=City&optionName=Antwerp&Allianceid=7375838&SID=279148115&trip_sub1=antwerp&trip_sub3=D7597858
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -827,6 +863,7 @@ ghent:
   state: "Flemish Region"
   county: "East Flanders"
   country: "Belgium"
+  tripcomurl: https://www.trip.com/hotels/list?city=3423&display=Ghent&optionId=3423&optionType=City&optionName=Ghent&Allianceid=7375838&SID=279148115&trip_sub1=ghent&trip_sub3=D7597858
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -848,6 +885,7 @@ charleroi:
   state: "Wallonia"
   county: "Hainaut"
   country: "Belgium"
+  tripcomurl: https://www.trip.com/hotels/list?city=9474&display=Charleroi&optionId=9474&optionType=City&optionName=Charleroi&Allianceid=7375838&SID=279148115&trip_sub1=charleroi&trip_sub3=D7597858
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -869,6 +907,7 @@ liege:
   state: "Wallonia"
   county: "Liège"
   country: "Belgium"
+  tripcomurl: https://www.trip.com/hotels/list?city=37620&display=Liege&optionId=37620&optionType=City&optionName=Liege&Allianceid=7375838&SID=279148115&trip_sub1=Liege&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -894,6 +933,7 @@ paris:
   state: "Île-de-France"
   county: "Paris"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=192&display=Paris&optionId=192&optionType=City&optionName=Paris&Allianceid=7375838&SID=279148115&trip_sub1=paris&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -915,6 +955,7 @@ lyon:
   state: "Auvergne-Rhône-Alpes"
   county: "Rhône"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=713&display=Lyon&optionId=713&optionType=City&optionName=Lyon&Allianceid=7375838&SID=279148115&trip_sub1=lyon&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -936,6 +977,7 @@ marseille:
   state: "Provence-Alpes-Côte d'Azur"
   county: "Bouches-du-Rhône"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=712&display=Marseille&optionId=712&optionType=City&optionName=Marseille&Allianceid=7375838&SID=279148115&trip_sub1=marseille&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -957,6 +999,7 @@ nice:
   state: "Provence-Alpes-Côte d'Azur"
   county: "Alpes-Maritimes"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=775&display=Nice&optionId=775&optionType=City&optionName=Nice&Allianceid=7375838&SID=279148115&trip_sub1=nice&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -978,6 +1021,7 @@ toulouse:
   state: "Occitanie"
   county: "Haute-Garonne"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=1361&display=Toulouse&optionId=1361&optionType=City&optionName=Toulouse&Allianceid=7375838&SID=279148115&trip_sub1=toulouse&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -999,6 +1043,7 @@ lille:
   state: "Hauts-de-France"
   county: "Nord"
   country: "France"
+  tripcomurl: https://www.trip.com/hotels/list?city=1462&display=Lille&optionId=1462&optionType=City&optionName=Lille&Allianceid=7375838&SID=279148115&trip_sub1=lille&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1024,6 +1069,7 @@ vienna:
   state: "Vienna"
   county: "Vienna"
   country: "Austria"
+  tripcomurl: https://www.trip.com/hotels/list?city=651&display=Vienna&optionId=651&optionType=City&optionName=Vienna&Allianceid=7375838&SID=279148115&trip_sub1=vienna&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1045,6 +1091,7 @@ salzburg:
   state: "Salzburg"
   county: "Salzburg"
   country: "Austria"
+  tripcomurl: https://www.trip.com/hotels/list?city=739&display=Salzburg&optionId=739&optionType=City&optionName=Salzburg&Allianceid=7375838&SID=279148115&trip_sub1=salzburg&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1066,6 +1113,7 @@ graz:
   state: "Styria"
   county: "Graz"
   country: "Austria"
+  tripcomurl: https://www.trip.com/hotels/list?city=805&display=Graz&optionId=805&optionType=City&optionName=Graz&Allianceid=7375838&SID=279148115&trip_sub1=graz&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1087,6 +1135,7 @@ linz:
   state: "Upper Austria"
   county: "Linz"
   country: "Austria"
+  tripcomurl: https://www.trip.com/hotels/list?city=815&display=Linz&optionId=815&optionType=City&optionName=Linz&Allianceid=7375838&SID=279148115&trip_sub1=linz&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1112,6 +1161,7 @@ oslo:
   state: "Oslo"
   county: "Oslo"
   country: "Norway"
+  tripcomurl: https://www.trip.com/hotels/list?city=827&display=Oslo&optionId=827&optionType=City&optionName=Oslo&Allianceid=7375838&SID=279148115&trip_sub1=oslo&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1133,6 +1183,7 @@ bergen:
   state: "Vestland"
   county: "Bergen"
   country: "Norway"
+  tripcomurl: https://www.trip.com/hotels/list?city=821&display=Bergen&optionId=821&optionType=City&optionName=Bergen&Allianceid=7375838&SID=279148115&trip_sub1=bergen&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1154,6 +1205,7 @@ trondheim:
   state: "Trøndelag"
   county: "Trondheim"
   country: "Norway"
+  tripcomurl: https://www.trip.com/hotels/list?city=1734&display=Trondheim&optionId=1734&optionType=City&optionName=Trondheim&Allianceid=7375838&SID=279148115&trip_sub1=trondheim&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1175,6 +1227,7 @@ stavanger:
   state: "Rogaland"
   county: "Stavanger"
   country: "Norway"
+  tripcomurl: https://www.trip.com/hotels/list?city=787&display=Stavanger&optionId=787&optionType=City&optionName=Stavanger&Allianceid=7375838&SID=279148115&trip_sub1=stavanger&trip_sub3=D7597865
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1200,6 +1253,7 @@ tokyo:
   state: "Tokyo"
   county: "Tokyo Metropolis"
   country: "Japan"
+  tripcomurl: https://www.trip.com/hotels/list?city=228&display=Tokyo&optionId=228&optionType=City&optionName=Tokyo&Allianceid=7375838&SID=279148115&trip_sub1=tokyo&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1221,6 +1275,7 @@ osaka:
   state: "Osaka"
   county: "Osaka"
   country: "Japan"
+  tripcomurl: https://www.trip.com/hotels/list?city=219&display=Osaka&optionId=219&optionType=City&optionName=Osaka&Allianceid=7375838&SID=279148115&trip_sub1=osaka&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1242,6 +1297,7 @@ kyoto:
   state: "Kyoto"
   county: "Kyoto"
   country: "Japan"
+  tripcomurl: https://www.trip.com/hotels/list?city=734&display=Kyoto&optionId=734&optionType=City&optionName=Kyoto&Allianceid=7375838&SID=279148115&trip_sub1=kyoto&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1263,6 +1319,7 @@ yokohama:
   state: "Kanagawa"
   county: "Yokohama"
   country: "Japan"
+  tripcomurl: https://www.trip.com/hotels/list?city=271&display=Yokohama&optionId=271&optionType=City&optionName=Yokohama&Allianceid=7375838&SID=279148115&trip_sub1=yokohama&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1288,6 +1345,7 @@ madrid:
   state: "Community of Madrid"
   county: "Madrid"
   country: "Spain"
+  tripcomurl: https://www.trip.com/hotels/list?city=357&display=Madrid&optionId=357&optionType=City&optionName=Madrid&Allianceid=7375838&SID=279148115&trip_sub1=madrid&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1309,6 +1367,7 @@ barcelona:
   state: "Catalonia"
   county: "Barcelona"
   country: "Spain"
+  tripcomurl: https://www.trip.com/hotels/list?city=40795&display=Barcelona&optionId=40795&optionType=City&optionName=Barcelona&Allianceid=7375838&SID=279148115&trip_sub1=barcelona&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1330,6 +1389,7 @@ valencia:
   state: "Valencian Community"
   county: "Valencia"
   country: "Spain"
+  tripcomurl: https://www.trip.com/hotels/list?city=1351&display=Valencia&optionId=1351&optionType=City&optionName=Valencia&Allianceid=7375838&SID=279148115&trip_sub1=valencia&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1351,6 +1411,7 @@ seville:
   state: "Andalusia"
   county: "Seville"
   country: "Spain"
+  tripcomurl: https://www.trip.com/hotels/list?city=1350&display=Seville&optionId=1350&optionType=City&optionName=Seville&Allianceid=7375838&SID=279148115&trip_sub1=seville&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1376,6 +1437,7 @@ rome:
   state: "Lazio"
   county: "Rome"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=343&display=Rome&optionId=343&optionType=City&optionName=Rome&Allianceid=7375838&SID=279148115&trip_sub1=rome&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1397,6 +1459,7 @@ milan:
   state: "Lombardy"
   county: "Milan"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=361&display=Milan&optionId=361&optionType=City&optionName=Milan&Allianceid=7375838&SID=279148115&trip_sub1=milan&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1418,6 +1481,7 @@ naples:
   state: "Campania"
   county: "Naples"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=1262&display=Naples&optionId=1262&optionType=City&optionName=Naples&Allianceid=7375838&SID=279148115&trip_sub1=naples&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1439,6 +1503,7 @@ venice:
   state: "Veneto"
   county: "Venice"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=688&display=Venice&optionId=688&optionType=City&optionName=Venice&Allianceid=7375838&SID=279148115&trip_sub1=venice&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1464,6 +1529,7 @@ lisbon:
   state: "Lisbon"
   county: "Lisbon"
   country: "Portugal"
+  tripcomurl: https://www.trip.com/hotels/list?city=1231&display=Lisbon&optionId=1231&optionType=City&optionName=Lisbon&Allianceid=7375838&SID=279148115&trip_sub1=lisbon&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1485,6 +1551,7 @@ porto:
   state: "Porto"
   county: "Porto"
   country: "Portugal"
+  tripcomurl: https://www.trip.com/hotels/list?city=826&display=Porto&optionId=826&optionType=City&optionName=Porto&Allianceid=7375838&SID=279148115&trip_sub1=porto&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1510,6 +1577,7 @@ athens:
   state: "Attica"
   county: "Athens"
   country: "Greece"
+  tripcomurl: https://www.trip.com/hotels/list?city=710&display=Athens&optionId=710&optionType=City&optionName=Athens&Allianceid=7375838&SID=279148115&trip_sub1=athens&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1531,6 +1599,7 @@ thessaloniki:
   state: "Central Macedonia"
   county: "Thessaloniki"
   country: "Greece"
+  tripcomurl: https://www.trip.com/hotels/list?city=3584&display=Thessaloniki&optionId=3584&optionType=City&optionName=Thessaloniki&Allianceid=7375838&SID=279148115&trip_sub1=thessaloniki&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1556,6 +1625,7 @@ prague:
   state: "Prague"
   county: "Prague"
   country: "Czech Republic"
+  tripcomurl: https://www.trip.com/hotels/list?city=1288&display=Prague&optionId=1288&optionType=City&optionName=Prague&Allianceid=7375838&SID=279148115&trip_sub1=prague&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Czechia_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1581,6 +1651,7 @@ dublin:
   state: "Dublin"
   county: "Dublin"
   country: "Ireland"
+  tripcomurl: https://www.trip.com/hotels/list?city=803&display=Dublin&optionId=803&optionType=City&optionName=Dublin&Allianceid=7375838&SID=279148115&trip_sub1=dublin&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Ireland_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1606,6 +1677,7 @@ istanbul:
   state: "Istanbul"
   county: "Istanbul"
   country: "Turkey"
+  tripcomurl: https://www.trip.com/hotels/list?city=532&display=Istanbul&optionId=532&optionType=City&optionName=Istanbul&Allianceid=7375838&SID=279148115&trip_sub1=istanbul&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1631,6 +1703,7 @@ bangkok:
   state: "Bangkok"
   county: "Bangkok"
   country: "Thailand"
+  tripcomurl: https://www.trip.com/hotels/list?city=359&display=Bangkok&optionId=359&optionType=City&optionName=Bangkok&Allianceid=7375838&SID=279148115&trip_sub1=bangkok&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1652,6 +1725,7 @@ chiang mai:
   state: "Chiang Mai"
   county: "Chiang Mai"
   country: "Thailand"
+  tripcomurl: https://www.trip.com/hotels/list?city=623&display=Chiang%20Mai&optionId=623&optionType=City&optionName=Chiang%20Mai&Allianceid=7375838&SID=279148115&trip_sub1=chiang%20mai&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1673,6 +1747,7 @@ phuket:
   state: "Phuket"
   county: "Phuket"
   country: "Thailand"
+  tripcomurl: https://www.trip.com/hotels/list?city=725&display=Phuket&optionId=725&optionType=City&optionName=Phuket&Allianceid=7375838&SID=279148115&trip_sub1=phuket&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1698,6 +1773,7 @@ phuket:
   state: "Ho Chi Minh"
   county: "Ho Chi Minh"
   country: "Vietnam"
+  tripcomurl: https://www.trip.com/hotels/list?city=301&display=Ho%20Chi%20Minh%20City&optionId=301&optionType=City&optionName=Ho%20Chi%20Minh%20City&Allianceid=7375838&SID=279148115&trip_sub1=ho%20chi%20minh%20city&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1719,6 +1795,7 @@ hanoi:
   state: "Hanoi"
   county: "Hanoi"
   country: "Vietnam"
+  tripcomurl: https://www.trip.com/hotels/list?city=286&display=Hanoi&optionId=286&optionType=City&optionName=Hanoi&Allianceid=7375838&SID=279148115&trip_sub1=hanoi&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1740,6 +1817,7 @@ hanoi:
   state: "Da Nang"
   county: "Da Nang"
   country: "Vietnam"
+  tripcomurl: https://www.trip.com/hotels/list?city=1356&display=Da%20Nang&optionId=1356&optionType=City&optionName=Da%20Nang&Allianceid=7375838&SID=279148115&trip_sub1=da%20nang&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1765,6 +1843,7 @@ hanoi:
   state: "Mexico City"
   county: "Mexico City"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=691&display=Mexico%20City&optionId=691&optionType=City&optionName=Mexico%20City&Allianceid=7375838&SID=279148115&trip_sub1=mexico%20city&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1786,6 +1865,7 @@ guadalajara:
   state: "Jalisco"
   county: "Guadalajara"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=1253&display=Guadalajara&optionId=1253&optionType=City&optionName=Guadalajara&Allianceid=7375838&SID=279148115&trip_sub1=guadalajara&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1807,6 +1887,7 @@ monterrey:
   state: "Nuevo León"
   county: "Monterrey"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=3697&display=Monterrey&optionId=3697&optionType=City&optionName=Monterrey&Allianceid=7375838&SID=279148115&trip_sub1=monterrey&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1828,6 +1909,7 @@ cancun:
   state: "Quintana Roo"
   county: "Benito Juárez"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=812&display=Cancun&optionId=812&optionType=City&optionName=Cancun&Allianceid=7375838&SID=279148115&trip_sub1=cancun&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1849,6 +1931,7 @@ cancun:
   state: "Guanajuato"
   county: "San Miguel de Allende"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=36445&display=San%20Miguel%20de%20Allende&optionId=36445&optionType=City&optionName=San%20Miguel%20de%20Allende&Allianceid=7375838&SID=279148115&trip_sub1=san%20miguel%20de%20allende&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1870,6 +1953,7 @@ cancun:
   state: "Baja California Sur"
   county: "Los Cabos"
   country: "Mexico"
+  tripcomurl: https://www.trip.com/hotels/list?city=36441&display=San%20Jose%20del%20Cabo&optionId=36441&optionType=City&optionName=San%20Jose%20del%20Cabo&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose%20del%20cabo&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1895,6 +1979,7 @@ cancun:
   state: "Panama Province"
   county: "Panama"
   country: "Panama"
+  tripcomurl: https://www.trip.com/hotels/list?city=830&display=Panama%20City&optionId=830&optionType=City&optionName=Panama%20City&Allianceid=7375838&SID=279148115&trip_sub1=panama%20city&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Panama_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1920,6 +2005,7 @@ cancun:
   state: "San José"
   county: "San José"
   country: "Costa Rica"
+  tripcomurl: https://www.trip.com/hotels/list?city=1250&display=San%20Jose&optionId=1250&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose%20costa%20rica&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Costa_Rica_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1945,6 +2031,7 @@ bahamas:
   state: "Bahamas"
   county: "Bahamas"
   country: "Bahamas"
+  tripcomurl: https://www.trip.com/hotels/w/home?Allianceid=7375838&SID=279148115&trip_sub1=bahamas&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Bahamas_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1970,6 +2057,7 @@ bahamas:
   state: "São Paulo"
   county: "São Paulo"
   country: "Brazil"
+  tripcomurl: https://www.trip.com/hotels/list?city=415&display=Sao%20Paulo&optionId=415&optionType=City&optionName=Sao%20Paulo&Allianceid=7375838&SID=279148115&trip_sub1=sao%20paulo&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -1991,6 +2079,7 @@ bahamas:
   state: "Rio de Janeiro"
   county: "Rio de Janeiro"
   country: "Brazil"
+  tripcomurl: https://www.trip.com/hotels/list?city=769&display=Rio%20de%20Janeiro&optionId=769&optionType=City&optionName=Rio%20de%20Janeiro&Allianceid=7375838&SID=279148115&trip_sub1=rio%20de%20janeiro&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2012,6 +2101,7 @@ salvador:
   state: "Bahia"
   county: "Salvador"
   country: "Brazil"
+  tripcomurl: https://www.trip.com/hotels/list?city=3434&display=Salvador&optionId=3434&optionType=City&optionName=Salvador&Allianceid=7375838&SID=279148115&trip_sub1=salvador&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2033,6 +2123,7 @@ brasilia:
   state: "Federal District"
   county: "Brasilia"
   country: "Brazil"
+  tripcomurl: https://www.trip.com/hotels/list?city=1255&display=Brasilia&optionId=1255&optionType=City&optionName=Brasilia&Allianceid=7375838&SID=279148115&trip_sub1=brasilia&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2047,12 +2138,14 @@ brasilia:
       max_lon: -47.7
   population_source: "manual"
   notes: "Brasília administrative regions."
+
 toronto:
   name: "Toronto"
   city: "Toronto"
   state: "ON"
   county: "Toronto"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=461&display=Toronto&optionId=461&optionType=City&optionName=Toronto&Allianceid=7375838&SID=279148115&trip_sub1=toronto&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2074,6 +2167,7 @@ vancouver:
   state: "BC"
   county: "Metro Vancouver"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=476&display=Vancouver&optionId=476&optionType=City&optionName=Vancouver&Allianceid=7375838&SID=279148115&trip_sub1=vancouver&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2095,6 +2189,7 @@ montreal:
   state: "QC"
   county: "Montreal"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=759&display=Montreal&optionId=759&optionType=City&optionName=Montreal&Allianceid=7375838&SID=279148115&trip_sub1=montreal&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2116,6 +2211,7 @@ calgary:
   state: "AB"
   county: "Calgary"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=761&display=Calgary&optionId=761&optionType=City&optionName=Calgary&Allianceid=7375838&SID=279148115&trip_sub1=calgary&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2137,6 +2233,7 @@ ottawa:
   state: "ON"
   county: "Ottawa"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=760&display=Ottawa&optionId=760&optionType=City&optionName=Ottawa&Allianceid=7375838&SID=279148115&trip_sub1=ottawa&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2158,6 +2255,7 @@ edmonton:
   state: "AB"
   county: "Edmonton"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=1245&display=Edmonton&optionId=1245&optionType=City&optionName=Edmonton&Allianceid=7375838&SID=279148115&trip_sub1=edmonton&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2179,6 +2277,7 @@ banff:
   state: "AB"
   county: "Banff"
   country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=7725&display=Banff&optionId=7725&optionType=City&optionName=Banff&Allianceid=7375838&SID=279148115&trip_sub1=banff&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2204,6 +2303,7 @@ sydney:
   state: "NSW"
   county: "Sydney"
   country: "Australia"
+  tripcomurl: https://www.trip.com/hotels/list?city=501&display=Sydney&optionId=501&optionType=City&optionName=Sydney&Allianceid=7375838&SID=279148115&trip_sub1=sydney&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2225,6 +2325,7 @@ melbourne:
   state: "VIC"
   county: "Melbourne"
   country: "Australia"
+  tripcomurl: https://www.trip.com/hotels/list?city=358&display=Melbourne&optionId=358&optionType=City&optionName=Melbourne&Allianceid=7375838&SID=279148115&trip_sub1=melbourne&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2246,6 +2347,7 @@ brisbane:
   state: "QLD"
   county: "Brisbane"
   country: "Australia"
+  tripcomurl: https://www.trip.com/hotels/list?city=680&display=Brisbane&optionId=680&optionType=City&optionName=Brisbane&Allianceid=7375838&SID=279148115&trip_sub1=brisbane&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2267,6 +2369,7 @@ perth:
   state: "WA"
   county: "Perth"
   country: "Australia"
+  tripcomurl: https://www.trip.com/hotels/list?city=681&display=Perth&optionId=681&optionType=City&optionName=Perth&Allianceid=7375838&SID=279148115&trip_sub1=perth&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2288,6 +2391,7 @@ adelaide:
   state: "SA"
   county: "Adelaide"
   country: "Australia"
+  tripcomurl: https://www.trip.com/hotels/list?city=1243&display=Adelaide&optionId=1243&optionType=City&optionName=Adelaide&Allianceid=7375838&SID=279148115&trip_sub1=adelaide&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2313,6 +2417,7 @@ auckland:
   state: "Auckland"
   county: "Auckland"
   country: "New Zealand"
+  tripcomurl: https://www.trip.com/hotels/list?city=678&display=Auckland&optionId=678&optionType=City&optionName=Auckland&Allianceid=7375838&SID=279148115&trip_sub1=auckland&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2334,6 +2439,7 @@ wellington:
   state: "Wellington"
   county: "Wellington"
   country: "New Zealand"
+  tripcomurl: https://www.trip.com/hotels/list?city=843&display=Wellington&optionId=843&optionType=City&optionName=Wellington&Allianceid=7375838&SID=279148115&trip_sub1=wellington&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2355,6 +2461,7 @@ christchurch:
   state: "Canterbury"
   county: "Christchurch"
   country: "New Zealand"
+  tripcomurl: https://www.trip.com/hotels/list?city=7505&display=Christchurch&optionId=7505&optionType=City&optionName=Christchurch&Allianceid=7375838&SID=279148115&trip_sub1=christchurch&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2380,6 +2487,7 @@ singapore:
   state: "Singapore"
   county: "Singapore"
   country: "Singapore"
+  tripcomurl: https://www.trip.com/hotels/list?city=73&display=Singapore&optionId=73&optionType=City&optionName=Singapore&Allianceid=7375838&SID=279148115&trip_sub1=singapore&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Singapore_ADM2_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2399,6 +2507,7 @@ dubai:
   state: "Dubai"
   county: "Dubai"
   country: "United Arab Emirates"
+  tripcomurl: https://www.trip.com/hotels/list?city=220&display=Dubai&optionId=220&optionType=City&optionName=Dubai&Allianceid=7375838&SID=279148115&trip_sub1=dubai&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json"
   type: "geojson"
   enabled: true
@@ -2420,6 +2529,7 @@ dubai:
   state: "CABA"
   county: "Buenos Aires"
   country: "Argentina"
+  tripcomurl: https://www.trip.com/hotels/list?city=807&display=Buenos%20Aires&optionId=807&optionType=City&optionName=Buenos%20Aires&Allianceid=7375838&SID=279148115&trip_sub1=buenos%20aires&trip_sub3=D7599167
   endpoint: "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ministerio-de-educacion/barrios/barrios.geojson"
   type: "geojson"
   enabled: true
@@ -2497,6 +2607,7 @@ florence:
   state: "Tuscany"
   county: "Florence"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=687&display=Florence&optionId=687&optionType=City&optionName=Florence&Allianceid=7375838&SID=279148115&trip_sub1=florence&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2518,6 +2629,7 @@ verona:
   state: "Veneto"
   county: "Verona"
   country: "Italy"
+  tripcomurl: https://www.trip.com/hotels/list?city=1420&display=Verona&optionId=1420&optionType=City&optionName=Verona&Allianceid=7375838&SID=279148115&trip_sub1=verona&trip_sub3=D7599167
   endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson"
   type: "geojson"
   enabled: true
@@ -2663,6 +2775,7 @@ states:
   state: "NY"
   state_fips: '36'
   county_fips: '061'  # New York County (Manhattan) - also covers other boroughs via multi-county
+  tripcomurl: https://www.trip.com/hotels/list?city=633&display=New%20York&optionId=633&optionType=City&optionName=New%20York&Allianceid=7375838&SID=279148115&trip_sub1=new%20york&trip_sub3=D7599167
   zillow: true
 
 'los angeles':
@@ -2671,6 +2784,7 @@ states:
   state: "CA"
   state_fips: '06'
   county_fips: '037'  # Los Angeles County
+  tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=los%20angeles&trip_sub3=D7599167
   zillow: true
 
 houston:
@@ -2679,6 +2793,7 @@ houston:
   state: "TX"
   state_fips: '48'
   county_fips: '201'  # Harris County
+  tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=houston&trip_sub3=D7599167
   zillow: true
 
 phoenix:
@@ -2687,6 +2802,7 @@ phoenix:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  tripcomurl: https://www.trip.com/hotels/list?city=25938&display=Phoenix&optionId=25938&optionType=City&optionName=Phoenix&Allianceid=7375838&SID=279148115&trip_sub1=phoenix&trip_sub3=D7599167
   zillow: true
 
 philadelphia:
@@ -2695,6 +2811,7 @@ philadelphia:
   state: "PA"
   state_fips: '42'
   county_fips: '101'  # Philadelphia County
+  tripcomurl: https://www.trip.com/hotels/list?city=26153&display=Philadelphia&optionId=26153&optionType=City&optionName=Philadelphia&Allianceid=7375838&SID=279148115&trip_sub1=philadelphia&trip_sub3=D7599167
   zillow: true
 
 'san antonio':
@@ -2703,6 +2820,7 @@ philadelphia:
   state: "TX"
   state_fips: '48'
   county_fips: '029'  # Bexar County
+  tripcomurl: https://www.trip.com/hotels/list?city=1193&display=San%20Antonio&optionId=1193&optionType=City&optionName=San%20Antonio&Allianceid=7375838&SID=279148115&trip_sub1=san%20antonio&trip_sub3=D7599167
   zillow: true
 
 'san diego':
@@ -2711,6 +2829,7 @@ philadelphia:
   state: "CA"
   state_fips: '06'
   county_fips: '073'  # San Diego County
+  tripcomurl: https://www.trip.com/hotels/list?city=698&display=San%20Diego&optionId=698&optionType=City&optionName=San%20Diego&Allianceid=7375838&SID=279148115&trip_sub1=san%20diego&trip_sub3=D7599167
   zillow: true
 
 'fort worth':
@@ -2719,6 +2838,7 @@ philadelphia:
   state: "TX"
   state_fips: '48'
   county_fips: '439'  # Tarrant County
+  tripcomurl: https://www.trip.com/hotels/list?city=19936&display=Fort%20Worth&optionId=19936&optionType=City&optionName=Fort%20Worth&Allianceid=7375838&SID=279148115&trip_sub1=fort%20worth&trip_sub3=D7599167
   zillow: true
 
 jacksonville:
@@ -2727,6 +2847,7 @@ jacksonville:
   state: "FL"
   state_fips: '12'
   county_fips: '031'  # Duval County
+  tripcomurl: https://www.trip.com/hotels/list?city=25795&display=Jacksonville&optionId=25795&optionType=City&optionName=Jacksonville&Allianceid=7375838&SID=279148115&trip_sub1=jacksonville&trip_sub3=D7599167
   zillow: true
 
 'san jose':
@@ -2735,6 +2856,7 @@ jacksonville:
   state: "CA"
   state_fips: '06'
   county_fips: '085'  # Santa Clara County
+  tripcomurl: https://www.trip.com/hotels/list?city=1880&display=San%20Jose&optionId=1880&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose&trip_sub3=D7599167
   zillow: true
 
 charlotte:
@@ -2743,6 +2865,7 @@ charlotte:
   state: "NC"
   state_fips: '37'
   county_fips: '119'  # Mecklenburg County
+  tripcomurl: https://www.trip.com/hotels/list?city=26852&display=Charlotte&optionId=26852&optionType=City&optionName=Charlotte&Allianceid=7375838&SID=279148115&trip_sub1=charlotte&trip_sub3=D7599167
   zillow: true
 
 columbus:
@@ -2751,6 +2874,7 @@ columbus:
   state: "OH"
   state_fips: '39'
   county_fips: '049'  # Franklin County
+  tripcomurl: https://www.trip.com/hotels/list?city=26851&display=Columbus&optionId=26851&optionType=City&optionName=Columbus&Allianceid=7375838&SID=279148115&trip_sub1=columbus&trip_sub3=D7599167
   zillow: true
 
 indianapolis:
@@ -2759,6 +2883,7 @@ indianapolis:
   state: "IN"
   state_fips: '18'
   county_fips: '097'  # Marion County
+  tripcomurl: https://www.trip.com/hotels/list?city=1291&display=Indianapolis&optionId=1291&optionType=City&optionName=Indianapolis&Allianceid=7375838&SID=279148115&trip_sub1=indianapolis&trip_sub3=D7599167
   zillow: true
 
 'san francisco':
@@ -2767,6 +2892,7 @@ indianapolis:
   state: "CA"
   state_fips: '06'
   county_fips: '075'  # San Francisco County
+  tripcomurl: https://www.trip.com/hotels/list?city=313&display=San%20Francisco&optionId=313&optionType=City&optionName=San%20Francisco&Allianceid=7375838&SID=279148115&trip_sub1=san%20francisco&trip_sub3=D7599167
   zillow: true
 
 seattle:
@@ -2775,6 +2901,7 @@ seattle:
   state: "WA"
   state_fips: '53'
   county_fips: '033'  # King County
+  tripcomurl: https://www.trip.com/hotels/list?city=511&display=Seattle&optionId=511&optionType=City&optionName=Seattle&Allianceid=7375838&SID=279148115&trip_sub1=seattle&trip_sub3=D7599167
   zillow: true
 
 denver:
@@ -2783,6 +2910,7 @@ denver:
   state: "CO"
   state_fips: '08'
   county_fips: '031'  # Denver County
+  tripcomurl: https://www.trip.com/hotels/list?city=20099&display=Denver&optionId=20099&optionType=City&optionName=Denver&Allianceid=7375838&SID=279148115&trip_sub1=denver&trip_sub3=D7599167
   zillow: true
 
 'oklahoma city':
@@ -2791,6 +2919,7 @@ denver:
   state: "OK"
   state_fips: '40'
   county_fips: '109'  # Oklahoma County
+  tripcomurl: https://www.trip.com/hotels/list?city=1440&display=Oklahoma%20City&optionId=1440&optionType=City&optionName=Oklahoma%20City&Allianceid=7375838&SID=279148115&trip_sub1=oklahoma%20city&trip_sub3=D7599167
   zillow: true
 
 washington:
@@ -2799,6 +2928,7 @@ washington:
   state: "DC"
   state_fips: '11'
   county_fips: '001'  # District of Columbia
+  tripcomurl: https://www.trip.com/hotels/list?city=26363&display=Washington%20D.C.&optionId=26363&optionType=City&optionName=Washington%20D.C.&Allianceid=7375838&SID=279148115&trip_sub1=washingtondc&trip_sub3=D7599167
   zillow: true
 
 nashville:
@@ -2807,6 +2937,7 @@ nashville:
   state: "TN"
   state_fips: '47'
   county_fips: '037'  # Davidson County
+  tripcomurl: https://www.trip.com/hotels/list?city=3228&display=Nashville&optionId=3228&optionType=City&optionName=Nashville&Allianceid=7375838&SID=279148115&trip_sub1=nashville&trip_sub3=D7599167
   zillow: true
 
 dallas:
@@ -2815,6 +2946,7 @@ dallas:
   state: "TX"
   state_fips: '48'
   county_fips: '113'  # Dallas County
+  tripcomurl: https://www.trip.com/hotels/list?city=705&display=Dallas&optionId=705&optionType=City&optionName=Dallas&Allianceid=7375838&SID=279148115&trip_sub1=dallas&trip_sub3=D7599167
   zillow: true
 
 chicago:
@@ -2823,6 +2955,7 @@ chicago:
   state: "IL"
   state_fips: '17'
   county_fips: '031'  # Cook County
+  tripcomurl: https://www.trip.com/hotels/list?city=549&display=Chicago&optionId=549&optionType=City&optionName=Chicago&Allianceid=7375838&SID=279148115&trip_sub1=chicago&trip_sub3=D7599167
   zillow: true
 
 austin:
@@ -2831,6 +2964,7 @@ austin:
   state: "TX"
   state_fips: '48'
   county_fips: '453'  # Travis County
+  tripcomurl: https://www.trip.com/hotels/list?city=25526&display=Austin&optionId=25526&optionType=City&optionName=Austin&Allianceid=7375838&SID=279148115&trip_sub1=austin&trip_sub3=D7599167
   zillow: true
 
 miami:
@@ -2839,6 +2973,7 @@ miami:
   state: "FL"
   state_fips: '12'
   county_fips: '086'  # Miami-Dade County
+  tripcomurl: https://www.trip.com/hotels/list?city=25773&display=Miami&optionId=25773&optionType=City&optionName=Miami&Allianceid=7375838&SID=279148115&trip_sub1=miami&trip_sub3=D7599167
   zillow: true
 
 sacramento:
@@ -2847,6 +2982,7 @@ sacramento:
   state: "CA"
   state_fips: '06'
   county_fips: '067'  # Sacramento County
+  tripcomurl: https://www.trip.com/hotels/list?city=1881&display=Sacramento&optionId=1881&optionType=City&optionName=Sacramento&Allianceid=7375838&SID=279148115&trip_sub1=sacramento&trip_sub3=D7599167
   zillow: true
 
 'las vegas':
@@ -2855,6 +2991,7 @@ sacramento:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  tripcomurl: https://www.trip.com/hotels/list?city=26282&display=Las%20Vegas&optionId=26282&optionType=City&optionName=Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=las%20vegas&trip_sub3=D7599167
   zillow: true
 
 'el paso':
@@ -2863,6 +3000,7 @@ sacramento:
   state: "TX"
   state_fips: '48'
   county_fips: '141'  # El Paso County
+  tripcomurl: https://www.trip.com/hotels/list?city=1178&display=El%20Paso&optionId=1178&optionType=City&optionName=El%20Paso&Allianceid=7375838&SID=279148115&trip_sub1=el%20paso&trip_sub3=D7599167
   zillow: true
 
 boston:
@@ -2871,6 +3009,7 @@ boston:
   state: "MA"
   state_fips: '25'
   county_fips: '025'  # Suffolk County
+  tripcomurl: https://www.trip.com/hotels/list?city=26848&display=Boston&optionId=26848&optionType=City&optionName=Boston&Allianceid=7375838&SID=279148115&trip_sub1=boston&trip_sub3=D7599167
   zillow: true
 
 detroit:
@@ -2879,6 +3018,7 @@ detroit:
   state: "MI"
   state_fips: '26'
   county_fips: '163'  # Wayne County
+  tripcomurl: https://www.trip.com/hotels/list?city=233&display=Detroit&optionId=233&optionType=City&optionName=Detroit&Allianceid=7375838&SID=279148115&trip_sub1=detroit&trip_sub3=D7599167
   zillow: true
 
 louisville:
@@ -2887,6 +3027,7 @@ louisville:
   state: "KY"
   state_fips: '21'
   county_fips: '111'  # Jefferson County
+  tripcomurl: https://www.trip.com/hotels/list?city=25945&display=Louisville&optionId=25945&optionType=City&optionName=Louisville&Allianceid=7375838&SID=279148115&trip_sub1=louisville&trip_sub3=D7599167
   zillow: true
 
 portland:
@@ -2895,6 +3036,7 @@ portland:
   state: "OR"
   state_fips: '41'
   county_fips: '051'  # Multnomah County
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Portland&optionId=XXXX&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portland&trip_sub3=D7597865
   zillow: true
 
 memphis:
@@ -2903,6 +3045,7 @@ memphis:
   state: "TN"
   state_fips: '47'
   county_fips: '157'  # Shelby County
+  tripcomurl: https://www.trip.com/hotels/list?city=1234&display=Memphis&optionId=1234&optionType=City&optionName=Memphis&Allianceid=7375838&SID=279148115&trip_sub1=memphis&trip_sub3=D7599167
   zillow: true
 
 baltimore:
@@ -2911,6 +3054,7 @@ baltimore:
   state: "MD"
   state_fips: '24'
   county_fips: '510'  # Baltimore City
+  tripcomurl: https://www.trip.com/hotels/list?city=1460&display=Baltimore&optionId=1460&optionType=City&optionName=Baltimore&Allianceid=7375838&SID=279148115&trip_sub1=baltimore&trip_sub3=D7599167
   zillow: true
 
 milwaukee:
@@ -2919,6 +3063,7 @@ milwaukee:
   state: "WI"
   state_fips: '55'
   county_fips: '079'  # Milwaukee County
+  tripcomurl: https://www.trip.com/hotels/list?city=1181&display=Milwaukee&optionId=1181&optionType=City&optionName=Milwaukee&Allianceid=7375838&SID=279148115&trip_sub1=milwaukee&trip_sub3=D7599167
   zillow: true
 
 albuquerque:
@@ -2927,6 +3072,7 @@ albuquerque:
   state: "NM"
   state_fips: '35'
   county_fips: '001'  # Bernalillo County
+  tripcomurl: https://www.trip.com/hotels/list?city=1848&display=Albuquerque&optionId=1848&optionType=City&optionName=Albuquerque&Allianceid=7375838&SID=279148115&trip_sub1=albuquerque&trip_sub3=D7599167
   zillow: true
 
 tucson:
@@ -2935,6 +3081,7 @@ tucson:
   state: "AZ"
   state_fips: '04'
   county_fips: '019'  # Pima County
+  tripcomurl: https://www.trip.com/hotels/list?city=1192&display=Tucson&optionId=1192&optionType=City&optionName=Tucson&Allianceid=7375838&SID=279148115&trip_sub1=tucson&trip_sub3=D7599167
   zillow: true
 
 fresno:
@@ -2943,6 +3090,7 @@ fresno:
   state: "CA"
   state_fips: '06'
   county_fips: '019'  # Fresno County
+  tripcomurl: https://www.trip.com/hotels/list?city=6726&display=Fresno&optionId=6726&optionType=City&optionName=Fresno&Allianceid=7375838&SID=279148115&trip_sub1=fresno&trip_sub3=D7599167
   zillow: true
 
 atlanta:
@@ -2951,6 +3099,7 @@ atlanta:
   state: "GA"
   state_fips: '13'
   county_fips: '121'  # Fulton County
+  tripcomurl: https://www.trip.com/hotels/list?city=27072&display=Atlanta&optionId=27072&optionType=City&optionName=Atlanta&Allianceid=7375838&SID=279148115&trip_sub1=atlanta&trip_sub3=D7599167
   zillow: true
 
 mesa:
@@ -2959,6 +3108,7 @@ mesa:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  tripcomurl: https://www.trip.com/hotels/list?city=9943&display=Mesa&optionId=9943&optionType=City&optionName=Mesa&Allianceid=7375838&SID=279148115&trip_sub1=mesa&trip_sub3=D7599167
   zillow: true
 
 'kansas city':
@@ -2967,6 +3117,7 @@ mesa:
   state: "MO"
   state_fips: '29'
   county_fips: '095'  # Jackson County
+  tripcomurl: https://www.trip.com/hotels/list?city=25410&display=Kansas%20City&optionId=25410&optionType=City&optionName=Kansas%20City&Allianceid=7375838&SID=279148115&trip_sub1=kansas%20city&trip_sub3=D7599167
   zillow: true
 
 raleigh:
@@ -2975,6 +3126,7 @@ raleigh:
   state: "NC"
   state_fips: '37'
   county_fips: '183'  # Wake County
+  tripcomurl: https://www.trip.com/hotels/list?city=1406&display=Raleigh&optionId=1406&optionType=City&optionName=Raleigh&Allianceid=7375838&SID=279148115&trip_sub1=raleigh&trip_sub3=D7599167
   zillow: true
 
 'colorado springs':
@@ -2983,6 +3135,7 @@ raleigh:
   state: "CO"
   state_fips: '08'
   county_fips: '041'  # El Paso County
+  tripcomurl: https://www.trip.com/hotels/list?city=25870&display=Colorado%20Springs&optionId=25870&optionType=City&optionName=Colorado%20Springs&Allianceid=7375838&SID=279148115&trip_sub1=colorado%20springs&trip_sub3=D7599167
   zillow: true
 
 omaha:
@@ -2991,6 +3144,7 @@ omaha:
   state: "NE"
   state_fips: '31'
   county_fips: '055'  # Douglas County
+  tripcomurl: https://www.trip.com/hotels/list?city=1425&display=Omaha&optionId=1425&optionType=City&optionName=Omaha&Allianceid=7375838&SID=279148115&trip_sub1=omaha&trip_sub3=D7599167
   zillow: true
 
 'virginia beach':
@@ -2999,6 +3153,7 @@ omaha:
   state: "VA"
   state_fips: '51'
   county_fips: '810'  # Virginia Beach City
+  tripcomurl: https://www.trip.com/hotels/list?city=9208&display=Virginia%20Beach&optionId=9208&optionType=City&optionName=Virginia%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=virginia%20beach&trip_sub3=D7599167
   zillow: true
 
 'long beach':
@@ -3007,6 +3162,7 @@ omaha:
   state: "CA"
   state_fips: '06'
   county_fips: '037'  # Los Angeles County
+  tripcomurl: https://www.trip.com/hotels/list?city=25916&display=Long%20Beach&optionId=25916&optionType=City&optionName=Long%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=long%20beach&trip_sub3=D7599167
   zillow: true
 
 oakland:
@@ -3015,6 +3171,7 @@ oakland:
   state: "CA"
   state_fips: '06'
   county_fips: '001'  # Alameda County
+  tripcomurl: https://www.trip.com/hotels/list?city=1435&display=Oakland&optionId=1435&optionType=City&optionName=Oakland&Allianceid=7375838&SID=279148115&trip_sub1=oakland&trip_sub3=D7599167
   zillow: true
 
 minneapolis:
@@ -3023,6 +3180,7 @@ minneapolis:
   state: "MN"
   state_fips: '27'
   county_fips: '053'  # Hennepin County
+  tripcomurl: https://www.trip.com/hotels/list?city=1238&display=Minneapolis&optionId=1238&optionType=City&optionName=Minneapolis&Allianceid=7375838&SID=279148115&trip_sub1=minneapolis&trip_sub3=D7599167
   zillow: true
 
 tampa:
@@ -3031,6 +3189,7 @@ tampa:
   state: "FL"
   state_fips: '12'
   county_fips: '057'  # Hillsborough County
+  tripcomurl: https://www.trip.com/hotels/list?city=1399&display=Tampa&optionId=1399&optionType=City&optionName=Tampa&Allianceid=7375838&SID=279148115&trip_sub1=tampa&trip_sub3=D7599167
   zillow: true
 
 bakersfield:
@@ -3039,6 +3198,7 @@ bakersfield:
   state: "CA"
   state_fips: '06'
   county_fips: '029'  # Kern County
+  tripcomurl: https://www.trip.com/hotels/list?city=4023&display=Bakersfield&optionId=4023&optionType=City&optionName=Bakersfield&Allianceid=7375838&SID=279148115&trip_sub1=bakersfield&trip_sub3=D7599167
   zillow: true
 
 tulsa:
@@ -3047,6 +3207,7 @@ tulsa:
   state: "OK"
   state_fips: '40'
   county_fips: '143'  # Tulsa County
+  tripcomurl: https://www.trip.com/hotels/list?city=1857&display=Tulsa&optionId=1857&optionType=City&optionName=Tulsa&Allianceid=7375838&SID=279148115&trip_sub1=tulsa&trip_sub3=D7599167
   zillow: true
 
 aurora:
@@ -3055,6 +3216,7 @@ aurora:
   state: "CO"
   state_fips: '08'
   county_fips: '001'  # Adams County
+  tripcomurl: https://www.trip.com/hotels/list?city=26729&display=Aurora&optionId=26729&optionType=City&optionName=Aurora&Allianceid=7375838&SID=279148115&trip_sub1=aurora&trip_sub3=D7599167
   zillow: true
 
 arlington:
@@ -3063,6 +3225,7 @@ arlington:
   state: "TX"
   state_fips: '48'
   county_fips: '439'  # Tarrant County
+  tripcomurl: https://www.trip.com/hotels/list?city=26813&display=Arlington&optionId=26813&optionType=City&optionName=Arlington&Allianceid=7375838&SID=279148115&trip_sub1=arlingtontx&trip_sub3=D7599167
   zillow: true
 
 wichita:
@@ -3071,6 +3234,7 @@ wichita:
   state: "KS"
   state_fips: '20'
   county_fips: '173'  # Sedgwick County
+  tripcomurl: https://www.trip.com/hotels/list?city=1856&display=Wichita&optionId=1856&optionType=City&optionName=Wichita&Allianceid=7375838&SID=279148115&trip_sub1=wichita&trip_sub3=D7599167
   zillow: true
 
 cleveland:
@@ -3079,6 +3243,7 @@ cleveland:
   state: "OH"
   state_fips: '39'
   county_fips: '035'  # Cuyahoga County
+  tripcomurl: https://www.trip.com/hotels/list?city=1185&display=Cleveland&optionId=1185&optionType=City&optionName=Cleveland&Allianceid=7375838&SID=279148115&trip_sub1=cleveland&trip_sub3=D7599167
   zillow: true
 
 henderson:
@@ -3087,6 +3252,7 @@ henderson:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  tripcomurl: https://www.trip.com/hotels/list?city=25719&display=Henderson&optionId=25719&optionType=City&optionName=Henderson&Allianceid=7375838&SID=279148115&trip_sub1=henderson&trip_sub3=D7599167
   zillow: true
 
 'new orleans':
@@ -3095,6 +3261,7 @@ henderson:
   state: "LA"
   state_fips: '22'
   county_fips: '071'  # Orleans Parish
+  tripcomurl: https://www.trip.com/hotels/list?city=1186&display=New%20Orleans&optionId=1186&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
   zillow: true
 
 honolulu:
@@ -3103,6 +3270,7 @@ honolulu:
   state: "HI"
   state_fips: '15'
   county_fips: '003'  # Honolulu County
+  tripcomurl: https://www.trip.com/hotels/list?city=757&display=Honolulu&optionId=757&optionType=City&optionName=Honolulu&Allianceid=7375838&SID=279148115&trip_sub1=honolulu&trip_sub3=D7599167
   zillow: true
 
 anaheim:
@@ -3111,6 +3279,7 @@ anaheim:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  tripcomurl: https://www.trip.com/hotels/list?city=3777&display=Anaheim&optionId=3777&optionType=City&optionName=Anaheim&Allianceid=7375838&SID=279148115&trip_sub1=anaheim&trip_sub3=D7599167
   zillow: true
 
 orlando:
@@ -3119,6 +3288,7 @@ orlando:
   state: "FL"
   state_fips: '12'
   county_fips: '095'  # Orange County
+  tripcomurl: https://www.trip.com/hotels/list?city=1187&display=Orlando&optionId=1187&optionType=City&optionName=Orlando&Allianceid=7375838&SID=279148115&trip_sub1=orlando&trip_sub3=D7599167
   zillow: true
 
 lexington:
@@ -3127,6 +3297,7 @@ lexington:
   state: "KY"
   state_fips: '21'
   county_fips: '067'  # Fayette County
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Lexington&optionId=XXXX&optionType=City&optionName=Lexington&Allianceid=7375838&SID=279148115&trip_sub1=lexington&trip_sub3=D7597865
   zillow: true
 
 stockton:
@@ -3135,6 +3306,7 @@ stockton:
   state: "CA"
   state_fips: '06'
   county_fips: '077'  # San Joaquin County
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Stockton&optionId=XXXX&optionType=City&optionName=Stockton&Allianceid=7375838&SID=279148115&trip_sub1=stockton&trip_sub3=D7597865
   zillow: true
 
 riverside:
@@ -3143,6 +3315,7 @@ riverside:
   state: "CA"
   state_fips: '06'
   county_fips: '065'  # Riverside County
+  tripcomurl: https://www.trip.com/hotels/list?city=20379&display=Riverside&optionId=20379&optionType=City&optionName=Riverside&Allianceid=7375838&SID=279148115&trip_sub1=riverside&trip_sub3=D7599167
   zillow: true
 
 irvine:
@@ -3151,6 +3324,7 @@ irvine:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  tripcomurl: https://www.trip.com/hotels/list?city=27020&display=Irvine&optionId=27020&optionType=City&optionName=Irvine&Allianceid=7375838&SID=279148115&trip_sub1=irvine&trip_sub3=D7599167
   zillow: true
 
 newark:
@@ -3159,6 +3333,7 @@ newark:
   state: "NJ"
   state_fips: '34'
   county_fips: '013'  # Essex County
+  tripcomurl: https://www.trip.com/hotels/list?city=26203&display=Newark&optionId=26203&optionType=City&optionName=Newark&Allianceid=7375838&SID=279148115&trip_sub1=newark&trip_sub3=D7599167
   zillow: true
 
 'santa ana':
@@ -3167,6 +3342,7 @@ newark:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  tripcomurl: https://www.trip.com/hotels/list?city=1396&display=Santa%20Ana&optionId=1396&optionType=City&optionName=Santa%20Ana&Allianceid=7375838&SID=279148115&trip_sub1=santa%20ana&trip_sub3=D7599167
   zillow: true
 
 'corpus christi':
@@ -3175,6 +3351,7 @@ newark:
   state: "TX"
   state_fips: '48'
   county_fips: '355'  # Nueces County
+  tripcomurl: https://www.trip.com/hotels/list?city=5114&display=Corpus%20Christi&optionId=5114&optionType=City&optionName=Corpus%20Christi&Allianceid=7375838&SID=279148115&trip_sub1=corpus%20christi&trip_sub3=D7599167
   zillow: true
 
 cincinnati:
@@ -3183,6 +3360,7 @@ cincinnati:
   state: "OH"
   state_fips: '39'
   county_fips: '061'  # Hamilton County
+  tripcomurl: https://www.trip.com/hotels/list?city=1184&display=Cincinnati&optionId=1184&optionType=City&optionName=Cincinnati&Allianceid=7375838&SID=279148115&trip_sub1=cincinnati&trip_sub3=D7599167
   zillow: true
 
 greensboro:
@@ -3191,6 +3369,7 @@ greensboro:
   state: "NC"
   state_fips: '37'
   county_fips: '081'  # Guilford County
+  tripcomurl: https://www.trip.com/hotels/list?city=27101&display=Greensboro&optionId=27101&optionType=City&optionName=Greensboro&Allianceid=7375838&SID=279148115&trip_sub1=greensboro&trip_sub3=D7599167
   zillow: true
 
 pittsburgh:
@@ -3199,6 +3378,7 @@ pittsburgh:
   state: "PA"
   state_fips: '42'
   county_fips: '003'  # Allegheny County
+  tripcomurl: https://www.trip.com/hotels/list?city=771&display=Pittsburgh&optionId=771&optionType=City&optionName=Pittsburgh&Allianceid=7375838&SID=279148115&trip_sub1=pittsburgh&trip_sub3=D7599167
   zillow: true
 
 durham:
@@ -3207,6 +3387,7 @@ durham:
   state: "NC"
   state_fips: '37'
   county_fips: '063'  # Durham County
+  tripcomurl: https://www.trip.com/hotels/list?city=26079&display=Durham&optionId=26079&optionType=City&optionName=Durham&Allianceid=7375838&SID=279148115&trip_sub1=durham&trip_sub3=D7599167
   zillow: true
 
 'st paul':
@@ -3215,6 +3396,7 @@ durham:
   state: "MN"
   state_fips: '27'
   county_fips: '123'  # Ramsey County
+  tripcomurl: https://www.trip.com/hotels/list?city=7591&display=Saint%20Paul&optionId=7591&optionType=City&optionName=Saint%20Paul&Allianceid=7375838&SID=279148115&trip_sub1=stpaul&trip_sub3=D7599167
 
 'jersey city':
   name: "Jersey City"
@@ -3222,6 +3404,7 @@ durham:
   state: "NJ"
   state_fips: '34'
   county_fips: '017'  # Hudson County
+  tripcomurl: https://www.trip.com/hotels/list?city=9767&display=Jersey%20City&optionId=9767&optionType=City&optionName=Jersey%20City&Allianceid=7375838&SID=279148115&trip_sub1=jersey%20city&trip_sub3=D7599167
   zillow: true
 
 lincoln:
@@ -3230,6 +3413,7 @@ lincoln:
   state: "NE"
   state_fips: '31'
   county_fips: '109'  # Lancaster County
+  tripcomurl: https://www.trip.com/hotels/list?city=3842&display=Lincoln&optionId=3842&optionType=City&optionName=Lincoln&Allianceid=7375838&SID=279148115&trip_sub1=lincoln&trip_sub3=D7599167
   zillow: true
 
 'north las vegas':
@@ -3238,6 +3422,7 @@ lincoln:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  tripcomurl: https://www.trip.com/hotels/list?city=25866&display=North%20Las%20Vegas&optionId=25866&optionType=City&optionName=North%20Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=north%20las%20vegas&trip_sub3=D7599167
   zillow: true
 
 plano:
@@ -3246,6 +3431,7 @@ plano:
   state: "TX"
   state_fips: '48'
   county_fips: '085'  # Collin County
+  tripcomurl: https://www.trip.com/hotels/list?city=19889&display=Plano&optionId=19889&optionType=City&optionName=Plano&Allianceid=7375838&SID=279148115&trip_sub1=plano&trip_sub3=D7599167
   zillow: true
 
 gilbert:
@@ -3254,6 +3440,7 @@ gilbert:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  tripcomurl: https://www.trip.com/hotels/list?city=43701&display=Gilbert&optionId=43701&optionType=City&optionName=Gilbert&Allianceid=7375838&SID=279148115&trip_sub1=gilbert&trip_sub3=D7599167
   zillow: true
 
 charleston:
@@ -3262,6 +3449,7 @@ charleston:
   state: "SC"
   state_fips: '45'
   county_fips: '019'  # Charleston County
+  tripcomurl: https://www.trip.com/hotels/list?city=4188&display=Charleston&optionId=4188&optionType=City&optionName=Charleston&Allianceid=7375838&SID=279148115&trip_sub1=charleston&trip_sub3=D7599167
   zillow: true
 
 savannah:
@@ -3270,6 +3458,7 @@ savannah:
   state: "GA"
   state_fips: '13'
   county_fips: '051'  # Chatham County
+  tripcomurl: https://www.trip.com/hotels/list?city=26631&display=Savannah&optionId=26631&optionType=City&optionName=Savannah&Allianceid=7375838&SID=279148115&trip_sub1=savannah&trip_sub3=D7599167
   zillow: true
 
 scottsdale:
@@ -3278,6 +3467,7 @@ scottsdale:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  tripcomurl: https://www.trip.com/hotels/list?city=3807&display=Scottsdale&optionId=3807&optionType=City&optionName=Scottsdale&Allianceid=7375838&SID=279148115&trip_sub1=scottsdale&trip_sub3=D7599167
   zillow: true
 
 'salt lake city':
@@ -3286,6 +3476,7 @@ scottsdale:
   state: "UT"
   state_fips: '49'
   county_fips: '035'  # Salt Lake County
+  tripcomurl: https://www.trip.com/hotels/list?city=700&display=Salt%20Lake%20City&optionId=700&optionType=City&optionName=Salt%20Lake%20City&Allianceid=7375838&SID=279148115&trip_sub1=salt%20lake%20city&trip_sub3=D7599167
   zillow: true
 
 'santa fe':
@@ -3294,6 +3485,7 @@ scottsdale:
   state: "NM"
   state_fips: '35'
   county_fips: '049'  # Santa Fe County
+  tripcomurl: https://www.trip.com/hotels/list?city=5806&display=Santa%20Fe&optionId=5806&optionType=City&optionName=Santa%20Fe&Allianceid=7375838&SID=279148115&trip_sub1=santa%20fe&trip_sub3=D7599167
   zillow: true
 
 'st louis':
@@ -3302,6 +3494,7 @@ scottsdale:
   state: "MO"
   state_fips: '29'
   county_fips: '510'  # St. Louis City (independent city)
+  tripcomurl: https://www.trip.com/hotels/list?city=798983&display=Saint%20Louis&optionId=798983&optionType=City&optionName=Saint%20Louis&Allianceid=7375838&SID=279148115&trip_sub1=stlouis&trip_sub3=D7599167
 
 anchorage:
   name: "Anchorage"
@@ -3309,6 +3502,7 @@ anchorage:
   state: "AK"
   state_fips: '02'
   county_fips: '020'  # Anchorage Municipality
+  tripcomurl: https://www.trip.com/hotels/list?city=752&display=Anchorage&optionId=752&optionType=City&optionName=Anchorage&Allianceid=7375838&SID=279148115&trip_sub1=anchorage&trip_sub3=D7599167
   zillow: true
 
 boulder:
@@ -3317,6 +3511,7 @@ boulder:
   state: "CO"
   state_fips: '08'
   county_fips: '013'  # Boulder County
+  tripcomurl: https://www.trip.com/hotels/list?city=20065&display=Boulder&optionId=20065&optionType=City&optionName=Boulder&Allianceid=7375838&SID=279148115&trip_sub1=boulder&trip_sub3=D7599167
   zillow: true
 
 napa:
@@ -3325,6 +3520,7 @@ napa:
   state: "CA"
   state_fips: '06'
   county_fips: '055'  # Napa County
+  tripcomurl: https://www.trip.com/hotels/list?city=9995&display=Napa&optionId=9995&optionType=City&optionName=Napa&Allianceid=7375838&SID=279148115&trip_sub1=napa&trip_sub3=D7599167
   zillow: true
 
 # ============================================================================
@@ -3340,6 +3536,7 @@ sedona:
   state_fips: '04'
   county: "Yavapai"
   county_fips: '025'  # Yavapai County
+  tripcomurl: https://www.trip.com/hotels/list?city=3808&display=Sedona&optionId=3808&optionType=City&optionName=Sedona&Allianceid=7375838&SID=279148115&trip_sub1=sedona&trip_sub3=D7599167
   endpoint: "https://services.arcgis.com/ZzrwjTRez6FJiOq4/arcgis/rest/services/City_Boundary_Data/FeatureServer/0/query?where=CITY_NAME='Sedona'&outFields=*&outSR=4326&f=geojson"
   type: "geojson"
   enabled: false  # Disabled until we find working endpoint
@@ -3355,6 +3552,7 @@ aspen:
   state_fips: '08'
   county: "Pitkin"
   county_fips: '097'  # Pitkin County
+  tripcomurl: https://www.trip.com/hotels/list?city=4153&display=Aspen&optionId=4153&optionType=City&optionName=Aspen&Allianceid=7375838&SID=279148115&trip_sub1=aspen&trip_sub3=D7599167
   endpoint: "https://data.colorado.gov/resource/u943-ics6.geojson?municipality=Aspen"
   type: "geojson"
   enabled: false  # Disabled until we find working endpoint
@@ -3370,6 +3568,7 @@ aspen:
   state_fips: '23'
   county: "Cumberland"
   county_fips: '005'
+  tripcomurl: https://www.trip.com/hotels/list?city=26336&display=Portland&optionId=26336&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portlandme&trip_sub3=D7599167
   population_source: "census"
   notes: "Distinguishes Portland, Maine from Portland, Oregon."
 
@@ -3390,6 +3589,7 @@ aspen:
   state_fips: '36'
   county: "Warren"
   county_fips: '113'
+  tripcomurl: https://www.trip.com/hotels/list?city=26105&display=Lake%20George&optionId=26105&optionType=City&optionName=Lake%20George&Allianceid=7375838&SID=279148115&trip_sub1=lake%20george&trip_sub3=D7599167
   population_source: "census"
 
 branson:
@@ -3399,6 +3599,7 @@ branson:
   state_fips: '29'
   county: "Taney"
   county_fips: '213'
+  tripcomurl: https://www.trip.com/hotels/list?city=19768&display=Branson&optionId=19768&optionType=City&optionName=Branson&Allianceid=7375838&SID=279148115&trip_sub1=branson&trip_sub3=D7599167
   population_source: "census"
 
 # Template for adding new states (add to 'states' section above):
