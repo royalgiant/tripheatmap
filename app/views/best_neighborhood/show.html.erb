@@ -1,0 +1,72 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Best Neighborhoods in <%= @city_display_name %>
+    </h1>
+    <p class="text-xl text-gray-600">
+      Discover the most vibrant and exciting areas to stay.
+    </p>
+  </div>
+
+  <% if @has_neighborhoods %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% @neighborhoods.each do |neighborhood| %>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <h2 class="text-2xl font-semibold text-gray-800">
+                <%= link_to neighborhood.name, neighborhood_path(neighborhood.slug), class: "hover:text-blue-600 transition-colors" %>
+              </h2>
+              <div class="flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                <span class="mr-1">✨</span>
+                <%= neighborhood.neighborhood_places_stat.vibrancy_index.round(1) %>/10
+              </div>
+            </div>
+
+            <p class="text-gray-600 mb-4 line-clamp-3">
+              <%= neighborhood.description || "A vibrant neighborhood in #{@city_display_name} with plenty to explore." %>
+            </p>
+
+            <div class="space-y-2 text-sm text-gray-500 mb-6">
+              <div class="flex items-center">
+                <span class="w-5 text-center mr-2">🍽️</span>
+                <%= pluralize(neighborhood.neighborhood_places_stat.restaurant_count, 'Restaurant') %>
+              </div>
+              <div class="flex items-center">
+                <span class="w-5 text-center mr-2">☕</span>
+                <%= pluralize(neighborhood.neighborhood_places_stat.cafe_count, 'Café') %>
+              </div>
+              <div class="flex items-center">
+                <span class="w-5 text-center mr-2">🍸</span>
+                <%= pluralize(neighborhood.neighborhood_places_stat.bar_count, 'Bar') %>
+              </div>
+              <div class="flex items-center">
+                <span class="w-5 text-center mr-2">🏨</span>
+                <%= pluralize(neighborhood.neighborhood_places_stat.hotel_count, 'Hotel') %>
+              </div>
+              <div class="flex items-center">
+                <span class="w-5 text-center mr-2">🛏️</span>
+                <%= pluralize(neighborhood.neighborhood_places_stat.hostel_count, 'Hostel') %>
+              </div>
+            </div>
+
+            <%= link_to "Explore Neighborhood →", neighborhood_path(neighborhood.slug), class: "block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg">
+      <div class="text-6xl mb-4">🏙️</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No High-Vibrancy Neighborhoods Found</h3>
+      <p class="text-gray-600 max-w-md mx-auto">
+        We couldn't find any neighborhoods in <%= @city_display_name %> with a vibrancy score higher than 6.0.
+        Check back later as we update our data!
+      </p>
+      <%= link_to "View All Neighborhoods in #{@city_display_name}", where_to_stay_path(@url_slug), class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>
+    </div>
+  <% end %>
+
+  <!-- Related Cities -->
+  <%= render partial: 'shared/related_cities', locals: { related_cities: @related_cities, country_name: @country } %>
+</div>

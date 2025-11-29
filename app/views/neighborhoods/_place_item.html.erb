@@ -81,7 +81,7 @@
 
       <% if place.place_type == 'hotel' || place.place_type == 'hostel' %>
         <a
-          href="https://www.booking.com/searchresults.html?ss=<%= CGI.escape(place.name + ' ' + place.neighborhood.city) %>&aid=YOUR_AFFILIATE_ID"
+          href="https://www.booking.com/searchresults.html?ss=<%= CGI.escape(place.name + ' ' + place.neighborhood.city + ' ' + place.neighborhood.country) %>&aid=YOUR_AFFILIATE_ID"
           target="_blank"
           rel="noopener nofollow"
           class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded transition-colors">
@@ -98,15 +98,7 @@
           </a>
         <% end %>
 
-        <% if place.place_type == 'hostel' %>
-          <a
-            href="https://www.hostelworld.com/s?q=<%= CGI.escape(place.name + ' ' + place.neighborhood.city) %>"
-            target="_blank"
-            rel="noopener nofollow"
-            class="inline-flex items-center px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded transition-colors">
-            Check Hostelworld
-          </a>
-        <% end %>
+        
       <% end %>
 
       <% if place.booking_url.present? %>

@@ -5,6 +5,7 @@ SitemapGenerator::Sitemap.compress = false
 
 SitemapGenerator::Sitemap.create do
   add root_path, changefreq: "daily", priority: 1.0
+  add best_neighborhood_index_path, changefreq: "daily", priority: 0.9
 
   # Build city list from database (moved inside block to avoid loading at require time)
   city_data_for_sitemap = Neighborhood
@@ -26,6 +27,7 @@ SitemapGenerator::Sitemap.create do
   city_data_for_sitemap.each do |city_data|
     slug = city_data[:slug]
     add where_to_stay_path(slug), changefreq: "weekly", priority: 0.8
+    add best_neighborhood_path(slug), changefreq: "weekly", priority: 0.8
     add places_map_path(slug), changefreq: "weekly", priority: 0.7
   end
 

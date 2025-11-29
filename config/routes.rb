@@ -2,6 +2,8 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'
+  get 'best-neighborhood-in-:city', to: 'best_neighborhood#show', as: 'best_neighborhood'
   resources :neighborhoods, only: [:show], param: :slug
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'

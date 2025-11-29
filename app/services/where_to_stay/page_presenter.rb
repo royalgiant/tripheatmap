@@ -90,19 +90,27 @@ module WhereToStay
         return [] unless available?
         return [] unless @country
 
-        related = Neighborhood
-          .where(country: @country)
-          .where.not(city: @city_slug)
-          .select("DISTINCT city, country")
-          .order(:city)
-          .limit(6)
-          .pluck(:city, :country)
+        related = CityDataImporter.city_configs.select do |key, config|
+          next false if key == 'states'
+          next false if config['enabled'] == false
+          
+          config_country = config['country'] || 'United States'
+          same_country = config_country.downcase == @country.downcase
+          
+          normalized_key = key.to_s.downcase.tr('-', ' ').tr('_', ' ').squish
+          not_current = normalized_key != @city_slug.tr('-', ' ').tr('_', ' ').squish
+          
+          same_country && not_current
+        end
 
-        related.map do |city, country|
+        related.sort_by { |_, config| config['name'] || config['city'] }.sample(12).map do |key, config|
+          city_name = config['name'] || config['city']
+          slug = config['city'].to_s.downcase.gsub('.', '').gsub(' ', '-')
+          
           {
-            city: city,
-            country: country,
-            url: Rails.application.routes.url_helpers.where_to_stay_path(city.parameterize)
+            city: city_name,
+            country: config['country'],
+            url: Rails.application.routes.url_helpers.where_to_stay_path(slug)
           }
         end
       end
@@ -184,10 +192,14 @@ module WhereToStay
 
     def fetch_neighborhoods
       Neighborhood
-        .for_city(@city_slug)
+        .for_city(city_param)
         .with_geom
         .includes(:neighborhood_places_stat)
         .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC NULLS LAST"))
+    end
+
+    def city_param
+      (@city_config[:city] || @city_config[:name] || @city_slug).to_s
     end
 
     def build_metrics_without_places(neighborhoods)

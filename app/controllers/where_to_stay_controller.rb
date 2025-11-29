@@ -41,6 +41,6 @@ class WhereToStayController < ApplicationController
   end
 
   def normalize_slug(value)
-    value.to_s.downcase.tr('-', ' ').tr('_', ' ').squish
+    value.to_s.downcase.tr('.', ' ').tr('-', ' ').tr('_', ' ').squish
   end
 end
