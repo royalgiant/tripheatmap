@@ -35,52 +35,27 @@ namespace :city do
     end
 
     puts "Found #{places_without_content.size} places without AI content"
+    puts "Enqueueing Sidekiq jobs..."
     puts ""
 
-    generated_count = 0
-    failed_count = 0
+    enqueued_count = 0
 
     places_without_content.each_with_index do |place, index|
-      begin
-        if place.rating.present? && place.price_range.present? && place.category.present? && place.image_url.present?
-          puts "  [#{index + 1}/#{places_without_content.size}] Skipping #{place.name} (already complete)"
-          next
-        end
-
-        print "  [#{index + 1}/#{places_without_content.size}] Generating content for #{place.name}..."
-
-        content = AiContentGenerator.generate_place_content(
-          place: place,
-          neighborhood: place.neighborhood
-        )
-
-        if content && (content[:rating].present? || content[:price_range].present? || content[:category].present? || content[:image_url].present?)
-          updates = {}
-          updates[:rating] = content[:rating] if content[:rating].present?
-          updates[:price_range] = content[:price_range] if content[:price_range].present?
-          updates[:category] = content[:category] if content[:category].present?
-          updates[:image_url] = content[:image_url] if content[:image_url].present?
-          
-          place.update_columns(updates)
-          generated_count += 1
-          puts " ✅"
-        else
-          failed_count += 1
-          puts " ❌ (no response or incomplete content)"
-        end
-      rescue => e
-        failed_count += 1
-        puts " ❌ (#{e.message})"
+      if place.rating.present? && place.price_range.present? && place.category.present? && place.image_url.present?
+        puts "  [#{index + 1}/#{places_without_content.size}] Skipping #{place.name} (already complete)"
+        next
       end
 
-      # Rate limiting: sleep briefly between API calls
-      sleep(0.5)
+      GeneratePlaceAiContentJob.perform_later(place.id)
+      enqueued_count += 1
+      puts "  [#{index + 1}/#{places_without_content.size}] Enqueued job for #{place.name}"
     end
 
     puts ""
     puts "=" * 80
-    puts "✅ Generated AI content for #{generated_count} places"
-    puts "❌ Failed: #{failed_count}" if failed_count > 0
+    puts "✅ Enqueued #{enqueued_count} Sidekiq jobs for AI content generation"
+    puts "💡 Jobs will process in the background without affecting web server performance"
+    puts "📊 Monitor progress in Sidekiq dashboard: /sidekiq"
     puts "=" * 80
   end
 

@@ -14,10 +14,10 @@
 <div class="container mx-auto px-4 py-8">
   <div class="text-center mb-12">
     <h1 class="text-4xl font-bold text-gray-900 mb-4">
-      <%= @boutique_hotels.count %> Best Boutique Hotels in <%= @city_display_name %>
+      <%= @luxury_hotels.count %> Best Luxury Hotels in <%= @city_display_name %>
     </h1>
     <p class="text-xl text-gray-600">
-      Discover the most charming, unique, and highly-rated boutique stays across <%= @boutique_hotels.count %> hotels in <%= Neighborhood.for_city(@city_config['city'].downcase).count %> neighborhoods.
+      Discover the most exclusive and highly-rated luxury hotels for an unforgettable stay across <%= @luxury_hotels.count %> hotels in <%= Neighborhood.for_city(@city_config['city'].downcase).count %> neighborhoods.
     </p>
   </div>
 
@@ -57,7 +57,7 @@
           <fieldset>
             <legend class="block font-medium text-gray-900">Neighborhood</legend>
             <div class="space-y-3 pt-6 max-h-60 overflow-y-auto">
-              <% @boutique_hotels.map(&:neighborhood).uniq.sort_by(&:name).each do |hood| %>
+              <% @luxury_hotels.map(&:neighborhood).uniq.sort_by(&:name).each do |hood| %>
                 <div class="flex items-center">
                   <input id="hood-<%= hood.id %>" name="neighborhood[]" value="<%= hood.id %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
                   <label for="hood-<%= hood.id %>" class="ml-3 text-sm text-gray-600"><%= hood.name %></label>
@@ -71,7 +71,7 @@
 
     <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
       <ul role="list" class="divide-y divide-gray-200" id="hotel-list">
-        <% @boutique_hotels.each do |hotel| %>
+        <% @luxury_hotels.each do |hotel| %>
           <li 
             class="hotel-item flex flex-col sm:flex-row gap-x-6 py-5 hover:bg-gray-50 transition duration-150 ease-in-out px-4 sm:px-6"
             data-price="<%= hotel.price_range %>"
@@ -150,9 +150,9 @@
   <% else %>
     <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
       <div class="text-6xl mb-4">🏨</div>
-      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Boutique Hotels Found</h3>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Luxury Hotels Found</h3>
       <p class="text-gray-600 max-w-md mx-auto">
-        We couldn't find any hotels categorized as "boutique" in <%= @city_display_name %> yet.
+        We couldn't find any hotels categorized as "luxury" in <%= @city_display_name %> yet.
         Check back later as we update our data!
       </p>
       <%= link_to "View All Neighborhoods in #{@city_display_name}", where_to_stay_path(@url_slug), class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>

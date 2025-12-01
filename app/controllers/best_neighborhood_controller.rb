@@ -13,6 +13,9 @@ class BestNeighborhoodController < ApplicationController
     @neighborhoods = high_vibrancy_neighborhoods
     @has_neighborhoods = @neighborhoods.any?
     @related_cities = fetch_related_cities
+    @seo_title = "Best Neighborhoods in #{@city_display_name} (#{Time.current.year}) | Top Rated Areas"
+    @seo_description = "Discover the best neighborhoods in #{@city_display_name} ranked by vibrancy, safety, and amenities. Find the perfect place to stay based on data."
+    @canonical_url = best_neighborhood_url(@url_slug)
   end
 
   private

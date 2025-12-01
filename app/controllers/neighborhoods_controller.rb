@@ -1,6 +1,11 @@
 class NeighborhoodsController < ApplicationController
   def show
-    @neighborhood = Neighborhood.find_by!(slug: params[:slug])
+    @neighborhood = Neighborhood.find_by(slug: params[:slug])
+
+    if @neighborhood.nil?
+      redirect_to where_to_stay_index_path, status: :moved_permanently and return
+    end
+
     @places = @neighborhood.places.order(:place_type, :name)
 
     # Group places by type for display

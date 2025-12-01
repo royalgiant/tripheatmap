@@ -2,6 +2,8 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  get 'best-luxury-hotels', to: 'best_luxury_hotel#index', as: 'best_luxury_hotels_index'
+  get 'best-luxury-hotels-in-:city', to: 'best_luxury_hotel#show', as: 'best_luxury_hotels'
   get 'best-boutique-hotels', to: 'best_boutique_hotel#index', as: 'best_boutique_hotels_index'
   get 'best-boutique-hotels-in-:city', to: 'best_boutique_hotel#show', as: 'best_boutique_hotels'
   get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'

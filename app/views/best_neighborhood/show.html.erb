@@ -1,3 +1,16 @@
+<% content_for :head do %>
+  <title><%= @seo_title %></title>
+  <meta name="description" content="<%= @seo_description %>">
+  <link rel="canonical" href="<%= @canonical_url %>">
+  <meta property="og:title" content="<%= @seo_title %>">
+  <meta property="og:description" content="<%= @seo_description %>">
+  <meta property="og:url" content="<%= @canonical_url %>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @seo_title %>">
+  <meta name="twitter:description" content="<%= @seo_description %>">
+<% end %>
+
 <div class="container mx-auto px-4 py-8">
   <div class="text-center mb-12">
     <h1 class="text-4xl font-bold text-gray-900 mb-4">

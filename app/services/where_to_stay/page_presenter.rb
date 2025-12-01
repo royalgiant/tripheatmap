@@ -7,7 +7,7 @@ module WhereToStay
     }.freeze
 
     attr_reader :city_name, :state, :neighborhood_cards, :city_intro, :total_neighborhoods,
-                :city_about, :city_time_to_visit, :city_getting_around, :country
+                :city_about, :city_time_to_visit, :city_getting_around, :country, :url_slug
 
     def initialize(city_slug:, city_config:, url_slug:)
       @city_slug = city_slug
