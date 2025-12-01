@@ -1,0 +1,87 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      <%= @boutique_hotels.count %> Best Boutique Hotels in <%= @city_display_name %>
+    </h1>
+    <p class="text-xl text-gray-600">
+      Discover the most charming, unique, and highly-rated boutique stays across <%= @boutique_hotels.count %> hotels in <%= Neighborhood.for_city(@city_config['city'].downcase).count %> neighborhoods.
+    </p>
+  </div>
+
+  <% if @has_hotels %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @boutique_hotels.each do |hotel| %>
+          <li>
+            <div class="flex flex-col sm:flex-row p-4 sm:p-6 gap-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+              <div class="flex-1 min-w-0 flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-start">
+                    <h3 class="text-lg font-semibold text-blue-600 truncate">
+                      <%= hotel.name %>
+                    </h3>
+                    <div class="flex items-center gap-2">
+                      <% if hotel.price_range.present? %>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                          <%= hotel.price_range %>
+                        </span>
+                      <% end %>
+                      <% if hotel.rating.present? %>
+                        <div class="flex items-center bg-green-50 text-green-700 px-2 py-0.5 rounded text-sm font-bold">
+                          <%= hotel.rating %> <span class="text-xs font-normal ml-1 text-green-600">/ 5</span>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-1 flex items-center text-sm text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="truncate"><%= hotel.neighborhood.name %>, <%= @city_display_name %></span>
+                  </div>
+                  <% if hotel.address.present? %>
+                    <p class="mt-1 text-xs text-gray-400 truncate"><%= hotel.address %></p>
+                  <% end %>
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-4 flex flex-wrap items-center gap-3 sm:gap-4">
+                  <% if hotel.trip_affiliate_url.present? %>
+                    <a href="<%= hotel.trip_affiliate_url %>" target="_blank" rel="noopener nofollow" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                      Check Availability
+                    </a>
+                  <% elsif hotel.booking_url.present? %>
+                    <a href="<%= hotel.booking_url %>" target="_blank" rel="noopener nofollow" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                      Official Site
+                    </a>
+                  <% end %>
+
+                  <a href="https://www.google.com/maps/search/?api=1&query=<%= hotel.lat %>,<%= hotel.lon %>" target="_blank" rel="noopener" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
+                    Directions
+                  </a>
+                  
+                  <%= link_to "Neighborhood Guide", neighborhood_path(hotel.neighborhood.slug), class: "inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-500" %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="text-6xl mb-4">🏨</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Boutique Hotels Found</h3>
+      <p class="text-gray-600 max-w-md mx-auto">
+        We couldn't find any hotels categorized as "boutique" in <%= @city_display_name %> yet.
+        Check back later as we update our data!
+      </p>
+      <%= link_to "View All Neighborhoods in #{@city_display_name}", where_to_stay_path(@url_slug), class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>
+    </div>
+  <% end %>
+
+  <!-- Related Cities -->
+  <%= render partial: 'shared/related_cities', locals: { related_cities: @related_cities, country_name: @country } %>
+</div>

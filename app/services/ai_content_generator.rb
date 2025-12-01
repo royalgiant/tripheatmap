@@ -98,16 +98,17 @@ class AiContentGenerator
       1.  **Average Rating**: A numerical rating from 1.0 to 5.0, in increments of 0.5 (e.g., 3.0, 3.5, 4.0, 4.5).
       2.  **Price Range**: A string representing the price level using dollar signs: $, $$, $$$, or $$$$.
       3.  **Category**: For hotels, determine if it fits into one of these specific categories: "luxury" or "boutique". If it does not clearly fit either (e.g., it's a standard chain hotel, motel, or budget inn), return null.
+      4.  **Image URL**: Provide a public image URL for this place from your knowledge base, if available. If you don't have a specific image URL, return null.
 
       Return ONLY valid JSON (no markdown, no code blocks):
       {
         "rating": 4.0,
         "price_range": "$$",
-        "category": "boutique"
+        "category": "boutique",
+        "image_url": "https://example.com/hotel.jpg"
       }
     PROMPT
-
-    response = call_openai_api(prompt, max_tokens: 100) # Max tokens for a short, structured response
+    response = call_openai_api(prompt, max_tokens: 2500)
     parse_json_response(response)
   rescue => e
     Rails.logger.error "OpenAI API error generating place content: #{e.message}"
@@ -125,7 +126,7 @@ class AiContentGenerator
 
     client.chat(
       parameters: {
-        model: "gpt-4.1-nano",
+        model: "gpt-5-nano",
         messages: [
           { role: "system", content: system_prompt },
           { role: "user", content: prompt }

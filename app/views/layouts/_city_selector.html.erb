@@ -5,7 +5,24 @@
       <div class="flex items-center gap-3">
         <%= link_to "TripHeatMap", root_path, class: "text-lg font-semibold text-white hover:text-blue-400 transition-colors" %>
         <span class="text-gray-500">|</span>
-        <span class="text-sm text-gray-400">Explore neighborhoods by vibrancy</span>
+        <!-- Popular Searches Dropdown -->
+        <div class="relative">
+          <button type="button" class="inline-flex items-center gap-x-1 text-sm font-medium leading-6 text-gray-300 hover:text-white px-3 py-2 rounded-md focus:outline-none transition-colors" id="popular-searches-button" aria-expanded="false" aria-haspopup="true">
+            Popular Searches
+            <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.17 8.29a.75.75 0 01.06-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="popular-searches-button" tabindex="-1" id="popular-searches-menu">
+            <div class="py-1" role="none">
+              <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
+              <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
+              <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="flex items-center gap-4">
@@ -55,14 +72,14 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
             </button>
-            <div class="absolute right-0 z-10 mt-2 w-48 text-center origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-              <div class="flex flex-col items-center">
-                <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 w-full' %>
+            <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <div class="flex flex-col">
+                <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% if current_user.subscribed? || current_user.role == 'admin' %>
-                  <%= link_to 'My Rentals', rentals_path, class: 'block px-4 py-2 text-sm text-gray-700 w-full' %>
+                  <%= link_to 'My Rentals', rentals_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% end %>
-                <%= link_to !current_user&.subscribed? ? "Pricing" : "Manage Subscription", pricing_path, class: "block px-4 py-2 text-sm text-gray-700 w-full cursor-pointer" %>
-                <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 w-full cursor-pointer" %>
+                <%= link_to !current_user&.subscribed? ? "Pricing" : "Manage Subscription", pricing_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" %>
+                <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" %>
               </div>
             </div>
           </div>
@@ -90,6 +107,19 @@
     $(document).click(function(e) {
       if (!$(e.target).closest('#user-menu-button').length && !$(e.target).closest('#user-menu').length) {
         $('#user-menu').addClass('hidden');
+      }
+    });
+
+    // Toggle the popular searches dropdown
+    $('#popular-searches-button').click(function(e){
+      e.stopPropagation();
+      $('#popular-searches-menu').toggleClass('hidden');
+    });
+
+    // Close popular searches dropdown when clicking outside
+    $(document).click(function(e) {
+      if (!$(e.target).closest('#popular-searches-button').length && !$(e.target).closest('#popular-searches-menu').length) {
+        $('#popular-searches-menu').addClass('hidden');
       }
     });
   });

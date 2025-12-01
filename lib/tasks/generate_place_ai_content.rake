@@ -27,10 +27,10 @@ namespace :city do
       .joins(:neighborhood)
       .where(neighborhoods: { city: city_name.downcase })
       .where(place_type: ['hotel', 'hostel'])
-      .where("rating IS NULL OR price_range IS NULL OR category IS NULL")
+      .where("rating IS NULL OR price_range IS NULL OR category IS NULL OR image_url IS NULL")
 
     if places_without_content.empty?
-      puts "✅ All places already have AI-generated rating, price range, and category!"
+      puts "✅ All places already have AI-generated rating, price range, category, and image url!"
       exit 0
     end
 
@@ -42,6 +42,11 @@ namespace :city do
 
     places_without_content.each_with_index do |place, index|
       begin
+        if place.rating.present? && place.price_range.present? && place.category.present? && place.image_url.present?
+          puts "  [#{index + 1}/#{places_without_content.size}] Skipping #{place.name} (already complete)"
+          next
+        end
+
         print "  [#{index + 1}/#{places_without_content.size}] Generating content for #{place.name}..."
 
         content = AiContentGenerator.generate_place_content(
@@ -49,11 +54,12 @@ namespace :city do
           neighborhood: place.neighborhood
         )
 
-        if content && (content[:rating].present? || content[:price_range].present? || content[:category].present?)
+        if content && (content[:rating].present? || content[:price_range].present? || content[:category].present? || content[:image_url].present?)
           updates = {}
           updates[:rating] = content[:rating] if content[:rating].present?
           updates[:price_range] = content[:price_range] if content[:price_range].present?
           updates[:category] = content[:category] if content[:category].present?
+          updates[:image_url] = content[:image_url] if content[:image_url].present?
           
           place.update_columns(updates)
           generated_count += 1
