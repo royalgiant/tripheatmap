@@ -97,11 +97,13 @@ class AiContentGenerator
 
       1.  **Average Rating**: A numerical rating from 1.0 to 5.0, in increments of 0.5 (e.g., 3.0, 3.5, 4.0, 4.5).
       2.  **Price Range**: A string representing the price level using dollar signs: $, $$, $$$, or $$$$.
+      3.  **Category**: For hotels, determine if it fits into one of these specific categories: "luxury" or "boutique". If it does not clearly fit either (e.g., it's a standard chain hotel, motel, or budget inn), return null.
 
       Return ONLY valid JSON (no markdown, no code blocks):
       {
         "rating": 4.0,
-        "price_range": "$$"
+        "price_range": "$$",
+        "category": "boutique"
       }
     PROMPT
 

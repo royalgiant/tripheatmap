@@ -27,11 +27,10 @@ namespace :city do
       .joins(:neighborhood)
       .where(neighborhoods: { city: city_name.downcase })
       .where(place_type: ['hotel', 'hostel'])
-      .where(rating: nil)
-      .or(Place.joins(:neighborhood).where(neighborhoods: { city: city_name.downcase }, place_type: ['hotel', 'hostel'], price_range: nil))
+      .where("rating IS NULL OR price_range IS NULL OR category IS NULL")
 
     if places_without_content.empty?
-      puts "✅ All places already have AI-generated rating and price range!"
+      puts "✅ All places already have AI-generated rating, price range, and category!"
       exit 0
     end
 
@@ -50,11 +49,13 @@ namespace :city do
           neighborhood: place.neighborhood
         )
 
-        if content && content[:rating].present? && content[:price_range].present?
-          place.update_columns(
-            rating: content[:rating],
-            price_range: content[:price_range]
-          )
+        if content && (content[:rating].present? || content[:price_range].present? || content[:category].present?)
+          updates = {}
+          updates[:rating] = content[:rating] if content[:rating].present?
+          updates[:price_range] = content[:price_range] if content[:price_range].present?
+          updates[:category] = content[:category] if content[:category].present?
+          
+          place.update_columns(updates)
           generated_count += 1
           puts " ✅"
         else
@@ -74,6 +75,26 @@ namespace :city do
     puts "=" * 80
     puts "✅ Generated AI content for #{generated_count} places"
     puts "❌ Failed: #{failed_count}" if failed_count > 0
+    puts "=" * 80
+  end
+
+  desc "Generate AI content for places in ALL cities"
+  task :generate_all_places_ai_content => :environment do
+    puts "=" * 80
+    puts "Generating AI Place Content for All Cities"
+    puts "=" * 80
+    puts ""
+
+    CityDataImporter::CITY_NAMES.keys.each do |city_key|
+      # Re-enable the task so it can be run multiple times
+      Rake::Task["city:generate_place_ai_content"].reenable
+      # Invoke the task for the current city
+      Rake::Task["city:generate_place_ai_content"].invoke(city_key)
+      puts ""
+    end
+
+    puts "=" * 80
+    puts "✅ Completed Place Content Generation for All Cities"
     puts "=" * 80
   end
 end
