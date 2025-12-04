@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   get 'best-luxury-hotels-in-:city', to: 'best_luxury_hotel#show', as: 'best_luxury_hotels'
   get 'best-boutique-hotels', to: 'best_boutique_hotel#index', as: 'best_boutique_hotels_index'
   get 'best-boutique-hotels-in-:city', to: 'best_boutique_hotel#show', as: 'best_boutique_hotels'
+  get 'best-cheap-hotels', to: 'best_cheap_hotel#index', as: 'best_cheap_hotels_index'
+  get 'best-cheap-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_cheap_hotels'
+  get 'best-affordable-hotels', to: 'best_cheap_hotel#index', as: 'best_affordable_hotels_index'
+  get 'best-affordable-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_affordable_hotels'
+  get 'best-budget-hotels', to: 'best_cheap_hotel#index', as: 'best_budget_hotels_index'
+  get 'best-budget-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_budget_hotels'
   get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'
   get 'best-neighborhood-in-:city', to: 'best_neighborhood#show', as: 'best_neighborhood'
   resources :neighborhoods, only: [:show], param: :slug

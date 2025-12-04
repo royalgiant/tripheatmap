@@ -1,0 +1,36 @@
+class BestCheapHotelController < ApplicationController
+  include CityContext
+
+  before_action :set_city_context, only: [:show]
+
+  def index
+    @cities = get_cities
+    @cities_grouped = get_cities_grouped_by_location
+  end
+
+  def show
+    @city_display_name = city_display_name
+    @country = @city_config['country'] || 'United States'
+    @cheap_hotels = cheap_hotels
+    @has_hotels = @cheap_hotels.any?
+    @related_cities = fetch_related_cities
+    @seo_title = "Best Cheap Hotels in #{@city_display_name} (#{Time.current.year}) | Budget & Affordable Stays"
+    @seo_description = "Find the best budget-friendly and affordable hotels in #{@city_display_name}. Quality accommodations at great prices."
+    @canonical_url = best_cheap_hotels_url(@url_slug)
+  end
+
+  private
+
+  def cheap_hotels
+    Place
+      .joins(:neighborhood)
+      .where(neighborhoods: { city: city_name.downcase })
+      .where(place_type: ['hotel', 'hostel'])
+      .where(price_range: ['$', '$$'])
+      .order(rating: :desc, review_count: :desc)
+  end
+
+  def related_city_path(slug)
+    best_cheap_hotels_path(slug)
+  end
+end

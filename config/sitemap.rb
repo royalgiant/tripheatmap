@@ -8,6 +8,9 @@ SitemapGenerator::Sitemap.create do
   add best_neighborhood_index_path, changefreq: "daily", priority: 0.9
   add best_boutique_hotels_index_path, changefreq: "daily", priority: 0.9
   add best_luxury_hotels_index_path, changefreq: "daily", priority: 0.9
+  add best_cheap_hotels_index_path, changefreq: "daily", priority: 0.9
+  add best_affordable_hotels_index_path, changefreq: "daily", priority: 0.9
+  add best_budget_hotels_index_path, changefreq: "daily", priority: 0.9
 
   # Build city list from database (moved inside block to avoid loading at require time)
   city_data_for_sitemap = Neighborhood
@@ -32,6 +35,9 @@ SitemapGenerator::Sitemap.create do
     add best_neighborhood_path(slug), changefreq: "weekly", priority: 0.8
     add best_boutique_hotels_path(slug), changefreq: "weekly", priority: 0.8
     add best_luxury_hotels_path(slug), changefreq: "weekly", priority: 0.8
+    add best_cheap_hotels_path(slug), changefreq: "weekly", priority: 0.8
+    add best_affordable_hotels_path(slug), changefreq: "weekly", priority: 0.8
+    add best_budget_hotels_path(slug), changefreq: "weekly", priority: 0.8
     add places_map_path(slug), changefreq: "weekly", priority: 0.7
   end
 
