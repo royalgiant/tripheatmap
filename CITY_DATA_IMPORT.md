@@ -10,6 +10,7 @@ This guide explains how to import neighborhood boundaries and places data for th
 # Full import (boundaries + places)
 kamal app exec -i "bundle exec rake 'city:import[las vegas,true]'"
 rake city:import[dallas]
+bundle exec rake "city:import[dallas,true]"
 
 # Or use the service directly
 bin/rails runner "CityDataImporter.new('dallas').import_all"

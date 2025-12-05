@@ -1,0 +1,97 @@
+<% content_for :head do %>
+  <title><%= @seo_title %></title>
+  <meta name="description" content="<%= @seo_description %>">
+  <link rel="canonical" href="<%= @canonical_url %>">
+  <meta property="og:title" content="<%= @seo_title %>">
+  <meta property="og:description" content="<%= @seo_description %>">
+  <meta property="og:url" content="<%= @canonical_url %>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @seo_title %>">
+  <meta name="twitter:description" content="<%= @seo_description %>">
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold mb-2">Hotels Near Landmarks</p>
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      <%= @landmarks.count %> Popular Landmarks in <%= @city_display_name %>
+    </h1>
+    <p class="text-xl text-gray-600">
+      Find hotels near top attractions, museums, monuments, and points of interest in <%= @city_display_name %>.
+    </p>
+  </div>
+
+  <% if @landmarks.any? %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @landmarks.each do |landmark| %>
+          <div class="px-4 py-5 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center min-w-0 flex-1">
+                <span class="mr-3 text-2xl flex-shrink-0">
+                  <% case landmark.place_type %>
+                  <% when 'airport' %>
+                    ✈️
+                  <% when 'museum' %>
+                    🏛️
+                  <% when 'monument' %>
+                    🗿
+                  <% when 'beach' %>
+                    🏖️
+                  <% when 'university' %>
+                    🎓
+                  <% when 'convention_center' %>
+                    🏢
+                  <% when 'theme_park' %>
+                    🎢
+                  <% when 'zoo' %>
+                    🦁
+                  <% when 'park' %>
+                    🌳
+                  <% else %>
+                    📍
+                  <% end %>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <h3 class="text-lg font-bold text-gray-900 truncate">
+                    <%= landmark.name %>
+                  </h3>
+                  <p class="mt-1 text-sm text-gray-500">
+                    <%= landmark.neighborhood&.name %> · <%= landmark.place_type.titleize %>
+                  </p>
+                </div>
+              </div>
+              <div class="ml-5 flex gap-3 flex-shrink-0">
+                <a href="https://www.google.com/maps/search/?api=1&query=<%= landmark.lat %>,<%= landmark.lon %>" target="_blank" rel="noopener" class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                  Get Direction
+                </a>
+                <%= link_to "Hotels Near #{landmark.name}", hotels_near_landmark_path(landmark.slug, @city_slug), class: "inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="text-6xl mb-4">📍</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Landmarks Found</h3>
+      <p class="text-gray-600 max-w-md mx-auto">
+        We couldn't find any landmarks in <%= @city_display_name %> yet.
+        Check back later as we update our data!
+      </p>
+      <%= link_to "Browse All Cities", hotels_near_landmark_index_path, class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>
+    </div>
+  <% end %>
+
+  <!-- Back to All Cities -->
+  <div class="mt-8 text-center">
+    <%= link_to hotels_near_landmark_index_path, class: "inline-flex items-center text-blue-600 hover:text-blue-800 font-medium" do %>
+      <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to All Cities
+    <% end %>
+  </div>
+</div>

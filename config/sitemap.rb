@@ -10,6 +10,7 @@ SitemapGenerator::Sitemap.create do
   add best_cheap_hotels_index_path, changefreq: "daily", priority: 0.9
   add best_affordable_hotels_index_path, changefreq: "daily", priority: 0.9
   add best_budget_hotels_index_path, changefreq: "daily", priority: 0.9
+  add hotels_near_landmark_index_path, changefreq: "daily", priority: 0.9
 
   city_data_for_sitemap = Neighborhood
     .where.not(city: nil)
@@ -47,6 +48,20 @@ SitemapGenerator::Sitemap.create do
 
     if city_slug
       add hotels_near_path(city_slug, neighborhood.slug), changefreq: "weekly", priority: 0.7
+    end
+  end
+
+  Place.landmarks
+       .joins(:neighborhood)
+       .where.not(name: ['Unnamed', nil, ''])
+       .where.not(slug: nil)
+       .find_each do |landmark|
+    city_slug = city_data_for_sitemap.find { |city_data|
+      city_data[:key].downcase == landmark.neighborhood.city.downcase
+    }&.dig(:slug)
+
+    if city_slug && landmark.slug.present?
+      add hotels_near_landmark_path(city_slug, landmark.slug), changefreq: "weekly", priority: 0.8
     end
   end
 end

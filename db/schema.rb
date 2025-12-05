@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_01_171334) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_05_195010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -99,12 +99,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_01_171334) do
     t.string "trip_affiliate_url"
     t.string "category"
     t.string "image_url"
+    t.string "slug"
     t.index ["google_place_id"], name: "index_places_on_google_place_id", unique: true
     t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
     t.index ["neighborhood_id", "place_type"], name: "index_places_on_neighborhood_id_and_place_type"
     t.index ["neighborhood_id"], name: "index_places_on_neighborhood_id"
     t.index ["place_type"], name: "index_places_on_place_type"
     t.index ["price_range"], name: "index_places_on_price_range"
+    t.index ["slug"], name: "index_places_on_slug", unique: true
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 

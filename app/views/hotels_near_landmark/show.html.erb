@@ -14,11 +14,18 @@
 <div class="container mx-auto px-4 py-8">
   <div class="text-center mb-12">
     <h1 class="text-4xl font-bold text-gray-900 mb-4">
-      <%= @hotels.count %> Hotels in <%= @city_display_name %> near <%= @neighborhood.name %>
+      <%= @hotels.count %> Hotels near <%= @landmark.name %> in <%= @city_display_name %>
     </h1>
-    <p class="text-xl text-gray-600">
-      Find the best hotels and accommodations near <%= @neighborhood.name %> in <%= @city_display_name %>.
+    <p class="text-xl text-gray-600 mb-4">
+      Find the best hotels within walking distance of <%= @landmark.name %>.
     </p>
+    <a href="https://www.google.com/maps/search/?api=1&query=<%= @landmark.lat %>,<%= @landmark.lon %>" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+      <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      Directions to <%= @landmark.name %>
+    </a>
   </div>
 
   <% if @has_hotels %>
@@ -98,6 +105,11 @@
                 </h3>
 
                 <div class="hidden sm:flex items-center gap-x-2 flex-shrink-0">
+                  <% if hotel.distance_meters.present? %>
+                    <span class="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-500/10">
+                      <%= number_to_human(hotel.distance_meters, units: { unit: 'm', thousand: 'km' }, precision: 1, strip_insignificant_zeros: true) %> away
+                    </span>
+                  <% end %>
                   <% if hotel.price_range.present? %>
                     <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10">
                       <%= hotel.price_range %>
@@ -117,18 +129,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span class="font-medium text-gray-700"><%= @neighborhood.name %></span>
+                  <span class="font-medium text-gray-700">Near <%= @landmark.name %></span>
+                  <span class="hidden sm:inline text-gray-300">|</span>
+                  <span><%= hotel.neighborhood&.name %></span>
                   <span class="hidden sm:inline text-gray-300">|</span>
                   <span><%= @city_display_name %></span>
+                  <% if hotel.address.present? %>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="truncate">Hotel Address: <%= hotel.address %></span>
+                  <% end %>
                 </div>
-
-                <% if hotel.address.present? %>
-                  <span class="hidden sm:inline text-gray-300">&middot;</span>
-                  <span class="truncate"><%= hotel.address %></span>
-                <% end %>
               </div>
 
-              <div class="mt-2 flex sm:hidden items-center gap-x-2">
+              <div class="mt-2 flex sm:hidden items-center gap-x-2 flex-wrap">
+                <% if hotel.distance_meters.present? %>
+                  <span class="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-500/10">
+                    <%= number_to_human(hotel.distance_meters, units: { unit: 'm', thousand: 'km' }, precision: 1, strip_insignificant_zeros: true) %> away
+                  </span>
+                <% end %>
                 <% if hotel.price_range.present? %>
                   <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10"><%= hotel.price_range %></span>
                 <% end %>
@@ -152,8 +170,6 @@
                   <a href="https://www.google.com/maps/search/?api=1&query=<%= hotel.lat %>,<%= hotel.lon %>" target="_blank" rel="noopener" class="flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto">
                     Directions
                   </a>
-
-                  <%= link_to "Neighborhood", neighborhood_path(@neighborhood.slug), class: "flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto" %>
                 </div>
               </div>
             </div>
@@ -166,21 +182,27 @@
       <div class="text-6xl mb-4">🏨</div>
       <h3 class="text-2xl font-medium text-gray-900 mb-2">No Hotels Found</h3>
       <p class="text-gray-600 max-w-md mx-auto">
-        We couldn't find any hotels near <%= @neighborhood.name %> in <%= @city_display_name %> yet.
+        We couldn't find any hotels near <%= @landmark.name %> in <%= @city_display_name %> yet.
         Check back later as we update our data!
       </p>
-      <%= link_to "View All Neighborhoods in #{@city_display_name}", where_to_stay_path(@url_slug), class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>
+      <%= link_to "View All Hotels in #{@city_display_name}", where_to_stay_path(@url_slug), class: "inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium hover:underline" %>
     </div>
   <% end %>
 
-  <!-- Neighborhood Info -->
+  <!-- Landmark Info -->
   <div class="mt-12 bg-blue-50 rounded-lg p-6">
-    <h2 class="text-2xl font-bold text-gray-900 mb-4">About <%= @neighborhood.name %></h2>
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">About <%= @landmark.name %></h2>
     <p class="text-gray-700 mb-4">
-      <%= @neighborhood.name %> is a neighborhood in <%= @city_display_name %>, <%= @country %>.
-      Discover <%= @hotels.count %> hotels and accommodations in this area.
+      <%= @landmark.name %> is a <%= @landmark.place_type.titleize %> in <%= @city_display_name %>, <%= @country %>.
+      <% if @has_hotels %>
+        Discover <%= @hotels.count %> hotels within walking distance of this location.
+      <% end %>
     </p>
-    <%= link_to "Explore #{@neighborhood.name} →", neighborhood_path(@neighborhood.slug), class: "inline-flex items-center text-blue-600 hover:text-blue-700 font-medium" %>
+    <% if @landmark.address.present? %>
+      <p class="text-gray-600 text-sm">
+        <strong>Address:</strong> <%= @landmark.address %>
+      </p>
+    <% end %>
   </div>
 </div>
 

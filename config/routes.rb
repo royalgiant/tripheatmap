@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'best-budget-hotels', to: 'best_cheap_hotel#index', as: 'best_budget_hotels_index'
   get 'best-budget-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_budget_hotels'
   get 'hotels-in-:city-near-:neighborhood', to: 'hotels_near#show', as: 'hotels_near'
+  get 'hotels-near-landmarks', to: 'hotels_near_landmark#index', as: 'hotels_near_landmark_index'
+  get 'hotels-near-landmarks-in-:city', to: 'hotels_near_landmark#city', as: 'hotels_near_landmark_city'
+  get 'hotels-near-:landmark-in-:city', to: 'hotels_near_landmark#show', as: 'hotels_near_landmark'
   get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'
   get 'best-neighborhood-in-:city', to: 'best_neighborhood#show', as: 'best_neighborhood'
   resources :neighborhoods, only: [:show], param: :slug

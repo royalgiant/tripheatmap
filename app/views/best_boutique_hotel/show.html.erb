@@ -41,7 +41,7 @@
       </div>
       
       <div id="filter-panel" class="hidden border-t border-gray-200 py-10">
-        <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
           <fieldset>
             <legend class="block font-medium text-gray-900">Price</legend>
             <div class="space-y-3 pt-6">
@@ -49,6 +49,18 @@
                 <div class="flex items-center">
                   <input id="price-<%= price.length %>" name="price[]" value="<%= price %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
                   <label for="price-<%= price.length %>" class="ml-3 text-sm text-gray-600"><%= price %></label>
+                </div>
+              <% end %>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="block font-medium text-gray-900">Rating</legend>
+            <div class="space-y-3 pt-6">
+              <% [['4.5', '4.5+ Stars'], ['4.0', '4.0+ Stars'], ['3.5', '3.5+ Stars'], ['3.0', '3.0+ Stars']].each do |rating_val, label| %>
+                <div class="flex items-center">
+                  <input id="rating-<%= rating_val %>" name="rating[]" value="<%= rating_val %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <label for="rating-<%= rating_val %>" class="ml-3 text-sm text-gray-600"><%= label %></label>
                 </div>
               <% end %>
             </div>
@@ -72,9 +84,10 @@
     <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
       <ul role="list" class="divide-y divide-gray-200" id="hotel-list">
         <% @boutique_hotels.each do |hotel| %>
-          <li 
+          <li
             class="hotel-item flex flex-col sm:flex-row gap-x-6 py-5 hover:bg-gray-50 transition duration-150 ease-in-out px-4 sm:px-6"
             data-price="<%= hotel.price_range %>"
+            data-rating="<%= hotel.rating %>"
             data-neighborhood-id="<%= hotel.neighborhood_id %>"
           >
             <div class="flex-auto min-w-0">
@@ -172,10 +185,11 @@
     // Filter Logic
     function filterHotels() {
       const selectedPrices = $('input[name="price[]"]:checked').map(function() { return this.value; }).get();
+      const selectedRatings = $('input[name="rating[]"]:checked').map(function() { return parseFloat(this.value); }).get();
       const selectedHoods = $('input[name="neighborhood[]"]:checked').map(function() { return this.value; }).get();
 
       // Update Filter Count Text
-      const totalFilters = selectedPrices.length + selectedHoods.length;
+      const totalFilters = selectedPrices.length + selectedRatings.length + selectedHoods.length;
       if (totalFilters > 0) {
         $('#filter-count-text').text(`${totalFilters} Filters`);
         $('#clear-filters').removeClass('invisible');
@@ -186,12 +200,14 @@
 
       $('.hotel-item').each(function() {
         const price = $(this).data('price');
+        const rating = parseFloat($(this).data('rating'));
         const hoodId = String($(this).data('neighborhood-id'));
 
         const priceMatch = selectedPrices.length === 0 || selectedPrices.includes(price);
+        const ratingMatch = selectedRatings.length === 0 || selectedRatings.some(minRating => rating >= minRating);
         const hoodMatch = selectedHoods.length === 0 || selectedHoods.includes(hoodId);
 
-        if (priceMatch && hoodMatch) {
+        if (priceMatch && ratingMatch && hoodMatch) {
           $(this).show();
         } else {
           $(this).hide();
