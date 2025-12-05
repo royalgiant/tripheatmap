@@ -53,10 +53,17 @@
                 <span class="w-5 text-center mr-2">🍸</span>
                 <%= pluralize(neighborhood.neighborhood_places_stat.bar_count, 'Bar') %>
               </div>
-              <div class="flex items-center">
-                <span class="w-5 text-center mr-2">🏨</span>
-                <%= pluralize(neighborhood.neighborhood_places_stat.hotel_count, 'Hotel') %>
-              </div>
+              <% if neighborhood.neighborhood_places_stat.hotel_count > 0 %>
+                <%= link_to hotels_near_path(@url_slug, neighborhood.slug), class: "flex items-center text-blue-600 hover:text-blue-800 transition-colors", target: "_blank", rel: "noopener" do %>
+                  <span class="w-5 text-center mr-2">🏨</span>
+                  <%= pluralize(neighborhood.neighborhood_places_stat.hotel_count, 'Hotel') %>
+                <% end %>
+              <% else %>
+                <div class="flex items-center">
+                  <span class="w-5 text-center mr-2">🏨</span>
+                  <%= pluralize(neighborhood.neighborhood_places_stat.hotel_count, 'Hotel') %>
+                </div>
+              <% end %>
               <div class="flex items-center">
                 <span class="w-5 text-center mr-2">🛏️</span>
                 <%= pluralize(neighborhood.neighborhood_places_stat.hostel_count, 'Hostel') %>

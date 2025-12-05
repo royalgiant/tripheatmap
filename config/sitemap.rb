@@ -1,4 +1,3 @@
-# Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "https://tripheatmap.com"
 # Generate a plain XML file instead of the default gzipped version
 SitemapGenerator::Sitemap.compress = false
@@ -12,7 +11,6 @@ SitemapGenerator::Sitemap.create do
   add best_affordable_hotels_index_path, changefreq: "daily", priority: 0.9
   add best_budget_hotels_index_path, changefreq: "daily", priority: 0.9
 
-  # Build city list from database (moved inside block to avoid loading at require time)
   city_data_for_sitemap = Neighborhood
     .where.not(city: nil)
     .group(:city)
@@ -41,8 +39,14 @@ SitemapGenerator::Sitemap.create do
     add places_map_path(slug), changefreq: "weekly", priority: 0.7
   end
 
-  # Add all neighborhood pages
   Neighborhood.find_each do |neighborhood|
     add neighborhood_path(neighborhood), changefreq: "weekly", priority: 0.6
+    city_slug = city_data_for_sitemap.find { |city_data|
+      city_data[:key].downcase == neighborhood.city.downcase
+    }&.dig(:slug)
+
+    if city_slug
+      add hotels_near_path(city_slug, neighborhood.slug), changefreq: "weekly", priority: 0.7
+    end
   end
 end

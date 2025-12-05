@@ -221,7 +221,8 @@ module WhereToStay
         counts = {
           restaurants: stats.restaurant_count.to_i,
           cafes: stats.cafe_count.to_i,
-          bars: stats.bar_count.to_i
+          bars: stats.bar_count.to_i,
+          hotels: stats.hotel_count.to_i
         }
 
         {
@@ -261,6 +262,7 @@ module WhereToStay
           rank: rank,
           neighborhood_id: neighborhood.id,
           name: neighborhood.name,
+          slug: neighborhood.slug,
           vibrancy_score: metric[:vibrancy]&.round(1),
           tags: tag_assigner.tags_for(vibrancy: metric[:vibrancy], densities: densities),
           densities: format_densities(densities),
