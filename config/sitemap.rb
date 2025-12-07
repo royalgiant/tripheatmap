@@ -11,6 +11,7 @@ SitemapGenerator::Sitemap.create do
   add best_affordable_hotels_index_path, changefreq: "daily", priority: 0.9
   add best_budget_hotels_index_path, changefreq: "daily", priority: 0.9
   add hotels_near_landmark_index_path, changefreq: "daily", priority: 0.9
+  add hotels_near_airport_index_path, changefreq: "daily", priority: 0.9
 
   city_data_for_sitemap = Neighborhood
     .where.not(city: nil)
@@ -37,6 +38,8 @@ SitemapGenerator::Sitemap.create do
     add best_cheap_hotels_path(slug), changefreq: "weekly", priority: 0.8
     add best_affordable_hotels_path(slug), changefreq: "weekly", priority: 0.8
     add best_budget_hotels_path(slug), changefreq: "weekly", priority: 0.8
+    add hotels_near_landmark_city_path(slug), changefreq: "weekly", priority: 0.8
+    add hotels_near_airport_city_path(slug), changefreq: "weekly", priority: 0.8
     add places_map_path(slug), changefreq: "weekly", priority: 0.7
   end
 
@@ -62,6 +65,20 @@ SitemapGenerator::Sitemap.create do
 
     if city_slug && landmark.slug.present?
       add hotels_near_landmark_path(city_slug, landmark.slug), changefreq: "weekly", priority: 0.8
+    end
+  end
+
+  Place.where(place_type: 'airport')
+       .joins(:neighborhood)
+       .where.not(name: ['Unnamed', nil, ''])
+       .where.not(slug: nil)
+       .find_each do |airport|
+    city_slug = city_data_for_sitemap.find { |city_data|
+      city_data[:key].downcase == airport.neighborhood.city.downcase
+    }&.dig(:slug)
+
+    if city_slug && airport.slug.present?
+      add hotels_near_airport_path(airport.slug, city_slug), changefreq: "weekly", priority: 0.8
     end
   end
 end

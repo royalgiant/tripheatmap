@@ -2810,9 +2810,10 @@ philadelphia:
   city: "Philadelphia"
   state: "PA"
   state_fips: '42'
-  county_fips: '101'  # Philadelphia County
+  county_fips: ['101', '045']  # Philadelphia and Delaware Counties (for PHL)
   tripcomurl: https://www.trip.com/hotels/list?city=26153&display=Philadelphia&optionId=26153&optionType=City&optionName=Philadelphia&Allianceid=7375838&SID=279148115&trip_sub1=philadelphia&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Delaware County to capture PHL Airport."
 
 'san antonio':
   name: "San Antonio"
@@ -2891,9 +2892,10 @@ indianapolis:
   city: "San Francisco"
   state: "CA"
   state_fips: '06'
-  county_fips: '075'  # San Francisco County
+  county_fips: ['075', '081']  # San Francisco and San Mateo Counties (for SFO)
   tripcomurl: https://www.trip.com/hotels/list?city=313&display=San%20Francisco&optionId=313&optionType=City&optionName=San%20Francisco&Allianceid=7375838&SID=279148115&trip_sub1=san%20francisco&trip_sub3=D7599167
   zillow: true
+  notes: "Includes San Mateo County to capture SFO Airport."
 
 seattle:
   name: "Seattle"
@@ -2909,9 +2911,10 @@ denver:
   city: "Denver"
   state: "CO"
   state_fips: '08'
-  county_fips: '031'  # Denver County
+  county_fips: ['031', '001']  # Denver and Adams Counties (for DIA)
   tripcomurl: https://www.trip.com/hotels/list?city=20099&display=Denver&optionId=20099&optionType=City&optionName=Denver&Allianceid=7375838&SID=279148115&trip_sub1=denver&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Adams County to fully capture Denver International Airport area."
 
 'oklahoma city':
   name: "Oklahoma City"
@@ -2927,9 +2930,10 @@ washington:
   city: "Washington"
   state: "DC"
   state_fips: '11'
-  county_fips: '001'  # District of Columbia
+  county_fips: ['001', '013', '107', '059']  # DC, Arlington (DCA), Loudoun/Fairfax (IAD)
   tripcomurl: https://www.trip.com/hotels/list?city=26363&display=Washington%20D.C.&optionId=26363&optionType=City&optionName=Washington%20D.C.&Allianceid=7375838&SID=279148115&trip_sub1=washingtondc&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Arlington, Loudoun, and Fairfax counties (VA) to capture DCA and IAD airports."
 
 nashville:
   name: "Nashville"
@@ -2945,9 +2949,10 @@ dallas:
   city: "Dallas"
   state: "TX"
   state_fips: '48'
-  county_fips: '113'  # Dallas County
+  county_fips: ['113', '439']  # Dallas and Tarrant Counties (for DFW airport)
   tripcomurl: https://www.trip.com/hotels/list?city=705&display=Dallas&optionId=705&optionType=City&optionName=Dallas&Allianceid=7375838&SID=279148115&trip_sub1=dallas&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Tarrant County to capture DFW Airport."
 
 chicago:
   name: "Chicago"
@@ -3098,9 +3103,10 @@ atlanta:
   city: "Atlanta"
   state: "GA"
   state_fips: '13'
-  county_fips: '121'  # Fulton County
+  county_fips: ['121', '063']  # Fulton and Clayton Counties (for ATL airport)
   tripcomurl: https://www.trip.com/hotels/list?city=27072&display=Atlanta&optionId=27072&optionType=City&optionName=Atlanta&Allianceid=7375838&SID=279148115&trip_sub1=atlanta&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Clayton County to capture Hartsfield-Jackson Airport."
 
 mesa:
   name: "Mesa"
@@ -3116,9 +3122,10 @@ mesa:
   city: "Kansas City"
   state: "MO"
   state_fips: '29'
-  county_fips: '095'  # Jackson County
+  county_fips: ['095', '165', '047']  # Jackson, Platte, and Clay Counties (for MCI)
   tripcomurl: https://www.trip.com/hotels/list?city=25410&display=Kansas%20City&optionId=25410&optionType=City&optionName=Kansas%20City&Allianceid=7375838&SID=279148115&trip_sub1=kansas%20city&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Platte and Clay counties to capture MCI Airport."
 
 raleigh:
   name: "Raleigh"
@@ -3260,9 +3267,10 @@ henderson:
   city: "New Orleans"
   state: "LA"
   state_fips: '22'
-  county_fips: '071'  # Orleans Parish
+  county_fips: ['071', '051']  # Orleans and Jefferson Parishes (for MSY)
   tripcomurl: https://www.trip.com/hotels/list?city=1186&display=New%20Orleans&optionId=1186&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Jefferson Parish to capture MSY Airport."
 
 honolulu:
   name: "Honolulu"
@@ -3359,9 +3367,10 @@ cincinnati:
   city: "Cincinnati"
   state: "OH"
   state_fips: '39'
-  county_fips: '061'  # Hamilton County
+  county_fips: ['061', '015']  # Hamilton OH and Boone KY (for CVG)
   tripcomurl: https://www.trip.com/hotels/list?city=1184&display=Cincinnati&optionId=1184&optionType=City&optionName=Cincinnati&Allianceid=7375838&SID=279148115&trip_sub1=cincinnati&trip_sub3=D7599167
   zillow: true
+  notes: "Includes Boone County, KY to capture CVG Airport."
 
 greensboro:
   name: "Greensboro"
@@ -3493,8 +3502,9 @@ scottsdale:
   city: "St. Louis"
   state: "MO"
   state_fips: '29'
-  county_fips: '510'  # St. Louis City (independent city)
+  county_fips: ['510', '189']  # St. Louis City and St. Louis County (for STL)
   tripcomurl: https://www.trip.com/hotels/list?city=798983&display=Saint%20Louis&optionId=798983&optionType=City&optionName=Saint%20Louis&Allianceid=7375838&SID=279148115&trip_sub1=stlouis&trip_sub3=D7599167
+  notes: "Includes St. Louis County to capture Lambert Airport."
 
 anchorage:
   name: "Anchorage"

@@ -20,25 +20,28 @@
       </div>
       <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-3 xl:col-span-2 xl:mt-0">
         <div>
-          <h3 class="text-sm font-semibold leading-6 text-white">Where to Stay</h3>
+          <h3 class="text-sm font-semibold leading-6 text-white">Popular Searches</h3>
           <ul role="list" class="mt-3 space-y-4">
             <li>
-              <a href="<%= where_to_stay_index_path %>" class="text-sm leading-6 text-gray-300 hover:text-white">All Cities</a>
+              <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
             <li>
-              <a href="<%= best_neighborhood_index_path %>" class="text-sm leading-6 text-gray-300 hover:text-white">Best Neighborhoods</a>
+              <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
             <li>
-              <a href="<%= where_to_stay_path('new-york') %>" class="text-sm leading-6 text-gray-300 hover:text-white">New York</a>
+              <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
             <li>
-              <a href="<%= where_to_stay_path('los-angeles') %>" class="text-sm leading-6 text-gray-300 hover:text-white">Los Angeles</a>
+              <%= link_to "Best Cheap Hotels", best_cheap_hotels_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
             <li>
-              <a href="<%= where_to_stay_path('chicago') %>" class="text-sm leading-6 text-gray-300 hover:text-white">Chicago</a>
+              <%= link_to "Hotels Near Landmarks", hotels_near_landmark_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
             <li>
-              <a href="<%= where_to_stay_path('atlanta') %>" class="text-sm leading-6 text-gray-300 hover:text-white">Atlanta</a>
+              <%= link_to "Hotels Near Airports", hotels_near_airport_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
+            </li>
+            <li>
+              <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
           </ul>
         </div>

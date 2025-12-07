@@ -183,17 +183,23 @@ class NeighborhoodBoundaryImporter
         state = fips[:state]
         county_name = fips[:county]
 
-        importer = CensusTractImporter.new(
-          state: fips[:state_fips],
-          county: fips[:county_fips],
-          city_name: city_name,
-          county_name: county_name,
-          enrich_names: true
-        )
-        count = importer.import_tracts
-        results[:neighborhoods] = count
+        total_count = 0
+        counties = Array(fips[:county_fips])
+
+        counties.each do |county_fips_code|
+          importer = CensusTractImporter.new(
+            state: fips[:state_fips],
+            county: county_fips_code,
+            city_name: city_name,
+            county_name: county_name,
+            enrich_names: true
+          )
+          total_count += importer.import_tracts
+          @errors.concat(importer.errors)
+        end
+
+        results[:neighborhoods] = total_count
         results[:method] = 'census_tracts'
-        @errors.concat(importer.errors)
       rescue => e
         Rails.logger.error "Failed to import Census Tracts: #{e.message}"
         @errors << "Census Tracts import failed: #{e.message}"

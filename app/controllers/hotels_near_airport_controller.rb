@@ -1,14 +1,14 @@
-class HotelsNearLandmarkController < ApplicationController
+class HotelsNearAirportController < ApplicationController
   include CityContext
 
-  before_action :set_city_and_landmark, only: [:show]
+  before_action :set_city_and_airport, only: [:show]
 
   def index
-    @cities_with_landmarks = cities_with_popular_landmarks
-    @cities_grouped = get_cities_grouped_by_location(@cities_with_landmarks)
-    @seo_title = "Hotels Near Popular Landmarks (#{Time.current.year}) | Find Hotels Near Attractions"
-    @seo_description = "Find hotels near popular landmarks, attractions, airports, and points of interest in major cities worldwide."
-    @canonical_url = hotels_near_landmark_index_url
+    @cities_with_airports = cities_with_airports
+    @cities_grouped = get_cities_grouped_by_location(@cities_with_airports)
+    @seo_title = "Hotels Near Major Airports (#{Time.current.year}) | Find Airport Hotels"
+    @seo_description = "Find hotels near major international and domestic airports in cities worldwide. Perfect for layovers and business travel."
+    @canonical_url = hotels_near_airport_index_url
   end
 
   def city
@@ -16,7 +16,7 @@ class HotelsNearLandmarkController < ApplicationController
     @city_config = CityDataImporter.city_configs[@city_slug]
 
     unless @city_config
-      redirect_to hotels_near_landmark_index_path, alert: "City not found" and return
+      redirect_to hotels_near_airport_index_path, alert: "City not found" and return
     end
 
     @city_name = CityDataImporter::CITY_NAMES[@city_slug]
@@ -24,42 +24,60 @@ class HotelsNearLandmarkController < ApplicationController
     @url_slug = @city_slug
     @country = @city_config['country'] || 'United States'
 
-    @landmarks = Place
+    @airports = Place
       .includes(:neighborhood)
       .joins(:neighborhood)
       .where(neighborhoods: { city: @city_name.downcase })
-      .where(place_type: ['attraction', 'museum', 'monument', 'theme_park'])
+      .where(place_type: ['airport'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
-      .where("places.name ~ '^[A-Z]'")
-      .where("LENGTH(places.name) > 3")
-      .where("places.name !~ '[\\\\]'")
       .distinct
       .order('places.name ASC')
 
-    @seo_title = "Hotels Near Popular Landmarks in #{@city_display_name} (#{Time.current.year})"
-    @seo_description = "Find hotels near #{@landmarks.count} popular landmarks in #{@city_display_name}. Explore attractions, museums, monuments, and points of interest."
-    @canonical_url = hotels_near_landmark_city_url(@city_slug)
+    @seo_title = "Hotels Near Airports in #{@city_display_name} (#{Time.current.year})"
+    @seo_description = "Find hotels near #{@airports.count} airports in #{@city_display_name}. Compare prices and book your stay near the terminal."
+    @canonical_url = hotels_near_airport_city_url(@city_slug)
   end
 
   def show
-    @hotels = hotels_near_landmark(@landmark, radius_km: 5.0)
+    @hotels = hotels_near_airport(@airport, radius_km: 5.0)
     @has_hotels = @hotels.any?
-    @seo_title = "Hotels near #{@landmark.name} in #{@city_display_name} (#{Time.current.year}) | Best Stays"
-    @seo_description = "Find the best hotels near #{@landmark.name} in #{@city_display_name}. #{@hotels.count} hotels within walking distance."
-    @canonical_url = hotels_near_landmark_url(@city_slug, @landmark.slug)
+    @seo_title = "Hotels near #{@airport.name} in #{@city_display_name} (#{Time.current.year}) | Airport Hotels"
+    @seo_description = "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@hotels.count} hotels within short distance of the terminal."
+    @canonical_url = hotels_near_airport_url(@airport.slug, @city_slug)
+  end
+
+  def show_smart
+    slug = params[:slug]
+
+    airport = Place.find_by(slug: slug, place_type: 'airport')
+    if airport
+      city_name = airport.neighborhood&.city&.downcase
+      city_config = CityDataImporter.city_configs.find { |k, v| (v['city'] || v['name'])&.downcase == city_name }
+      
+      if city_config
+        params[:city] = city_config.first
+        params[:airport] = slug
+        set_city_and_airport
+        show
+        render :show
+        return
+      end
+    end
+
+    redirect_to hotels_near_airport_index_path, alert: "Airport or City not found for '#{slug}'"
   end
 
   private
 
-  def set_city_and_landmark
+  def set_city_and_airport
     @city_slug = params[:city]
-    @landmark_slug = params[:landmark]
+    @airport_slug = params[:airport]
 
     @city_config = CityDataImporter.city_configs[@city_slug]
 
     unless @city_config
-      redirect_to hotels_near_landmark_index_path, alert: "City not found" and return
+      redirect_to hotels_near_airport_index_path, alert: "City not found" and return
     end
 
     @city_name = CityDataImporter::CITY_NAMES[@city_slug]
@@ -67,19 +85,19 @@ class HotelsNearLandmarkController < ApplicationController
     @url_slug = @city_slug
     @country = @city_config['country'] || 'United States'
 
-    @landmark = Place.find_by(slug: @landmark_slug)
+    @airport = Place.find_by(slug: @airport_slug)
 
-    unless @landmark
-      redirect_to hotels_near_landmark_index_path, alert: "Landmark not found" and return
+    unless @airport
+      redirect_to hotels_near_airport_index_path, alert: "Airport not found" and return
     end
 
-    unless @landmark.neighborhood&.city&.downcase == @city_name.downcase
-      redirect_to hotels_near_landmark_index_path, alert: "Landmark not found in this city" and return
+    unless @airport.neighborhood&.city&.downcase == @city_name.downcase
+      redirect_to hotels_near_airport_index_path, alert: "Airport not found in this city" and return
     end
   end
 
-  def hotels_near_landmark(landmark, radius_km: 5.0)
-    # Use PostGIS to find hotels within radius of landmark
+  def hotels_near_airport(airport, radius_km: 5.0)
+    # Use PostGIS to find hotels within radius of airport
     # ST_DWithin uses meters for geography type
     radius_meters = radius_km * 1000
 
@@ -105,11 +123,11 @@ class HotelsNearLandmarkController < ApplicationController
           )
         ORDER BY distance_meters ASC, rating DESC NULLS LAST, review_count DESC NULLS LAST
       SQL
-      landmark.lon,
-      landmark.lat,
+      airport.lon,
+      airport.lat,
       @city_name.downcase,
-      landmark.lon,
-      landmark.lat,
+      airport.lon,
+      airport.lat,
       radius_meters
     ])
 
@@ -124,19 +142,16 @@ class HotelsNearLandmarkController < ApplicationController
     hotels
   end
 
-  def cities_with_popular_landmarks
+  def cities_with_airports
     city_counts = Place
       .joins(:neighborhood)
-      .where(place_type: ['attraction', 'museum', 'monument', 'theme_park'])
+      .where(place_type: ['airport'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
-      .where("places.name ~ '^[A-Z]'")
-      .where("LENGTH(places.name) > 3")
-      .where("places.name !~ '[\\\\]'")
       .select('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
-      .select('COUNT(DISTINCT places.id) as landmark_count')
+      .select('COUNT(DISTINCT places.id) as airport_count')
       .group('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
-      .having('COUNT(DISTINCT places.id) >= 3')
+      .having('COUNT(DISTINCT places.id) >= 1')
       .order('neighborhoods.city')
 
     return [] if city_counts.empty?
@@ -160,13 +175,13 @@ class HotelsNearLandmarkController < ApplicationController
         city: city,
         display_name: display_name,
         slug: city_config[:slug],
-        landmark_count: result.landmark_count,
+        airport_count: result.airport_count,
         country: country,
         continent: continent
       }
     end.compact.sort_by { |c| c[:display_name] }
   rescue => e
-    Rails.logger.error "Error fetching cities with landmarks: #{e.message}"
+    Rails.logger.error "Error fetching cities with airports: #{e.message}"
     []
   end
 end
