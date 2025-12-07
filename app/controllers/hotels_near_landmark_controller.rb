@@ -25,6 +25,7 @@ class HotelsNearLandmarkController < ApplicationController
     @country = @city_config['country'] || 'United States'
 
     @landmarks = Place
+      .includes(:neighborhood)
       .joins(:neighborhood)
       .where(neighborhoods: { city: @city_name.downcase })
       .where(place_type: ['attraction', 'museum', 'monument', 'theme_park'])
@@ -94,6 +95,9 @@ class HotelsNearLandmarkController < ApplicationController
         INNER JOIN neighborhoods ON neighborhoods.id = places.neighborhood_id
         WHERE neighborhoods.city = ?
           AND places.place_type IN ('hotel', 'hostel')
+          AND places.name IS NOT NULL
+          AND places.name != 'Unnamed'
+          AND places.name != ''
           AND ST_DWithin(
             ST_SetSRID(ST_MakePoint(places.lon, places.lat), 4326)::geography,
             ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography,
@@ -109,49 +113,53 @@ class HotelsNearLandmarkController < ApplicationController
       radius_meters
     ])
 
-    Place.find_by_sql(sql)
+    hotels = Place.find_by_sql(sql)
+    neighborhood_ids = hotels.map(&:neighborhood_id).compact.uniq
+    neighborhoods = Neighborhood.where(id: neighborhood_ids).index_by(&:id)
+
+    hotels.each do |hotel|
+      hotel.association(:neighborhood).target = neighborhoods[hotel.neighborhood_id]
+    end
+
+    hotels
   end
 
   def cities_with_popular_landmarks
-    # Get cities that have landmarks, grouped with their top landmarks
-    cities_with_landmark_counts = Place
+    city_counts = Place
       .joins(:neighborhood)
-      .where(place_type: ['attraction', 'museum', 'monument', 'airport', 'university', 'beach', 'convention_center', 'theme_park', 'zoo', 'park'])
+      .where(place_type: ['attraction', 'museum', 'monument', 'theme_park'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
+      .where("places.name ~ '^[A-Z]'")
+      .where("LENGTH(places.name) > 3")
+      .where("places.name !~ '[\\\\]'")
+      .select('neighborhoods.city')
+      .select('COUNT(DISTINCT places.id) as landmark_count')
       .group('neighborhoods.city')
-      .having('COUNT(places.id) >= 3')
-      .pluck('neighborhoods.city')
+      .having('COUNT(DISTINCT places.id) >= 3')
+      .order('neighborhoods.city')
 
-    return [] if cities_with_landmark_counts.empty?
+    return [] if city_counts.empty?
 
-    cities_with_landmark_counts.map do |city|
-      landmarks = Place
-        .joins(:neighborhood)
-        .where(neighborhoods: { city: city })
-        .where(place_type: ['attraction', 'museum', 'monument', 'theme_park']) # 'airport', 'university', 'beach', 'convention_center', 'zoo', 'park'
-        .where.not(name: ['Unnamed', nil, ''])
-        .where.not(slug: nil)
-        .where("places.name ~ '^[A-Z]'")
-        .where("LENGTH(places.name) > 3")
-        .where("places.name !~ '[\\\\]'")
-        .distinct
+    city_config_lookup = CityDataImporter.city_configs.each_with_object({}) do |(key, config), hash|
+      city_name = (config['city'] || config['name'])&.downcase
+      hash[city_name] = { slug: key, config: config } if city_name
+    end
 
-      city_config = CityDataImporter.city_configs.find { |key, config|
-        (config['city'] || config['name'])&.downcase == city.downcase
-      }
+    city_counts.map do |result|
+      city = result.city
+      city_config = city_config_lookup[city.downcase]
 
       next unless city_config
 
-      city_slug = city_config[0]
       display_name = CityDataImporter::DISPLAY_NAMES[city]
-      country = city_config[1]['country'] || 'United States'
+      country = city_config[:config]['country'] || 'United States'
 
       {
         city: city,
         display_name: display_name,
-        slug: city_slug,
-        landmark_count: landmarks.count,
+        slug: city_config[:slug],
+        landmark_count: result.landmark_count,
         country: country
       }
     end.compact.sort_by { |c| c[:display_name] }

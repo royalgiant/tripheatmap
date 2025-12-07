@@ -1,12 +1,12 @@
 <!-- Global City Selector -->
 <div class="bg-gray-900 border-b border-gray-800 shadow-lg">
   <div class="container mx-auto px-4 py-3">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div class="flex items-center justify-between md:justify-start gap-3">
         <%= link_to "TripHeatMap", root_path, class: "text-lg font-semibold text-white hover:text-blue-400 transition-colors" %>
-        <span class="text-gray-500">|</span>
+        <span class="hidden md:inline text-gray-500">|</span>
         <!-- Popular Searches Dropdown -->
-        <div class="relative">
+        <div class="relative hidden md:block">
           <button type="button" class="inline-flex items-center gap-x-1 text-sm font-medium leading-6 text-gray-300 hover:text-white px-3 py-2 rounded-md focus:outline-none transition-colors" id="popular-searches-button" aria-expanded="false" aria-haspopup="true">
             Popular Searches
             <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -14,7 +14,7 @@
             </svg>
           </button>
 
-          <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="popular-searches-button" tabindex="-1" id="popular-searches-menu">
+          <div class="absolute left-0 md:right-0 z-10 mt-2 w-56 origin-top-left md:origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="popular-searches-button" tabindex="-1" id="popular-searches-menu">
             <div class="py-1" role="none">
               <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
@@ -26,11 +26,17 @@
           </div>
         </div>
 
+        <!-- Mobile Menu Toggle -->
+        <button type="button" class="md:hidden text-gray-300 hover:text-white" id="mobile-menu-toggle">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
 
-      <div class="flex items-center gap-4">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4">
         <!-- City Search -->
-        <div class="relative w-80" id="city-selector-container">
+        <div class="relative w-full md:w-80" id="city-selector-container">
           <div class="relative">
             <input
               type="text"
@@ -67,7 +73,7 @@
         <!-- User Menu / Auth Buttons -->
         <% if current_user.present? %>
           <!-- Profile dropdown -->
-          <div class="relative">
+          <div class="relative flex justify-center md:justify-end">
             <button type="button" class="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
@@ -75,7 +81,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
             </button>
-            <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 z-10 mt-2 w-56 origin-top md:origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <div class="flex flex-col">
                 <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% if current_user.subscribed? || current_user.role == 'admin' %>
@@ -88,11 +94,23 @@
           </div>
         <% else %>
           <!-- Login/Signup buttons -->
-          <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center md:justify-start gap-3">
             <%= link_to 'Login', new_user_session_path, class: 'text-gray-300 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
             <%= link_to 'Sign Up', new_user_registration_path, class: 'bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 text-sm font-medium transition-colors' %>
           </div>
         <% end %>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-gray-800">
+      <div class="space-y-2">
+        <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Best Cheap Hotels", best_cheap_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Hotels Near Landmarks", hotels_near_landmark_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
       </div>
     </div>
   </div>
@@ -123,6 +141,19 @@
     $(document).click(function(e) {
       if (!$(e.target).closest('#popular-searches-button').length && !$(e.target).closest('#popular-searches-menu').length) {
         $('#popular-searches-menu').addClass('hidden');
+      }
+    });
+
+    // Toggle mobile menu
+    $('#mobile-menu-toggle').click(function(e) {
+      e.stopPropagation();
+      $('#mobile-menu').toggleClass('hidden');
+    });
+
+    // Close mobile menu when clicking outside
+    $(document).click(function(e) {
+      if (!$(e.target).closest('#mobile-menu-toggle').length && !$(e.target).closest('#mobile-menu').length) {
+        $('#mobile-menu').addClass('hidden');
       }
     });
   });

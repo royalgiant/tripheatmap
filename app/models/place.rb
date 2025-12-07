@@ -28,6 +28,18 @@ class Place < ApplicationRecord
   scope :with_ratings, -> { where.not(rating: nil) }
   scope :highly_rated, -> { where('rating >= ?', 4.0) }
 
+  def wikimedia_image?
+    tags&.dig('wikimedia_commons').present?
+  end
+
+  def wikimedia_image_url(width: 200)
+    filename = tags&.dig('wikimedia_commons')
+    return nil unless filename.present?
+    filename = filename.sub(/^File:/, '').gsub(' ', '_')
+    encoded_filename = ERB::Util.url_encode(filename)
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/#{encoded_filename}?width=#{width}"
+  end
+
   private
 
   def should_generate_slug?

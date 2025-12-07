@@ -27,34 +27,42 @@
       <ul role="list" class="divide-y divide-gray-200">
         <% @landmarks.each do |landmark| %>
           <div class="px-4 py-5 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center min-w-0 flex-1">
-                <span class="mr-3 text-2xl flex-shrink-0">
-                  <% case landmark.place_type %>
-                  <% when 'airport' %>
-                    ✈️
-                  <% when 'museum' %>
-                    🏛️
-                  <% when 'monument' %>
-                    🗿
-                  <% when 'beach' %>
-                    🏖️
-                  <% when 'university' %>
-                    🎓
-                  <% when 'convention_center' %>
-                    🏢
-                  <% when 'theme_park' %>
-                    🎢
-                  <% when 'zoo' %>
-                    🦁
-                  <% when 'park' %>
-                    🌳
-                  <% else %>
-                    📍
-                  <% end %>
-                </span>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div class="flex items-start min-w-0 flex-1 gap-3">
+                <%
+                  landmark_emoji = case landmark.place_type
+                  when 'airport' then '✈️'
+                  when 'museum' then '🏛️'
+                  when 'monument' then '🗿'
+                  when 'beach' then '🏖️'
+                  when 'university' then '🎓'
+                  when 'convention_center' then '🏢'
+                  when 'theme_park' then '🎢'
+                  when 'zoo' then '🦁'
+                  when 'park' then '🌳'
+                  else '📍'
+                  end
+                %>
+                <% if landmark.wikimedia_image? %>
+                  <div class="landmark-image-container flex-shrink-0">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
+                      <%= image_tag landmark.wikimedia_image_url(width: 200),
+                        alt: landmark.name,
+                        class: "w-full h-full object-cover",
+                        loading: "lazy",
+                        onerror: "this.closest('.landmark-image-container').style.display='none'; this.closest('.landmark-image-container').nextElementSibling.style.display='block';" %>
+                    </div>
+                  </div>
+                  <span class="flex-shrink-0 text-2xl" style="display: none;">
+                    <%= landmark_emoji %>
+                  </span>
+                <% else %>
+                  <span class="flex-shrink-0 text-2xl">
+                    <%= landmark_emoji %>
+                  </span>
+                <% end %>
                 <div class="min-w-0 flex-1">
-                  <h3 class="text-lg font-bold text-gray-900 truncate">
+                  <h3 class="text-lg font-bold text-gray-900">
                     <%= landmark.name %>
                   </h3>
                   <p class="mt-1 text-sm text-gray-500">
@@ -62,7 +70,7 @@
                   </p>
                 </div>
               </div>
-              <div class="ml-5 flex gap-3 flex-shrink-0">
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
                 <a href="https://www.google.com/maps/search/?api=1&query=<%= landmark.lat %>,<%= landmark.lon %>" target="_blank" rel="noopener" class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
                   Get Direction
                 </a>
