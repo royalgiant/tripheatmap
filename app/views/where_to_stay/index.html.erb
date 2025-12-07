@@ -1,15 +1,15 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-12">
-  <header class="space-y-6">
-    <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold">TripHeatmap · Data-backed stays</p>
-    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900">Where to Stay – City Guides</h1>
-    <p class="text-xl text-gray-700">Data-driven neighborhood rankings for <%= @cities.size %> cities. Find the best place to book based on vibrancy scores, restaurant/bar/café density, and real venue data.</p>
-  </header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-5">
+  <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold mt-4">TripHeatmap · Data-backed stays</p>
+  <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mt-4">Where to Stay – City Guides</h1>
+  <p class="text-xl text-gray-700 mt-4">Data-driven neighborhood rankings for <%= @cities.size %> cities. Find the best place to book based on vibrancy scores, restaurant/bar/café density, and real venue data.</p>
+  
+  <%= render 'shared/city_filter' %>
 
-  <section class="space-y-12">
+  <section class="space-y-6">
     <h2 class="text-2xl font-bold text-gray-900">Browse All City Guides</h2>
 
     <% @cities_grouped.each do |continent, countries| %>
-      <div class="space-y-6">
+      <div class="space-y-6 continent-section">
         <!-- Continent Header -->
         <h3 class="text-xl font-bold text-gray-800 border-b-2 border-blue-600 pb-2">
           <%= continent %>
@@ -22,19 +22,19 @@
           <% has_more = hidden_cities.any? %>
           <% is_us = country == "United States" %>
 
-          <div class="space-y-4">
+          <div class="space-y-4 country-section <%= 'is-us' if is_us %>">
             <!-- Country Header (Clickable) -->
             <button
               type="button"
               onclick="toggleCountry('<%= country_id %>')"
-              class="flex items-center justify-between w-full text-left pl-4 pr-4 py-2 hover:bg-gray-50 rounded-lg transition-colors group"
+              class="flex items-center justify-between w-full text-left pl-4 pr-4 py-2 hover:bg-gray-50 rounded-lg transition-colors group country-toggle-button"
             >
               <h4 class="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
                 <%= country %> (<%= cities.size %>)
               </h4>
               <svg
                 id="<%= country_id %>-icon"
-                class="w-5 h-5 text-gray-500 transform transition-transform duration-200 <%= 'rotate-180' if is_us %>"
+                class="w-5 h-5 text-gray-500 transform transition-transform duration-200 <%= 'rotate-180' if is_us %> country-toggle-icon"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -44,12 +44,12 @@
             </button>
 
             <!-- Cities Container (Initially Hidden, except US) -->
-            <div id="<%= country_id %>" class="<%= 'hidden' unless is_us %> pl-0 md:pl-8 space-y-4">
+            <div id="<%= country_id %>" class="<%= 'hidden' unless is_us %> pl-0 md:pl-8 space-y-4 cities-container">
               <!-- First 9 Cities -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <% visible_cities.each do |city| %>
-                  <%= link_to where_to_stay_path(city[:slug]), class: "group" do %>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <%= link_to where_to_stay_path(city[:slug]), class: "group city-guide-link", data: { "city-name": city[:name] } do %>
+                    <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow city-item-wrapper">
                       <div class="space-y-3">
                         <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                           <%= city[:name] %>
@@ -74,10 +74,9 @@
               <% if has_more %>
                 <!-- Hidden Cities (Shown after "See More") -->
                 <div id="<%= country_id %>-more" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <% hidden_cities.each do |city| %>
-                    <%= link_to where_to_stay_path(city[:slug]), class: "group" do %>
-                      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="space-y-3">
+                          <% hidden_cities.each do |city| %>
+                          <%= link_to where_to_stay_path(city[:slug]), class: "group city-guide-link", data: { "city-name": city[:name] } do %>
+                          <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow city-item-wrapper"><div class="space-y-3">
                           <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                             <%= city[:name] %>
                           </h5>

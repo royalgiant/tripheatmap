@@ -42,13 +42,15 @@ class ApplicationController < ActionController::Base
     end.sort_by { |city_data| city_data[:name] }
   end
 
-  # Get cities grouped by continent and country
-  def get_cities_grouped_by_location
-    cities = get_cities
-
-    # Group by continent, then by country
-    grouped = cities.group_by { |city| city[:continent] || 'Other' }
-      .transform_values { |continent_cities| continent_cities.group_by { |city| city[:country] || 'Unknown' } }
+  def get_cities_grouped_by_location(cities_to_group = nil)
+    cities = cities_to_group || get_cities
+    grouped = cities.group_by do |city| 
+      (city.is_a?(Hash) ? city[:continent] : city.try(:continent)) || 'Other'
+    end.transform_values do |continent_cities| 
+      continent_cities.group_by do |city| 
+        (city.is_a?(Hash) ? city[:country] : city.try(:country)) || 'Unknown'
+      end 
+    end
 
     # Sort continents: North America, Europe, Asia, Oceania, South America, Other
     continent_order = ['North America', 'Europe', 'Asia', 'Oceania', 'South America', 'Other']

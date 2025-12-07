@@ -5,7 +5,7 @@ class HotelsNearLandmarkController < ApplicationController
 
   def index
     @cities_with_landmarks = cities_with_popular_landmarks
-    @cities_grouped = group_cities_by_continent(@cities_with_landmarks)
+    @cities_grouped = get_cities_grouped_by_location(@cities_with_landmarks)
     @seo_title = "Hotels Near Popular Landmarks (#{Time.current.year}) | Find Hotels Near Attractions"
     @seo_description = "Find hotels near popular landmarks, attractions, airports, and points of interest in major cities worldwide."
     @canonical_url = hotels_near_landmark_index_url
@@ -154,13 +154,15 @@ class HotelsNearLandmarkController < ApplicationController
 
       display_name = CityDataImporter::DISPLAY_NAMES[city]
       country = city_config[:config]['country'] || 'United States'
+      continent = city_config[:config]['continent'] || 'Other'
 
       {
         city: city,
         display_name: display_name,
         slug: city_config[:slug],
         landmark_count: result.landmark_count,
-        country: country
+        country: country,
+        continent: continent
       }
     end.compact.sort_by { |c| c[:display_name] }
   rescue => e
@@ -168,31 +170,5 @@ class HotelsNearLandmarkController < ApplicationController
     []
   end
 
-  def group_cities_by_continent(cities)
-    continent_mapping = {
-      'United States' => 'North America',
-      'Canada' => 'North America',
-      'Mexico' => 'North America',
-      'United Kingdom' => 'Europe',
-      'France' => 'Europe',
-      'Germany' => 'Europe',
-      'Spain' => 'Europe',
-      'Italy' => 'Europe',
-      'Netherlands' => 'Europe',
-      'Belgium' => 'Europe',
-      'Switzerland' => 'Europe',
-      'Austria' => 'Europe',
-      'Portugal' => 'Europe',
-      'Ireland' => 'Europe',
-      'Japan' => 'Asia',
-      'Singapore' => 'Asia',
-      'Australia' => 'Oceania',
-      'New Zealand' => 'Oceania',
-      'Argentina' => 'South America',
-      'Brazil' => 'South America'
-    }
-
-    grouped = cities.group_by { |city| continent_mapping[city[:country]] || 'Other' }
-    grouped.transform_values { |continent_cities| continent_cities.group_by { |city| city[:country] } }
   end
 end
