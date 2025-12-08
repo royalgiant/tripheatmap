@@ -25,14 +25,12 @@ class HotelsNearAirportController < ApplicationController
     @country = @city_config['country'] || 'United States'
 
     @airports = Place
-      .includes(:neighborhood)
-      .joins(:neighborhood)
-      .where(neighborhoods: { city: @city_name.downcase })
+      .where(city: @city_name.downcase)
       .where(place_type: ['airport'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
       .distinct
-      .order('places.name ASC')
+      .order('name ASC')
 
     @seo_title = "Hotels Near Airports in #{@city_display_name} (#{Time.current.year})"
     @seo_description = "Find hotels near #{@airports.count} airports in #{@city_display_name}. Compare prices and book your stay near the terminal."
@@ -52,7 +50,7 @@ class HotelsNearAirportController < ApplicationController
 
     airport = Place.find_by(slug: slug, place_type: 'airport')
     if airport
-      city_name = airport.neighborhood&.city&.downcase
+      city_name = airport.city&.downcase
       city_config = CityDataImporter.city_configs.find { |k, v| (v['city'] || v['name'])&.downcase == city_name }
       
       if city_config
@@ -91,7 +89,7 @@ class HotelsNearAirportController < ApplicationController
       redirect_to hotels_near_airport_index_path, alert: "Airport not found" and return
     end
 
-    unless @airport.neighborhood&.city&.downcase == @city_name.downcase
+    unless @airport.city&.downcase == @city_name.downcase
       redirect_to hotels_near_airport_index_path, alert: "Airport not found in this city" and return
     end
   end
@@ -144,15 +142,17 @@ class HotelsNearAirportController < ApplicationController
 
   def cities_with_airports
     city_counts = Place
-      .joins(:neighborhood)
       .where(place_type: ['airport'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
-      .select('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
+      .where.not(city: nil)
+      .where.not(country: nil)
+      .where.not(continent: nil)
+      .select('places.city, places.country, places.continent')
       .select('COUNT(DISTINCT places.id) as airport_count')
-      .group('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
+      .group('places.city, places.country, places.continent')
       .having('COUNT(DISTINCT places.id) >= 1')
-      .order('neighborhoods.city')
+      .order('places.city')
 
     return [] if city_counts.empty?
 

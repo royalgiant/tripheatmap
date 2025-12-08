@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_05_195010) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_08_200554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_195010) do
   end
 
   create_table "places", force: :cascade do |t|
-    t.bigint "neighborhood_id", null: false
+    t.bigint "neighborhood_id"
     t.string "name"
     t.string "place_type"
     t.decimal "lat", precision: 10, scale: 6
@@ -100,6 +100,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_05_195010) do
     t.string "category"
     t.string "image_url"
     t.string "slug"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "continent"
+    t.index ["city", "place_type"], name: "index_places_on_city_and_place_type"
+    t.index ["city"], name: "index_places_on_city"
+    t.index ["country", "continent"], name: "index_places_on_country_and_continent"
     t.index ["google_place_id"], name: "index_places_on_google_place_id", unique: true
     t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
     t.index ["neighborhood_id", "place_type"], name: "index_places_on_neighborhood_id_and_place_type"

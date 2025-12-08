@@ -160,6 +160,7 @@ class NeighborhoodBoundaryImporter
     # Try Zillow neighborhoods (US cities with EPA/Zillow data)
     elsif fips[:zillow] == true
       Rails.logger.info "Using Zillow neighborhoods for #{city_key}..."
+      zillow_success = false
       begin
         city_name = fips[:city] || fips[:name]
         state = fips[:state]
@@ -168,12 +169,46 @@ class NeighborhoodBoundaryImporter
         importer = ZillowNeighborhoodImporter.new(city_name: city_name, state: state, county: county)
         count = importer.import_neighborhoods
         results[:neighborhoods] = count
-        results[:method] = 'zillow'
         @errors.concat(importer.errors)
+
+        zillow_success = count > 0
       rescue => e
         Rails.logger.error "Failed to import Zillow neighborhoods: #{e.message}"
         @errors << "Zillow import failed: #{e.message}"
         results[:errors] << e.message
+      end
+
+      if !zillow_success && fips[:state_fips] && fips[:county_fips]
+        Rails.logger.info "Zillow import failed, falling back to Census Tracts for #{city_key}..."
+        begin
+          city_name = fips[:city] || fips[:name]
+          state = fips[:state]
+          county_name = fips[:county]
+
+          total_count = 0
+          counties = Array(fips[:county_fips])
+
+          counties.each do |county_fips_code|
+            importer = CensusTractImporter.new(
+              state: fips[:state_fips],
+              county: county_fips_code,
+              city_name: city_name,
+              county_name: county_name,
+              enrich_names: true
+            )
+            total_count += importer.import_tracts
+            @errors.concat(importer.errors)
+          end
+
+          results[:neighborhoods] = total_count
+          results[:method] = 'census_tracts_fallback'
+        rescue => e
+          Rails.logger.error "Failed to import Census Tracts (fallback): #{e.message}"
+          @errors << "Census Tracts fallback failed: #{e.message}"
+          results[:errors] << e.message
+        end
+      elsif zillow_success
+        results[:method] = 'zillow'
       end
     # Fall back to Census Tracts (US cities with FIPS codes but no custom source)
     elsif fips[:state_fips] && fips[:county_fips]

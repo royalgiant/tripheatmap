@@ -295,6 +295,10 @@ class OverpassImporter
         booking_url: tags['website'],
         trip_affiliate_url: get_trip_affiliate_url(neighborhood.city),
         slug: slug,
+        city: neighborhood&.city,
+        state: neighborhood&.state,
+        country: neighborhood&.country,
+        continent: neighborhood&.continent,
         created_at: current_time,
         updated_at: current_time
       }

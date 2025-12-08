@@ -1,10 +1,11 @@
 class Place < ApplicationRecord
-  belongs_to :neighborhood
+  belongs_to :neighborhood, optional: true
   belongs_to :user, optional: true
 
   validates :name, presence: true
   validates :place_type, presence: true
   validates :lat, :lon, presence: true
+  validates :neighborhood_id, presence: true, unless: :airport?
 
   before_save :generate_slug, if: :should_generate_slug?
 
@@ -40,6 +41,10 @@ class Place < ApplicationRecord
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/#{encoded_filename}?width=#{width}"
   end
 
+  def airport?
+    place_type == 'airport'
+  end
+
   private
 
   def should_generate_slug?
@@ -50,10 +55,14 @@ class Place < ApplicationRecord
     base_slug = name.to_s.parameterize
     return if base_slug.blank?
 
-    city_part = neighborhood&.city&.parameterize || 'unknown'
-    neighborhood_part = neighborhood&.name&.parameterize&.first(20) || 'unknown'
-
-    unique_slug = "#{base_slug}-#{city_part}-#{neighborhood_part}"
+    if neighborhood
+      city_part = neighborhood.city&.parameterize || 'unknown'
+      neighborhood_part = neighborhood.name&.parameterize&.first(20) || 'unknown'
+      unique_slug = "#{base_slug}-#{city_part}-#{neighborhood_part}"
+    else
+      city_part = city&.parameterize || 'unknown'
+      unique_slug = "#{base_slug}-#{city_part}-#{place_type}"
+    end
 
     counter = 1
     final_slug = unique_slug

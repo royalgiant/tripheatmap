@@ -2775,6 +2775,7 @@ states:
   state: "NY"
   state_fips: '36'
   county_fips: '061'  # New York County (Manhattan) - also covers other boroughs via multi-county
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=633&display=New%20York&optionId=633&optionType=City&optionName=New%20York&Allianceid=7375838&SID=279148115&trip_sub1=new%20york&trip_sub3=D7599167
   zillow: true
 
@@ -2784,6 +2785,7 @@ states:
   state: "CA"
   state_fips: '06'
   county_fips: '037'  # Los Angeles County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=los%20angeles&trip_sub3=D7599167
   zillow: true
 
@@ -2793,6 +2795,7 @@ houston:
   state: "TX"
   state_fips: '48'
   county_fips: '201'  # Harris County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=houston&trip_sub3=D7599167
   zillow: true
 
@@ -2802,6 +2805,7 @@ phoenix:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25938&display=Phoenix&optionId=25938&optionType=City&optionName=Phoenix&Allianceid=7375838&SID=279148115&trip_sub1=phoenix&trip_sub3=D7599167
   zillow: true
 
@@ -2811,6 +2815,7 @@ philadelphia:
   state: "PA"
   state_fips: '42'
   county_fips: ['101', '045']  # Philadelphia and Delaware Counties (for PHL)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26153&display=Philadelphia&optionId=26153&optionType=City&optionName=Philadelphia&Allianceid=7375838&SID=279148115&trip_sub1=philadelphia&trip_sub3=D7599167
   zillow: true
   notes: "Includes Delaware County to capture PHL Airport."
@@ -2821,6 +2826,7 @@ philadelphia:
   state: "TX"
   state_fips: '48'
   county_fips: '029'  # Bexar County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1193&display=San%20Antonio&optionId=1193&optionType=City&optionName=San%20Antonio&Allianceid=7375838&SID=279148115&trip_sub1=san%20antonio&trip_sub3=D7599167
   zillow: true
 
@@ -2830,6 +2836,7 @@ philadelphia:
   state: "CA"
   state_fips: '06'
   county_fips: '073'  # San Diego County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=698&display=San%20Diego&optionId=698&optionType=City&optionName=San%20Diego&Allianceid=7375838&SID=279148115&trip_sub1=san%20diego&trip_sub3=D7599167
   zillow: true
 
@@ -2839,6 +2846,7 @@ philadelphia:
   state: "TX"
   state_fips: '48'
   county_fips: '439'  # Tarrant County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=19936&display=Fort%20Worth&optionId=19936&optionType=City&optionName=Fort%20Worth&Allianceid=7375838&SID=279148115&trip_sub1=fort%20worth&trip_sub3=D7599167
   zillow: true
 
@@ -2848,6 +2856,7 @@ jacksonville:
   state: "FL"
   state_fips: '12'
   county_fips: '031'  # Duval County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25795&display=Jacksonville&optionId=25795&optionType=City&optionName=Jacksonville&Allianceid=7375838&SID=279148115&trip_sub1=jacksonville&trip_sub3=D7599167
   zillow: true
 
@@ -2857,6 +2866,7 @@ jacksonville:
   state: "CA"
   state_fips: '06'
   county_fips: '085'  # Santa Clara County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1880&display=San%20Jose&optionId=1880&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose&trip_sub3=D7599167
   zillow: true
 
@@ -2866,6 +2876,7 @@ charlotte:
   state: "NC"
   state_fips: '37'
   county_fips: '119'  # Mecklenburg County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26852&display=Charlotte&optionId=26852&optionType=City&optionName=Charlotte&Allianceid=7375838&SID=279148115&trip_sub1=charlotte&trip_sub3=D7599167
   zillow: true
 
@@ -2875,6 +2886,7 @@ columbus:
   state: "OH"
   state_fips: '39'
   county_fips: '049'  # Franklin County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26851&display=Columbus&optionId=26851&optionType=City&optionName=Columbus&Allianceid=7375838&SID=279148115&trip_sub1=columbus&trip_sub3=D7599167
   zillow: true
 
@@ -2884,6 +2896,7 @@ indianapolis:
   state: "IN"
   state_fips: '18'
   county_fips: '097'  # Marion County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1291&display=Indianapolis&optionId=1291&optionType=City&optionName=Indianapolis&Allianceid=7375838&SID=279148115&trip_sub1=indianapolis&trip_sub3=D7599167
   zillow: true
 
@@ -2893,6 +2906,7 @@ indianapolis:
   state: "CA"
   state_fips: '06'
   county_fips: ['075', '081']  # San Francisco and San Mateo Counties (for SFO)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=313&display=San%20Francisco&optionId=313&optionType=City&optionName=San%20Francisco&Allianceid=7375838&SID=279148115&trip_sub1=san%20francisco&trip_sub3=D7599167
   zillow: true
   notes: "Includes San Mateo County to capture SFO Airport."
@@ -2903,6 +2917,7 @@ seattle:
   state: "WA"
   state_fips: '53'
   county_fips: '033'  # King County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=511&display=Seattle&optionId=511&optionType=City&optionName=Seattle&Allianceid=7375838&SID=279148115&trip_sub1=seattle&trip_sub3=D7599167
   zillow: true
 
@@ -2912,6 +2927,7 @@ denver:
   state: "CO"
   state_fips: '08'
   county_fips: ['031', '001']  # Denver and Adams Counties (for DIA)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=20099&display=Denver&optionId=20099&optionType=City&optionName=Denver&Allianceid=7375838&SID=279148115&trip_sub1=denver&trip_sub3=D7599167
   zillow: true
   notes: "Includes Adams County to fully capture Denver International Airport area."
@@ -2922,6 +2938,7 @@ denver:
   state: "OK"
   state_fips: '40'
   county_fips: '109'  # Oklahoma County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1440&display=Oklahoma%20City&optionId=1440&optionType=City&optionName=Oklahoma%20City&Allianceid=7375838&SID=279148115&trip_sub1=oklahoma%20city&trip_sub3=D7599167
   zillow: true
 
@@ -2931,6 +2948,7 @@ washington:
   state: "DC"
   state_fips: '11'
   county_fips: ['001', '013', '107', '059']  # DC, Arlington (DCA), Loudoun/Fairfax (IAD)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26363&display=Washington%20D.C.&optionId=26363&optionType=City&optionName=Washington%20D.C.&Allianceid=7375838&SID=279148115&trip_sub1=washingtondc&trip_sub3=D7599167
   zillow: true
   notes: "Includes Arlington, Loudoun, and Fairfax counties (VA) to capture DCA and IAD airports."
@@ -2941,6 +2959,7 @@ nashville:
   state: "TN"
   state_fips: '47'
   county_fips: '037'  # Davidson County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=3228&display=Nashville&optionId=3228&optionType=City&optionName=Nashville&Allianceid=7375838&SID=279148115&trip_sub1=nashville&trip_sub3=D7599167
   zillow: true
 
@@ -2949,10 +2968,11 @@ dallas:
   city: "Dallas"
   state: "TX"
   state_fips: '48'
-  county_fips: ['113', '439']  # Dallas and Tarrant Counties (for DFW airport)
+  county_fips: ['113', '439', '085', '121']  # Dallas, Tarrant, Collin, Denton Counties
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=705&display=Dallas&optionId=705&optionType=City&optionName=Dallas&Allianceid=7375838&SID=279148115&trip_sub1=dallas&trip_sub3=D7599167
   zillow: true
-  notes: "Includes Tarrant County to capture DFW Airport."
+  notes: "Full DFW metroplex: Dallas (113), Tarrant (439), Collin (085 - Plano/Frisco), Denton (121 - Flower Mound/Lewisville)."
 
 chicago:
   name: "Chicago"
@@ -2960,6 +2980,7 @@ chicago:
   state: "IL"
   state_fips: '17'
   county_fips: '031'  # Cook County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=549&display=Chicago&optionId=549&optionType=City&optionName=Chicago&Allianceid=7375838&SID=279148115&trip_sub1=chicago&trip_sub3=D7599167
   zillow: true
 
@@ -2969,6 +2990,7 @@ austin:
   state: "TX"
   state_fips: '48'
   county_fips: '453'  # Travis County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25526&display=Austin&optionId=25526&optionType=City&optionName=Austin&Allianceid=7375838&SID=279148115&trip_sub1=austin&trip_sub3=D7599167
   zillow: true
 
@@ -2978,6 +3000,7 @@ miami:
   state: "FL"
   state_fips: '12'
   county_fips: '086'  # Miami-Dade County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25773&display=Miami&optionId=25773&optionType=City&optionName=Miami&Allianceid=7375838&SID=279148115&trip_sub1=miami&trip_sub3=D7599167
   zillow: true
 
@@ -2987,6 +3010,7 @@ sacramento:
   state: "CA"
   state_fips: '06'
   county_fips: '067'  # Sacramento County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1881&display=Sacramento&optionId=1881&optionType=City&optionName=Sacramento&Allianceid=7375838&SID=279148115&trip_sub1=sacramento&trip_sub3=D7599167
   zillow: true
 
@@ -2996,6 +3020,7 @@ sacramento:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26282&display=Las%20Vegas&optionId=26282&optionType=City&optionName=Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=las%20vegas&trip_sub3=D7599167
   zillow: true
 
@@ -3005,6 +3030,7 @@ sacramento:
   state: "TX"
   state_fips: '48'
   county_fips: '141'  # El Paso County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1178&display=El%20Paso&optionId=1178&optionType=City&optionName=El%20Paso&Allianceid=7375838&SID=279148115&trip_sub1=el%20paso&trip_sub3=D7599167
   zillow: true
 
@@ -3014,6 +3040,7 @@ boston:
   state: "MA"
   state_fips: '25'
   county_fips: '025'  # Suffolk County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26848&display=Boston&optionId=26848&optionType=City&optionName=Boston&Allianceid=7375838&SID=279148115&trip_sub1=boston&trip_sub3=D7599167
   zillow: true
 
@@ -3023,6 +3050,7 @@ detroit:
   state: "MI"
   state_fips: '26'
   county_fips: '163'  # Wayne County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=233&display=Detroit&optionId=233&optionType=City&optionName=Detroit&Allianceid=7375838&SID=279148115&trip_sub1=detroit&trip_sub3=D7599167
   zillow: true
 
@@ -3032,6 +3060,7 @@ louisville:
   state: "KY"
   state_fips: '21'
   county_fips: '111'  # Jefferson County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25945&display=Louisville&optionId=25945&optionType=City&optionName=Louisville&Allianceid=7375838&SID=279148115&trip_sub1=louisville&trip_sub3=D7599167
   zillow: true
 
@@ -3041,6 +3070,7 @@ portland:
   state: "OR"
   state_fips: '41'
   county_fips: '051'  # Multnomah County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Portland&optionId=XXXX&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portland&trip_sub3=D7597865
   zillow: true
 
@@ -3050,6 +3080,7 @@ memphis:
   state: "TN"
   state_fips: '47'
   county_fips: '157'  # Shelby County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1234&display=Memphis&optionId=1234&optionType=City&optionName=Memphis&Allianceid=7375838&SID=279148115&trip_sub1=memphis&trip_sub3=D7599167
   zillow: true
 
@@ -3059,6 +3090,7 @@ baltimore:
   state: "MD"
   state_fips: '24'
   county_fips: '510'  # Baltimore City
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1460&display=Baltimore&optionId=1460&optionType=City&optionName=Baltimore&Allianceid=7375838&SID=279148115&trip_sub1=baltimore&trip_sub3=D7599167
   zillow: true
 
@@ -3068,6 +3100,7 @@ milwaukee:
   state: "WI"
   state_fips: '55'
   county_fips: '079'  # Milwaukee County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1181&display=Milwaukee&optionId=1181&optionType=City&optionName=Milwaukee&Allianceid=7375838&SID=279148115&trip_sub1=milwaukee&trip_sub3=D7599167
   zillow: true
 
@@ -3077,6 +3110,7 @@ albuquerque:
   state: "NM"
   state_fips: '35'
   county_fips: '001'  # Bernalillo County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1848&display=Albuquerque&optionId=1848&optionType=City&optionName=Albuquerque&Allianceid=7375838&SID=279148115&trip_sub1=albuquerque&trip_sub3=D7599167
   zillow: true
 
@@ -3086,6 +3120,7 @@ tucson:
   state: "AZ"
   state_fips: '04'
   county_fips: '019'  # Pima County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1192&display=Tucson&optionId=1192&optionType=City&optionName=Tucson&Allianceid=7375838&SID=279148115&trip_sub1=tucson&trip_sub3=D7599167
   zillow: true
 
@@ -3095,6 +3130,7 @@ fresno:
   state: "CA"
   state_fips: '06'
   county_fips: '019'  # Fresno County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=6726&display=Fresno&optionId=6726&optionType=City&optionName=Fresno&Allianceid=7375838&SID=279148115&trip_sub1=fresno&trip_sub3=D7599167
   zillow: true
 
@@ -3104,6 +3140,7 @@ atlanta:
   state: "GA"
   state_fips: '13'
   county_fips: ['121', '063']  # Fulton and Clayton Counties (for ATL airport)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=27072&display=Atlanta&optionId=27072&optionType=City&optionName=Atlanta&Allianceid=7375838&SID=279148115&trip_sub1=atlanta&trip_sub3=D7599167
   zillow: true
   notes: "Includes Clayton County to capture Hartsfield-Jackson Airport."
@@ -3114,7 +3151,8 @@ mesa:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
-  tripcomurl: https://www.trip.com/hotels/list?city=9943&display=Mesa&optionId=9943&optionType=City&optionName=Mesa&Allianceid=7375838&SID=279148115&trip_sub1=mesa&trip_sub3=D7599167
+  country: "United States"
+  tripcomurl: https://www.trip.com/hotels/list?city=3325&display=Mesa&optionId=3325&optionType=City&optionName=Mesa&Allianceid=7375838&SID=279148115&trip_sub1=mesa&trip_sub3=D7599167
   zillow: true
 
 'kansas city':
@@ -3123,6 +3161,7 @@ mesa:
   state: "MO"
   state_fips: '29'
   county_fips: ['095', '165', '047']  # Jackson, Platte, and Clay Counties (for MCI)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25410&display=Kansas%20City&optionId=25410&optionType=City&optionName=Kansas%20City&Allianceid=7375838&SID=279148115&trip_sub1=kansas%20city&trip_sub3=D7599167
   zillow: true
   notes: "Includes Platte and Clay counties to capture MCI Airport."
@@ -3133,6 +3172,7 @@ raleigh:
   state: "NC"
   state_fips: '37'
   county_fips: '183'  # Wake County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1406&display=Raleigh&optionId=1406&optionType=City&optionName=Raleigh&Allianceid=7375838&SID=279148115&trip_sub1=raleigh&trip_sub3=D7599167
   zillow: true
 
@@ -3142,6 +3182,7 @@ raleigh:
   state: "CO"
   state_fips: '08'
   county_fips: '041'  # El Paso County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25870&display=Colorado%20Springs&optionId=25870&optionType=City&optionName=Colorado%20Springs&Allianceid=7375838&SID=279148115&trip_sub1=colorado%20springs&trip_sub3=D7599167
   zillow: true
 
@@ -3151,6 +3192,7 @@ omaha:
   state: "NE"
   state_fips: '31'
   county_fips: '055'  # Douglas County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1425&display=Omaha&optionId=1425&optionType=City&optionName=Omaha&Allianceid=7375838&SID=279148115&trip_sub1=omaha&trip_sub3=D7599167
   zillow: true
 
@@ -3160,6 +3202,7 @@ omaha:
   state: "VA"
   state_fips: '51'
   county_fips: '810'  # Virginia Beach City
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=9208&display=Virginia%20Beach&optionId=9208&optionType=City&optionName=Virginia%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=virginia%20beach&trip_sub3=D7599167
   zillow: true
 
@@ -3169,7 +3212,8 @@ omaha:
   state: "CA"
   state_fips: '06'
   county_fips: '037'  # Los Angeles County
-  tripcomurl: https://www.trip.com/hotels/list?city=25916&display=Long%20Beach&optionId=25916&optionType=City&optionName=Long%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=long%20beach&trip_sub3=D7599167
+  country: "United States"
+  tripcomurl: https://www.trip.com/hotels/list?city=33610&display=Long%20Beach&optionId=33610&optionType=City&optionName=Long%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=long%20beach&trip_sub3=D7599167
   zillow: true
 
 oakland:
@@ -3178,6 +3222,7 @@ oakland:
   state: "CA"
   state_fips: '06'
   county_fips: '001'  # Alameda County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1435&display=Oakland&optionId=1435&optionType=City&optionName=Oakland&Allianceid=7375838&SID=279148115&trip_sub1=oakland&trip_sub3=D7599167
   zillow: true
 
@@ -3187,7 +3232,8 @@ minneapolis:
   state: "MN"
   state_fips: '27'
   county_fips: '053'  # Hennepin County
-  tripcomurl: https://www.trip.com/hotels/list?city=1238&display=Minneapolis&optionId=1238&optionType=City&optionName=Minneapolis&Allianceid=7375838&SID=279148115&trip_sub1=minneapolis&trip_sub3=D7599167
+  country: "United States"
+  tripcomurl: https://www.trip.com/hotels/list?city=1302&display=Minneapolis&optionId=1302&optionType=City&optionName=Minneapolis&Allianceid=7375838&SID=279148115&trip_sub1=minneapolis&trip_sub3=D7599167
   zillow: true
 
 tampa:
@@ -3196,6 +3242,7 @@ tampa:
   state: "FL"
   state_fips: '12'
   county_fips: '057'  # Hillsborough County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1399&display=Tampa&optionId=1399&optionType=City&optionName=Tampa&Allianceid=7375838&SID=279148115&trip_sub1=tampa&trip_sub3=D7599167
   zillow: true
 
@@ -3205,6 +3252,7 @@ bakersfield:
   state: "CA"
   state_fips: '06'
   county_fips: '029'  # Kern County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=4023&display=Bakersfield&optionId=4023&optionType=City&optionName=Bakersfield&Allianceid=7375838&SID=279148115&trip_sub1=bakersfield&trip_sub3=D7599167
   zillow: true
 
@@ -3214,6 +3262,7 @@ tulsa:
   state: "OK"
   state_fips: '40'
   county_fips: '143'  # Tulsa County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1857&display=Tulsa&optionId=1857&optionType=City&optionName=Tulsa&Allianceid=7375838&SID=279148115&trip_sub1=tulsa&trip_sub3=D7599167
   zillow: true
 
@@ -3223,6 +3272,7 @@ aurora:
   state: "CO"
   state_fips: '08'
   county_fips: '001'  # Adams County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26729&display=Aurora&optionId=26729&optionType=City&optionName=Aurora&Allianceid=7375838&SID=279148115&trip_sub1=aurora&trip_sub3=D7599167
   zillow: true
 
@@ -3232,6 +3282,7 @@ arlington:
   state: "TX"
   state_fips: '48'
   county_fips: '439'  # Tarrant County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26813&display=Arlington&optionId=26813&optionType=City&optionName=Arlington&Allianceid=7375838&SID=279148115&trip_sub1=arlingtontx&trip_sub3=D7599167
   zillow: true
 
@@ -3241,6 +3292,7 @@ wichita:
   state: "KS"
   state_fips: '20'
   county_fips: '173'  # Sedgwick County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1856&display=Wichita&optionId=1856&optionType=City&optionName=Wichita&Allianceid=7375838&SID=279148115&trip_sub1=wichita&trip_sub3=D7599167
   zillow: true
 
@@ -3250,6 +3302,7 @@ cleveland:
   state: "OH"
   state_fips: '39'
   county_fips: '035'  # Cuyahoga County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1185&display=Cleveland&optionId=1185&optionType=City&optionName=Cleveland&Allianceid=7375838&SID=279148115&trip_sub1=cleveland&trip_sub3=D7599167
   zillow: true
 
@@ -3259,6 +3312,7 @@ henderson:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25719&display=Henderson&optionId=25719&optionType=City&optionName=Henderson&Allianceid=7375838&SID=279148115&trip_sub1=henderson&trip_sub3=D7599167
   zillow: true
 
@@ -3268,7 +3322,8 @@ henderson:
   state: "LA"
   state_fips: '22'
   county_fips: ['071', '051']  # Orleans and Jefferson Parishes (for MSY)
-  tripcomurl: https://www.trip.com/hotels/list?city=1186&display=New%20Orleans&optionId=1186&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
+  country: "United States"
+  tripcomurl: https://www.trip.com/hotels/list?city=1026&display=New%20Orleans&optionId=1026&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
   zillow: true
   notes: "Includes Jefferson Parish to capture MSY Airport."
 
@@ -3278,6 +3333,7 @@ honolulu:
   state: "HI"
   state_fips: '15'
   county_fips: '003'  # Honolulu County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=757&display=Honolulu&optionId=757&optionType=City&optionName=Honolulu&Allianceid=7375838&SID=279148115&trip_sub1=honolulu&trip_sub3=D7599167
   zillow: true
 
@@ -3287,6 +3343,7 @@ anaheim:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=3777&display=Anaheim&optionId=3777&optionType=City&optionName=Anaheim&Allianceid=7375838&SID=279148115&trip_sub1=anaheim&trip_sub3=D7599167
   zillow: true
 
@@ -3296,6 +3353,7 @@ orlando:
   state: "FL"
   state_fips: '12'
   county_fips: '095'  # Orange County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1187&display=Orlando&optionId=1187&optionType=City&optionName=Orlando&Allianceid=7375838&SID=279148115&trip_sub1=orlando&trip_sub3=D7599167
   zillow: true
 
@@ -3305,6 +3363,7 @@ lexington:
   state: "KY"
   state_fips: '21'
   county_fips: '067'  # Fayette County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Lexington&optionId=XXXX&optionType=City&optionName=Lexington&Allianceid=7375838&SID=279148115&trip_sub1=lexington&trip_sub3=D7597865
   zillow: true
 
@@ -3314,6 +3373,7 @@ stockton:
   state: "CA"
   state_fips: '06'
   county_fips: '077'  # San Joaquin County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Stockton&optionId=XXXX&optionType=City&optionName=Stockton&Allianceid=7375838&SID=279148115&trip_sub1=stockton&trip_sub3=D7597865
   zillow: true
 
@@ -3323,6 +3383,7 @@ riverside:
   state: "CA"
   state_fips: '06'
   county_fips: '065'  # Riverside County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=20379&display=Riverside&optionId=20379&optionType=City&optionName=Riverside&Allianceid=7375838&SID=279148115&trip_sub1=riverside&trip_sub3=D7599167
   zillow: true
 
@@ -3332,6 +3393,7 @@ irvine:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=27020&display=Irvine&optionId=27020&optionType=City&optionName=Irvine&Allianceid=7375838&SID=279148115&trip_sub1=irvine&trip_sub3=D7599167
   zillow: true
 
@@ -3341,6 +3403,7 @@ newark:
   state: "NJ"
   state_fips: '34'
   county_fips: '013'  # Essex County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26203&display=Newark&optionId=26203&optionType=City&optionName=Newark&Allianceid=7375838&SID=279148115&trip_sub1=newark&trip_sub3=D7599167
   zillow: true
 
@@ -3350,6 +3413,7 @@ newark:
   state: "CA"
   state_fips: '06'
   county_fips: '059'  # Orange County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1396&display=Santa%20Ana&optionId=1396&optionType=City&optionName=Santa%20Ana&Allianceid=7375838&SID=279148115&trip_sub1=santa%20ana&trip_sub3=D7599167
   zillow: true
 
@@ -3359,6 +3423,7 @@ newark:
   state: "TX"
   state_fips: '48'
   county_fips: '355'  # Nueces County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=5114&display=Corpus%20Christi&optionId=5114&optionType=City&optionName=Corpus%20Christi&Allianceid=7375838&SID=279148115&trip_sub1=corpus%20christi&trip_sub3=D7599167
   zillow: true
 
@@ -3368,6 +3433,7 @@ cincinnati:
   state: "OH"
   state_fips: '39'
   county_fips: ['061', '015']  # Hamilton OH and Boone KY (for CVG)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=1184&display=Cincinnati&optionId=1184&optionType=City&optionName=Cincinnati&Allianceid=7375838&SID=279148115&trip_sub1=cincinnati&trip_sub3=D7599167
   zillow: true
   notes: "Includes Boone County, KY to capture CVG Airport."
@@ -3378,6 +3444,7 @@ greensboro:
   state: "NC"
   state_fips: '37'
   county_fips: '081'  # Guilford County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=27101&display=Greensboro&optionId=27101&optionType=City&optionName=Greensboro&Allianceid=7375838&SID=279148115&trip_sub1=greensboro&trip_sub3=D7599167
   zillow: true
 
@@ -3387,6 +3454,7 @@ pittsburgh:
   state: "PA"
   state_fips: '42'
   county_fips: '003'  # Allegheny County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=771&display=Pittsburgh&optionId=771&optionType=City&optionName=Pittsburgh&Allianceid=7375838&SID=279148115&trip_sub1=pittsburgh&trip_sub3=D7599167
   zillow: true
 
@@ -3396,6 +3464,7 @@ durham:
   state: "NC"
   state_fips: '37'
   county_fips: '063'  # Durham County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26079&display=Durham&optionId=26079&optionType=City&optionName=Durham&Allianceid=7375838&SID=279148115&trip_sub1=durham&trip_sub3=D7599167
   zillow: true
 
@@ -3405,6 +3474,7 @@ durham:
   state: "MN"
   state_fips: '27'
   county_fips: '123'  # Ramsey County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=7591&display=Saint%20Paul&optionId=7591&optionType=City&optionName=Saint%20Paul&Allianceid=7375838&SID=279148115&trip_sub1=stpaul&trip_sub3=D7599167
 
 'jersey city':
@@ -3413,6 +3483,7 @@ durham:
   state: "NJ"
   state_fips: '34'
   county_fips: '017'  # Hudson County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=9767&display=Jersey%20City&optionId=9767&optionType=City&optionName=Jersey%20City&Allianceid=7375838&SID=279148115&trip_sub1=jersey%20city&trip_sub3=D7599167
   zillow: true
 
@@ -3422,6 +3493,7 @@ lincoln:
   state: "NE"
   state_fips: '31'
   county_fips: '109'  # Lancaster County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=3842&display=Lincoln&optionId=3842&optionType=City&optionName=Lincoln&Allianceid=7375838&SID=279148115&trip_sub1=lincoln&trip_sub3=D7599167
   zillow: true
 
@@ -3431,6 +3503,7 @@ lincoln:
   state: "NV"
   state_fips: '32'
   county_fips: '003'  # Clark County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=25866&display=North%20Las%20Vegas&optionId=25866&optionType=City&optionName=North%20Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=north%20las%20vegas&trip_sub3=D7599167
   zillow: true
 
@@ -3440,6 +3513,7 @@ plano:
   state: "TX"
   state_fips: '48'
   county_fips: '085'  # Collin County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=19889&display=Plano&optionId=19889&optionType=City&optionName=Plano&Allianceid=7375838&SID=279148115&trip_sub1=plano&trip_sub3=D7599167
   zillow: true
 
@@ -3449,6 +3523,7 @@ gilbert:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=43701&display=Gilbert&optionId=43701&optionType=City&optionName=Gilbert&Allianceid=7375838&SID=279148115&trip_sub1=gilbert&trip_sub3=D7599167
   zillow: true
 
@@ -3458,6 +3533,7 @@ charleston:
   state: "SC"
   state_fips: '45'
   county_fips: '019'  # Charleston County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=4188&display=Charleston&optionId=4188&optionType=City&optionName=Charleston&Allianceid=7375838&SID=279148115&trip_sub1=charleston&trip_sub3=D7599167
   zillow: true
 
@@ -3467,6 +3543,7 @@ savannah:
   state: "GA"
   state_fips: '13'
   county_fips: '051'  # Chatham County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26631&display=Savannah&optionId=26631&optionType=City&optionName=Savannah&Allianceid=7375838&SID=279148115&trip_sub1=savannah&trip_sub3=D7599167
   zillow: true
 
@@ -3476,6 +3553,7 @@ scottsdale:
   state: "AZ"
   state_fips: '04'
   county_fips: '013'  # Maricopa County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=3807&display=Scottsdale&optionId=3807&optionType=City&optionName=Scottsdale&Allianceid=7375838&SID=279148115&trip_sub1=scottsdale&trip_sub3=D7599167
   zillow: true
 
@@ -3485,6 +3563,7 @@ scottsdale:
   state: "UT"
   state_fips: '49'
   county_fips: '035'  # Salt Lake County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=700&display=Salt%20Lake%20City&optionId=700&optionType=City&optionName=Salt%20Lake%20City&Allianceid=7375838&SID=279148115&trip_sub1=salt%20lake%20city&trip_sub3=D7599167
   zillow: true
 
@@ -3494,6 +3573,7 @@ scottsdale:
   state: "NM"
   state_fips: '35'
   county_fips: '049'  # Santa Fe County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=5806&display=Santa%20Fe&optionId=5806&optionType=City&optionName=Santa%20Fe&Allianceid=7375838&SID=279148115&trip_sub1=santa%20fe&trip_sub3=D7599167
   zillow: true
 
@@ -3503,6 +3583,7 @@ scottsdale:
   state: "MO"
   state_fips: '29'
   county_fips: ['510', '189']  # St. Louis City and St. Louis County (for STL)
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=798983&display=Saint%20Louis&optionId=798983&optionType=City&optionName=Saint%20Louis&Allianceid=7375838&SID=279148115&trip_sub1=stlouis&trip_sub3=D7599167
   notes: "Includes St. Louis County to capture Lambert Airport."
 
@@ -3512,6 +3593,7 @@ anchorage:
   state: "AK"
   state_fips: '02'
   county_fips: '020'  # Anchorage Municipality
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=752&display=Anchorage&optionId=752&optionType=City&optionName=Anchorage&Allianceid=7375838&SID=279148115&trip_sub1=anchorage&trip_sub3=D7599167
   zillow: true
 
@@ -3521,6 +3603,7 @@ boulder:
   state: "CO"
   state_fips: '08'
   county_fips: '013'  # Boulder County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=20065&display=Boulder&optionId=20065&optionType=City&optionName=Boulder&Allianceid=7375838&SID=279148115&trip_sub1=boulder&trip_sub3=D7599167
   zillow: true
 
@@ -3530,6 +3613,7 @@ napa:
   state: "CA"
   state_fips: '06'
   county_fips: '055'  # Napa County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=9995&display=Napa&optionId=9995&optionType=City&optionName=Napa&Allianceid=7375838&SID=279148115&trip_sub1=napa&trip_sub3=D7599167
   zillow: true
 
@@ -3546,6 +3630,7 @@ sedona:
   state_fips: '04'
   county: "Yavapai"
   county_fips: '025'  # Yavapai County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=3808&display=Sedona&optionId=3808&optionType=City&optionName=Sedona&Allianceid=7375838&SID=279148115&trip_sub1=sedona&trip_sub3=D7599167
   endpoint: "https://services.arcgis.com/ZzrwjTRez6FJiOq4/arcgis/rest/services/City_Boundary_Data/FeatureServer/0/query?where=CITY_NAME='Sedona'&outFields=*&outSR=4326&f=geojson"
   type: "geojson"
@@ -3562,6 +3647,7 @@ aspen:
   state_fips: '08'
   county: "Pitkin"
   county_fips: '097'  # Pitkin County
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=4153&display=Aspen&optionId=4153&optionType=City&optionName=Aspen&Allianceid=7375838&SID=279148115&trip_sub1=aspen&trip_sub3=D7599167
   endpoint: "https://data.colorado.gov/resource/u943-ics6.geojson?municipality=Aspen"
   type: "geojson"
@@ -3578,6 +3664,7 @@ aspen:
   state_fips: '23'
   county: "Cumberland"
   county_fips: '005'
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26336&display=Portland&optionId=26336&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portlandme&trip_sub3=D7599167
   population_source: "census"
   notes: "Distinguishes Portland, Maine from Portland, Oregon."
@@ -3589,6 +3676,7 @@ aspen:
   state_fips: '36'
   county: "Suffolk"
   county_fips: '103'
+  country: "United States"
   population_source: "census"
   notes: "Uses Suffolk County East End tracts to approximate the Hamptons."
 
@@ -3599,6 +3687,7 @@ aspen:
   state_fips: '36'
   county: "Warren"
   county_fips: '113'
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=26105&display=Lake%20George&optionId=26105&optionType=City&optionName=Lake%20George&Allianceid=7375838&SID=279148115&trip_sub1=lake%20george&trip_sub3=D7599167
   population_source: "census"
 
@@ -3609,6 +3698,7 @@ branson:
   state_fips: '29'
   county: "Taney"
   county_fips: '213'
+  country: "United States"
   tripcomurl: https://www.trip.com/hotels/list?city=19768&display=Branson&optionId=19768&optionType=City&optionName=Branson&Allianceid=7375838&SID=279148115&trip_sub1=branson&trip_sub3=D7599167
   population_source: "census"
 

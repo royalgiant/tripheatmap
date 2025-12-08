@@ -143,6 +143,8 @@ class CensusTractImporter
       city: @city_name || @county_name,
       county: @county_name,
       state: state_name,
+      country: 'United States',
+      continent: 'North America',
       geom: geometry,
       centroid: centroid
     )

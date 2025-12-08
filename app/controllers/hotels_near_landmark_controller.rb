@@ -126,18 +126,18 @@ class HotelsNearLandmarkController < ApplicationController
 
   def cities_with_popular_landmarks
     city_counts = Place
-      .joins(:neighborhood)
       .where(place_type: ['attraction', 'museum', 'monument', 'theme_park'])
       .where.not(name: ['Unnamed', nil, ''])
       .where.not(slug: nil)
+      .where.not(city: nil)
       .where("places.name ~ '^[A-Z]'")
       .where("LENGTH(places.name) > 3")
       .where("places.name !~ '[\\\\]'")
-      .select('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
+      .select('places.city, places.country, places.continent')
       .select('COUNT(DISTINCT places.id) as landmark_count')
-      .group('neighborhoods.city, neighborhoods.country, neighborhoods.continent')
+      .group('places.city, places.country, places.continent')
       .having('COUNT(DISTINCT places.id) >= 3')
-      .order('neighborhoods.city')
+      .order('places.city')
 
     return [] if city_counts.empty?
 
