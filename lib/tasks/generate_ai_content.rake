@@ -1,6 +1,12 @@
 namespace :city do
   desc "Generate AI content for neighborhoods in a city"
   task :generate_ai_content, [:city] => :environment do |t, args|
+    unless Rails.env.production?
+      puts "⚠️  AI content generation only runs in production environment"
+      puts "Current environment: #{Rails.env}"
+      exit 0
+    end
+
     city = args[:city]
 
     unless city
@@ -52,6 +58,11 @@ namespace :city do
       stats = neighborhood.neighborhood_places_stat
       next unless stats
 
+      if neighborhood.updated_at.present? && neighborhood.updated_at > 90.days.ago
+        puts "  [#{index + 1}/#{neighborhoods_without_content.size}] Skipping #{neighborhood.name} - updated within last 90 days"
+        next
+      end
+
       begin
         print "  [#{index + 1}/#{neighborhoods_without_content.size}] Generating content for #{neighborhood.name}..."
 
@@ -79,10 +90,12 @@ namespace :city do
           generated_count += 1
           puts " ✅"
         else
+          neighborhood.touch
           failed_count += 1
           puts " ❌ (no response)"
         end
       rescue => e
+        neighborhood.touch
         failed_count += 1
         puts " ❌ (#{e.message})"
       end
@@ -100,6 +113,12 @@ namespace :city do
 
   desc "Generate AI content for ALL cities"
   task :generate_all_ai_content => :environment do
+    unless Rails.env.production?
+      puts "⚠️  AI content generation only runs in production environment"
+      puts "Current environment: #{Rails.env}"
+      exit 0
+    end
+
     puts "=" * 80
     puts "Generating AI Content for All Cities"
     puts "=" * 80
@@ -136,6 +155,11 @@ namespace :city do
         stats = neighborhood.neighborhood_places_stat
         next unless stats
 
+        if neighborhood.updated_at.present? && neighborhood.updated_at > 90.days.ago
+          puts "  [#{index + 1}/#{neighborhoods_without_content.size}] Skipping #{neighborhood.name} - updated within last 90 days"
+          next
+        end
+
         begin
           print "  [#{index + 1}/#{neighborhoods_without_content.size}] #{neighborhood.name}..."
 
@@ -163,10 +187,12 @@ namespace :city do
             generated_count += 1
             puts " ✅"
           else
+            neighborhood.touch
             failed_count += 1
             puts " ❌"
           end
         rescue => e
+          neighborhood.touch
           failed_count += 1
           puts " ❌ (#{e.message})"
         end

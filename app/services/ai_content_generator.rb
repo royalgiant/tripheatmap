@@ -1,6 +1,10 @@
 class AiContentGenerator
   # Generate all content for a single neighborhood
   def self.generate_neighborhood_content(neighborhood:, stats:, city_name:, state: nil, country: nil, total_neighborhoods:)
+    if neighborhood.name.include?("Tract")
+      return nil
+    end
+
     new.generate_neighborhood_content(
       neighborhood: neighborhood,
       stats: stats,
@@ -12,6 +16,10 @@ class AiContentGenerator
   end
 
   def self.generate_place_content(place:, neighborhood:)
+    if neighborhood.name.include?("Tract")
+      return nil
+    end
+
     new.generate_place_content(place: place, neighborhood: neighborhood)
   end
 
