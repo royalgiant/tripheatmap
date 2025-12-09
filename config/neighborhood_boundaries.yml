@@ -2271,6 +2271,28 @@ edmonton:
   population_source: "manual"
   notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Edmonton."
 
+winnipeg:
+  name: "Winnipeg"
+  city: "Winnipeg"
+  state: "MB"
+  county: "Winnipeg"
+  country: "Canada"
+  tripcomurl: https://www.trip.com/hotels/list?city=768&display=Winnipeg&optionId=768&optionType=City&optionName=Winnipeg&Allianceid=7375838&SID=279148115&trip_sub1=winnipeg&trip_sub3=D7599167
+  endpoint: "https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson"
+  type: "geojson"
+  enabled: true
+  field_mappings:
+    name: "shapeName"
+    geoid: "shapeID"
+  filters:
+    bbox:
+      min_lat: 49.7
+      max_lat: 50.1
+      min_lon: -97.4
+      max_lon: -96.9
+  population_source: "manual"
+  notes: "GADM ADM3 - Canadian subdivisions. Bounding box around Winnipeg metro area."
+
 banff:
   name: "Banff"
   city: "Banff"

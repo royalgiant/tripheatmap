@@ -1,9 +1,11 @@
-# Generic importer for European cities that rely on hosted GADM GeoJSON
-# datasets (Germany, Netherlands, Switzerland, Sweden, Denmark, Belgium,
-# France, Austria, Norway). Each city entry in config/neighborhood_boundaries.yml
-# provides the endpoint plus optional bounding-box filters.
+# Generic importer for cities that rely on hosted GADM GeoJSON datasets
+# (Europe, UK, Australia, Canada, New Zealand, Singapore, UAE, etc.)
+# Each city entry in config/neighborhood_boundaries.yml provides the endpoint
+# plus optional bounding-box or parent-name filters.
 
 class GadmGlobalNeighborhoodImporter
+  include ContinentHelper
+
   SUPPORTED_COUNTRIES = {
     "Germany" => "DE",
     "Netherlands" => "NL",
@@ -29,7 +31,13 @@ class GadmGlobalNeighborhoodImporter
     "Argentina" => "AR",
     "Czech Republic" => "CZ",
     "Turkey" => "TR",
-    "Ireland" => "IE"
+    "Ireland" => "IE",
+    "United Kingdom" => "GB",
+    "Australia" => "AU",
+    "Canada" => "CA",
+    "New Zealand" => "NZ",
+    "Singapore" => "SG",
+    "United Arab Emirates" => "AE"
   }.freeze
 
   attr_reader :city_key, :config, :errors
@@ -44,9 +52,7 @@ class GadmGlobalNeighborhoodImporter
     raise ArgumentError, "Country '#{config['country']}' is not supported" unless supported_country?
     raise ArgumentError, "City '#{city_key}' missing endpoint" unless config["endpoint"].present?
 
-    unless bounding_box.present? || parent_name_field.present?
-      raise ArgumentError, "City '#{city_key}' needs either a bounding box or parent_name mapping"
-    end
+    # Note: Filters (bbox or parent_name) are optional for city-states like Singapore
   end
 
   def self.available_for_city?(city_key)
@@ -55,13 +61,13 @@ class GadmGlobalNeighborhoodImporter
     return false unless city_config && city_config["enabled"] != false
 
     SUPPORTED_COUNTRIES.key?(city_config["country"]) &&
-      (city_config.dig("filters", "bbox").present? || city_config.dig("field_mappings", "parent_name").present?)
+      city_config["endpoint"].present?
   rescue
     false
   end
 
   def import_neighborhoods
-    Rails.logger.info "Importing European GADM neighborhoods for #{city_name}"
+    Rails.logger.info "Importing GADM neighborhoods for #{city_name} (#{config['country']})"
 
     features = fetch_and_filter_features
     return 0 if features.empty?
@@ -119,7 +125,7 @@ class GadmGlobalNeighborhoodImporter
   end
 
   def fetch_and_filter_features
-    Rails.logger.info "Fetching European GeoJSON from #{endpoint}"
+    Rails.logger.info "Fetching GeoJSON from #{endpoint}"
 
     response = Faraday.get(endpoint) do |req|
       req.options.timeout = 120
@@ -133,8 +139,15 @@ class GadmGlobalNeighborhoodImporter
 
     data = JSON.parse(response.body)
     features = data["features"] || []
-    Rails.logger.info "Fetched #{features.size} features for #{city_name}"
+    Rails.logger.info "Fetched #{features.size} total features"
 
+    # If no filtering is configured (e.g., Singapore city-state), return all features
+    if !bounding_box.present? && !parent_name_field.present?
+      Rails.logger.info "No filters configured, importing all #{features.size} features"
+      return features
+    end
+
+    # Otherwise filter by bbox or parent name
     filtered =
       if bounding_box.present?
         filter_by_bbox(features)
@@ -153,7 +166,7 @@ class GadmGlobalNeighborhoodImporter
   def filter_by_parent_name(features)
     Rails.logger.warn "Parent name filtering requested but no field provided" unless parent_name_field.present?
 
-    expected = Array(config['state']) + Array(config['city']) + Array(config['county'])
+    expected = Array(config['state']) + Array(config['city']) + Array(config['county']) + Array(config['parent_names'])
     expected = expected.compact.map(&:downcase).uniq
 
     filtered = features.select do |feature|
@@ -235,6 +248,7 @@ class GadmGlobalNeighborhoodImporter
       county: config["county"],
       state: config["state"],
       country: config["country"],
+      continent: determine_continent(config["country"]),
       population: nil,
       geom: geometry,
       centroid: centroid
