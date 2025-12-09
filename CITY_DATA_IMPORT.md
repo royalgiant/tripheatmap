@@ -7,83 +7,64 @@ This guide explains how to import neighborhood boundaries and places data for th
 ### Import Data for a Single City
 
 ```bash
-# Full import (boundaries + places)
-kamal app exec -i "bundle exec rake 'city:import[las vegas,true]'"
-rake city:import[dallas]
-bundle exec rake "city:import[dallas,true]"
+# Production (async, non-blocking, recommended)
+kamal app exec -i "bundle exec rake 'city:import_with_airports_async[dallas]'"
 
-# Or use the service directly
-bin/rails runner "CityDataImporter.new('dallas').import_all"
+# Development/Testing (sync, blocking)
+rake city:import_with_airports[dallas]
 ```
 
 ### Import Data for All Cities
 
 ```bash
-rake city:import_all
+# Production (async, non-blocking, recommended)
+rake city:import_all_async
+
+# Monitor progress
+kamal app logs
 ```
 
 ## Available Commands
 
-### Rake Tasks (Synchronous - blocks until complete)
+### Primary Import Commands
+
+**Async (Recommended for Production)**
+
+Non-blocking commands that queue Sidekiq jobs:
 
 ```bash
-# Import all data (boundaries + places) for a specific city
-rake city:import[CITY]
-# Example: rake city:import[dallas]
+# Import single city (boundaries + places + airports)
+rake city:import_with_airports_async[CITY]
 
-# Import only boundaries
-rake city:import_boundaries[CITY]
+# Import all cities (boundaries + places + airports for each)
+rake city:import_all_async
+```
 
-# Import only places data (requires boundaries to exist)
-rake city:import_places[CITY]
+**Sync (For Testing/Development)**
 
-# Enrich existing census tract names (only needed for old data)
-rake city:enrich_names[CITY]
-# Updates existing "Tract 9802" to "Oak Cliff" (new imports do this automatically)
+Blocking commands that run immediately:
 
-# Import all cities
-rake city:import_all
+```bash
+# Import single city (boundaries + places + airports)
+rake city:import_with_airports[CITY]
+```
 
-# Update places data for all cities (skip boundaries)
-rake city:update_places
+### Utility Commands
 
-# Show statistics for a city
-rake city:stats[CITY]
-
+```bash
 # List all supported cities and their data status
 rake city:list
 
-# Import airports for a specific city
-rake import:airports[CITY]
-```
-
-### Rake Tasks (Async - queues Sidekiq job, returns immediately)
-
-**Recommended for production to avoid blocking the web server**
-
-```bash
-# Queue city import job (boundaries + places)
-rake city:import_async[CITY]
-# Example: rake city:import_async[dallas]
-
-# Queue city + airport import job (boundaries + places + airports)
-rake city:import_with_airports_async[CITY]
-# Example: rake city:import_with_airports_async[dallas]
-
-# Queue all cities + airports import jobs (runs cities in parallel)
-rake city:import_all_async
-
-# Queue airport import job only
-rake import:airports_async[CITY]
-# Example: rake import:airports_async[dallas]
+# Update places data for all cities (scheduled maintenance)
+rake city:update_places
 ```
 
 **Usage with Kamal:**
 ```bash
-# Single city with airports (non-blocking)
+# Single city import
 kamal app exec -i "bundle exec rake 'city:import_with_airports_async[dallas]'"
 
-# All cities with airports (non-blocking)
+# All cities import
 kamal app exec -i "bundle exec rake 'city:import_all_async'"
 
 # Monitor progress
@@ -109,23 +90,14 @@ CityDataImporter.import_all_cities
 CityDataImporter.import_all_cities(skip_boundaries: true)
 ```
 
-### Sidekiq Jobs (for scheduled/background execution)
+### Sidekiq Jobs (for programmatic/scheduled execution)
 
 ```ruby
-# Queue a job to import a specific city (boundaries + places only)
-ImportCityDataJob.perform_async('dallas')
-
-# Queue a job to import a specific city + airports
+# Import city + airports
 ImportCityWithAirportsJob.perform_async('dallas')
 
-# Queue airport import job for a specific city
-ImportAirportsJob.perform_async('dallas')
-
-# Queue jobs for all cities + airports (runs cities in parallel)
+# Import all cities + airports (runs in parallel)
 ImportAllCitiesWithAirportsJob.perform_async
-
-# Full import for all cities (boundaries + places only)
-ImportAllCitiesJob.perform_async
 
 # Update places for all cities (OSM restaurants/bars/cafes)
 UpdatePlacesJob.perform_async
@@ -285,20 +257,16 @@ CityDataImporter.new('dallas', skip_boundaries: true, force: true).import_all
 
 ### Initial Setup for Dallas
 
-**Synchronous (blocks until complete):**
+**Production (recommended):**
 ```bash
-# 1. Import neighborhood boundaries and population
-# Automatically enriches names: "Oak Cliff", "Uptown", etc.
-rake city:import_boundaries[dallas]
+# Import everything (boundaries + places + airports) async
+kamal app exec -i "bundle exec rake 'city:import_with_airports_async[dallas]'"
+```
 
-# 2. Import places data
-rake city:import_places[dallas]
-
-# 3. Import airports
-rake import:airports[dallas]
-
-# 4. Check results
-rake city:stats[dallas]
+**Development/Testing:**
+```bash
+# Import everything (boundaries + places + airports) sync
+rake city:import_with_airports[dallas]
 ```
 
 ### Neighborhood Name Enrichment
@@ -309,37 +277,9 @@ For cities using census tracts (Dallas, Austin, Sacramento), the import automati
 - During census tract import, each tract's centroid is reverse geocoded using Nominatim (OpenStreetMap)
 - Automatically respects API rate limits (1 request/second)
 - Falls back to "Tract 9802" if geocoding fails
-- This happens by default - no extra step required!
-
-**For existing data:**
-If you already imported tracts with generic names, you can enrich them:
-
-```bash
-# Update existing neighborhoods with better names
-rake city:enrich_names[dallas]
-```
+- This happens automatically during import - no extra step required!
 
 **Note**: Chicago and Miami use official neighborhood boundaries and don't need enrichment.
-
-### Update Places Data Weekly
-
-```bash
-# Update all cities
-rake city:update_places
-
-# Or just one city
-rake city:import_places[dallas]
-```
-
-### Check Current Data Status
-
-```bash
-# List all cities
-rake city:list
-
-# Detailed stats for one city
-rake city:stats[dallas]
-```
 
 ### Manual Testing
 
@@ -461,7 +401,7 @@ end
 1. Add city configuration to `config/neighborhood_boundaries.yml`
 2. Add city name to `CityDataImporter::CITY_NAMES`
 3. If city has official neighborhoods, verify endpoint in config
-4. Run import: `rake city:import[new_city]`
+4. Run import: `rake city:import_with_airports_async[new_city]`
 
 ## Performance Notes
 
