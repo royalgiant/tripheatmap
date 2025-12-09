@@ -189,6 +189,44 @@ namespace :city do
     end
   end
 
+  desc "Queue city import as async Sidekiq job (non-blocking)"
+  task :import_async, [:city] => :environment do |t, args|
+    city = args[:city]
+
+    unless city
+      puts "Error: City parameter required"
+      puts "Usage: rake city:import_async[dallas]"
+      exit 1
+    end
+
+    ImportCityDataJob.perform_async(city)
+    puts "✅ Queued import job for #{city}"
+    puts "Monitor progress in Sidekiq dashboard or logs"
+  end
+
+  desc "Queue city + airport import as async Sidekiq job (non-blocking)"
+  task :import_with_airports_async, [:city] => :environment do |t, args|
+    city = args[:city]
+
+    unless city
+      puts "Error: City parameter required"
+      puts "Usage: rake city:import_with_airports_async[dallas]"
+      exit 1
+    end
+
+    ImportCityWithAirportsJob.perform_async(city)
+    puts "✅ Queued city + airport import job for #{city}"
+    puts "Monitor progress in Sidekiq dashboard or logs"
+  end
+
+  desc "Queue all cities + airports import as async Sidekiq jobs (non-blocking)"
+  task :import_all_async => :environment do
+    ImportAllCitiesWithAirportsJob.perform_async
+    puts "✅ Queued import jobs for all cities (with airports)"
+    puts "Individual jobs will be queued for each city to run in parallel"
+    puts "Monitor progress in Sidekiq dashboard or logs"
+  end
+
   desc "List all supported cities and their current data status"
   task :list => :environment do
     puts "=" * 80
@@ -215,7 +253,7 @@ namespace :city do
 
     puts "=" * 80
     puts ""
-    puts "Commands:"
+    puts "Synchronous Commands (blocks until complete):"
     puts "  rake city:import[CITY]           - Import all data for a city (skips if updated within 90 days)"
     puts "  rake city:import[CITY,true]      - Force import (ignores 90-day freshness check)"
     puts "  rake city:import_places[CITY]    - Import only places data (skips if updated within 90 days)"
@@ -223,6 +261,12 @@ namespace :city do
     puts "  rake city:stats[CITY]            - Show statistics for a city"
     puts "  rake city:import_all             - Import all cities (skips fresh data)"
     puts "  FORCE=true rake city:import_all  - Force import all cities (ignores freshness)"
+    puts ""
+    puts "Async Commands (queues Sidekiq job, returns immediately):"
+    puts "  rake city:import_async[CITY]              - Queue city import job"
+    puts "  rake city:import_with_airports_async[CITY] - Queue city + airport import job"
+    puts "  rake city:import_all_async                 - Queue all cities + airports import jobs"
+    puts "  rake import:airports_async[CITY]           - Queue airport import job only"
     puts ""
     puts "Freshness: Cities updated within 90 days are automatically skipped unless force=true"
     puts ""

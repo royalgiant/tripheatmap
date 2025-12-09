@@ -29,7 +29,7 @@ class OverpassImporter
 
   def initialize
     @errors = []
-    @city_configs = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml')).except('states')
+    @city_configs = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml'))
     
     # Pre-compute city URL map for O(1) lookup
     @city_url_map = {}

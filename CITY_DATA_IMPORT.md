@@ -24,7 +24,7 @@ rake city:import_all
 
 ## Available Commands
 
-### Rake Tasks
+### Rake Tasks (Synchronous - blocks until complete)
 
 ```bash
 # Import all data (boundaries + places) for a specific city
@@ -52,6 +52,42 @@ rake city:stats[CITY]
 
 # List all supported cities and their data status
 rake city:list
+
+# Import airports for a specific city
+rake import:airports[CITY]
+```
+
+### Rake Tasks (Async - queues Sidekiq job, returns immediately)
+
+**Recommended for production to avoid blocking the web server**
+
+```bash
+# Queue city import job (boundaries + places)
+rake city:import_async[CITY]
+# Example: rake city:import_async[dallas]
+
+# Queue city + airport import job (boundaries + places + airports)
+rake city:import_with_airports_async[CITY]
+# Example: rake city:import_with_airports_async[dallas]
+
+# Queue all cities + airports import jobs (runs cities in parallel)
+rake city:import_all_async
+
+# Queue airport import job only
+rake import:airports_async[CITY]
+# Example: rake import:airports_async[dallas]
+```
+
+**Usage with Kamal:**
+```bash
+# Single city with airports (non-blocking)
+kamal app exec -i "bundle exec rake 'city:import_with_airports_async[dallas]'"
+
+# All cities with airports (non-blocking)
+kamal app exec -i "bundle exec rake 'city:import_all_async'"
+
+# Monitor progress
+kamal app logs
 ```
 
 ### Ruby Service
@@ -76,18 +112,29 @@ CityDataImporter.import_all_cities(skip_boundaries: true)
 ### Sidekiq Jobs (for scheduled/background execution)
 
 ```ruby
-# Queue a job to import a specific city
+# Queue a job to import a specific city (boundaries + places only)
 ImportCityDataJob.perform_async('dallas')
+
+# Queue a job to import a specific city + airports
+ImportCityWithAirportsJob.perform_async('dallas')
+
+# Queue airport import job for a specific city
+ImportAirportsJob.perform_async('dallas')
+
+# Queue jobs for all cities + airports (runs cities in parallel)
+ImportAllCitiesWithAirportsJob.perform_async
+
+# Full import for all cities (boundaries + places only)
+ImportAllCitiesJob.perform_async
 
 # Update places for all cities (OSM restaurants/bars/cafes)
 UpdatePlacesJob.perform_async
 
 # Update hotels/hostels for all cities (removes closed businesses, adds new ones via OSM)
 UpdateHotelsJob.perform_async
-
-# Full import for all cities
-ImportAllCitiesJob.perform_async
 ```
+
+**Note:** The async jobs are non-blocking and won't freeze your web server. Monitor progress via logs or Sidekiq dashboard.
 
 ## Supported Cities
 
@@ -238,6 +285,7 @@ CityDataImporter.new('dallas', skip_boundaries: true, force: true).import_all
 
 ### Initial Setup for Dallas
 
+**Synchronous (blocks until complete):**
 ```bash
 # 1. Import neighborhood boundaries and population
 # Automatically enriches names: "Oak Cliff", "Uptown", etc.
@@ -246,7 +294,10 @@ rake city:import_boundaries[dallas]
 # 2. Import places data
 rake city:import_places[dallas]
 
-# 3. Check results
+# 3. Import airports
+rake import:airports[dallas]
+
+# 4. Check results
 rake city:stats[dallas]
 ```
 
