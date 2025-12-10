@@ -1,0 +1,1226 @@
+# North America Cities Configuration
+# Neighborhood boundaries for cities in North America
+
+---
+mexico city:
+  name: Mexico City
+  city: Mexico City
+  state: Mexico City
+  county: Mexico City
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=691&display=Mexico%20City&optionId=691&optionType=City&optionName=Mexico%20City&Allianceid=7375838&SID=279148115&trip_sub1=mexico%20city&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 19.2
+      max_lat: 19.6
+      min_lon: -99.35
+      max_lon: -98.9
+  population_source: manual
+  notes: Mexico City alcaldías.
+guadalajara:
+  name: Guadalajara
+  city: Guadalajara
+  state: Jalisco
+  county: Guadalajara
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=1253&display=Guadalajara&optionId=1253&optionType=City&optionName=Guadalajara&Allianceid=7375838&SID=279148115&trip_sub1=guadalajara&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.55
+      max_lat: 20.8
+      min_lon: -103.5
+      max_lon: -103.2
+  population_source: manual
+  notes: Guadalajara municipios.
+monterrey:
+  name: Monterrey
+  city: Monterrey
+  state: Nuevo León
+  county: Monterrey
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=3697&display=Monterrey&optionId=3697&optionType=City&optionName=Monterrey&Allianceid=7375838&SID=279148115&trip_sub1=monterrey&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 25.55
+      max_lat: 25.8
+      min_lon: -100.45
+      max_lon: -100.15
+  population_source: manual
+  notes: Monterrey municipios.
+cancun:
+  name: Cancun
+  city: Cancun
+  state: Quintana Roo
+  county: Benito Juárez
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=812&display=Cancun&optionId=812&optionType=City&optionName=Cancun&Allianceid=7375838&SID=279148115&trip_sub1=cancun&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 21.0
+      max_lat: 21.25
+      min_lon: -87.2
+      max_lon: -86.9
+  population_source: manual
+  notes: Cancún municipality.
+san miguel de allende:
+  name: San Miguel de Allende
+  city: San Miguel de Allende
+  state: Guanajuato
+  county: San Miguel de Allende
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=36445&display=San%20Miguel%20de%20Allende&optionId=36445&optionType=City&optionName=San%20Miguel%20de%20Allende&Allianceid=7375838&SID=279148115&trip_sub1=san%20miguel%20de%20allende&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.8
+      max_lat: 21.05
+      min_lon: -100.9
+      max_lon: -100.6
+  population_source: manual
+  notes: San Miguel de Allende municipio.
+san jose del cabo:
+  name: San José del Cabo
+  city: San José del Cabo
+  state: Baja California Sur
+  county: Los Cabos
+  country: Mexico
+  tripcomurl: https://www.trip.com/hotels/list?city=36441&display=San%20Jose%20del%20Cabo&optionId=36441&optionType=City&optionName=San%20Jose%20del%20Cabo&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose%20del%20cabo&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.9
+      max_lat: 23.2
+      min_lon: -109.85
+      max_lon: -109.55
+  population_source: manual
+  notes: Filters Los Cabos municipio around San José del Cabo.
+panama city:
+  name: Panama City
+  city: Panama City
+  state: Panama Province
+  county: Panama
+  country: Panama
+  tripcomurl: https://www.trip.com/hotels/list?city=830&display=Panama%20City&optionId=830&optionType=City&optionName=Panama%20City&Allianceid=7375838&SID=279148115&trip_sub1=panama%20city&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Panama_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 8.85
+      max_lat: 9.2
+      min_lon: -79.7
+      max_lon: -79.2
+  population_source: manual
+  notes: Filters Panama City corregimientos within Panama District.
+san jose costa rica:
+  name: San José
+  city: San José
+  state: San José
+  county: San José
+  country: Costa Rica
+  tripcomurl: https://www.trip.com/hotels/list?city=1250&display=San%20Jose&optionId=1250&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose%20costa%20rica&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Costa_Rica_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 9.8
+      max_lat: 10.1
+      min_lon: -84.2
+      max_lon: -83.9
+  population_source: manual
+  notes: San José canton neighborhoods.
+bahamas:
+  name: Bahamas
+  city: Bahamas
+  state: Bahamas
+  county: Bahamas
+  country: Bahamas
+  tripcomurl: https://www.trip.com/hotels/w/home?Allianceid=7375838&SID=279148115&trip_sub1=bahamas&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Bahamas_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.0
+      max_lat: 27.5
+      min_lon: -80.5
+      max_lon: -72.0
+  population_source: manual
+  notes: Entire Bahamas archipelago using ADM2 districts.
+toronto:
+  name: Toronto
+  city: Toronto
+  state: 'ON'
+  county: Toronto
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=461&display=Toronto&optionId=461&optionType=City&optionName=Toronto&Allianceid=7375838&SID=279148115&trip_sub1=toronto&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 43.4
+      max_lat: 44.0
+      min_lon: -79.8
+      max_lon: -79.0
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Filtering via bounding box around metro
+    Toronto.
+vancouver:
+  name: Vancouver
+  city: Vancouver
+  state: BC
+  county: Metro Vancouver
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=476&display=Vancouver&optionId=476&optionType=City&optionName=Vancouver&Allianceid=7375838&SID=279148115&trip_sub1=vancouver&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 49.0
+      max_lat: 49.4
+      min_lon: -123.3
+      max_lon: -122.8
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Metro Vancouver.
+montreal:
+  name: Montreal
+  city: Montreal
+  state: QC
+  county: Montreal
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=759&display=Montreal&optionId=759&optionType=City&optionName=Montreal&Allianceid=7375838&SID=279148115&trip_sub1=montreal&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.35
+      max_lat: 45.65
+      min_lon: -73.95
+      max_lon: -73.35
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Montreal CMA.
+calgary:
+  name: Calgary
+  city: Calgary
+  state: AB
+  county: Calgary
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=761&display=Calgary&optionId=761&optionType=City&optionName=Calgary&Allianceid=7375838&SID=279148115&trip_sub1=calgary&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.8
+      max_lat: 51.2
+      min_lon: -114.3
+      max_lon: -113.8
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Calgary.
+ottawa:
+  name: Ottawa
+  city: Ottawa
+  state: 'ON'
+  county: Ottawa
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=760&display=Ottawa&optionId=760&optionType=City&optionName=Ottawa&Allianceid=7375838&SID=279148115&trip_sub1=ottawa&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.2
+      max_lat: 45.6
+      min_lon: -76.2
+      max_lon: -75.1
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Ottawa-Gatineau.
+edmonton:
+  name: Edmonton
+  city: Edmonton
+  state: AB
+  county: Edmonton
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=1245&display=Edmonton&optionId=1245&optionType=City&optionName=Edmonton&Allianceid=7375838&SID=279148115&trip_sub1=edmonton&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 53.3
+      max_lat: 53.7
+      min_lon: -113.8
+      max_lon: -113.2
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Edmonton.
+winnipeg:
+  name: Winnipeg
+  city: Winnipeg
+  state: MB
+  county: Winnipeg
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=768&display=Winnipeg&optionId=768&optionType=City&optionName=Winnipeg&Allianceid=7375838&SID=279148115&trip_sub1=winnipeg&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 49.7
+      max_lat: 50.1
+      min_lon: -97.4
+      max_lon: -96.9
+  population_source: manual
+  notes: GADM ADM3 - Canadian subdivisions. Bounding box around Winnipeg metro area.
+banff:
+  name: Banff
+  city: Banff
+  state: AB
+  county: Banff
+  country: Canada
+  tripcomurl: https://www.trip.com/hotels/list?city=7725&display=Banff&optionId=7725&optionType=City&optionName=Banff&Allianceid=7375838&SID=279148115&trip_sub1=banff&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.1
+      max_lat: 51.25
+      min_lon: -115.65
+      max_lon: -115.35
+  population_source: manual
+  notes: Banff townsite and surrounding improvement district.
+new york:
+  name: New York
+  city: New York
+  state: NY
+  state_fips: '36'
+  county_fips: '061'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=633&display=New%20York&optionId=633&optionType=City&optionName=New%20York&Allianceid=7375838&SID=279148115&trip_sub1=new%20york&trip_sub3=D7599167
+  zillow: true
+los angeles:
+  name: Los Angeles
+  city: Los Angeles
+  state: CA
+  state_fips: '06'
+  county_fips: '037'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=los%20angeles&trip_sub3=D7599167
+  zillow: true
+houston:
+  name: Houston
+  city: Houston
+  state: TX
+  state_fips: '48'
+  county_fips: '201'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=houston&trip_sub3=D7599167
+  zillow: true
+phoenix:
+  name: Phoenix
+  city: Phoenix
+  state: AZ
+  state_fips: '04'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25938&display=Phoenix&optionId=25938&optionType=City&optionName=Phoenix&Allianceid=7375838&SID=279148115&trip_sub1=phoenix&trip_sub3=D7599167
+  zillow: true
+philadelphia:
+  name: Philadelphia
+  city: Philadelphia
+  state: PA
+  state_fips: '42'
+  county_fips:
+  - '101'
+  - '045'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26153&display=Philadelphia&optionId=26153&optionType=City&optionName=Philadelphia&Allianceid=7375838&SID=279148115&trip_sub1=philadelphia&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Delaware County to capture PHL Airport.
+san antonio:
+  name: San Antonio
+  city: San Antonio
+  state: TX
+  state_fips: '48'
+  county_fips: '029'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1193&display=San%20Antonio&optionId=1193&optionType=City&optionName=San%20Antonio&Allianceid=7375838&SID=279148115&trip_sub1=san%20antonio&trip_sub3=D7599167
+  zillow: true
+san diego:
+  name: San Diego
+  city: San Diego
+  state: CA
+  state_fips: '06'
+  county_fips: '073'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=698&display=San%20Diego&optionId=698&optionType=City&optionName=San%20Diego&Allianceid=7375838&SID=279148115&trip_sub1=san%20diego&trip_sub3=D7599167
+  zillow: true
+fort worth:
+  name: Fort Worth
+  city: Fort Worth
+  state: TX
+  state_fips: '48'
+  county_fips: '439'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=19936&display=Fort%20Worth&optionId=19936&optionType=City&optionName=Fort%20Worth&Allianceid=7375838&SID=279148115&trip_sub1=fort%20worth&trip_sub3=D7599167
+  zillow: true
+jacksonville:
+  name: Jacksonville
+  city: Jacksonville
+  state: FL
+  state_fips: '12'
+  county_fips: '031'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25795&display=Jacksonville&optionId=25795&optionType=City&optionName=Jacksonville&Allianceid=7375838&SID=279148115&trip_sub1=jacksonville&trip_sub3=D7599167
+  zillow: true
+san jose:
+  name: San Jose
+  city: San Jose
+  state: CA
+  state_fips: '06'
+  county_fips: '085'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1880&display=San%20Jose&optionId=1880&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose&trip_sub3=D7599167
+  zillow: true
+charlotte:
+  name: Charlotte
+  city: Charlotte
+  state: NC
+  state_fips: '37'
+  county_fips: '119'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26852&display=Charlotte&optionId=26852&optionType=City&optionName=Charlotte&Allianceid=7375838&SID=279148115&trip_sub1=charlotte&trip_sub3=D7599167
+  zillow: true
+columbus:
+  name: Columbus
+  city: Columbus
+  state: OH
+  state_fips: '39'
+  county_fips: '049'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26851&display=Columbus&optionId=26851&optionType=City&optionName=Columbus&Allianceid=7375838&SID=279148115&trip_sub1=columbus&trip_sub3=D7599167
+  zillow: true
+indianapolis:
+  name: Indianapolis
+  city: Indianapolis
+  state: IN
+  state_fips: '18'
+  county_fips: '097'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1291&display=Indianapolis&optionId=1291&optionType=City&optionName=Indianapolis&Allianceid=7375838&SID=279148115&trip_sub1=indianapolis&trip_sub3=D7599167
+  zillow: true
+san francisco:
+  name: San Francisco
+  city: San Francisco
+  state: CA
+  state_fips: '06'
+  county_fips:
+  - '075'
+  - '081'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=313&display=San%20Francisco&optionId=313&optionType=City&optionName=San%20Francisco&Allianceid=7375838&SID=279148115&trip_sub1=san%20francisco&trip_sub3=D7599167
+  zillow: true
+  notes: Includes San Mateo County to capture SFO Airport.
+seattle:
+  name: Seattle
+  city: Seattle
+  state: WA
+  state_fips: '53'
+  county_fips: '033'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=511&display=Seattle&optionId=511&optionType=City&optionName=Seattle&Allianceid=7375838&SID=279148115&trip_sub1=seattle&trip_sub3=D7599167
+  zillow: true
+denver:
+  name: Denver
+  city: Denver
+  state: CO
+  state_fips: '08'
+  county_fips:
+  - '031'
+  - '001'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=20099&display=Denver&optionId=20099&optionType=City&optionName=Denver&Allianceid=7375838&SID=279148115&trip_sub1=denver&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Adams County to fully capture Denver International Airport area.
+oklahoma city:
+  name: Oklahoma City
+  city: Oklahoma City
+  state: OK
+  state_fips: '40'
+  county_fips: '109'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1440&display=Oklahoma%20City&optionId=1440&optionType=City&optionName=Oklahoma%20City&Allianceid=7375838&SID=279148115&trip_sub1=oklahoma%20city&trip_sub3=D7599167
+  zillow: true
+washington:
+  name: Washington
+  city: Washington
+  state: DC
+  state_fips: '11'
+  county_fips:
+  - '001'
+  - '013'
+  - '107'
+  - '059'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26363&display=Washington%20D.C.&optionId=26363&optionType=City&optionName=Washington%20D.C.&Allianceid=7375838&SID=279148115&trip_sub1=washingtondc&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Arlington, Loudoun, and Fairfax counties (VA) to capture DCA and
+    IAD airports.
+nashville:
+  name: Nashville
+  city: Nashville
+  state: TN
+  state_fips: '47'
+  county_fips: '037'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3228&display=Nashville&optionId=3228&optionType=City&optionName=Nashville&Allianceid=7375838&SID=279148115&trip_sub1=nashville&trip_sub3=D7599167
+  zillow: true
+dallas:
+  name: Dallas
+  city: Dallas
+  state: TX
+  state_fips: '48'
+  county_fips:
+  - '113'
+  - '439'
+  - '085'
+  - '121'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=705&display=Dallas&optionId=705&optionType=City&optionName=Dallas&Allianceid=7375838&SID=279148115&trip_sub1=dallas&trip_sub3=D7599167
+  zillow: true
+  notes: 'Full DFW metroplex: Dallas (113), Tarrant (439), Collin (085 - Plano/Frisco),
+    Denton (121 - Flower Mound/Lewisville).'
+chicago:
+  name: Chicago
+  city: Chicago
+  state: IL
+  state_fips: '17'
+  county_fips: '031'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=549&display=Chicago&optionId=549&optionType=City&optionName=Chicago&Allianceid=7375838&SID=279148115&trip_sub1=chicago&trip_sub3=D7599167
+  zillow: true
+austin:
+  name: Austin
+  city: Austin
+  state: TX
+  state_fips: '48'
+  county_fips: '453'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25526&display=Austin&optionId=25526&optionType=City&optionName=Austin&Allianceid=7375838&SID=279148115&trip_sub1=austin&trip_sub3=D7599167
+  zillow: true
+miami:
+  name: Miami
+  city: Miami
+  state: FL
+  state_fips: '12'
+  county_fips: '086'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25773&display=Miami&optionId=25773&optionType=City&optionName=Miami&Allianceid=7375838&SID=279148115&trip_sub1=miami&trip_sub3=D7599167
+  zillow: true
+sacramento:
+  name: Sacramento
+  city: Sacramento
+  state: CA
+  state_fips: '06'
+  county_fips: '067'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1881&display=Sacramento&optionId=1881&optionType=City&optionName=Sacramento&Allianceid=7375838&SID=279148115&trip_sub1=sacramento&trip_sub3=D7599167
+  zillow: true
+las vegas:
+  name: Las Vegas
+  city: Las Vegas
+  state: NV
+  state_fips: '32'
+  county_fips: '003'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26282&display=Las%20Vegas&optionId=26282&optionType=City&optionName=Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=las%20vegas&trip_sub3=D7599167
+  zillow: true
+el paso:
+  name: El Paso
+  city: El Paso
+  state: TX
+  state_fips: '48'
+  county_fips: '141'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1178&display=El%20Paso&optionId=1178&optionType=City&optionName=El%20Paso&Allianceid=7375838&SID=279148115&trip_sub1=el%20paso&trip_sub3=D7599167
+  zillow: true
+boston:
+  name: Boston
+  city: Boston
+  state: MA
+  state_fips: '25'
+  county_fips: '025'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26848&display=Boston&optionId=26848&optionType=City&optionName=Boston&Allianceid=7375838&SID=279148115&trip_sub1=boston&trip_sub3=D7599167
+  zillow: true
+detroit:
+  name: Detroit
+  city: Detroit
+  state: MI
+  state_fips: '26'
+  county_fips: '163'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=233&display=Detroit&optionId=233&optionType=City&optionName=Detroit&Allianceid=7375838&SID=279148115&trip_sub1=detroit&trip_sub3=D7599167
+  zillow: true
+louisville:
+  name: Louisville
+  city: Louisville
+  state: KY
+  state_fips: '21'
+  county_fips: '111'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25945&display=Louisville&optionId=25945&optionType=City&optionName=Louisville&Allianceid=7375838&SID=279148115&trip_sub1=louisville&trip_sub3=D7599167
+  zillow: true
+portland:
+  name: Portland
+  city: Portland
+  state: OR
+  state_fips: '41'
+  county_fips: '051'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Portland&optionId=XXXX&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portland&trip_sub3=D7597865
+  zillow: true
+memphis:
+  name: Memphis
+  city: Memphis
+  state: TN
+  state_fips: '47'
+  county_fips: '157'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1234&display=Memphis&optionId=1234&optionType=City&optionName=Memphis&Allianceid=7375838&SID=279148115&trip_sub1=memphis&trip_sub3=D7599167
+  zillow: true
+baltimore:
+  name: Baltimore
+  city: Baltimore
+  state: MD
+  state_fips: '24'
+  county_fips: '510'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1460&display=Baltimore&optionId=1460&optionType=City&optionName=Baltimore&Allianceid=7375838&SID=279148115&trip_sub1=baltimore&trip_sub3=D7599167
+  zillow: true
+milwaukee:
+  name: Milwaukee
+  city: Milwaukee
+  state: WI
+  state_fips: '55'
+  county_fips: '079'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1181&display=Milwaukee&optionId=1181&optionType=City&optionName=Milwaukee&Allianceid=7375838&SID=279148115&trip_sub1=milwaukee&trip_sub3=D7599167
+  zillow: true
+albuquerque:
+  name: Albuquerque
+  city: Albuquerque
+  state: NM
+  state_fips: '35'
+  county_fips: '001'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1848&display=Albuquerque&optionId=1848&optionType=City&optionName=Albuquerque&Allianceid=7375838&SID=279148115&trip_sub1=albuquerque&trip_sub3=D7599167
+  zillow: true
+tucson:
+  name: Tucson
+  city: Tucson
+  state: AZ
+  state_fips: '04'
+  county_fips: '019'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1192&display=Tucson&optionId=1192&optionType=City&optionName=Tucson&Allianceid=7375838&SID=279148115&trip_sub1=tucson&trip_sub3=D7599167
+  zillow: true
+fresno:
+  name: Fresno
+  city: Fresno
+  state: CA
+  state_fips: '06'
+  county_fips: '019'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=6726&display=Fresno&optionId=6726&optionType=City&optionName=Fresno&Allianceid=7375838&SID=279148115&trip_sub1=fresno&trip_sub3=D7599167
+  zillow: true
+atlanta:
+  name: Atlanta
+  city: Atlanta
+  state: GA
+  state_fips: '13'
+  county_fips:
+  - '121'
+  - '063'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=27072&display=Atlanta&optionId=27072&optionType=City&optionName=Atlanta&Allianceid=7375838&SID=279148115&trip_sub1=atlanta&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Clayton County to capture Hartsfield-Jackson Airport.
+mesa:
+  name: Mesa
+  city: Mesa
+  state: AZ
+  state_fips: '04'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3325&display=Mesa&optionId=3325&optionType=City&optionName=Mesa&Allianceid=7375838&SID=279148115&trip_sub1=mesa&trip_sub3=D7599167
+  zillow: true
+kansas city:
+  name: Kansas City
+  city: Kansas City
+  state: MO
+  state_fips: '29'
+  county_fips:
+  - '095'
+  - '165'
+  - '047'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25410&display=Kansas%20City&optionId=25410&optionType=City&optionName=Kansas%20City&Allianceid=7375838&SID=279148115&trip_sub1=kansas%20city&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Platte and Clay counties to capture MCI Airport.
+raleigh:
+  name: Raleigh
+  city: Raleigh
+  state: NC
+  state_fips: '37'
+  county_fips: '183'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1406&display=Raleigh&optionId=1406&optionType=City&optionName=Raleigh&Allianceid=7375838&SID=279148115&trip_sub1=raleigh&trip_sub3=D7599167
+  zillow: true
+colorado springs:
+  name: Colorado Springs
+  city: Colorado Springs
+  state: CO
+  state_fips: '08'
+  county_fips: '041'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25870&display=Colorado%20Springs&optionId=25870&optionType=City&optionName=Colorado%20Springs&Allianceid=7375838&SID=279148115&trip_sub1=colorado%20springs&trip_sub3=D7599167
+  zillow: true
+omaha:
+  name: Omaha
+  city: Omaha
+  state: NE
+  state_fips: '31'
+  county_fips: '055'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1425&display=Omaha&optionId=1425&optionType=City&optionName=Omaha&Allianceid=7375838&SID=279148115&trip_sub1=omaha&trip_sub3=D7599167
+  zillow: true
+virginia beach:
+  name: Virginia Beach
+  city: Virginia Beach
+  state: VA
+  state_fips: '51'
+  county_fips: '810'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=9208&display=Virginia%20Beach&optionId=9208&optionType=City&optionName=Virginia%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=virginia%20beach&trip_sub3=D7599167
+  zillow: true
+long beach:
+  name: Long Beach
+  city: Long Beach
+  state: CA
+  state_fips: '06'
+  county_fips: '037'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=33610&display=Long%20Beach&optionId=33610&optionType=City&optionName=Long%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=long%20beach&trip_sub3=D7599167
+  zillow: true
+oakland:
+  name: Oakland
+  city: Oakland
+  state: CA
+  state_fips: '06'
+  county_fips: '001'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1435&display=Oakland&optionId=1435&optionType=City&optionName=Oakland&Allianceid=7375838&SID=279148115&trip_sub1=oakland&trip_sub3=D7599167
+  zillow: true
+minneapolis:
+  name: Minneapolis
+  city: Minneapolis
+  state: MN
+  state_fips: '27'
+  county_fips: '053'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1302&display=Minneapolis&optionId=1302&optionType=City&optionName=Minneapolis&Allianceid=7375838&SID=279148115&trip_sub1=minneapolis&trip_sub3=D7599167
+  zillow: true
+tampa:
+  name: Tampa
+  city: Tampa
+  state: FL
+  state_fips: '12'
+  county_fips: '057'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1399&display=Tampa&optionId=1399&optionType=City&optionName=Tampa&Allianceid=7375838&SID=279148115&trip_sub1=tampa&trip_sub3=D7599167
+  zillow: true
+bakersfield:
+  name: Bakersfield
+  city: Bakersfield
+  state: CA
+  state_fips: '06'
+  county_fips: '029'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=4023&display=Bakersfield&optionId=4023&optionType=City&optionName=Bakersfield&Allianceid=7375838&SID=279148115&trip_sub1=bakersfield&trip_sub3=D7599167
+  zillow: true
+tulsa:
+  name: Tulsa
+  city: Tulsa
+  state: OK
+  state_fips: '40'
+  county_fips: '143'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1857&display=Tulsa&optionId=1857&optionType=City&optionName=Tulsa&Allianceid=7375838&SID=279148115&trip_sub1=tulsa&trip_sub3=D7599167
+  zillow: true
+aurora:
+  name: Aurora
+  city: Aurora
+  state: CO
+  state_fips: '08'
+  county_fips: '001'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26729&display=Aurora&optionId=26729&optionType=City&optionName=Aurora&Allianceid=7375838&SID=279148115&trip_sub1=aurora&trip_sub3=D7599167
+  zillow: true
+arlington:
+  name: Arlington
+  city: Arlington
+  state: TX
+  state_fips: '48'
+  county_fips: '439'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26813&display=Arlington&optionId=26813&optionType=City&optionName=Arlington&Allianceid=7375838&SID=279148115&trip_sub1=arlingtontx&trip_sub3=D7599167
+  zillow: true
+wichita:
+  name: Wichita
+  city: Wichita
+  state: KS
+  state_fips: '20'
+  county_fips: '173'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1856&display=Wichita&optionId=1856&optionType=City&optionName=Wichita&Allianceid=7375838&SID=279148115&trip_sub1=wichita&trip_sub3=D7599167
+  zillow: true
+cleveland:
+  name: Cleveland
+  city: Cleveland
+  state: OH
+  state_fips: '39'
+  county_fips: '035'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1185&display=Cleveland&optionId=1185&optionType=City&optionName=Cleveland&Allianceid=7375838&SID=279148115&trip_sub1=cleveland&trip_sub3=D7599167
+  zillow: true
+henderson:
+  name: Henderson
+  city: Henderson
+  state: NV
+  state_fips: '32'
+  county_fips: '003'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25719&display=Henderson&optionId=25719&optionType=City&optionName=Henderson&Allianceid=7375838&SID=279148115&trip_sub1=henderson&trip_sub3=D7599167
+  zillow: true
+new orleans:
+  name: New Orleans
+  city: New Orleans
+  state: LA
+  state_fips: '22'
+  county_fips:
+  - '071'
+  - '051'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1026&display=New%20Orleans&optionId=1026&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Jefferson Parish to capture MSY Airport.
+honolulu:
+  name: Honolulu
+  city: Honolulu
+  state: HI
+  state_fips: '15'
+  county_fips: '003'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=757&display=Honolulu&optionId=757&optionType=City&optionName=Honolulu&Allianceid=7375838&SID=279148115&trip_sub1=honolulu&trip_sub3=D7599167
+  zillow: true
+anaheim:
+  name: Anaheim
+  city: Anaheim
+  state: CA
+  state_fips: '06'
+  county_fips: '059'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3777&display=Anaheim&optionId=3777&optionType=City&optionName=Anaheim&Allianceid=7375838&SID=279148115&trip_sub1=anaheim&trip_sub3=D7599167
+  zillow: true
+orlando:
+  name: Orlando
+  city: Orlando
+  state: FL
+  state_fips: '12'
+  county_fips: '095'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1187&display=Orlando&optionId=1187&optionType=City&optionName=Orlando&Allianceid=7375838&SID=279148115&trip_sub1=orlando&trip_sub3=D7599167
+  zillow: true
+lexington:
+  name: Lexington
+  city: Lexington
+  state: KY
+  state_fips: '21'
+  county_fips: '067'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Lexington&optionId=XXXX&optionType=City&optionName=Lexington&Allianceid=7375838&SID=279148115&trip_sub1=lexington&trip_sub3=D7597865
+  zillow: true
+stockton:
+  name: Stockton
+  city: Stockton
+  state: CA
+  state_fips: '06'
+  county_fips: '077'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Stockton&optionId=XXXX&optionType=City&optionName=Stockton&Allianceid=7375838&SID=279148115&trip_sub1=stockton&trip_sub3=D7597865
+  zillow: true
+riverside:
+  name: Riverside
+  city: Riverside
+  state: CA
+  state_fips: '06'
+  county_fips: '065'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=20379&display=Riverside&optionId=20379&optionType=City&optionName=Riverside&Allianceid=7375838&SID=279148115&trip_sub1=riverside&trip_sub3=D7599167
+  zillow: true
+irvine:
+  name: Irvine
+  city: Irvine
+  state: CA
+  state_fips: '06'
+  county_fips: '059'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=27020&display=Irvine&optionId=27020&optionType=City&optionName=Irvine&Allianceid=7375838&SID=279148115&trip_sub1=irvine&trip_sub3=D7599167
+  zillow: true
+newark:
+  name: Newark
+  city: Newark
+  state: NJ
+  state_fips: '34'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26203&display=Newark&optionId=26203&optionType=City&optionName=Newark&Allianceid=7375838&SID=279148115&trip_sub1=newark&trip_sub3=D7599167
+  zillow: true
+santa ana:
+  name: Santa Ana
+  city: Santa Ana
+  state: CA
+  state_fips: '06'
+  county_fips: '059'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1396&display=Santa%20Ana&optionId=1396&optionType=City&optionName=Santa%20Ana&Allianceid=7375838&SID=279148115&trip_sub1=santa%20ana&trip_sub3=D7599167
+  zillow: true
+corpus christi:
+  name: Corpus Christi
+  city: Corpus Christi
+  state: TX
+  state_fips: '48'
+  county_fips: '355'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=5114&display=Corpus%20Christi&optionId=5114&optionType=City&optionName=Corpus%20Christi&Allianceid=7375838&SID=279148115&trip_sub1=corpus%20christi&trip_sub3=D7599167
+  zillow: true
+cincinnati:
+  name: Cincinnati
+  city: Cincinnati
+  state: OH
+  state_fips: '39'
+  county_fips:
+  - '061'
+  - '015'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=1184&display=Cincinnati&optionId=1184&optionType=City&optionName=Cincinnati&Allianceid=7375838&SID=279148115&trip_sub1=cincinnati&trip_sub3=D7599167
+  zillow: true
+  notes: Includes Boone County, KY to capture CVG Airport.
+greensboro:
+  name: Greensboro
+  city: Greensboro
+  state: NC
+  state_fips: '37'
+  county_fips: '081'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=27101&display=Greensboro&optionId=27101&optionType=City&optionName=Greensboro&Allianceid=7375838&SID=279148115&trip_sub1=greensboro&trip_sub3=D7599167
+  zillow: true
+pittsburgh:
+  name: Pittsburgh
+  city: Pittsburgh
+  state: PA
+  state_fips: '42'
+  county_fips: '003'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=771&display=Pittsburgh&optionId=771&optionType=City&optionName=Pittsburgh&Allianceid=7375838&SID=279148115&trip_sub1=pittsburgh&trip_sub3=D7599167
+  zillow: true
+durham:
+  name: Durham
+  city: Durham
+  state: NC
+  state_fips: '37'
+  county_fips: '063'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26079&display=Durham&optionId=26079&optionType=City&optionName=Durham&Allianceid=7375838&SID=279148115&trip_sub1=durham&trip_sub3=D7599167
+  zillow: true
+st paul:
+  name: St. Paul
+  city: St. Paul
+  state: MN
+  state_fips: '27'
+  county_fips: '123'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=7591&display=Saint%20Paul&optionId=7591&optionType=City&optionName=Saint%20Paul&Allianceid=7375838&SID=279148115&trip_sub1=stpaul&trip_sub3=D7599167
+jersey city:
+  name: Jersey City
+  city: Jersey City
+  state: NJ
+  state_fips: '34'
+  county_fips: '017'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=9767&display=Jersey%20City&optionId=9767&optionType=City&optionName=Jersey%20City&Allianceid=7375838&SID=279148115&trip_sub1=jersey%20city&trip_sub3=D7599167
+  zillow: true
+lincoln:
+  name: Lincoln
+  city: Lincoln
+  state: NE
+  state_fips: '31'
+  county_fips: '109'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3842&display=Lincoln&optionId=3842&optionType=City&optionName=Lincoln&Allianceid=7375838&SID=279148115&trip_sub1=lincoln&trip_sub3=D7599167
+  zillow: true
+north las vegas:
+  name: North Las Vegas
+  city: North Las Vegas
+  state: NV
+  state_fips: '32'
+  county_fips: '003'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=25866&display=North%20Las%20Vegas&optionId=25866&optionType=City&optionName=North%20Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=north%20las%20vegas&trip_sub3=D7599167
+  zillow: true
+plano:
+  name: Plano
+  city: Plano
+  state: TX
+  state_fips: '48'
+  county_fips: '085'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=19889&display=Plano&optionId=19889&optionType=City&optionName=Plano&Allianceid=7375838&SID=279148115&trip_sub1=plano&trip_sub3=D7599167
+  zillow: true
+gilbert:
+  name: Gilbert
+  city: Gilbert
+  state: AZ
+  state_fips: '04'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=43701&display=Gilbert&optionId=43701&optionType=City&optionName=Gilbert&Allianceid=7375838&SID=279148115&trip_sub1=gilbert&trip_sub3=D7599167
+  zillow: true
+charleston:
+  name: Charleston
+  city: Charleston
+  state: SC
+  state_fips: '45'
+  county_fips: '019'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=4188&display=Charleston&optionId=4188&optionType=City&optionName=Charleston&Allianceid=7375838&SID=279148115&trip_sub1=charleston&trip_sub3=D7599167
+  zillow: true
+savannah:
+  name: Savannah
+  city: Savannah
+  state: GA
+  state_fips: '13'
+  county_fips: '051'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26631&display=Savannah&optionId=26631&optionType=City&optionName=Savannah&Allianceid=7375838&SID=279148115&trip_sub1=savannah&trip_sub3=D7599167
+  zillow: true
+scottsdale:
+  name: Scottsdale
+  city: Scottsdale
+  state: AZ
+  state_fips: '04'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3807&display=Scottsdale&optionId=3807&optionType=City&optionName=Scottsdale&Allianceid=7375838&SID=279148115&trip_sub1=scottsdale&trip_sub3=D7599167
+  zillow: true
+salt lake city:
+  name: Salt Lake City
+  city: Salt Lake City
+  state: UT
+  state_fips: '49'
+  county_fips: '035'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=700&display=Salt%20Lake%20City&optionId=700&optionType=City&optionName=Salt%20Lake%20City&Allianceid=7375838&SID=279148115&trip_sub1=salt%20lake%20city&trip_sub3=D7599167
+  zillow: true
+santa fe:
+  name: Santa Fe
+  city: Santa Fe
+  state: NM
+  state_fips: '35'
+  county_fips: '049'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=5806&display=Santa%20Fe&optionId=5806&optionType=City&optionName=Santa%20Fe&Allianceid=7375838&SID=279148115&trip_sub1=santa%20fe&trip_sub3=D7599167
+  zillow: true
+st louis:
+  name: St. Louis
+  city: St. Louis
+  state: MO
+  state_fips: '29'
+  county_fips:
+  - '510'
+  - '189'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=798983&display=Saint%20Louis&optionId=798983&optionType=City&optionName=Saint%20Louis&Allianceid=7375838&SID=279148115&trip_sub1=stlouis&trip_sub3=D7599167
+  notes: Includes St. Louis County to capture Lambert Airport.
+anchorage:
+  name: Anchorage
+  city: Anchorage
+  state: AK
+  state_fips: '02'
+  county_fips: '020'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=752&display=Anchorage&optionId=752&optionType=City&optionName=Anchorage&Allianceid=7375838&SID=279148115&trip_sub1=anchorage&trip_sub3=D7599167
+  zillow: true
+boulder:
+  name: Boulder
+  city: Boulder
+  state: CO
+  state_fips: '08'
+  county_fips: '013'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=20065&display=Boulder&optionId=20065&optionType=City&optionName=Boulder&Allianceid=7375838&SID=279148115&trip_sub1=boulder&trip_sub3=D7599167
+  zillow: true
+napa:
+  name: Napa
+  city: Napa
+  state: CA
+  state_fips: '06'
+  county_fips: '055'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=9995&display=Napa&optionId=9995&optionType=City&optionName=Napa&Allianceid=7375838&SID=279148115&trip_sub1=napa&trip_sub3=D7599167
+  zillow: true
+sedona:
+  name: Sedona
+  city: Sedona
+  state: AZ
+  state_fips: '04'
+  county: Yavapai
+  county_fips: '025'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=3808&display=Sedona&optionId=3808&optionType=City&optionName=Sedona&Allianceid=7375838&SID=279148115&trip_sub1=sedona&trip_sub3=D7599167
+  endpoint: https://services.arcgis.com/ZzrwjTRez6FJiOq4/arcgis/rest/services/City_Boundary_Data/FeatureServer/0/query?where=CITY_NAME='Sedona'&outFields=*&outSR=4326&f=geojson
+  type: geojson
+  enabled: false
+  field_mappings:
+    name: CITY_NAME
+    geoid: OBJECTID
+  population_source: census
+aspen:
+  name: Aspen
+  city: Aspen
+  state: CO
+  state_fips: '08'
+  county: Pitkin
+  county_fips: '097'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=4153&display=Aspen&optionId=4153&optionType=City&optionName=Aspen&Allianceid=7375838&SID=279148115&trip_sub1=aspen&trip_sub3=D7599167
+  endpoint: https://data.colorado.gov/resource/u943-ics6.geojson?municipality=Aspen
+  type: geojson
+  enabled: false
+  field_mappings:
+    name: municipality
+    geoid: objectid
+  population_source: census
+portland me:
+  name: Portland (Maine)
+  city: Portland
+  state: ME
+  state_fips: '23'
+  county: Cumberland
+  county_fips: '005'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26336&display=Portland&optionId=26336&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portlandme&trip_sub3=D7599167
+  population_source: census
+  notes: Distinguishes Portland, Maine from Portland, Oregon.
+the hamptons:
+  name: The Hamptons
+  city: The Hamptons
+  state: NY
+  state_fips: '36'
+  county: Suffolk
+  county_fips: '103'
+  country: United States
+  population_source: census
+  notes: Uses Suffolk County East End tracts to approximate the Hamptons.
+lake george:
+  name: Lake George
+  city: Lake George
+  state: NY
+  state_fips: '36'
+  county: Warren
+  county_fips: '113'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=26105&display=Lake%20George&optionId=26105&optionType=City&optionName=Lake%20George&Allianceid=7375838&SID=279148115&trip_sub1=lake%20george&trip_sub3=D7599167
+  population_source: census
+branson:
+  name: Branson
+  city: Branson
+  state: MO
+  state_fips: '29'
+  county: Taney
+  county_fips: '213'
+  country: United States
+  tripcomurl: https://www.trip.com/hotels/list?city=19768&display=Branson&optionId=19768&optionType=City&optionName=Branson&Allianceid=7375838&SID=279148115&trip_sub1=branson&trip_sub3=D7599167
+  population_source: census

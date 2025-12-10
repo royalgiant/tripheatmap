@@ -1,0 +1,1567 @@
+# Europe Cities Configuration
+# Neighborhood boundaries for cities in Europe
+
+---
+london:
+  name: London
+  city: London
+  state: England
+  county: Greater London
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=338&display=London&optionId=338&optionType=City&optionName=London&Allianceid=7375838&SID=279148115&trip_sub1=london&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Barking and Dagenham
+  - Barnet
+  - Bexley
+  - Brent
+  - Bromley
+  - Camden
+  - Croydon
+  - Ealing
+  - Enfield
+  - Greenwich
+  - Hackney
+  - Hammersmith and Fulham
+  - Haringey
+  - Harrow
+  - Havering
+  - Hillingdon
+  - Hounslow
+  - Islington
+  - Kensington and Chelsea
+  - Kingston upon Thames
+  - Lambeth
+  - Lewisham
+  - Merton
+  - Newham
+  - Redbridge
+  - Richmond upon Thames
+  - Southwark
+  - Sutton
+  - Tower Hamlets
+  - Waltham Forest
+  - Wandsworth
+  - Westminster
+  - City of London
+  population_source: manual
+  notes: GADM Level 4 - UK wards. Filter by NAME_3='London' or matching borough names.
+birmingham:
+  name: Birmingham
+  city: Birmingham
+  state: England
+  county: West Midlands
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=1270&display=Birmingham&optionId=1270&optionType=City&optionName=Birmingham&Allianceid=7375838&SID=279148115&trip_sub1=birmingham&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Birmingham
+  - City of Birmingham
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+manchester:
+  name: Manchester
+  city: Manchester
+  state: England
+  county: Greater Manchester
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=722&display=Manchester&optionId=722&optionType=City&optionName=Manchester&Allianceid=7375838&SID=279148115&trip_sub1=manchester&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Manchester
+  - City of Manchester
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+liverpool:
+  name: Liverpool
+  city: Liverpool
+  state: England
+  county: Merseyside
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=689&display=Liverpool&optionId=689&optionType=City&optionName=Liverpool&Allianceid=7375838&SID=279148115&trip_sub1=liverpool&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Liverpool
+  - City of Liverpool
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+leeds:
+  name: Leeds
+  city: Leeds
+  state: England
+  county: West Yorkshire
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=1733&display=Leeds&optionId=1733&optionType=City&optionName=Leeds&Allianceid=7375838&SID=279148115&trip_sub1=leeds&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Leeds
+  - City of Leeds
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+sheffield:
+  name: Sheffield
+  city: Sheffield
+  state: England
+  county: South Yorkshire
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=3191&display=Sheffield&optionId=3191&optionType=City&optionName=Sheffield&Allianceid=7375838&SID=279148115&trip_sub1=sheffield&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Sheffield
+  - City of Sheffield
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+bristol:
+  name: Bristol
+  city: Bristol
+  state: England
+  county: Bristol
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=838&display=Bristol&optionId=838&optionType=City&optionName=Bristol&Allianceid=7375838&SID=279148115&trip_sub1=bristol&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Bristol
+  - Bristol, City of
+  population_source: manual
+  notes: 'GADM Level 4 - UK wards. All UK cities share the same endpoint. Note: May
+    be ''Bristol, City of'' in NAME_3.'
+glasgow:
+  name: Glasgow
+  city: Glasgow
+  state: Scotland
+  county: Glasgow City
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=780&display=Glasgow&optionId=780&optionType=City&optionName=Glasgow&Allianceid=7375838&SID=279148115&trip_sub1=glasgow&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Glasgow City
+  - Glasgow
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+edinburgh:
+  name: Edinburgh
+  city: Edinburgh
+  state: Scotland
+  county: City of Edinburgh
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=706&display=Edinburgh&optionId=706&optionType=City&optionName=Edinburgh&Allianceid=7375838&SID=279148115&trip_sub1=edinburgh&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - City of Edinburgh
+  - Edinburgh
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+cardiff:
+  name: Cardiff
+  city: Cardiff
+  state: Wales
+  county: Cardiff
+  country: United Kingdom
+  tripcomurl: https://www.trip.com/hotels/list?city=1475&display=Cardiff&optionId=1475&optionType=City&optionName=Cardiff&Allianceid=7375838&SID=279148115&trip_sub1=cardiff&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_4
+    geoid: GID_4
+    parent_name: NAME_3
+  parent_names:
+  - Cardiff
+  - City of Cardiff
+  population_source: manual
+  notes: GADM Level 4 - UK wards. All UK cities share the same endpoint.
+berlin:
+  name: Berlin
+  city: Berlin
+  state: Berlin
+  county: Berlin
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=193&display=Berlin&optionId=193&optionType=City&optionName=Berlin&Allianceid=7375838&SID=279148115&trip_sub1=berlin&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 52.3
+      max_lat: 52.7
+      min_lon: 13.0
+      max_lon: 13.9
+  population_source: manual
+  notes: GADM ADM3 - Berlin boroughs/districts. Bounding box keeps the Hauptstadt
+    metro.
+munich:
+  name: Munich
+  city: Munich
+  state: Bavaria
+  county: Upper Bavaria
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=363&display=Munich&optionId=363&optionType=City&optionName=Munich&Allianceid=7375838&SID=279148115&trip_sub1=munich&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 48.05
+      max_lat: 48.25
+      min_lon: 11.4
+      max_lon: 11.75
+  population_source: manual
+  notes: GADM ADM3 - Landkreis/Stadtkreis boundaries around Munich.
+hamburg:
+  name: Hamburg
+  city: Hamburg
+  state: Hamburg
+  county: Hamburg
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=763&display=Hamburg&optionId=763&optionType=City&optionName=Hamburg&Allianceid=7375838&SID=279148115&trip_sub1=hamburg&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 53.3
+      max_lat: 53.7
+      min_lon: 9.7
+      max_lon: 10.3
+  population_source: manual
+  notes: GADM ADM3 - Hamburg boroughs.
+frankfurt:
+  name: Frankfurt
+  city: Frankfurt
+  state: Hesse
+  county: Darmstadt Region
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=250&display=Frankfurt&optionId=250&optionType=City&optionName=Frankfurt&Allianceid=7375838&SID=279148115&trip_sub1=frankfurt&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.0
+      max_lat: 50.25
+      min_lon: 8.4
+      max_lon: 8.9
+  population_source: manual
+  notes: GADM ADM3 - Frankfurt urban districts.
+cologne:
+  name: Cologne
+  city: Cologne
+  state: North Rhine-Westphalia
+  county: Cologne
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=709&display=Cologne&optionId=709&optionType=City&optionName=Cologne&Allianceid=7375838&SID=279148115&trip_sub1=cologne&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.85
+      max_lat: 51.1
+      min_lon: 6.7
+      max_lon: 7.2
+  population_source: manual
+  notes: GADM ADM3 - Cologne boroughs (Stadtbezirke).
+stuttgart:
+  name: Stuttgart
+  city: Stuttgart
+  state: Baden-Württemberg
+  county: Stuttgart
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=765&display=Stuttgart&optionId=765&optionType=City&optionName=Stuttgart&Allianceid=7375838&SID=279148115&trip_sub1=stuttgart&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 48.65
+      max_lat: 48.9
+      min_lon: 9.05
+      max_lon: 9.35
+  population_source: manual
+  notes: GADM ADM3 - Stuttgart boroughs.
+dusseldorf:
+  name: Dusseldorf
+  city: Dusseldorf
+  state: North Rhine-Westphalia
+  county: Düsseldorf
+  country: Germany
+  tripcomurl: https://www.trip.com/hotels/list?city=762&display=Dusseldorf&optionId=762&optionType=City&optionName=Dusseldorf&Allianceid=7375838&SID=279148115&trip_sub1=dusseldorf&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.15
+      max_lat: 51.35
+      min_lon: 6.65
+      max_lon: 6.95
+  population_source: manual
+  notes: GADM ADM3 - Düsseldorf boroughs.
+amsterdam:
+  name: Amsterdam
+  city: Amsterdam
+  state: North Holland
+  county: Amsterdam
+  country: Netherlands
+  tripcomurl: https://www.trip.com/hotels/list?city=176&display=Amsterdam&optionId=176&optionType=City&optionName=Amsterdam&Allianceid=7375838&SID=279148115&trip_sub1=amsterdam&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 52.2
+      max_lat: 52.5
+      min_lon: 4.7
+      max_lon: 5.1
+  population_source: manual
+  notes: GADM ADM2 - Amsterdam municipalities.
+rotterdam:
+  name: Rotterdam
+  city: Rotterdam
+  state: South Holland
+  county: Rotterdam
+  country: Netherlands
+  tripcomurl: https://www.trip.com/hotels/list?city=718&display=Rotterdam&optionId=718&optionType=City&optionName=Rotterdam&Allianceid=7375838&SID=279148115&trip_sub1=rotterdam&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.85
+      max_lat: 52.05
+      min_lon: 4.35
+      max_lon: 4.6
+  population_source: manual
+  notes: GADM ADM2 - Rotterdam municipalities.
+the hague:
+  name: The Hague
+  city: The Hague
+  state: South Holland
+  county: The Hague
+  country: Netherlands
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 52.0
+      max_lat: 52.15
+      min_lon: 4.2
+      max_lon: 4.4
+  population_source: manual
+  notes: GADM ADM2 - The Hague municipalities.
+utrecht:
+  name: Utrecht
+  city: Utrecht
+  state: Utrecht
+  county: Utrecht
+  country: Netherlands
+  tripcomurl: https://www.trip.com/hotels/list?city=719&display=Utrecht&optionId=719&optionType=City&optionName=Utrecht&Allianceid=7375838&SID=279148115&trip_sub1=utrecht&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 52.02
+      max_lat: 52.18
+      min_lon: 5.0
+      max_lon: 5.2
+  population_source: manual
+  notes: GADM ADM2 - Utrecht municipalities.
+eindhoven:
+  name: Eindhoven
+  city: Eindhoven
+  state: North Brabant
+  county: Eindhoven
+  country: Netherlands
+  tripcomurl: https://www.trip.com/hotels/list?city=1731&display=Eindhoven&optionId=1731&optionType=City&optionName=Eindhoven&Allianceid=7375838&SID=279148115&trip_sub1=eindhoven&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.35
+      max_lat: 51.55
+      min_lon: 5.35
+      max_lon: 5.6
+  population_source: manual
+  notes: GADM ADM2 - Eindhoven municipalities.
+zurich:
+  name: Zurich
+  city: Zurich
+  state: Zürich
+  county: Zurich
+  country: Switzerland
+  tripcomurl: https://www.trip.com/hotels/list?city=434&display=Zurich&optionId=434&optionType=City&optionName=Zurich&Allianceid=7375838&SID=279148115&trip_sub1=zurich&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 47.3
+      max_lat: 47.5
+      min_lon: 8.4
+      max_lon: 8.7
+  population_source: manual
+  notes: GADM ADM3 - Zurich municipalities.
+geneva:
+  name: Geneva
+  city: Geneva
+  state: Geneva
+  county: Geneva
+  country: Switzerland
+  tripcomurl: https://www.trip.com/hotels/list?city=666&display=Geneva&optionId=666&optionType=City&optionName=Geneva&Allianceid=7375838&SID=279148115&trip_sub1=geneva&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 46.15
+      max_lat: 46.3
+      min_lon: 6.05
+      max_lon: 6.25
+  population_source: manual
+  notes: GADM ADM3 - Geneva municipalities.
+basel:
+  name: Basel
+  city: Basel
+  state: Basel-Stadt
+  county: Basel
+  country: Switzerland
+  tripcomurl: https://www.trip.com/hotels/list?city=806&display=Basel&optionId=806&optionType=City&optionName=Basel&Allianceid=7375838&SID=279148115&trip_sub1=basel&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 47.5
+      max_lat: 47.65
+      min_lon: 7.5
+      max_lon: 7.75
+  population_source: manual
+  notes: GADM ADM3 - Basel municipalities.
+lausanne:
+  name: Lausanne
+  city: Lausanne
+  state: Vaud
+  county: Lausanne
+  country: Switzerland
+  tripcomurl: https://www.trip.com/hotels/list?city=3154&display=Lausanne&optionId=3154&optionType=City&optionName=Lausanne&Allianceid=7375838&SID=279148115&trip_sub1=lausanne&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 46.45
+      max_lat: 46.6
+      min_lon: 6.55
+      max_lon: 6.75
+  population_source: manual
+  notes: GADM ADM3 - Lausanne municipalities.
+bern:
+  name: Bern
+  city: Bern
+  state: Bern
+  county: Bern
+  country: Switzerland
+  tripcomurl: https://www.trip.com/hotels/list?city=834&display=Berne&optionId=834&optionType=City&optionName=Berne&Allianceid=7375838&SID=279148115&trip_sub1=Bern&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 46.9
+      max_lat: 47.0
+      min_lon: 7.35
+      max_lon: 7.55
+  population_source: manual
+  notes: GADM ADM3 - Bern municipalities.
+stockholm:
+  name: Stockholm
+  city: Stockholm
+  state: Stockholm
+  county: Stockholm
+  country: Sweden
+  tripcomurl: https://www.trip.com/hotels/list?city=420&display=Stockholm&optionId=420&optionType=City&optionName=Stockholm&Allianceid=7375838&SID=279148115&trip_sub1=stockholm&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 59.2
+      max_lat: 59.5
+      min_lon: 17.8
+      max_lon: 18.3
+  population_source: manual
+  notes: GADM ADM3 - Stockholm municipalities.
+gothenburg:
+  name: Gothenburg
+  city: Gothenburg
+  state: Västra Götaland
+  county: Gothenburg
+  country: Sweden
+  tripcomurl: https://www.trip.com/hotels/list?city=804&display=Gothenburg&optionId=804&optionType=City&optionName=Gothenburg&Allianceid=7375838&SID=279148115&trip_sub1=gothenburg&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 57.6
+      max_lat: 57.8
+      min_lon: 11.8
+      max_lon: 12.2
+  population_source: manual
+  notes: GADM ADM3 - Gothenburg municipalities.
+malmo:
+  name: Malmo
+  city: Malmo
+  state: Skåne
+  county: Malmo
+  country: Sweden
+  tripcomurl: https://www.trip.com/hotels/list?city=3747&display=Malmo&optionId=3747&optionType=City&optionName=Malmo&Allianceid=7375838&SID=279148115&trip_sub1=malmo&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 55.5
+      max_lat: 55.7
+      min_lon: 12.8
+      max_lon: 13.1
+  population_source: manual
+  notes: GADM ADM3 - Malmö municipalities.
+uppsala:
+  name: Uppsala
+  city: Uppsala
+  state: Uppsala
+  county: Uppsala
+  country: Sweden
+  tripcomurl: https://www.trip.com/hotels/list?city=9167&display=Uppsala&optionId=9167&optionType=City&optionName=Uppsala&Allianceid=7375838&SID=279148115&trip_sub1=uppsala&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 59.75
+      max_lat: 59.95
+      min_lon: 17.5
+      max_lon: 17.75
+  population_source: manual
+  notes: GADM ADM3 - Uppsala municipalities.
+copenhagen:
+  name: Copenhagen
+  city: Copenhagen
+  state: Capital Region
+  county: Copenhagen
+  country: Denmark
+  tripcomurl: https://www.trip.com/hotels/list?city=260&display=Copenhagen&optionId=260&optionType=City&optionName=Copenhagen&Allianceid=7375838&SID=279148115&trip_sub1=copenhagen&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 55.55
+      max_lat: 55.75
+      min_lon: 12.4
+      max_lon: 12.75
+  population_source: manual
+  notes: GADM ADM2 - Copenhagen municipalities.
+aarhus:
+  name: Aarhus
+  city: Aarhus
+  state: Central Denmark
+  county: Aarhus
+  country: Denmark
+  tripcomurl: https://www.trip.com/hotels/list?city=3324&display=Aarhus&optionId=3324&optionType=City&optionName=Aarhus&Allianceid=7375838&SID=279148115&trip_sub1=aarhus&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 56.05
+      max_lat: 56.25
+      min_lon: 10.1
+      max_lon: 10.35
+  population_source: manual
+  notes: GADM ADM2 - Aarhus municipalities.
+odense:
+  name: Odense
+  city: Odense
+  state: Southern Denmark
+  county: Odense
+  country: Denmark
+  tripcomurl: https://www.trip.com/hotels/list?city=781&display=Odense&optionId=781&optionType=City&optionName=Odense&Allianceid=7375838&SID=279148115&trip_sub1=odense&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 55.3
+      max_lat: 55.5
+      min_lon: 10.3
+      max_lon: 10.5
+  population_source: manual
+  notes: GADM ADM2 - Odense municipalities.
+aalborg:
+  name: Aalborg
+  city: Aalborg
+  state: North Denmark
+  county: Aalborg
+  country: Denmark
+  tripcomurl: https://www.trip.com/hotels/list?city=1441&display=Aalborg&optionId=1441&optionType=City&optionName=Aalborg&Allianceid=7375838&SID=279148115&trip_sub1=aalborg&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 56.95
+      max_lat: 57.15
+      min_lon: 9.8
+      max_lon: 10.05
+  population_source: manual
+  notes: GADM ADM2 - Aalborg municipalities.
+brussels:
+  name: Brussels
+  city: Brussels
+  state: Brussels-Capital
+  county: Brussels
+  country: Belgium
+  tripcomurl: https://www.trip.com/hotels/list?city=196&display=Brussels&optionId=196&optionType=City&optionName=Brussels&Allianceid=7375838&SID=279148115&trip_sub1=brussels&trip_sub3=D7597578
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.75
+      max_lat: 50.95
+      min_lon: 4.25
+      max_lon: 4.5
+  population_source: manual
+  notes: GADM ADM3 - Brussels communes.
+antwerp:
+  name: Antwerp
+  city: Antwerp
+  state: Flemish Region
+  county: Antwerp
+  country: Belgium
+  tripcomurl: https://www.trip.com/hotels/list?city=1767&display=Antwerp&optionId=1767&optionType=City&optionName=Antwerp&Allianceid=7375838&SID=279148115&trip_sub1=antwerp&trip_sub3=D7597858
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.15
+      max_lat: 51.35
+      min_lon: 4.3
+      max_lon: 4.55
+  population_source: manual
+  notes: GADM ADM3 - Antwerp communes.
+ghent:
+  name: Ghent
+  city: Ghent
+  state: Flemish Region
+  county: East Flanders
+  country: Belgium
+  tripcomurl: https://www.trip.com/hotels/list?city=3423&display=Ghent&optionId=3423&optionType=City&optionName=Ghent&Allianceid=7375838&SID=279148115&trip_sub1=ghent&trip_sub3=D7597858
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 51.0
+      max_lat: 51.15
+      min_lon: 3.65
+      max_lon: 3.9
+  population_source: manual
+  notes: GADM ADM3 - Ghent communes.
+charleroi:
+  name: Charleroi
+  city: Charleroi
+  state: Wallonia
+  county: Hainaut
+  country: Belgium
+  tripcomurl: https://www.trip.com/hotels/list?city=9474&display=Charleroi&optionId=9474&optionType=City&optionName=Charleroi&Allianceid=7375838&SID=279148115&trip_sub1=charleroi&trip_sub3=D7597858
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.35
+      max_lat: 50.5
+      min_lon: 4.35
+      max_lon: 4.55
+  population_source: manual
+  notes: GADM ADM3 - Charleroi communes.
+liege:
+  name: Liege
+  city: Liege
+  state: Wallonia
+  county: Liège
+  country: Belgium
+  tripcomurl: https://www.trip.com/hotels/list?city=37620&display=Liege&optionId=37620&optionType=City&optionName=Liege&Allianceid=7375838&SID=279148115&trip_sub1=Liege&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.55
+      max_lat: 50.7
+      min_lon: 5.5
+      max_lon: 5.7
+  population_source: manual
+  notes: GADM ADM3 - Liège communes.
+paris:
+  name: Paris
+  city: Paris
+  state: Île-de-France
+  county: Paris
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=192&display=Paris&optionId=192&optionType=City&optionName=Paris&Allianceid=7375838&SID=279148115&trip_sub1=paris&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 48.75
+      max_lat: 48.95
+      min_lon: 2.2
+      max_lon: 2.55
+  population_source: manual
+  notes: GADM ADM3 - Paris arrondissements/communes.
+lyon:
+  name: Lyon
+  city: Lyon
+  state: Auvergne-Rhône-Alpes
+  county: Rhône
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=713&display=Lyon&optionId=713&optionType=City&optionName=Lyon&Allianceid=7375838&SID=279148115&trip_sub1=lyon&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.65
+      max_lat: 45.85
+      min_lon: 4.75
+      max_lon: 5.05
+  population_source: manual
+  notes: GADM ADM3 - Lyon communes.
+marseille:
+  name: Marseille
+  city: Marseille
+  state: Provence-Alpes-Côte d'Azur
+  county: Bouches-du-Rhône
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=712&display=Marseille&optionId=712&optionType=City&optionName=Marseille&Allianceid=7375838&SID=279148115&trip_sub1=marseille&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 43.2
+      max_lat: 43.4
+      min_lon: 5.2
+      max_lon: 5.55
+  population_source: manual
+  notes: GADM ADM3 - Marseille communes.
+nice:
+  name: Nice
+  city: Nice
+  state: Provence-Alpes-Côte d'Azur
+  county: Alpes-Maritimes
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=775&display=Nice&optionId=775&optionType=City&optionName=Nice&Allianceid=7375838&SID=279148115&trip_sub1=nice&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 43.65
+      max_lat: 43.75
+      min_lon: 7.15
+      max_lon: 7.35
+  population_source: manual
+  notes: GADM ADM3 - Nice communes.
+toulouse:
+  name: Toulouse
+  city: Toulouse
+  state: Occitanie
+  county: Haute-Garonne
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=1361&display=Toulouse&optionId=1361&optionType=City&optionName=Toulouse&Allianceid=7375838&SID=279148115&trip_sub1=toulouse&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 43.5
+      max_lat: 43.7
+      min_lon: 1.3
+      max_lon: 1.55
+  population_source: manual
+  notes: GADM ADM3 - Toulouse communes.
+lille:
+  name: Lille
+  city: Lille
+  state: Hauts-de-France
+  county: Nord
+  country: France
+  tripcomurl: https://www.trip.com/hotels/list?city=1462&display=Lille&optionId=1462&optionType=City&optionName=Lille&Allianceid=7375838&SID=279148115&trip_sub1=lille&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 50.55
+      max_lat: 50.75
+      min_lon: 2.95
+      max_lon: 3.2
+  population_source: manual
+  notes: GADM ADM3 - Lille communes.
+vienna:
+  name: Vienna
+  city: Vienna
+  state: Vienna
+  county: Vienna
+  country: Austria
+  tripcomurl: https://www.trip.com/hotels/list?city=651&display=Vienna&optionId=651&optionType=City&optionName=Vienna&Allianceid=7375838&SID=279148115&trip_sub1=vienna&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 48.1
+      max_lat: 48.35
+      min_lon: 16.2
+      max_lon: 16.55
+  population_source: manual
+  notes: GADM ADM3 - Vienna districts.
+salzburg:
+  name: Salzburg
+  city: Salzburg
+  state: Salzburg
+  county: Salzburg
+  country: Austria
+  tripcomurl: https://www.trip.com/hotels/list?city=739&display=Salzburg&optionId=739&optionType=City&optionName=Salzburg&Allianceid=7375838&SID=279148115&trip_sub1=salzburg&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 47.75
+      max_lat: 47.9
+      min_lon: 12.95
+      max_lon: 13.15
+  population_source: manual
+  notes: GADM ADM3 - Salzburg municipalities.
+graz:
+  name: Graz
+  city: Graz
+  state: Styria
+  county: Graz
+  country: Austria
+  tripcomurl: https://www.trip.com/hotels/list?city=805&display=Graz&optionId=805&optionType=City&optionName=Graz&Allianceid=7375838&SID=279148115&trip_sub1=graz&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 46.98
+      max_lat: 47.15
+      min_lon: 15.35
+      max_lon: 15.55
+  population_source: manual
+  notes: GADM ADM3 - Graz municipalities.
+linz:
+  name: Linz
+  city: Linz
+  state: Upper Austria
+  county: Linz
+  country: Austria
+  tripcomurl: https://www.trip.com/hotels/list?city=815&display=Linz&optionId=815&optionType=City&optionName=Linz&Allianceid=7375838&SID=279148115&trip_sub1=linz&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 48.25
+      max_lat: 48.35
+      min_lon: 14.2
+      max_lon: 14.4
+  population_source: manual
+  notes: GADM ADM3 - Linz municipalities.
+oslo:
+  name: Oslo
+  city: Oslo
+  state: Oslo
+  county: Oslo
+  country: Norway
+  tripcomurl: https://www.trip.com/hotels/list?city=827&display=Oslo&optionId=827&optionType=City&optionName=Oslo&Allianceid=7375838&SID=279148115&trip_sub1=oslo&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 59.8
+      max_lat: 60.05
+      min_lon: 10.5
+      max_lon: 10.95
+  population_source: manual
+  notes: GADM ADM2 - Oslo municipalities.
+bergen:
+  name: Bergen
+  city: Bergen
+  state: Vestland
+  county: Bergen
+  country: Norway
+  tripcomurl: https://www.trip.com/hotels/list?city=821&display=Bergen&optionId=821&optionType=City&optionName=Bergen&Allianceid=7375838&SID=279148115&trip_sub1=bergen&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 60.25
+      max_lat: 60.5
+      min_lon: 5.1
+      max_lon: 5.4
+  population_source: manual
+  notes: GADM ADM2 - Bergen municipalities.
+trondheim:
+  name: Trondheim
+  city: Trondheim
+  state: Trøndelag
+  county: Trondheim
+  country: Norway
+  tripcomurl: https://www.trip.com/hotels/list?city=1734&display=Trondheim&optionId=1734&optionType=City&optionName=Trondheim&Allianceid=7375838&SID=279148115&trip_sub1=trondheim&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 63.35
+      max_lat: 63.5
+      min_lon: 10.3
+      max_lon: 10.55
+  population_source: manual
+  notes: GADM ADM2 - Trondheim municipalities.
+stavanger:
+  name: Stavanger
+  city: Stavanger
+  state: Rogaland
+  county: Stavanger
+  country: Norway
+  tripcomurl: https://www.trip.com/hotels/list?city=787&display=Stavanger&optionId=787&optionType=City&optionName=Stavanger&Allianceid=7375838&SID=279148115&trip_sub1=stavanger&trip_sub3=D7597865
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 58.9
+      max_lat: 59.05
+      min_lon: 5.6
+      max_lon: 5.85
+  population_source: manual
+  notes: GADM ADM2 - Stavanger municipalities.
+madrid:
+  name: Madrid
+  city: Madrid
+  state: Community of Madrid
+  county: Madrid
+  country: Spain
+  tripcomurl: https://www.trip.com/hotels/list?city=357&display=Madrid&optionId=357&optionType=City&optionName=Madrid&Allianceid=7375838&SID=279148115&trip_sub1=madrid&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.3
+      max_lat: 40.6
+      min_lon: -3.9
+      max_lon: -3.4
+  population_source: manual
+  notes: Madrid municipios.
+barcelona:
+  name: Barcelona
+  city: Barcelona
+  state: Catalonia
+  county: Barcelona
+  country: Spain
+  tripcomurl: https://www.trip.com/hotels/list?city=40795&display=Barcelona&optionId=40795&optionType=City&optionName=Barcelona&Allianceid=7375838&SID=279148115&trip_sub1=barcelona&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 41.3
+      max_lat: 41.5
+      min_lon: 2.0
+      max_lon: 2.3
+  population_source: manual
+  notes: Barcelona municipios.
+valencia:
+  name: Valencia
+  city: Valencia
+  state: Valencian Community
+  county: Valencia
+  country: Spain
+  tripcomurl: https://www.trip.com/hotels/list?city=1351&display=Valencia&optionId=1351&optionType=City&optionName=Valencia&Allianceid=7375838&SID=279148115&trip_sub1=valencia&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 39.35
+      max_lat: 39.55
+      min_lon: -0.45
+      max_lon: -0.25
+  population_source: manual
+  notes: Valencia municipios.
+seville:
+  name: Seville
+  city: Seville
+  state: Andalusia
+  county: Seville
+  country: Spain
+  tripcomurl: https://www.trip.com/hotels/list?city=1350&display=Seville&optionId=1350&optionType=City&optionName=Seville&Allianceid=7375838&SID=279148115&trip_sub1=seville&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 37.3
+      max_lat: 37.45
+      min_lon: -6.05
+      max_lon: -5.85
+  population_source: manual
+  notes: Seville municipios.
+rome:
+  name: Rome
+  city: Rome
+  state: Lazio
+  county: Rome
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=343&display=Rome&optionId=343&optionType=City&optionName=Rome&Allianceid=7375838&SID=279148115&trip_sub1=rome&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 41.75
+      max_lat: 42.0
+      min_lon: 12.3
+      max_lon: 12.7
+  population_source: manual
+  notes: Rome comuni.
+milan:
+  name: Milan
+  city: Milan
+  state: Lombardy
+  county: Milan
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=361&display=Milan&optionId=361&optionType=City&optionName=Milan&Allianceid=7375838&SID=279148115&trip_sub1=milan&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.35
+      max_lat: 45.55
+      min_lon: 9.05
+      max_lon: 9.3
+  population_source: manual
+  notes: Milan comuni.
+naples:
+  name: Naples
+  city: Naples
+  state: Campania
+  county: Naples
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=1262&display=Naples&optionId=1262&optionType=City&optionName=Naples&Allianceid=7375838&SID=279148115&trip_sub1=naples&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.8
+      max_lat: 40.95
+      min_lon: 14.15
+      max_lon: 14.45
+  population_source: manual
+  notes: Naples comuni.
+venice:
+  name: Venice
+  city: Venice
+  state: Veneto
+  county: Venice
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=688&display=Venice&optionId=688&optionType=City&optionName=Venice&Allianceid=7375838&SID=279148115&trip_sub1=venice&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.35
+      max_lat: 45.55
+      min_lon: 12.2
+      max_lon: 12.5
+  population_source: manual
+  notes: Venice comuni.
+lisbon:
+  name: Lisbon
+  city: Lisbon
+  state: Lisbon
+  county: Lisbon
+  country: Portugal
+  tripcomurl: https://www.trip.com/hotels/list?city=1231&display=Lisbon&optionId=1231&optionType=City&optionName=Lisbon&Allianceid=7375838&SID=279148115&trip_sub1=lisbon&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 38.66
+      max_lat: 38.78
+      min_lon: -9.25
+      max_lon: -9.05
+  population_source: manual
+  notes: Lisbon freguesias.
+porto:
+  name: Porto
+  city: Porto
+  state: Porto
+  county: Porto
+  country: Portugal
+  tripcomurl: https://www.trip.com/hotels/list?city=826&display=Porto&optionId=826&optionType=City&optionName=Porto&Allianceid=7375838&SID=279148115&trip_sub1=porto&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 41.1
+      max_lat: 41.2
+      min_lon: -8.7
+      max_lon: -8.5
+  population_source: manual
+  notes: Porto freguesias.
+athens:
+  name: Athens
+  city: Athens
+  state: Attica
+  county: Athens
+  country: Greece
+  tripcomurl: https://www.trip.com/hotels/list?city=710&display=Athens&optionId=710&optionType=City&optionName=Athens&Allianceid=7375838&SID=279148115&trip_sub1=athens&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 37.85
+      max_lat: 38.1
+      min_lon: 23.5
+      max_lon: 23.9
+  population_source: manual
+  notes: Athens municipalities.
+thessaloniki:
+  name: Thessaloniki
+  city: Thessaloniki
+  state: Central Macedonia
+  county: Thessaloniki
+  country: Greece
+  tripcomurl: https://www.trip.com/hotels/list?city=3584&display=Thessaloniki&optionId=3584&optionType=City&optionName=Thessaloniki&Allianceid=7375838&SID=279148115&trip_sub1=thessaloniki&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.55
+      max_lat: 40.75
+      min_lon: 22.8
+      max_lon: 23.1
+  population_source: manual
+  notes: Thessaloniki municipalities.
+prague:
+  name: Prague
+  city: Prague
+  state: Prague
+  county: Prague
+  country: Czech Republic
+  tripcomurl: https://www.trip.com/hotels/list?city=1288&display=Prague&optionId=1288&optionType=City&optionName=Prague&Allianceid=7375838&SID=279148115&trip_sub1=prague&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Czechia_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 49.95
+      max_lat: 50.2
+      min_lon: 14.25
+      max_lon: 14.7
+  population_source: manual
+  notes: Prague districts.
+dublin:
+  name: Dublin
+  city: Dublin
+  state: Dublin
+  county: Dublin
+  country: Ireland
+  tripcomurl: https://www.trip.com/hotels/list?city=803&display=Dublin&optionId=803&optionType=City&optionName=Dublin&Allianceid=7375838&SID=279148115&trip_sub1=dublin&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Ireland_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 53.25
+      max_lat: 53.45
+      min_lon: -6.4
+      max_lon: -6.1
+  population_source: manual
+  notes: Dublin districts.
+istanbul:
+  name: Istanbul
+  city: Istanbul
+  state: Istanbul
+  county: Istanbul
+  country: Turkey
+  tripcomurl: https://www.trip.com/hotels/list?city=532&display=Istanbul&optionId=532&optionType=City&optionName=Istanbul&Allianceid=7375838&SID=279148115&trip_sub1=istanbul&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.85
+      max_lat: 41.25
+      min_lon: 28.8
+      max_lon: 29.2
+  population_source: manual
+  notes: Istanbul districts.
+costermano sul garda:
+  name: Costermano sul Garda
+  city: Costermano sul Garda
+  state: Veneto
+  county: Verona
+  country: Italy
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.55
+      max_lat: 45.65
+      min_lon: 10.65
+      max_lon: 10.8
+  population_source: manual
+  notes: Costermano comuni filtered via bounding box.
+lake como:
+  name: Lake Como
+  city: Lake Como
+  state: Lombardy
+  county: Como
+  country: Italy
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.7
+      max_lat: 46.2
+      min_lon: 8.9
+      max_lon: 9.6
+  population_source: manual
+  notes: Lake Como comuni (Como and Lecco provinces).
+amalfi coast:
+  name: Amalfi Coast
+  city: Amalfi Coast
+  state: Campania
+  county: Salerno
+  country: Italy
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.55
+      max_lat: 40.75
+      min_lon: 14.35
+      max_lon: 15.0
+  population_source: manual
+  notes: Filters Costiera Amalfitana comuni.
+florence:
+  name: Florence
+  city: Florence
+  state: Tuscany
+  county: Florence
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=687&display=Florence&optionId=687&optionType=City&optionName=Florence&Allianceid=7375838&SID=279148115&trip_sub1=florence&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 43.65
+      max_lat: 43.85
+      min_lon: 11.0
+      max_lon: 11.4
+  population_source: manual
+  notes: Florence comuni boundaries.
+verona:
+  name: Verona
+  city: Verona
+  state: Veneto
+  county: Verona
+  country: Italy
+  tripcomurl: https://www.trip.com/hotels/list?city=1420&display=Verona&optionId=1420&optionType=City&optionName=Verona&Allianceid=7375838&SID=279148115&trip_sub1=verona&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 45.34
+      max_lat: 45.52
+      min_lon: 10.85
+      max_lon: 11.1
+  population_source: manual
+  notes: Verona comuni filtered via bounding box.

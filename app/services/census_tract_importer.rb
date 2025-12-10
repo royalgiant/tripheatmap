@@ -181,11 +181,9 @@ class CensusTractImporter
   end
 
   # Load state configurations from YAML
+  # Note: State FIPS mapping removed - use state name directly
   def self.state_configs
-    @state_configs ||= begin
-      config = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml'))
-      config['states'] || {}
-    end
+    @state_configs ||= {}
   end
 
   # Map state FIPS codes to state abbreviations

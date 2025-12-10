@@ -8,9 +8,9 @@
 class NeighborhoodBoundaryImporter
   attr_reader :city_key, :errors
 
-  # Load city configurations from YAML file
+  # Load city configurations from continent boundary files
   def self.city_configs
-    @city_configs ||= YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml')).with_indifferent_access
+    @city_configs ||= BoundariesConfig.all_cities
   end
 
   # Get FIPS codes for a city (backward compatibility)

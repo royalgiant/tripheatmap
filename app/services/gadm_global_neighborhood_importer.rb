@@ -1,6 +1,6 @@
 # Generic importer for cities that rely on hosted GADM GeoJSON datasets
 # (Europe, UK, Australia, Canada, New Zealand, Singapore, UAE, etc.)
-# Each city entry in config/neighborhood_boundaries.yml provides the endpoint
+# Each city entry in config/boundaries/*.yml provides the endpoint
 # plus optional bounding-box or parent-name filters.
 
 class GadmGlobalNeighborhoodImporter
@@ -56,8 +56,7 @@ class GadmGlobalNeighborhoodImporter
   end
 
   def self.available_for_city?(city_key)
-    config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
-    city_config = config[city_key.to_s.downcase]
+    city_config = BoundariesConfig.city_config(city_key)
     return false unless city_config && city_config["enabled"] != false
 
     SUPPORTED_COUNTRIES.key?(city_config["country"]) &&
@@ -98,8 +97,7 @@ class GadmGlobalNeighborhoodImporter
   end
 
   def load_config
-    all_config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
-    all_config[city_key]
+    BoundariesConfig.city_config(city_key)
   end
 
   def endpoint

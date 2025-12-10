@@ -1,0 +1,266 @@
+# Asia Cities Configuration
+# Neighborhood boundaries for cities in Asia
+
+---
+tokyo:
+  name: Tokyo
+  city: Tokyo
+  state: Tokyo
+  county: Tokyo Metropolis
+  country: Japan
+  tripcomurl: https://www.trip.com/hotels/list?city=228&display=Tokyo&optionId=228&optionType=City&optionName=Tokyo&Allianceid=7375838&SID=279148115&trip_sub1=tokyo&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 35.5
+      max_lat: 36.0
+      min_lon: 139.4
+      max_lon: 140.1
+  population_source: manual
+  notes: Greater Tokyo wards - GADM ADM2.
+osaka:
+  name: Osaka
+  city: Osaka
+  state: Osaka
+  county: Osaka
+  country: Japan
+  tripcomurl: https://www.trip.com/hotels/list?city=219&display=Osaka&optionId=219&optionType=City&optionName=Osaka&Allianceid=7375838&SID=279148115&trip_sub1=osaka&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 34.55
+      max_lat: 34.8
+      min_lon: 135.3
+      max_lon: 135.7
+  population_source: manual
+  notes: Osaka prefectural municipalities.
+kyoto:
+  name: Kyoto
+  city: Kyoto
+  state: Kyoto
+  county: Kyoto
+  country: Japan
+  tripcomurl: https://www.trip.com/hotels/list?city=734&display=Kyoto&optionId=734&optionType=City&optionName=Kyoto&Allianceid=7375838&SID=279148115&trip_sub1=kyoto&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 34.9
+      max_lat: 35.2
+      min_lon: 135.6
+      max_lon: 135.9
+  population_source: manual
+  notes: Kyoto city municipal boundaries.
+yokohama:
+  name: Yokohama
+  city: Yokohama
+  state: Kanagawa
+  county: Yokohama
+  country: Japan
+  tripcomurl: https://www.trip.com/hotels/list?city=271&display=Yokohama&optionId=271&optionType=City&optionName=Yokohama&Allianceid=7375838&SID=279148115&trip_sub1=yokohama&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 35.3
+      max_lat: 35.6
+      min_lon: 139.5
+      max_lon: 139.8
+  population_source: manual
+  notes: Yokohama wards from GADM ADM2.
+bangkok:
+  name: Bangkok
+  city: Bangkok
+  state: Bangkok
+  county: Bangkok
+  country: Thailand
+  tripcomurl: https://www.trip.com/hotels/list?city=359&display=Bangkok&optionId=359&optionType=City&optionName=Bangkok&Allianceid=7375838&SID=279148115&trip_sub1=bangkok&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 13.55
+      max_lat: 13.95
+      min_lon: 100.35
+      max_lon: 100.75
+  population_source: manual
+  notes: Bangkok districts.
+chiang mai:
+  name: Chiang Mai
+  city: Chiang Mai
+  state: Chiang Mai
+  county: Chiang Mai
+  country: Thailand
+  tripcomurl: https://www.trip.com/hotels/list?city=623&display=Chiang%20Mai&optionId=623&optionType=City&optionName=Chiang%20Mai&Allianceid=7375838&SID=279148115&trip_sub1=chiang%20mai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 18.65
+      max_lat: 18.85
+      min_lon: 98.9
+      max_lon: 99.1
+  population_source: manual
+  notes: Chiang Mai districts.
+phuket:
+  name: Phuket
+  city: Phuket
+  state: Phuket
+  county: Phuket
+  country: Thailand
+  tripcomurl: https://www.trip.com/hotels/list?city=725&display=Phuket&optionId=725&optionType=City&optionName=Phuket&Allianceid=7375838&SID=279148115&trip_sub1=phuket&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 7.75
+      max_lat: 8.15
+      min_lon: 98.25
+      max_lon: 98.55
+  population_source: manual
+  notes: Phuket districts.
+pattaya:
+  name: Pattaya
+  city: Pattaya
+  state: Chonburi
+  county: Pattaya
+  country: Thailand
+  tripcomurl: https://www.trip.com/hotels/list?city=747&display=Pattaya&optionId=747&optionType=City&optionName=Pattaya&Allianceid=7375838&SID=279148115&trip_sub1=pattaya&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 12.85
+      max_lat: 13.05
+      min_lon: 100.8
+      max_lon: 101.0
+  population_source: manual
+  notes: Pattaya districts in Chonburi Province.
+ho chi minh city:
+  name: Ho Chi Minh City
+  city: Ho Chi Minh City
+  state: Ho Chi Minh
+  county: Ho Chi Minh
+  country: Vietnam
+  tripcomurl: https://www.trip.com/hotels/list?city=301&display=Ho%20Chi%20Minh%20City&optionId=301&optionType=City&optionName=Ho%20Chi%20Minh%20City&Allianceid=7375838&SID=279148115&trip_sub1=ho%20chi%20minh%20city&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 10.6
+      max_lat: 10.95
+      min_lon: 106.5
+      max_lon: 106.9
+  population_source: manual
+  notes: HCMC districts.
+hanoi:
+  name: Hanoi
+  city: Hanoi
+  state: Hanoi
+  county: Hanoi
+  country: Vietnam
+  tripcomurl: https://www.trip.com/hotels/list?city=286&display=Hanoi&optionId=286&optionType=City&optionName=Hanoi&Allianceid=7375838&SID=279148115&trip_sub1=hanoi&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.85
+      max_lat: 21.15
+      min_lon: 105.7
+      max_lon: 105.95
+  population_source: manual
+  notes: Hanoi districts.
+da nang:
+  name: Da Nang
+  city: Da Nang
+  state: Da Nang
+  county: Da Nang
+  country: Vietnam
+  tripcomurl: https://www.trip.com/hotels/list?city=1356&display=Da%20Nang&optionId=1356&optionType=City&optionName=Da%20Nang&Allianceid=7375838&SID=279148115&trip_sub1=da%20nang&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 15.9
+      max_lat: 16.15
+      min_lon: 108.1
+      max_lon: 108.35
+  population_source: manual
+  notes: Da Nang districts.
+singapore:
+  name: Singapore
+  city: Singapore
+  state: Singapore
+  county: Singapore
+  country: Singapore
+  tripcomurl: https://www.trip.com/hotels/list?city=73&display=Singapore&optionId=73&optionType=City&optionName=Singapore&Allianceid=7375838&SID=279148115&trip_sub1=singapore&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Singapore_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  population_source: manual
+  notes: GADM ADM2 - Singapore planning areas. City-state so no filtering needed.
+dubai:
+  name: Dubai
+  city: Dubai
+  state: Dubai
+  county: Dubai
+  country: United Arab Emirates
+  tripcomurl: https://www.trip.com/hotels/list?city=220&display=Dubai&optionId=220&optionType=City&optionName=Dubai&Allianceid=7375838&SID=279148115&trip_sub1=dubai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_3
+    geoid: GID_3
+    parent_name: NAME_1
+  population_source: manual
+  notes: GADM Level 3 - UAE neighborhoods. Filters all Dubai neighborhoods.

@@ -1,5 +1,5 @@
 # Service for importing city-specific neighborhood boundaries from open data portals
-# Uses GeoJSON endpoints configured in config/neighborhood_boundaries.yml
+# Uses GeoJSON endpoints configured in config/boundaries/*.yml
 #
 # Usage:
 #   CityNeighborhoodImporter.new('dallas').import_neighborhoods
@@ -44,8 +44,7 @@ class CityNeighborhoodImporter
   # Check if a city has neighborhood boundaries available from a custom endpoint
   # Only returns true if city has an endpoint configured AND is not disabled
   def self.available_for_city?(city_key)
-    config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
-    city_config = config[city_key.to_s.downcase]
+    city_config = BoundariesConfig.city_config(city_key)
     city_config && city_config["endpoint"].present? && city_config["enabled"] != false
   rescue
     false
@@ -53,8 +52,7 @@ class CityNeighborhoodImporter
 
   # Get list of all cities with neighborhood boundaries
   def self.available_cities
-    config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
-    config.select { |_, v| v["enabled"] != false }.keys
+    BoundariesConfig.all_cities.select { |_, v| v["enabled"] != false }.keys
   rescue
     []
   end
@@ -68,8 +66,7 @@ class CityNeighborhoodImporter
 
   # Load configuration for the specified city
   def load_config
-    all_config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
-    all_config[city_key]
+    BoundariesConfig.city_config(city_key)
   end
 
   # Fetch neighborhood features from city open data portal

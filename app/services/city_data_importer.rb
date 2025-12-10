@@ -8,13 +8,10 @@
 class CityDataImporter
   attr_reader :city_key, :city_name, :errors, :results
 
-  # Load city configurations from YAML and generate city names mapping
+  # Load city configurations from continent boundary files
   # Works for both US cities and international cities (Buenos Aires, Medellin, etc.)
   def self.city_configs
-    @city_configs ||= begin
-      config = YAML.load_file(Rails.root.join('config', 'neighborhood_boundaries.yml'))
-      config.except('states')  # Remove states section
-    end
+    @city_configs ||= BoundariesConfig.all_cities
   end
 
   # Map city keys to lowercase city names (stored in DB)

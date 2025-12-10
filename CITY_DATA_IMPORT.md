@@ -323,7 +323,7 @@ If neighborhoods show 0 vibrancy despite having amenities:
 Neighborhood.where(city: 'Dallas').where(population: nil).count
 
 # Re-run population fetch
-fips = YAML.load_file('config/neighborhood_boundaries.yml')['dallas']
+fips = BoundariesConfig.city_config('dallas')
 CensusPopulationService.new.update_neighborhood_populations(
   state_fips: fips['state_fips'],
   county_fips: fips['county_fips']
@@ -398,7 +398,12 @@ end
 
 ## Adding a New City
 
-1. Add city configuration to `config/neighborhood_boundaries.yml`
+1. Add city configuration to the appropriate continent file in `config/boundaries/`
+   - North America → `config/boundaries/north_america.yml`
+   - South America → `config/boundaries/south_america.yml`
+   - Europe → `config/boundaries/europe.yml`
+   - Asia → `config/boundaries/asia.yml`
+   - Oceania → `config/boundaries/oceania.yml`
 2. Add city name to `CityDataImporter::CITY_NAMES`
 3. If city has official neighborhoods, verify endpoint in config
 4. Run import: `rake city:import_with_airports_async[new_city]`

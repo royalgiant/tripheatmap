@@ -1,0 +1,103 @@
+# South America Cities Configuration
+# Neighborhood boundaries for cities in South America
+
+---
+sao paulo:
+  name: São Paulo
+  city: São Paulo
+  state: São Paulo
+  county: São Paulo
+  country: Brazil
+  tripcomurl: https://www.trip.com/hotels/list?city=415&display=Sao%20Paulo&optionId=415&optionType=City&optionName=Sao%20Paulo&Allianceid=7375838&SID=279148115&trip_sub1=sao%20paulo&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -23.8
+      max_lat: -23.3
+      min_lon: -46.9
+      max_lon: -46.2
+  population_source: manual
+  notes: São Paulo municípios.
+rio de janeiro:
+  name: Rio de Janeiro
+  city: Rio de Janeiro
+  state: Rio de Janeiro
+  county: Rio de Janeiro
+  country: Brazil
+  tripcomurl: https://www.trip.com/hotels/list?city=769&display=Rio%20de%20Janeiro&optionId=769&optionType=City&optionName=Rio%20de%20Janeiro&Allianceid=7375838&SID=279148115&trip_sub1=rio%20de%20janeiro&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -23.1
+      max_lat: -22.8
+      min_lon: -43.8
+      max_lon: -43.0
+  population_source: manual
+  notes: Rio de Janeiro municípios.
+salvador:
+  name: Salvador
+  city: Salvador
+  state: Bahia
+  county: Salvador
+  country: Brazil
+  tripcomurl: https://www.trip.com/hotels/list?city=3434&display=Salvador&optionId=3434&optionType=City&optionName=Salvador&Allianceid=7375838&SID=279148115&trip_sub1=salvador&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -13.1
+      max_lat: -12.8
+      min_lon: -38.6
+      max_lon: -38.3
+  population_source: manual
+  notes: Salvador municípios.
+brasilia:
+  name: Brasilia
+  city: Brasilia
+  state: Federal District
+  county: Brasilia
+  country: Brazil
+  tripcomurl: https://www.trip.com/hotels/list?city=1255&display=Brasilia&optionId=1255&optionType=City&optionName=Brasilia&Allianceid=7375838&SID=279148115&trip_sub1=brasilia&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -15.95
+      max_lat: -15.6
+      min_lon: -48.2
+      max_lon: -47.7
+  population_source: manual
+  notes: Brasília administrative regions.
+buenos aires:
+  name: Buenos Aires
+  city: Buenos Aires
+  state_name: Ciudad Autónoma de Buenos Aires
+  state: CABA
+  county: Buenos Aires
+  country: Argentina
+  tripcomurl: https://www.trip.com/hotels/list?city=807&display=Buenos%20Aires&optionId=807&optionType=City&optionName=Buenos%20Aires&Allianceid=7375838&SID=279148115&trip_sub1=buenos%20aires&trip_sub3=D7599167
+  endpoint: https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ministerio-de-educacion/barrios/barrios.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: nombre
+    geoid: id
+  population_source: manual
