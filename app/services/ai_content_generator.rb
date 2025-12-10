@@ -106,13 +106,15 @@ class AiContentGenerator
       1.  **Average Rating**: A numerical rating from 1.0 to 5.0, in increments of 0.5 (e.g., 3.0, 3.5, 4.0, 4.5).
       2.  **Price Range**: A string representing the price level using dollar signs: $, $$, $$$, or $$$$.
       3.  **Category**: For hotels, determine if it fits into one of these specific categories: "luxury" or "boutique". If it does not clearly fit either (e.g., it's a standard chain hotel, motel, or budget inn), return null.
-      4.  **Image URL**: Provide a public image URL for this place from your knowledge base, if available. If you don't have a specific image URL, return null.
+      4.  **Average Price**: Estimate the average nightly price in USD. Provide a reasonable estimate based on the place type, location, category, and price range. Return as a number (e.g., 45.00, 120.00, 350.00).
+      5.  **Image URL**: Provide a public image URL for this place from your knowledge base, if available. If you don't have a specific image URL, return null.
 
       Return ONLY valid JSON (no markdown, no code blocks):
       {
         "rating": 4.0,
         "price_range": "$$",
         "category": "boutique",
+        "average_price": 120.00,
         "image_url": "https://example.com/hotel.jpg"
       }
     PROMPT

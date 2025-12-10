@@ -6,7 +6,7 @@ class GeneratePlaceAiContentJob < ApplicationJob
     return unless place
 
     # Skip if already has the essential AI-generated fields (rating and price_range)
-    # Category and image_url may legitimately be nil if OpenAI couldn't find them
+    # Category, average_price, and image_url may legitimately be nil if OpenAI couldn't find them
     return if place.rating.present? && place.price_range.present?
 
     content = AiContentGenerator.generate_place_content(
@@ -14,11 +14,12 @@ class GeneratePlaceAiContentJob < ApplicationJob
       neighborhood: place.neighborhood
     )
 
-    if content && (content[:rating].present? || content[:price_range].present? || content[:category].present? || content[:image_url].present?)
+    if content && (content[:rating].present? || content[:price_range].present? || content[:category].present? || content[:average_price].present? || content[:image_url].present?)
       updates = {}
       updates[:rating] = content[:rating] if content[:rating].present?
       updates[:price_range] = content[:price_range] if content[:price_range].present?
       updates[:category] = content[:category] if content[:category].present?
+      updates[:average_price] = content[:average_price] if content[:average_price].present?
       updates[:image_url] = content[:image_url] if content[:image_url].present?
 
       place.update_columns(updates)

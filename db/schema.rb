@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_08_200554) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_10_151607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -104,6 +104,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_200554) do
     t.string "state"
     t.string "country"
     t.string "continent"
+    t.decimal "average_price", precision: 10, scale: 2, comment: "Average nightly price in USD (AI-generated estimate)"
     t.index ["city", "place_type"], name: "index_places_on_city_and_place_type"
     t.index ["city"], name: "index_places_on_city"
     t.index ["country", "continent"], name: "index_places_on_country_and_continent"
