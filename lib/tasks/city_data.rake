@@ -1,5 +1,5 @@
 namespace :city do
-  desc "Import all data (boundaries + places + airports) for a specific city"
+  desc "Import all data (boundaries + places + airports + universities) for a specific city"
   task :import_with_airports, [:city, :force] => :environment do |t, args|
     city = args[:city]
     force = args[:force] == 'true' || ENV['FORCE'] == 'true'
@@ -12,14 +12,19 @@ namespace :city do
 
     begin
       # Step 1: Import city data (boundaries + places)
-      puts "Step 1/2: Importing city data for #{city}..."
+      puts "Step 1/3: Importing city data for #{city}..."
       importer = CityDataImporter.new(city, force: force)
       importer.import_all
 
       # Step 2: Import airports
-      puts "Step 2/2: Importing airports for #{city}..."
+      puts "Step 2/3: Importing airports for #{city}..."
       airport_importer = AirportImporter.new
       airport_importer.import(city)
+
+      # Step 3: Import universities
+      puts "Step 3/3: Importing universities for #{city}..."
+      university_importer = UniversityImporter.new
+      university_importer.import(city)
 
       puts "✅ Import complete for #{city}"
     rescue ArgumentError => e

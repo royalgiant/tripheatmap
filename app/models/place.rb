@@ -24,6 +24,8 @@ class Place < ApplicationRecord
   scope :airbnbs, -> { where(place_type: 'airbnb') }
   scope :vrbos, -> { where(place_type: 'vrbo') }
   scope :rentals, -> { where(place_type: ['airbnb', 'vrbo']) }
+  scope :airports, -> { where(place_type: 'airport') }
+  scope :universities, -> { where(place_type: 'university') }
   scope :landmarks, -> { where(place_type: ['attraction', 'museum', 'monument', 'viewpoint', 'airport', 'university', 'beach', 'convention_center', 'theme_park', 'zoo', 'park']) }
   scope :by_type, ->(type) { where(place_type: type) }
   scope :with_ratings, -> { where.not(rating: nil) }
@@ -43,6 +45,10 @@ class Place < ApplicationRecord
 
   def airport?
     place_type == 'airport'
+  end
+
+  def university?
+    place_type == 'university'
   end
 
   private

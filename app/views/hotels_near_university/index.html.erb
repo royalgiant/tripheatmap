@@ -1,0 +1,308 @@
+<% content_for :head do %>
+  <title><%= @seo_title %></title>
+  <meta name="description" content="<%= @seo_description %>">
+  <link rel="canonical" href="<%= @canonical_url %>">
+  <meta property="og:title" content="<%= @seo_title %>">
+  <meta property="og:description" content="<%= @seo_description %>">
+  <meta property="og:url" content="<%= @canonical_url %>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @seo_title %>">
+  <meta name="twitter:description" content="<%= @seo_description %>">
+<% end %>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-5">
+
+  <header class="space-y-6">
+
+    <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold mt-4">TripHeatmap · Hotels Near Universities</p>
+
+    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mt-4">Hotels Near Major Universities</h1>
+
+    <p class="text-xl text-gray-700 mt-4">Find hotels near top universities and colleges in <%= @cities_with_universities.size %> cities worldwide.</p>
+
+  </header>
+
+
+
+  <% if @cities_with_universities.any? %>
+
+    <%= render 'shared/city_filter' %>
+
+    <section class="space-y-6">
+
+      <h2 class="text-2xl font-bold text-gray-900">Browse Cities with Major Universities</h2>
+
+
+
+      <% @cities_grouped.each do |continent, countries| %>
+
+        <div class="space-y-6 continent-section">
+
+          <!-- Continent Header -->
+
+          <h3 class="text-xl font-bold text-gray-800 border-b-2 border-blue-600 pb-2">
+
+            <%= continent %>
+
+          </h3>
+
+
+
+          <% countries.each_with_index do |(country, cities), country_index| %>
+
+            <% country_id = "country-#{continent.parameterize}-#{country.parameterize}" %>
+
+            <% visible_cities = cities.first(9) %>
+
+            <% hidden_cities = cities[9..-1] || [] %>
+
+            <% has_more = hidden_cities.any? %>
+
+            <% is_us = country == "United States" %>
+
+
+
+            <div class="space-y-4 country-section <%= 'is-us' if is_us %>">
+
+              <!-- Country Header (Clickable) -->
+
+              <button
+
+                type="button"
+
+                onclick="toggleCountry('<%= country_id %>')"
+
+                class="flex items-center justify-between w-full text-left pl-4 pr-4 py-2 hover:bg-gray-50 rounded-lg transition-colors group country-toggle-button"
+
+              >
+
+                <h4 class="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
+
+                  <%= country %> (<%= cities.size %>)
+
+                </h4>
+
+                <svg
+
+                  id="<%= country_id %>-icon"
+
+                  class="w-5 h-5 text-gray-500 transform transition-transform duration-200 <%= 'rotate-180' if is_us %> country-toggle-icon"
+
+                  fill="none"
+
+                  viewBox="0 0 24 24"
+
+                  stroke="currentColor"
+
+                >
+
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+                </svg>
+
+              </button>
+
+
+
+              <!-- Cities Container (Initially Hidden, except US) -->
+
+              <div id="<%= country_id %>" class="<%= 'hidden' unless is_us %> pl-0 md:pl-8 space-y-4 cities-container">
+
+                <!-- First 9 Cities -->
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                  <% visible_cities.each do |city| %>
+
+                    <%= link_to hotels_near_university_city_path(city[:slug]), class: "group city-guide-link", data: { "city-name": city[:display_name] } do %>
+
+                      <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow city-item-wrapper">
+
+                        <div class="space-y-3">
+
+                          <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+
+                            <%= city[:display_name] %>
+
+                          </h5>
+
+                          <p class="text-sm text-gray-600">
+
+                            <%= city[:university_count] %> major <%= 'university'.pluralize(city[:university_count]) %> in <%= city[:display_name] %>
+
+                          </p>
+
+                          <div class="pt-2">
+
+                            <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+
+                              View universities
+
+                              <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                              </svg>
+
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    <% end %>
+
+                  <% end %>
+
+                </div>
+
+
+
+                <% if has_more %>
+
+                  <!-- Hidden Cities (Shown after "See More") -->
+
+                  <div id="<%= country_id %>-more" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <% hidden_cities.each do |city| %>
+
+                      <%= link_to hotels_near_university_city_path(city[:slug]), class: "group city-guide-link", data: { "city-name": city[:display_name] } do %>
+
+                        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow city-item-wrapper">
+
+                          <div class="space-y-3">
+
+                            <h5 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+
+                              <%= city[:display_name] %>
+
+                            </h5>
+
+                            <p class="text-sm text-gray-600">
+
+                              <%= city[:university_count] %> major <%= 'university'.pluralize(city[:university_count]) %>
+
+                            </p>
+
+                            <div class="pt-2">
+
+                              <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+
+                                View universities
+
+                                <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                                </svg>
+
+                              </span>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      <% end %>
+
+                    <% end %>
+
+                  </div>
+
+
+
+                  <!-- See More Button -->
+
+                  <button
+
+                    type="button"
+
+                    onclick="toggleMoreCities('<%= country_id %>')"
+
+                    id="<%= country_id %>-more-btn"
+
+                    class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+
+                  >
+
+                    <span id="<%= country_id %>-more-text">See <%= hidden_cities.size %> More Cities</span>
+
+                    <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+                    </svg>
+
+                  </button>
+
+                <% end %>
+
+              </div>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    </section>
+
+  <% else %>
+
+    <div class="text-center py-12 bg-gray-50 rounded-lg">
+
+      <div class="text-6xl mb-4">🎓</div>
+
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Universities Found</h3>
+
+      <p class="text-gray-600 max-w-md mx-auto">
+
+        We're still importing university data. Check back soon!
+
+      </p>
+
+    </div>
+
+  <% end %>
+
+  <script>
+    function toggleCountry(countryId) {
+      const $content = $('#' + countryId);
+      const $icon = $('#' + countryId + '-icon');
+
+      if ($content.hasClass('hidden')) {
+        $content.removeClass('hidden');
+        $icon.addClass('rotate-180');
+      } else {
+        $content.addClass('hidden');
+        $icon.removeClass('rotate-180');
+      }
+    }
+
+    function toggleMoreCities(countryId) {
+      const $moreContent = $('#' + countryId + '-more');
+      const $moreText = $('#' + countryId + '-more-text');
+
+      if ($moreContent.hasClass('hidden')) {
+        $moreContent.removeClass('hidden');
+        $moreText.text('Show Less');
+      } else {
+        $moreContent.addClass('hidden');
+        $moreText.text($moreText.data('original-text'));
+      }
+    }
+
+    // Store original text for "See More" buttons
+    $(document).ready(function() {
+      $('[id$="-more-text"]').each(function() {
+        $(this).data('original-text', $(this).text());
+      });
+    });
+  </script>
+</div>

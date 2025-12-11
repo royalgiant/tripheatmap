@@ -8,6 +8,7 @@ This guide explains how to import neighborhood boundaries and places data for th
 
 ```bash
 # Production (async, non-blocking, recommended)
+# Imports: boundaries + places + airports + universities
 kamal app exec -i "bundle exec rake 'city:import_with_airports_async[dallas]'"
 
 # Development/Testing (sync, blocking)
@@ -18,6 +19,7 @@ rake city:import_with_airports[dallas]
 
 ```bash
 # Production (async, non-blocking, recommended)
+# Imports all cities with boundaries + places + airports + universities
 rake city:import_all_async
 
 # Monitor progress
@@ -33,10 +35,10 @@ kamal app logs
 Non-blocking commands that queue Sidekiq jobs:
 
 ```bash
-# Import single city (boundaries + places + airports)
+# Import single city (boundaries + places + airports + universities)
 rake city:import_with_airports_async[CITY]
 
-# Import all cities (boundaries + places + airports for each)
+# Import all cities (boundaries + places + airports + universities for each)
 rake city:import_all_async
 ```
 
@@ -45,7 +47,7 @@ rake city:import_all_async
 Blocking commands that run immediately:
 
 ```bash
-# Import single city (boundaries + places + airports)
+# Import single city (boundaries + places + airports + universities)
 rake city:import_with_airports[CITY]
 ```
 
@@ -93,10 +95,10 @@ CityDataImporter.import_all_cities(skip_boundaries: true)
 ### Sidekiq Jobs (for programmatic/scheduled execution)
 
 ```ruby
-# Import city + airports
+# Import city + airports + universities
 ImportCityWithAirportsJob.perform_async('dallas')
 
-# Import all cities + airports (runs in parallel)
+# Import all cities + airports + universities (runs in parallel)
 ImportAllCitiesWithAirportsJob.perform_async
 
 # Update places for all cities (OSM restaurants/bars/cafes)
@@ -162,6 +164,19 @@ The import process follows these steps:
      - Calculates vibrancy index (0-10 scale)
      - Saves individual places to `places` table
      - Saves stats to `neighborhood_places_stats` table
+
+3. **Import Landmarks for pSEO** (`AirportImporter` & `UniversityImporter`)
+   - **Airports** (city-wide landmarks):
+     - Queries Overpass API for `aeroway=aerodrome`
+     - Creates places with `place_type: 'airport'`
+     - `neighborhood_id: nil` (not associated with specific neighborhood)
+     - Used for "Hotels near [Airport Name]" pSEO pages
+
+   - **Universities** (neighborhood landmarks):
+     - Queries Overpass API for `amenity=university` and `amenity=college`
+     - Uses PostGIS to determine which neighborhood contains each university
+     - Creates places with `place_type: 'university'` and associated `neighborhood_id`
+     - Used for "Hotels near [University Name]" pSEO pages
 
 ## Scheduled Jobs (Cron)
 
