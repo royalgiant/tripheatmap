@@ -4,8 +4,8 @@ class BestLuxuryHotelController < ApplicationController
   before_action :set_city_context, only: [:show]
 
   def index
-    @cities = get_cities
-    @cities_grouped = get_cities_grouped_by_location
+    @cities = get_cities_with_hotel_counts
+    @cities_grouped = get_cities_grouped_by_location(@cities)
   end
 
   def show
@@ -20,6 +20,20 @@ class BestLuxuryHotelController < ApplicationController
   end
 
   private
+
+  def get_cities_with_hotel_counts
+    cities = get_cities
+
+    hotel_counts = Place
+      .joins(:neighborhood)
+      .where(place_type: 'hotel', category: 'luxury')
+      .group('neighborhoods.city')
+      .count
+
+    cities.map do |city|
+      city.merge(hotel_count: hotel_counts[city[:key]] || 0)
+    end.select { |city| city[:hotel_count] > 0 }
+  end
 
   def luxury_hotels
     Place

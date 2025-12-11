@@ -31,7 +31,7 @@
     <p class="text-xl text-gray-600 mb-4">
       Find the best hotels within walking distance of <%= @landmark.name %>.
     </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=<%= @landmark.lat %>,<%= @landmark.lon %>" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+    <a href="<%= google_maps_url(@landmark) %>" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
       <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -177,7 +177,7 @@
                 <% end %>
 
                 <div class="flex gap-3 w-full sm:w-auto">
-                  <a href="https://www.google.com/maps/search/?api=1&query=<%= hotel.lat %>,<%= hotel.lon %>" target="_blank" rel="noopener" class="flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto">
+                  <a href="<%= google_maps_url(hotel) %>" target="_blank" rel="noopener" class="flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto">
                     Directions
                   </a>
                 </div>

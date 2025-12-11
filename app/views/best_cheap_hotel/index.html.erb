@@ -54,7 +54,7 @@
                           <%= city[:name] %>
                         </h5>
                         <p class="text-sm text-gray-600">
-                          Find budget-friendly stays
+                          <%= city[:hotel_count] %> budget-friendly <%= 'stay'.pluralize(city[:hotel_count]) %>
                         </p>
                         <div class="pt-2">
                           <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
@@ -79,7 +79,7 @@
                             <%= city[:name] %>
                           </h5>
                           <p class="text-sm text-gray-600">
-                            Find budget-friendly stays
+                            <%= city[:hotel_count] %> budget-friendly <%= 'stay'.pluralize(city[:hotel_count]) %>
                           </p>
                           <div class="pt-2">
                             <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">

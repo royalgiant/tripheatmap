@@ -3,6 +3,23 @@ module ApplicationHelper
     current_user.present? && (current_user.is_admin? || current_user.subscribed?)
   end
 
+  def google_maps_url(place_or_options = nil, name: nil, lat: nil, lon: nil, zoom: 15)
+    if place_or_options.is_a?(Hash)
+      name = place_or_options[:name]
+      lat = place_or_options[:lat]
+      lon = place_or_options[:lon]
+      zoom = place_or_options[:zoom] || 15
+    elsif place_or_options.respond_to?(:name) && place_or_options.respond_to?(:lat) && place_or_options.respond_to?(:lon)
+      name = place_or_options.name
+      lat = place_or_options.lat
+      lon = place_or_options.lon
+    end
+
+    return nil unless name.present? && lat.present? && lon.present?
+    encoded_name = ERB::Util.url_encode(name).gsub('%20', '+')
+    "https://www.google.com/maps/search/#{encoded_name}/@#{lat},#{lon},#{zoom}z?entry=ttu"
+  end
+
   # Helper to display star ratings with half stars using Tailwind CSS
   def star_rating(rating)
     return unless rating.present?
