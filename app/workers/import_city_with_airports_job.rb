@@ -1,4 +1,4 @@
-# Sidekiq worker for importing city data and landmarks (airports + universities)
+# Sidekiq worker for importing city data and landmarks (airports + universities + convention centers)
 # Runs city import first, then landmarks import for pSEO
 #
 # Usage:
@@ -13,7 +13,7 @@ class ImportCityWithAirportsJob
     Rails.logger.info "ImportCityWithAirportsJob started for city: #{city_key}"
 
     # Step 1: Import city data (boundaries + places)
-    Rails.logger.info "Step 1/3: Importing city data for #{city_key}..."
+    Rails.logger.info "Step 1/4: Importing city data for #{city_key}..."
     importer = CityDataImporter.new(city_key)
     city_results = importer.import_all
 
@@ -24,16 +24,22 @@ class ImportCityWithAirportsJob
     end
 
     # Step 2: Import airports
-    Rails.logger.info "Step 2/3: Importing airports for #{city_key}..."
+    Rails.logger.info "Step 2/4: Importing airports for #{city_key}..."
     airport_importer = AirportImporter.new
     airport_importer.import(city_key)
     Rails.logger.info "Airport import completed for #{city_key}"
 
     # Step 3: Import universities
-    Rails.logger.info "Step 3/3: Importing universities for #{city_key}..."
+    Rails.logger.info "Step 3/4: Importing universities for #{city_key}..."
     university_importer = UniversityImporter.new
     university_importer.import(city_key)
     Rails.logger.info "University import completed for #{city_key}"
+
+    # Step 4: Import convention centers
+    Rails.logger.info "Step 4/4: Importing convention centers for #{city_key}..."
+    convention_center_importer = ConventionCenterImporter.new
+    convention_center_importer.import(city_key)
+    Rails.logger.info "Convention center import completed for #{city_key}"
 
     Rails.logger.info "ImportCityWithAirportsJob completed successfully for #{city_key}"
 

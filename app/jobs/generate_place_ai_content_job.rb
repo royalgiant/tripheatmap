@@ -4,6 +4,7 @@ class GeneratePlaceAiContentJob < ApplicationJob
   def perform(place_id)
     place = Place.find_by(id: place_id)
     return unless place
+    return unless %w[hotel hostel].include?(place.place_type)
 
     # Skip if already has the essential AI-generated fields (rating and price_range)
     # Category, average_price, and image_url may legitimately be nil if OpenAI couldn't find them

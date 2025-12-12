@@ -1,5 +1,5 @@
 namespace :city do
-  desc "Import all data (boundaries + places + airports + universities) for a specific city"
+  desc "Import all data (boundaries + places + airports + universities + convention centers) for a specific city"
   task :import_with_airports, [:city, :force] => :environment do |t, args|
     city = args[:city]
     force = args[:force] == 'true' || ENV['FORCE'] == 'true'
@@ -12,19 +12,24 @@ namespace :city do
 
     begin
       # Step 1: Import city data (boundaries + places)
-      puts "Step 1/3: Importing city data for #{city}..."
+      puts "Step 1/4: Importing city data for #{city}..."
       importer = CityDataImporter.new(city, force: force)
       importer.import_all
 
       # Step 2: Import airports
-      puts "Step 2/3: Importing airports for #{city}..."
+      puts "Step 2/4: Importing airports for #{city}..."
       airport_importer = AirportImporter.new
       airport_importer.import(city)
 
       # Step 3: Import universities
-      puts "Step 3/3: Importing universities for #{city}..."
+      puts "Step 3/4: Importing universities for #{city}..."
       university_importer = UniversityImporter.new
       university_importer.import(city)
+
+      # Step 4: Import convention centers
+      puts "Step 4/4: Importing convention centers for #{city}..."
+      convention_center_importer = ConventionCenterImporter.new
+      convention_center_importer.import(city)
 
       puts "✅ Import complete for #{city}"
     rescue ArgumentError => e
@@ -45,7 +50,7 @@ namespace :city do
     CityDataImporter.import_all_cities(skip_boundaries: true, force: force)
   end
 
-  desc "Queue city + airport import as async Sidekiq job (non-blocking)"
+  desc "Queue city + landmarks (airports + universities + convention centers) import as async Sidekiq job (non-blocking)"
   task :import_with_airports_async, [:city] => :environment do |t, args|
     city = args[:city]
 
@@ -56,14 +61,14 @@ namespace :city do
     end
 
     ImportCityWithAirportsJob.perform_async(city)
-    puts "✅ Queued city + airport import job for #{city}"
+    puts "✅ Queued city + landmarks import job for #{city}"
     puts "Monitor progress in Sidekiq dashboard or logs"
   end
 
-  desc "Queue all cities + airports import as async Sidekiq jobs (non-blocking)"
+  desc "Queue all cities + landmarks (airports + universities + convention centers) import as async Sidekiq jobs (non-blocking)"
   task :import_all_async => :environment do
     ImportAllCitiesWithAirportsJob.perform_async
-    puts "✅ Queued import jobs for all cities (with airports)"
+    puts "✅ Queued import jobs for all cities (with landmarks)"
     puts "Individual jobs will be queued for each city to run in parallel"
     puts "Monitor progress in Sidekiq dashboard or logs"
   end
