@@ -5,6 +5,10 @@ class AiContentGenerator
       return nil
     end
 
+    if stats[:vibrancy_index].nil? || stats[:vibrancy_index] <= 4.0
+      return nil
+    end
+
     new.generate_neighborhood_content(
       neighborhood: neighborhood,
       stats: stats,
@@ -41,7 +45,7 @@ class AiContentGenerator
       {"description":"...","about":"...","time_to_visit":"...","getting_around":"..."}
     PROMPT
 
-    response = call_openai_api(prompt, max_tokens: 2500)
+    response = call_openai_api(prompt, max_tokens: 4000)
     parse_json_response(response)
   rescue => e
     Rails.logger.error "OpenAI API error generating neighborhood content: #{e.message}"
@@ -96,8 +100,22 @@ class AiContentGenerator
   def parse_json_response(response)
     return nil unless response
 
+    if response["error"]
+      Rails.logger.error "OpenAI API error: #{response['error']}"
+      return nil
+    end
+
+    finish_reason = response.dig("choices", 0, "finish_reason")
+    if finish_reason && finish_reason != "stop"
+      Rails.logger.warn "OpenAI finish_reason: #{finish_reason}"
+    end
+
     content = response.dig("choices", 0, "message", "content")
-    return nil unless content
+    
+    if content.nil? || content.strip.empty?
+      Rails.logger.error "OpenAI returned empty content. Full response: #{response.to_json}"
+      return nil
+    end
 
     json_string = content.strip
 
@@ -112,7 +130,7 @@ class AiContentGenerator
 
     JSON.parse(json_string).symbolize_keys
   rescue JSON::ParserError => e
-    Rails.logger.error "Failed to parse JSON response: #{e.message}"
+    Rails.logger.error "Failed to parse JSON response: #{e.message}. Content was: #{content&.truncate(500)}"
     nil
   end
 

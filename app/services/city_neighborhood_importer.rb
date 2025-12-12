@@ -16,6 +16,10 @@ class CityNeighborhoodImporter
 
     raise ArgumentError, "City '#{city_key}' not found in configuration" unless @config
     raise ArgumentError, "City '#{city_key}' is disabled" if @config["enabled"] == false
+
+    if @config["country"].present? && @config["country"] != "United States"
+      raise ArgumentError, "City '#{city_key}' is not a US city (country: #{@config['country']}). Use GadmGlobalNeighborhoodImporter instead."
+    end
   end
 
   # Import neighborhoods for the configured city
@@ -42,10 +46,13 @@ class CityNeighborhoodImporter
   end
 
   # Check if a city has neighborhood boundaries available from a custom endpoint
-  # Only returns true if city has an endpoint configured AND is not disabled
+  # Only returns true if city has an endpoint configured AND is not disabled AND is a US city
   def self.available_for_city?(city_key)
     city_config = BoundariesConfig.city_config(city_key)
-    city_config && city_config["endpoint"].present? && city_config["enabled"] != false
+    return false unless city_config && city_config["endpoint"].present? && city_config["enabled"] != false
+
+    country = city_config["country"]
+    country.nil? || country == "United States"
   rescue
     false
   end

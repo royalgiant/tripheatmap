@@ -6,22 +6,35 @@ namespace :neighborhoods do
     puts "=" * 80
     puts ""
 
-    # Load config
-    config = YAML.load_file(Rails.root.join("config", "neighborhood_boundaries.yml"))
+    require_relative '../../app/services/concerns/continent_helper'
+
+    class ContinentUpdater
+      include ContinentHelper
+
+      def continent_for_country(country)
+        determine_continent(country)
+      end
+    end
+
+    helper = ContinentUpdater.new
+
+    # Load config from new boundaries structure
+    config = BoundariesConfig.all_cities
 
     # Build city -> country/continent mapping
     city_mappings = {}
     config.each do |city_key, city_config|
-      next if city_config.nil? || city_key == 'states'
+      next if city_config.nil? || city_key.to_s == 'states'
+      next unless city_config.is_a?(Hash)
 
-      city_name = (city_config['city'] || city_config['name']).to_s.downcase
+      city_name = (city_config[:city] || city_config['city'] || city_config[:name] || city_config['name']).to_s.downcase
 
       # Determine country and continent
-      if city_config['country']
+      if city_config[:country] || city_config['country']
         # International city with explicit country field
-        country = city_config['country']
-        continent = city_config['continent'] || determine_continent(country)
-      elsif city_config['state_fips'] && city_config['county_fips']
+        country = city_config[:country] || city_config['country']
+        continent = city_config[:continent] || city_config['continent'] || helper.continent_for_country(country)
+      elsif (city_config[:state_fips] || city_config['state_fips']) && (city_config[:county_fips] || city_config['county_fips'])
         # US city identified by FIPS codes
         country = "United States"
         continent = "North America"
@@ -73,24 +86,13 @@ namespace :neighborhoods do
     puts "Updated: #{updated_count} neighborhoods"
     puts "Missing city mapping: #{missing_city_count} neighborhoods"
     puts "=" * 80
-  end
 
-  def self.determine_continent(country)
-    case country
-    when "United Kingdom", "Ireland", "Italy", "Germany", "Netherlands", "Switzerland",
-         "Sweden", "Denmark", "Belgium", "France", "Austria", "Norway", "Spain",
-         "Portugal", "Greece"
-      "Europe"
-    when "Canada", "United States", "Mexico"
-      "North America"
-    when "Australia", "New Zealand"
-      "Oceania"
-    when "Singapore", "Hong Kong SAR", "United Arab Emirates", "Japan", "Thailand", "Vietnam"
-      "Asia"
-    when "Argentina", "Brazil"
-      "South America"
-    else
-      nil
+    # Show summary by continent
+    puts ""
+    puts "Summary by continent:"
+    continents = Neighborhood.where.not(continent: [nil, '']).group(:continent).count
+    continents.sort_by { |_, count| -count }.each do |continent, count|
+      puts "  #{continent}: #{count} neighborhoods"
     end
   end
 end

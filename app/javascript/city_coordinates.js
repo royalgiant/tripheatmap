@@ -266,7 +266,60 @@ const cityCoordinates = {
   'panama city': [-79.52, 8.98],
 
   // Caribbean
-  'bahamas': [-77.40, 25.03]
+  'bahamas': [-77.40, 25.03],
+
+  'antalya': [30.75, 36.93],
+  'abu dhabi': [54.37, 24.47],
+  'mecca': [39.83, 21.40],
+  'riyadh': [46.70, 24.70],
+  'cairo': [31.30, 30.05],
+  'marrakech': [-7.98, 31.63],
+  'jerusalem': [35.23, 31.78],
+  'tel aviv': [34.80, 32.08],
+  'doha': [51.50, 25.30],
+  'johannesburg': [28.05, -26.18],
+  'cape town': [18.60, -33.95],
+
+  'fukuoka': [130.40, 33.60],
+  'pattaya': [100.90, 12.95],
+  'ha long bay': [107.10, 20.93],
+  'hong kong': [114.15, 22.37],
+  'macau': [113.55, 22.16],
+  'shanghai': [121.55, 31.10],
+  'beijing': [116.45, 39.90],
+  'shenzhen': [114.15, 22.60],
+  'guangzhou': [113.35, 23.15],
+  'kuala lumpur': [101.70, 3.15],
+  'seoul': [126.95, 37.55],
+  'jeju city': [126.55, 33.50],
+  'taipei': [121.55, 25.05],
+  'denpasar': [115.20, -8.65],
+  'jakarta': [106.85, -6.20],
+  'mumbai': [72.85, 19.10],
+  'delhi': [77.10, 28.65],
+  'jaipur': [75.80, 26.90],
+  'chennai': [80.20, 13.05],
+  'agra': [78.00, 27.18],
+  'manila': [121.00, 14.60],
+
+  'lima': [-76.95, -12.05],
+  'cusco': [-71.95, -13.55],
+  'cartagena': [-75.50, 10.40],
+  'bogota': [-74.10, 4.68],
+  'cali': [-76.50, 3.45],
+  'medellin': [-75.55, 6.28],
+  'punta cana': [-68.40, 18.60],
+
+  'budapest': [19.04, 47.50],
+  'heraklion': [25.13, 35.34],
+  'krakow': [19.94, 50.06],
+  'moscow': [37.62, 55.75],
+  'reykjavik': [-21.90, 64.13],
+  'rhodes': [28.22, 36.43],
+  'st petersburg': [30.31, 59.93],
+  'warsaw': [21.01, 52.23],
+
+  'winnipeg': [-97.14, 49.90]
 };
 
 export default cityCoordinates;

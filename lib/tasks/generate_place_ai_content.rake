@@ -33,10 +33,10 @@ namespace :city do
       .joins(:neighborhood)
       .where(neighborhoods: { city: city_name.downcase })
       .where(place_type: ['hotel', 'hostel'])
-      .where("rating IS NULL OR price_range IS NULL OR category IS NULL OR image_url IS NULL")
+      .where("rating IS NULL OR price_range IS NULL")
 
     if places_without_content.empty?
-      puts "✅ All places already have AI-generated rating, price range, category, and image url!"
+      puts "✅ All places already have AI-generated rating and price range!"
       exit 0
     end
 
@@ -47,7 +47,7 @@ namespace :city do
     enqueued_count = 0
 
     places_without_content.each_with_index do |place, index|
-      if place.rating.present? && place.price_range.present? && place.category.present? && place.image_url.present?
+      if place.rating.present? && place.price_range.present?
         puts "  [#{index + 1}/#{places_without_content.size}] Skipping #{place.name} (already complete)"
         next
       end
