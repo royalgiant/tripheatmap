@@ -4,16 +4,20 @@ module ContinentHelper
     case country
     when "United Kingdom", "Ireland", "Italy", "Germany", "Netherlands", "Switzerland",
          "Sweden", "Denmark", "Belgium", "France", "Austria", "Norway", "Spain",
-         "Portugal", "Greece"
+         "Portugal", "Greece", "Czech Republic", "Hungary", "Iceland", "Poland", "Russia"
       "Europe"
-    when "Canada", "United States", "Mexico"
+    when "Canada", "United States", "Mexico", "Bahamas", "Costa Rica", "Dominican Republic", "Panama"
       "North America"
     when "Australia", "New Zealand"
       "Oceania"
-    when "Singapore", "Hong Kong SAR", "United Arab Emirates", "Japan", "Thailand", "Vietnam"
+    when "Singapore", "Hong Kong SAR", "United Arab Emirates", "Japan", "Thailand", "Vietnam",
+         "China", "India", "Indonesia", "Israel", "Malaysia", "Philippines", "Qatar",
+         "Saudi Arabia", "South Korea", "Taiwan", "Turkey"
       "Asia"
-    when "Argentina", "Brazil"
+    when "Argentina", "Brazil", "Colombia", "Peru"
       "South America"
+    when "Egypt", "Morocco", "South Africa"
+      "Africa"
     else
       nil
     end

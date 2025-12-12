@@ -1,5 +1,5 @@
 namespace :city do
-  desc "Generate AI content for places (rating and price_range) in a city"
+  desc "Generate AI content for places (rating, price_range, and average_price) in a city"
   task :generate_place_ai_content, [:city] => :environment do |t, args|
     unless Rails.env.production?
       puts "⚠️  AI content generation only runs in production environment"
@@ -33,10 +33,10 @@ namespace :city do
       .joins(:neighborhood)
       .where(neighborhoods: { city: city_name.downcase })
       .where(place_type: ['hotel', 'hostel'])
-      .where("rating IS NULL OR price_range IS NULL OR category IS NULL OR image_url IS NULL")
+      .where("rating IS NULL OR price_range IS NULL OR average_price IS NULL")
 
     if places_without_content.empty?
-      puts "✅ All places already have AI-generated rating, price range, category, and image url!"
+      puts "✅ All places already have AI-generated rating, price range, and average price!"
       exit 0
     end
 
@@ -47,7 +47,7 @@ namespace :city do
     enqueued_count = 0
 
     places_without_content.each_with_index do |place, index|
-      if place.rating.present? && place.price_range.present? && place.category.present? && place.image_url.present?
+      if place.rating.present? && place.price_range.present? && place.average_price.present?
         puts "  [#{index + 1}/#{places_without_content.size}] Skipping #{place.name} (already complete)"
         next
       end

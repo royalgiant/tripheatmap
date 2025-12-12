@@ -37,7 +37,27 @@ class GadmGlobalNeighborhoodImporter
     "Canada" => "CA",
     "New Zealand" => "NZ",
     "Singapore" => "SG",
-    "United Arab Emirates" => "AE"
+    "United Arab Emirates" => "AE",
+    "China" => "CN",
+    "South Korea" => "KR",
+    "Taiwan" => "TW",
+    "Indonesia" => "ID",
+    "India" => "IN",
+    "Malaysia" => "MY",
+    "Philippines" => "PH",
+    "Colombia" => "CO",
+    "Peru" => "PE",
+    "Dominican Republic" => "DO",
+    "Iceland" => "IS",
+    "Hungary" => "HU",
+    "Poland" => "PL",
+    "Russia" => "RU",
+    "Israel" => "IL",
+    "Saudi Arabia" => "SA",
+    "Qatar" => "QA",
+    "Egypt" => "EG",
+    "Morocco" => "MA",
+    "South Africa" => "ZA"
   }.freeze
 
   attr_reader :city_key, :config, :errors
@@ -197,14 +217,28 @@ class GadmGlobalNeighborhoodImporter
   end
 
   def geometry_overlaps_bbox?(geometry, box)
+    # Use centroid to check if geometry is within bounding box
+    # This prevents large polygons from other regions being included
+    # just because one corner touches the bbox
+    centroid = calculate_centroid(geometry)
+    return false unless centroid
+
+    lon, lat = centroid
+    lon >= box[:min_lon] && lon <= box[:max_lon] &&
+      lat >= box[:min_lat] && lat <= box[:max_lat]
+  end
+
+  def calculate_centroid(geometry)
+    return nil unless geometry && geometry["coordinates"]
+
     coords = []
     append_coords(geometry["coordinates"], coords)
-    coords.any? do |lon, lat|
-      next false unless lon && lat
+    return nil if coords.empty?
 
-      lon >= box[:min_lon] && lon <= box[:max_lon] &&
-        lat >= box[:min_lat] && lat <= box[:max_lat]
-    end
+    # Calculate average of all coordinates
+    total_lon = coords.sum { |lon, _| lon }
+    total_lat = coords.sum { |_, lat| lat }
+    [total_lon / coords.size, total_lat / coords.size]
   end
 
   def append_coords(value, coords)

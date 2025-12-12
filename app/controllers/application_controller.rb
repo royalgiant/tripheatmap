@@ -52,8 +52,7 @@ class ApplicationController < ActionController::Base
       end 
     end
 
-    # Sort continents: North America, Europe, Asia, Oceania, South America, Other
-    continent_order = ['North America', 'Europe', 'Asia', 'Oceania', 'South America', 'Other']
+    continent_order = ['North America', 'Europe', 'Asia', 'Africa', 'Oceania', 'South America', 'Other']
     sorted_grouped = continent_order.map { |continent| [continent, grouped[continent]] }.to_h.compact
 
     sorted_grouped

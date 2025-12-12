@@ -8,7 +8,7 @@ class GeneratePlaceAiContentJob < ApplicationJob
 
     # Skip if already has the essential AI-generated fields (rating and price_range)
     # Category, average_price, and image_url may legitimately be nil if OpenAI couldn't find them
-    return if place.rating.present? && place.price_range.present?
+    return if place.rating.present? && place.price_range.present? && place.average_price.present?
 
     content = AiContentGenerator.generate_place_content(
       place: place,
