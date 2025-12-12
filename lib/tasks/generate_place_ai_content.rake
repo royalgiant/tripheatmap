@@ -1,6 +1,12 @@
 namespace :city do
   desc "Generate AI content for places (rating and price_range) in a city"
   task :generate_place_ai_content, [:city] => :environment do |t, args|
+    unless Rails.env.production?
+      puts "⚠️  AI content generation only runs in production environment"
+      puts "Current environment: #{Rails.env}"
+      exit 0
+    end
+
     city = args[:city]
 
     unless city
@@ -61,6 +67,12 @@ namespace :city do
 
   desc "Generate AI content for places in ALL cities"
   task :generate_all_places_ai_content => :environment do
+    unless Rails.env.production?
+      puts "⚠️  AI content generation only runs in production environment"
+      puts "Current environment: #{Rails.env}"
+      exit 0
+    end
+
     puts "=" * 80
     puts "Generating AI Place Content for All Cities"
     puts "=" * 80

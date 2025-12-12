@@ -1064,6 +1064,132 @@ linz:
       max_lon: 14.4
   population_source: manual
   notes: GADM ADM3 - Linz municipalities.
+budapest:
+  name: Budapest
+  city: Budapest
+  state: Budapest
+  county: Budapest
+  country: Hungary
+  tripcomurl: https://www.trip.com/hotels/list?city=191&display=Budapest&optionId=191&optionType=City&optionName=Budapest&Allianceid=7375838&SID=279148115&trip_sub1=budapest&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Hungary_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 47.4
+      max_lat: 47.6
+      min_lon: 18.9
+      max_lon: 19.3
+  population_source: manual
+  notes: Budapest city districts.
+warsaw:
+  name: Warsaw
+  city: Warsaw
+  state: Masovian
+  county: Warsaw
+  country: Poland
+  tripcomurl: https://www.trip.com/hotels/list?city=743&display=Warsaw&optionId=743&optionType=City&optionName=Warsaw&Allianceid=7375838&SID=279148115&trip_sub1=warsaw&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Poland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 52.1
+      max_lat: 52.4
+      min_lon: 20.85
+      max_lon: 21.3
+  population_source: manual
+  notes: Warsaw city districts.
+krakow:
+  name: Krakow
+  city: Krakow
+  state: Lesser Poland
+  county: Krakow
+  country: Poland
+  tripcomurl: https://www.trip.com/hotels/list?city=837&display=Krakow&optionId=837&optionType=City&optionName=Krakow&Allianceid=7375838&SID=279148115&trip_sub1=krakow&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Poland_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 49.95
+      max_lat: 50.15
+      min_lon: 19.8
+      max_lon: 20.2
+  population_source: manual
+  notes: Krakow city districts.
+moscow:
+  name: Moscow
+  city: Moscow
+  state: Moscow
+  county: Moscow
+  country: Russia
+  tripcomurl: https://www.trip.com/hotels/list?city=400&display=Moscow&optionId=400&optionType=City&optionName=Moscow&Allianceid=7375838&SID=279148115&trip_sub1=moscow&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Russia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 55.55
+      max_lat: 55.95
+      min_lon: 37.35
+      max_lon: 37.9
+  population_source: manual
+  notes: Moscow city districts.
+st petersburg:
+  name: St. Petersburg
+  city: St. Petersburg
+  state: St. Petersburg
+  county: St. Petersburg
+  country: Russia
+  tripcomurl: https://www.trip.com/hotels/list?city=777&display=St.%20Petersburg&optionId=777&optionType=City&optionName=St.%20Petersburg&Allianceid=7375838&SID=279148115&trip_sub1=st%20petersburg&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Russia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 59.7
+      max_lat: 60.15
+      min_lon: 29.7
+      max_lon: 30.65
+  population_source: manual
+  notes: St. Petersburg city districts.
+reykjavik:
+  name: Reykjavik
+  city: Reykjavik
+  state: Capital Region
+  county: Reykjavik
+  country: Iceland
+  tripcomurl: https://www.trip.com/hotels/list?city=856&display=Reykjavik&optionId=856&optionType=City&optionName=Reykjavik&Allianceid=7375838&SID=279148115&trip_sub1=reykjavik&trip_sub3=D7593154
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Iceland_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 64.05
+      max_lat: 64.2
+      min_lon: -22.1
+      max_lon: -21.7
+  population_source: manual
+  notes: Reykjavik capital area districts.
 oslo:
   name: Oslo
   city: Oslo
@@ -1400,6 +1526,48 @@ thessaloniki:
       max_lon: 23.1
   population_source: manual
   notes: Thessaloniki municipalities.
+heraklion:
+  name: Heraklion
+  city: Heraklion
+  state: Crete
+  county: Heraklion
+  country: Greece
+  tripcomurl: https://www.trip.com/hotels/list?city=1415&display=Heraklion&optionId=1415&optionType=City&optionName=Heraklion&Allianceid=7375838&SID=279148115&trip_sub1=heraklion&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 35.25
+      max_lat: 35.4
+      min_lon: 25.05
+      max_lon: 25.25
+  population_source: manual
+  notes: Heraklion (Crete) municipalities.
+rhodes:
+  name: Rhodes
+  city: Rhodes
+  state: South Aegean
+  county: Rhodes
+  country: Greece
+  tripcomurl: https://www.trip.com/hotels/list?city=1438&display=Rhodes&optionId=1438&optionType=City&optionName=Rhodes&Allianceid=7375838&SID=279148115&trip_sub1=rhodes&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 36.1
+      max_lat: 36.5
+      min_lon: 27.7
+      max_lon: 28.3
+  population_source: manual
+  notes: Rhodes Island municipalities.
 prague:
   name: Prague
   city: Prague
@@ -1442,27 +1610,6 @@ dublin:
       max_lon: -6.1
   population_source: manual
   notes: Dublin districts.
-istanbul:
-  name: Istanbul
-  city: Istanbul
-  state: Istanbul
-  county: Istanbul
-  country: Turkey
-  tripcomurl: https://www.trip.com/hotels/list?city=532&display=Istanbul&optionId=532&optionType=City&optionName=Istanbul&Allianceid=7375838&SID=279148115&trip_sub1=istanbul&trip_sub3=D7599167
-  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
-  type: geojson
-  enabled: true
-  field_mappings:
-    name: shapeName
-    geoid: shapeID
-  filters:
-    bbox:
-      min_lat: 40.85
-      max_lat: 41.25
-      min_lon: 28.8
-      max_lon: 29.2
-  population_source: manual
-  notes: Istanbul districts.
 costermano sul garda:
   name: Costermano sul Garda
   city: Costermano sul Garda

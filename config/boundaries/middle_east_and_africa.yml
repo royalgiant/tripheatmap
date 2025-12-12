@@ -1,0 +1,266 @@
+# Middle East and Africa Cities Configuration
+# Neighborhood boundaries for cities in Middle East and Africa
+
+---
+istanbul:
+  name: Istanbul
+  city: Istanbul
+  state: Istanbul
+  county: Istanbul
+  country: Turkey
+  tripcomurl: https://www.trip.com/hotels/list?city=532&display=Istanbul&optionId=532&optionType=City&optionName=Istanbul&Allianceid=7375838&SID=279148115&trip_sub1=istanbul&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 40.85
+      max_lat: 41.25
+      min_lon: 28.8
+      max_lon: 29.2
+  population_source: manual
+  notes: Istanbul districts.
+antalya:
+  name: Antalya
+  city: Antalya
+  state: Antalya
+  county: Antalya
+  country: Turkey
+  tripcomurl: https://www.trip.com/hotels/list?city=772&display=Antalya&optionId=772&optionType=City&optionName=Antalya&Allianceid=7375838&SID=279148115&trip_sub1=antalya&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 36.8
+      max_lat: 37.05
+      min_lon: 30.6
+      max_lon: 30.9
+  population_source: manual
+  notes: Antalya city districts.
+dubai:
+  name: Dubai
+  city: Dubai
+  state: Dubai
+  county: Dubai
+  country: United Arab Emirates
+  tripcomurl: https://www.trip.com/hotels/list?city=220&display=Dubai&optionId=220&optionType=City&optionName=Dubai&Allianceid=7375838&SID=279148115&trip_sub1=dubai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: NAME_3
+    geoid: GID_3
+    parent_name: NAME_1
+  population_source: manual
+  notes: GADM Level 3 - UAE neighborhoods. Filters all Dubai neighborhoods.
+abu dhabi:
+  name: Abu Dhabi
+  city: Abu Dhabi
+  state: Abu Dhabi
+  county: Abu Dhabi
+  country: United Arab Emirates
+  tripcomurl: https://www.trip.com/hotels/list?city=221&display=Abu%20Dhabi&optionId=221&optionType=City&optionName=Abu%20Dhabi&Allianceid=7375838&SID=279148115&trip_sub1=abu%20dhabi&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/United_Arab_Emirates_ADM1_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  population_source: manual
+  notes: Abu Dhabi emirate regions.
+mecca:
+  name: Mecca
+  city: Mecca
+  state: Makkah
+  county: Mecca
+  country: Saudi Arabia
+  tripcomurl: https://www.trip.com/hotels/list?city=2408&display=Mecca&optionId=2408&optionType=City&optionName=Mecca&Allianceid=7375838&SID=279148115&trip_sub1=mecca&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Saudi_Arabia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 21.3
+      max_lat: 21.5
+      min_lon: 39.7
+      max_lon: 39.95
+  population_source: manual
+  notes: Mecca city districts in Makkah Province.
+riyadh:
+  name: Riyadh
+  city: Riyadh
+  state: Riyadh
+  county: Riyadh
+  country: Saudi Arabia
+  tripcomurl: https://www.trip.com/hotels/list?city=1283&display=Riyadh&optionId=1283&optionType=City&optionName=Riyadh&Allianceid=7375838&SID=279148115&trip_sub1=riyadh&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Saudi_Arabia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 24.5
+      max_lat: 24.9
+      min_lon: 46.5
+      max_lon: 46.9
+  population_source: manual
+  notes: Riyadh capital city districts.
+cairo:
+  name: Cairo
+  city: Cairo
+  state: Cairo
+  county: Cairo
+  country: Egypt
+  tripcomurl: https://www.trip.com/hotels/list?city=652&display=Cairo&optionId=652&optionType=City&optionName=Cairo&Allianceid=7375838&SID=279148115&trip_sub1=cairo&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Egypt_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 29.9
+      max_lat: 30.2
+      min_lon: 31.1
+      max_lon: 31.5
+  population_source: manual
+  notes: Cairo governorate districts.
+marrakech:
+  name: Marrakech
+  city: Marrakech
+  state: Marrakech-Safi
+  county: Marrakech
+  country: Morocco
+  tripcomurl: https://www.trip.com/hotels/list?city=714&display=Marrakech&optionId=714&optionType=City&optionName=Marrakech&Allianceid=7375838&SID=279148115&trip_sub1=marrakech&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Morocco_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 31.55
+      max_lat: 31.7
+      min_lon: -8.05
+      max_lon: -7.9
+  population_source: manual
+  notes: Marrakech city districts.
+jerusalem:
+  name: Jerusalem
+  city: Jerusalem
+  state: Jerusalem
+  county: Jerusalem
+  country: Israel
+  tripcomurl: https://www.trip.com/hotels/list?city=704&display=Jerusalem&optionId=704&optionType=City&optionName=Jerusalem&Allianceid=7375838&SID=279148115&trip_sub1=jerusalem&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Israel_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 31.7
+      max_lat: 31.85
+      min_lon: 35.15
+      max_lon: 35.3
+  population_source: manual
+  notes: Jerusalem city districts.
+tel aviv:
+  name: Tel Aviv
+  city: Tel Aviv
+  state: Tel Aviv
+  county: Tel Aviv
+  country: Israel
+  tripcomurl: https://www.trip.com/hotels/list?city=788&display=Tel%20Aviv&optionId=788&optionType=City&optionName=Tel%20Aviv&Allianceid=7375838&SID=279148115&trip_sub1=tel%20aviv&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Israel_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 32.0
+      max_lat: 32.15
+      min_lon: 34.75
+      max_lon: 34.85
+  population_source: manual
+  notes: Tel Aviv-Yafo metropolitan area districts.
+doha:
+  name: Doha
+  city: Doha
+  state: Doha
+  county: Doha
+  country: Qatar
+  tripcomurl: https://www.trip.com/hotels/list?city=801&display=Doha&optionId=801&optionType=City&optionName=Doha&Allianceid=7375838&SID=279148115&trip_sub1=doha&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Qatar_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 25.2
+      max_lat: 25.4
+      min_lon: 51.4
+      max_lon: 51.6
+  population_source: manual
+  notes: Doha municipality districts.
+johannesburg:
+  name: Johannesburg
+  city: Johannesburg
+  state: Gauteng
+  county: Johannesburg
+  country: South Africa
+  tripcomurl: https://www.trip.com/hotels/list?city=759&display=Johannesburg&optionId=759&optionType=City&optionName=Johannesburg&Allianceid=7375838&SID=279148115&trip_sub1=johannesburg&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Africa_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -26.35
+      max_lat: -26.0
+      min_lon: 27.8
+      max_lon: 28.3
+  population_source: manual
+  notes: Johannesburg metropolitan area districts.
+cape town:
+  name: Cape Town
+  city: Cape Town
+  state: Western Cape
+  county: Cape Town
+  country: South Africa
+  tripcomurl: https://www.trip.com/hotels/list?city=835&display=Cape%20Town&optionId=835&optionType=City&optionName=Cape%20Town&Allianceid=7375838&SID=279148115&trip_sub1=cape%20town&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Africa_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -34.2
+      max_lat: -33.7
+      min_lon: 18.3
+      max_lon: 18.9
+  population_source: manual
+  notes: Cape Town metropolitan area districts.

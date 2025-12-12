@@ -27,55 +27,18 @@ class AiContentGenerator
     location = [city_name, state, country].compact.join(", ")
 
     prompt = <<~PROMPT
-      You are a travel content writer and SEO specialist creating content for a neighborhood in #{city_name}.
+      Neighborhood: #{neighborhood.name}, #{location}
+      Total neighborhoods: #{total_neighborhoods}
+      Restaurants: #{stats[:restaurant_count] || 0}, Cafés: #{stats[:cafe_count] || 0}, Bars: #{stats[:bar_count] || 0}
+      Vibrancy: #{stats[:vibrancy_index]&.round(1) || 'N/A'}/10, Area: #{neighborhood.read_attribute(:area_sq_km)&.round(2) || 'N/A'} km²
 
-      CITY: #{location}
-      TOTAL NEIGHBORHOODS ANALYZED: #{total_neighborhoods}
+      Generate JSON:
+      - description (50-75 words): Compelling overview, incorporate stats, SEO optimized
+      - about (75-100 words): Unique features, culture, vibe, ideal visitor
+      - time_to_visit (60-80 words): Seasonal tips, local events
+      - getting_around (60-80 words): Transit, walkability, parking
 
-      NEIGHBORHOOD:
-      - Name: #{neighborhood.name}
-      - Restaurants: #{stats[:restaurant_count] || 0}
-      - Cafés: #{stats[:cafe_count] || 0}
-      - Bars: #{stats[:bar_count] || 0}
-      - Vibrancy Score: #{stats[:vibrancy_index]&.round(1) || 'N/A'} / 10
-      - Area: #{neighborhood.read_attribute(:area_sq_km)&.round(2) || 'N/A'} km²
-
-      Generate the following content:
-
-      1. NEIGHBORHOOD DESCRIPTION (100-150 words):
-         - Compelling 2-3 sentence description for #{neighborhood.name}
-         - Focus on what makes it appealing for visitors/travelers
-         - Naturally incorporate statistics (restaurant count, vibrancy, amenities)
-         - Use active, engaging language
-         - Optimize for SEO keywords: "where to stay", "best neighborhood", "restaurants", "nightlife"
-         - Be specific and data-driven
-
-      2. ABOUT (150-200 words):
-         - About #{neighborhood.name} neighborhood
-         - What makes this neighborhood unique
-         - Culture, vibe, atmosphere
-         - Who would enjoy staying here
-
-      3. BEST TIME TO VISIT (120-150 words):
-         - Best time to visit #{neighborhood.name}
-         - Seasonal considerations for this area
-         - Local events or festivals in this neighborhood
-
-      4. GETTING AROUND (120-150 words):
-         - Getting around #{neighborhood.name}
-         - Transit options from/to this neighborhood
-         - Walkability within the neighborhood
-         - Parking, bike rentals, local transportation tips
-
-      TONE: Informative, helpful, data-driven but engaging
-
-      Return ONLY valid JSON (no markdown, no code blocks):
-      {
-        "description": "neighborhood description...",
-        "about": "about this neighborhood...",
-        "time_to_visit": "best time to visit this neighborhood...",
-        "getting_around": "getting around this neighborhood..."
-      }
+      {"description":"...","about":"...","time_to_visit":"...","getting_around":"..."}
     PROMPT
 
     response = call_openai_api(prompt, max_tokens: 2500)
@@ -87,36 +50,19 @@ class AiContentGenerator
 
   def generate_place_content(place:, neighborhood:)
     prompt = <<~PROMPT
-      You are an expert travel assistant tasked with providing concise information about places.
+      Place: #{place.name} (#{place.place_type})
+      Address: #{place.address || 'N/A'}
+      Tags: #{place.tags.present? ? place.tags.to_json : 'N/A'}
+      Location: #{neighborhood.name}, #{neighborhood.city}, #{neighborhood.state}, #{neighborhood.country}
 
-      PLACE:
-      - Name: #{place.name}
-      - Type: #{place.place_type}
-      - Address: #{place.address || 'N/A'}
-      - Tags: #{place.tags.present? ? place.tags.to_json : 'N/A'}
+      Return JSON:
+      - rating: 1.0-5.0 (0.5 steps)
+      - price_range: $, $$, $$$, or $$$$
+      - category: "luxury", "boutique", or null
+      - average_price: USD/night estimate
+      - image_url: public URL or null
 
-      NEIGHBORHOOD CONTEXT:
-      - Neighborhood Name: #{neighborhood.name}
-      - City: #{neighborhood.city}
-      - State: #{neighborhood.state}
-      - Country: #{neighborhood.country}
-
-      Based on the provided place information and neighborhood context, generate the following:
-
-      1.  **Average Rating**: A numerical rating from 1.0 to 5.0, in increments of 0.5 (e.g., 3.0, 3.5, 4.0, 4.5).
-      2.  **Price Range**: A string representing the price level using dollar signs: $, $$, $$$, or $$$$.
-      3.  **Category**: For hotels, determine if it fits into one of these specific categories: "luxury" or "boutique". If it does not clearly fit either (e.g., it's a standard chain hotel, motel, or budget inn), return null.
-      4.  **Average Price**: Estimate the average nightly price in USD. Provide a reasonable estimate based on the place type, location, category, and price range. Return as a number (e.g., 45.00, 120.00, 350.00).
-      5.  **Image URL**: Provide a public image URL for this place from your knowledge base, if available. If you don't have a specific image URL, return null.
-
-      Return ONLY valid JSON (no markdown, no code blocks):
-      {
-        "rating": 4.0,
-        "price_range": "$$",
-        "category": "boutique",
-        "average_price": 120.00,
-        "image_url": "https://example.com/hotel.jpg"
-      }
+      {"rating":4.0,"price_range":"$$","category":"boutique","average_price":120.00,"image_url":null}
     PROMPT
     response = call_openai_api(prompt, max_tokens: 2500)
     parse_json_response(response)

@@ -101,3 +101,150 @@ buenos aires:
     name: nombre
     geoid: id
   population_source: manual
+lima:
+  name: Lima
+  city: Lima
+  state: Lima
+  county: Lima
+  country: Peru
+  tripcomurl: https://www.trip.com/hotels/list?city=295&display=Lima&optionId=295&optionType=City&optionName=Lima&Allianceid=7375838&SID=279148115&trip_sub1=lima&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Peru_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -12.3
+      max_lat: -11.8
+      min_lon: -77.2
+      max_lon: -76.7
+  population_source: manual
+  notes: Lima metropolitan area districts.
+cusco:
+  name: Cusco
+  city: Cusco
+  state: Cusco
+  county: Cusco
+  country: Peru
+  tripcomurl: https://www.trip.com/hotels/list?city=1392&display=Cusco&optionId=1392&optionType=City&optionName=Cusco&Allianceid=7375838&SID=279148115&trip_sub1=cusco&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Peru_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -13.7
+      max_lat: -13.4
+      min_lon: -72.1
+      max_lon: -71.8
+  population_source: manual
+  notes: Cusco city districts.
+cartagena:
+  name: Cartagena
+  city: Cartagena
+  state: Bolívar
+  county: Cartagena
+  country: Colombia
+  tripcomurl: https://www.trip.com/hotels/list?city=1394&display=Cartagena&optionId=1394&optionType=City&optionName=Cartagena&Allianceid=7375838&SID=279148115&trip_sub1=cartagena&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 10.3
+      max_lat: 10.5
+      min_lon: -75.6
+      max_lon: -75.4
+  population_source: manual
+  notes: Cartagena city districts.
+bogota:
+  name: Bogotá
+  city: Bogotá
+  state: Cundinamarca
+  county: Bogotá
+  country: Colombia
+  tripcomurl: https://www.trip.com/hotels/list?city=322&display=Bogota&optionId=322&optionType=City&optionName=Bogota&Allianceid=7375838&SID=279148115&trip_sub1=bogota&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 4.5
+      max_lat: 4.85
+      min_lon: -74.25
+      max_lon: -73.95
+  population_source: manual
+  notes: Bogotá capital district.
+cali:
+  name: Cali
+  city: Cali
+  state: Valle del Cauca
+  county: Cali
+  country: Colombia
+  tripcomurl: https://www.trip.com/hotels/list?city=1424&display=Cali&optionId=1424&optionType=City&optionName=Cali&Allianceid=7375838&SID=279148115&trip_sub1=cali&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 3.35
+      max_lat: 3.55
+      min_lon: -76.6
+      max_lon: -76.4
+  population_source: manual
+  notes: Cali city districts.
+medellin:
+  name: Medellín
+  city: Medellín
+  state: Antioquia
+  county: Medellín
+  country: Colombia
+  tripcomurl: https://www.trip.com/hotels/list?city=770&display=Medellin&optionId=770&optionType=City&optionName=Medellin&Allianceid=7375838&SID=279148115&trip_sub1=medellin&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 6.15
+      max_lat: 6.4
+      min_lon: -75.65
+      max_lon: -75.45
+  population_source: manual
+  notes: Medellín metropolitan area districts.
+punta cana:
+  name: Punta Cana
+  city: Punta Cana
+  state: La Altagracia
+  county: Punta Cana
+  country: Dominican Republic
+  tripcomurl: https://www.trip.com/hotels/list?city=766&display=Punta%20Cana&optionId=766&optionType=City&optionName=Punta%20Cana&Allianceid=7375838&SID=279148115&trip_sub1=punta%20cana&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Dominican_Republic_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 18.4
+      max_lat: 18.8
+      min_lon: -68.6
+      max_lon: -68.2
+  population_source: manual
+  notes: Punta Cana resort area districts.

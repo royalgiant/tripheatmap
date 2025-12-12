@@ -86,6 +86,27 @@ yokohama:
       max_lon: 139.8
   population_source: manual
   notes: Yokohama wards from GADM ADM2.
+fukuoka:
+  name: Fukuoka
+  city: Fukuoka
+  state: Fukuoka
+  county: Fukuoka
+  country: Japan
+  tripcomurl: https://www.trip.com/hotels/list?city=230&display=Fukuoka&optionId=230&optionType=City&optionName=Fukuoka&Allianceid=7375838&SID=279148115&trip_sub1=fukuoka&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 33.5
+      max_lat: 33.7
+      min_lon: 130.3
+      max_lon: 130.5
+  population_source: manual
+  notes: Fukuoka wards from GADM ADM2.
 bangkok:
   name: Bangkok
   city: Bangkok
@@ -233,6 +254,405 @@ da nang:
       max_lon: 108.35
   population_source: manual
   notes: Da Nang districts.
+ha long bay:
+  name: Ha Long Bay
+  city: Ha Long
+  state: Quang Ninh
+  county: Ha Long
+  country: Vietnam
+  tripcomurl: https://www.trip.com/hotels/list?city=2453&display=Ha%20Long&optionId=2453&optionType=City&optionName=Ha%20Long&Allianceid=7375838&SID=279148115&trip_sub1=ha%20long&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.8
+      max_lat: 21.05
+      min_lon: 106.9
+      max_lon: 107.3
+  population_source: manual
+  notes: Ha Long Bay area districts in Quang Ninh Province.
+hong kong:
+  name: Hong Kong
+  city: Hong Kong
+  state: Hong Kong
+  county: Hong Kong
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=38&display=Hong%20Kong&optionId=38&optionType=City&optionName=Hong%20Kong&Allianceid=7375838&SID=279148115&trip_sub1=hong%20kong&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.15
+      max_lat: 22.58
+      min_lon: 113.8
+      max_lon: 114.4
+  population_source: manual
+  notes: Hong Kong SAR districts.
+macau:
+  name: Macau
+  city: Macau
+  state: Macau
+  county: Macau
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=39&display=Macau&optionId=39&optionType=City&optionName=Macau&Allianceid=7375838&SID=279148115&trip_sub1=macau&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.1
+      max_lat: 22.22
+      min_lon: 113.5
+      max_lon: 113.6
+  population_source: manual
+  notes: Macau SAR districts.
+shanghai:
+  name: Shanghai
+  city: Shanghai
+  state: Shanghai
+  county: Shanghai
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=17&display=Shanghai&optionId=17&optionType=City&optionName=Shanghai&Allianceid=7375838&SID=279148115&trip_sub1=shanghai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 30.7
+      max_lat: 31.5
+      min_lon: 121.2
+      max_lon: 121.9
+  population_source: manual
+  notes: Shanghai municipality districts.
+beijing:
+  name: Beijing
+  city: Beijing
+  state: Beijing
+  county: Beijing
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=1&display=Beijing&optionId=1&optionType=City&optionName=Beijing&Allianceid=7375838&SID=279148115&trip_sub1=beijing&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 39.4
+      max_lat: 40.4
+      min_lon: 115.4
+      max_lon: 117.5
+  population_source: manual
+  notes: Beijing municipality districts.
+shenzhen:
+  name: Shenzhen
+  city: Shenzhen
+  state: Guangdong
+  county: Shenzhen
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=28&display=Shenzhen&optionId=28&optionType=City&optionName=Shenzhen&Allianceid=7375838&SID=279148115&trip_sub1=shenzhen&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.4
+      max_lat: 22.8
+      min_lon: 113.7
+      max_lon: 114.6
+  population_source: manual
+  notes: Shenzhen city districts in Guangdong Province.
+guangzhou:
+  name: Guangzhou
+  city: Guangzhou
+  state: Guangdong
+  county: Guangzhou
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=152&display=Guangzhou&optionId=152&optionType=City&optionName=Guangzhou&Allianceid=7375838&SID=279148115&trip_sub1=guangzhou&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.9
+      max_lat: 23.4
+      min_lon: 113.0
+      max_lon: 113.7
+  population_source: manual
+  notes: Guangzhou city districts in Guangdong Province.
+kuala lumpur:
+  name: Kuala Lumpur
+  city: Kuala Lumpur
+  state: Federal Territory
+  county: Kuala Lumpur
+  country: Malaysia
+  tripcomurl: https://www.trip.com/hotels/list?city=45&display=Kuala%20Lumpur&optionId=45&optionType=City&optionName=Kuala%20Lumpur&Allianceid=7375838&SID=279148115&trip_sub1=kuala%20lumpur&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Malaysia_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 3.0
+      max_lat: 3.3
+      min_lon: 101.6
+      max_lon: 101.8
+  population_source: manual
+  notes: Kuala Lumpur Federal Territory districts.
+seoul:
+  name: Seoul
+  city: Seoul
+  state: Seoul
+  county: Seoul
+  country: South Korea
+  tripcomurl: https://www.trip.com/hotels/list?city=235&display=Seoul&optionId=235&optionType=City&optionName=Seoul&Allianceid=7375838&SID=279148115&trip_sub1=seoul&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Korea_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 37.4
+      max_lat: 37.7
+      min_lon: 126.7
+      max_lon: 127.2
+  population_source: manual
+  notes: Seoul metropolitan city districts.
+jeju city:
+  name: Jeju City
+  city: Jeju
+  state: Jeju
+  county: Jeju
+  country: South Korea
+  tripcomurl: https://www.trip.com/hotels/list?city=2337&display=Jeju&optionId=2337&optionType=City&optionName=Jeju&Allianceid=7375838&SID=279148115&trip_sub1=jeju&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Korea_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 33.4
+      max_lat: 33.6
+      min_lon: 126.4
+      max_lon: 126.7
+  population_source: manual
+  notes: Jeju Island districts.
+taipei:
+  name: Taipei
+  city: Taipei
+  state: Taipei
+  county: Taipei
+  country: Taiwan
+  tripcomurl: https://www.trip.com/hotels/list?city=303&display=Taipei&optionId=303&optionType=City&optionName=Taipei&Allianceid=7375838&SID=279148115&trip_sub1=taipei&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Taiwan_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 24.9
+      max_lat: 25.2
+      min_lon: 121.4
+      max_lon: 121.7
+  population_source: manual
+  notes: Taipei city districts.
+denpasar:
+  name: Denpasar
+  city: Denpasar
+  state: Bali
+  county: Denpasar
+  country: Indonesia
+  tripcomurl: https://www.trip.com/hotels/list?city=364&display=Bali&optionId=364&optionType=City&optionName=Bali&Allianceid=7375838&SID=279148115&trip_sub1=bali&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Indonesia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -8.8
+      max_lat: -8.5
+      min_lon: 115.1
+      max_lon: 115.3
+  population_source: manual
+  notes: Bali (Denpasar) regencies.
+jakarta:
+  name: Jakarta
+  city: Jakarta
+  state: Jakarta
+  county: Jakarta
+  country: Indonesia
+  tripcomurl: https://www.trip.com/hotels/list?city=365&display=Jakarta&optionId=365&optionType=City&optionName=Jakarta&Allianceid=7375838&SID=279148115&trip_sub1=jakarta&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Indonesia_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: -6.4
+      max_lat: -6.0
+      min_lon: 106.7
+      max_lon: 107.0
+  population_source: manual
+  notes: Jakarta special capital region.
+mumbai:
+  name: Mumbai
+  city: Mumbai
+  state: Maharashtra
+  county: Mumbai
+  country: India
+  tripcomurl: https://www.trip.com/hotels/list?city=308&display=Mumbai&optionId=308&optionType=City&optionName=Mumbai&Allianceid=7375838&SID=279148115&trip_sub1=mumbai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 18.9
+      max_lat: 19.3
+      min_lon: 72.7
+      max_lon: 73.0
+  population_source: manual
+  notes: Mumbai metropolitan area districts.
+delhi:
+  name: Delhi
+  city: Delhi
+  state: Delhi
+  county: Delhi
+  country: India
+  tripcomurl: https://www.trip.com/hotels/list?city=313&display=New%20Delhi&optionId=313&optionType=City&optionName=New%20Delhi&Allianceid=7375838&SID=279148115&trip_sub1=delhi&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 28.4
+      max_lat: 28.9
+      min_lon: 76.8
+      max_lon: 77.4
+  population_source: manual
+  notes: Delhi National Capital Territory districts.
+jaipur:
+  name: Jaipur
+  city: Jaipur
+  state: Rajasthan
+  county: Jaipur
+  country: India
+  tripcomurl: https://www.trip.com/hotels/list?city=315&display=Jaipur&optionId=315&optionType=City&optionName=Jaipur&Allianceid=7375838&SID=279148115&trip_sub1=jaipur&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 26.8
+      max_lat: 27.0
+      min_lon: 75.7
+      max_lon: 75.9
+  population_source: manual
+  notes: Jaipur city districts in Rajasthan.
+chennai:
+  name: Chennai
+  city: Chennai
+  state: Tamil Nadu
+  county: Chennai
+  country: India
+  tripcomurl: https://www.trip.com/hotels/list?city=345&display=Chennai&optionId=345&optionType=City&optionName=Chennai&Allianceid=7375838&SID=279148115&trip_sub1=chennai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 12.9
+      max_lat: 13.2
+      min_lon: 80.1
+      max_lon: 80.3
+  population_source: manual
+  notes: Chennai metropolitan area districts.
+agra:
+  name: Agra
+  city: Agra
+  state: Uttar Pradesh
+  county: Agra
+  country: India
+  tripcomurl: https://www.trip.com/hotels/list?city=1253&display=Agra&optionId=1253&optionType=City&optionName=Agra&Allianceid=7375838&SID=279148115&trip_sub1=agra&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 27.1
+      max_lat: 27.25
+      min_lon: 77.9
+      max_lon: 78.1
+  population_source: manual
+  notes: Agra city districts in Uttar Pradesh.
+manila:
+  name: Manila
+  city: Manila
+  state: Metro Manila
+  county: Manila
+  country: Philippines
+  tripcomurl: https://www.trip.com/hotels/list?city=275&display=Manila&optionId=275&optionType=City&optionName=Manila&Allianceid=7375838&SID=279148115&trip_sub1=manila&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Philippines_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 14.4
+      max_lat: 14.8
+      min_lon: 120.9
+      max_lon: 121.1
+  population_source: manual
+  notes: Metro Manila municipalities and cities.
 singapore:
   name: Singapore
   city: Singapore
@@ -248,19 +668,3 @@ singapore:
     geoid: shapeID
   population_source: manual
   notes: GADM ADM2 - Singapore planning areas. City-state so no filtering needed.
-dubai:
-  name: Dubai
-  city: Dubai
-  state: Dubai
-  county: Dubai
-  country: United Arab Emirates
-  tripcomurl: https://www.trip.com/hotels/list?city=220&display=Dubai&optionId=220&optionType=City&optionName=Dubai&Allianceid=7375838&SID=279148115&trip_sub1=dubai&trip_sub3=D7599167
-  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json
-  type: geojson
-  enabled: true
-  field_mappings:
-    name: NAME_3
-    geoid: GID_3
-    parent_name: NAME_1
-  population_source: manual
-  notes: GADM Level 3 - UAE neighborhoods. Filters all Dubai neighborhoods.
