@@ -63,7 +63,7 @@
                 <a href="<%= google_maps_url(university) %>" target="_blank" rel="noopener" class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
                   Get Direction
                 </a>
-                <%= link_to "Hotels Near #{university.name}", hotels_near_university_path(university.slug, @city_slug), class: "inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" %>
+                <%= link_to "Hotels Near #{university.name}", hotels_near_university_path(@city_slug, university.slug), class: "inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" %>
               </div>
             </div>
           </div>

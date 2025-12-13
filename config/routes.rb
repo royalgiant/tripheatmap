@@ -13,21 +13,25 @@ Rails.application.routes.draw do
   get 'best-budget-hotels', to: 'best_cheap_hotel#index', as: 'best_budget_hotels_index'
   get 'best-budget-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_budget_hotels'
   get 'hotels-in-:city-near-:neighborhood', to: 'hotels_near#show', as: 'hotels_near'
-  get 'hotels-near-major-airports', to: 'hotels_near_airport#index', as: 'hotels_near_airport_index'
-  get 'hotels-near-airports-in-:city', to: 'hotels_near_airport#city', as: 'hotels_near_airport_city'
-  get 'hotels-near-airport-:airport-in-:city', to: 'hotels_near_airport#show', as: 'hotels_near_airport'
-  get 'hotels-near-:slug-airport', to: 'hotels_near_airport#show_smart', as: 'hotels_near_smart_airport'
-  get 'hotels-near-major-universities', to: 'hotels_near_university#index', as: 'hotels_near_university_index'
-  get 'hotels-near-universities-in-:city', to: 'hotels_near_university#city', as: 'hotels_near_university_city'
-  get 'hotels-near-university-:university-in-:city', to: 'hotels_near_university#show', as: 'hotels_near_university'
-  get 'hotels-near-:slug-university', to: 'hotels_near_university#show_smart', as: 'hotels_near_smart_university'
-  get 'hotels-near-convention-centers', to: 'hotels_near_convention_center#index', as: 'hotels_near_convention_center_index'
-  get 'hotels-near-convention-centers-in-:city', to: 'hotels_near_convention_center#city', as: 'hotels_near_convention_center_city'
-  get 'hotels-near-:convention_center-in-:city', to: 'hotels_near_convention_center#show', as: 'hotels_near_convention_center'
-  get 'hotels-near-:slug-convention-center', to: 'hotels_near_convention_center#show_smart', as: 'hotels_near_smart_convention_center'
-  get 'hotels-near-landmarks', to: 'hotels_near_landmark#index', as: 'hotels_near_landmark_index'
-  get 'hotels-near-landmarks-in-:city', to: 'hotels_near_landmark#city', as: 'hotels_near_landmark_city'
-  get 'hotels-near-:landmark-in-:city', to: 'hotels_near_landmark#show', as: 'hotels_near_landmark'
+  
+  scope 'hotels-near', as: 'hotels_near' do
+    get 'airports', to: 'hotels_near_airport#index', as: 'airport_index'
+    get 'airports/:city', to: 'hotels_near_airport#city', as: 'airport_city'
+    get 'airports/:city/:airport', to: 'hotels_near_airport#show', as: 'airport'
+
+    get 'universities', to: 'hotels_near_university#index', as: 'university_index'
+    get 'universities/:city', to: 'hotels_near_university#city', as: 'university_city'
+    get 'universities/:city/:university', to: 'hotels_near_university#show', as: 'university'
+
+    get 'convention-centers', to: 'hotels_near_convention_center#index', as: 'convention_center_index'
+    get 'convention-centers/:city', to: 'hotels_near_convention_center#city', as: 'convention_center_city'
+    get 'convention-centers/:city/:convention_center', to: 'hotels_near_convention_center#show', as: 'convention_center'
+
+    get 'landmarks', to: 'hotels_near_landmark#index', as: 'landmark_index'
+    get 'landmarks/:city', to: 'hotels_near_landmark#city', as: 'landmark_city'
+    get 'landmarks/:city/:landmark', to: 'hotels_near_landmark#show', as: 'landmark'
+  end
+  
   get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'
   get 'best-neighborhood-in-:city', to: 'best_neighborhood#show', as: 'best_neighborhood'
   resources :neighborhoods, only: [:show], param: :slug
