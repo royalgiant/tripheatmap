@@ -9,6 +9,7 @@ istanbul:
   county: Istanbul
   country: Turkey
   tripcomurl: https://www.trip.com/hotels/list?city=532&display=Istanbul&optionId=532&optionType=City&optionName=Istanbul&Allianceid=7375838&SID=279148115&trip_sub1=istanbul&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14932
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -30,6 +31,7 @@ antalya:
   county: Antalya
   country: Turkey
   tripcomurl: https://www.trip.com/hotels/list?city=772&display=Antalya&optionId=772&optionType=City&optionName=Antalya&Allianceid=7375838&SID=279148115&trip_sub1=antalya&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7493
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Turkey_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -51,6 +53,7 @@ dubai:
   county: Dubai
   country: United Arab Emirates
   tripcomurl: https://www.trip.com/hotels/list?city=220&display=Dubai&optionId=220&optionType=City&optionName=Dubai&Allianceid=7375838&SID=279148115&trip_sub1=dubai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2994
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UAE_L3.json
   type: geojson
   enabled: true
@@ -67,6 +70,7 @@ abu dhabi:
   county: Abu Dhabi
   country: United Arab Emirates
   tripcomurl: https://www.trip.com/hotels/list?city=221&display=Abu%20Dhabi&optionId=221&optionType=City&optionName=Abu%20Dhabi&Allianceid=7375838&SID=279148115&trip_sub1=abu%20dhabi&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10182
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/United_Arab_Emirates_ADM1_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -82,6 +86,7 @@ mecca:
   county: Mecca
   country: Saudi Arabia
   tripcomurl: https://www.trip.com/hotels/list?city=2408&display=Mecca&optionId=2408&optionType=City&optionName=Mecca&Allianceid=7375838&SID=279148115&trip_sub1=mecca&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=78591
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Saudi_Arabia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -103,6 +108,7 @@ riyadh:
   county: Riyadh
   country: Saudi Arabia
   tripcomurl: https://www.trip.com/hotels/list?city=1283&display=Riyadh&optionId=1283&optionType=City&optionName=Riyadh&Allianceid=7375838&SID=279148115&trip_sub1=riyadh&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5349
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Saudi_Arabia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -124,6 +130,7 @@ cairo:
   county: Cairo
   country: Egypt
   tripcomurl: https://www.trip.com/hotels/list?city=652&display=Cairo&optionId=652&optionType=City&optionName=Cairo&Allianceid=7375838&SID=279148115&trip_sub1=cairo&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7923
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Egypt_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -145,6 +152,7 @@ marrakech:
   county: Marrakech
   country: Morocco
   tripcomurl: https://www.trip.com/hotels/list?city=714&display=Marrakech&optionId=714&optionType=City&optionName=Marrakech&Allianceid=7375838&SID=279148115&trip_sub1=marrakech&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11825
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Morocco_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -166,6 +174,7 @@ jerusalem:
   county: Jerusalem
   country: Israel
   tripcomurl: https://www.trip.com/hotels/list?city=704&display=Jerusalem&optionId=704&optionType=City&optionName=Jerusalem&Allianceid=7375838&SID=279148115&trip_sub1=jerusalem&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9927
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Israel_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -187,6 +196,7 @@ tel aviv:
   county: Tel Aviv
   country: Israel
   tripcomurl: https://www.trip.com/hotels/list?city=788&display=Tel%20Aviv&optionId=788&optionType=City&optionName=Tel%20Aviv&Allianceid=7375838&SID=279148115&trip_sub1=tel%20aviv&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1692
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Israel_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -208,6 +218,7 @@ doha:
   county: Doha
   country: Qatar
   tripcomurl: https://www.trip.com/hotels/list?city=801&display=Doha&optionId=801&optionType=City&optionName=Doha&Allianceid=7375838&SID=279148115&trip_sub1=doha&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4472
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Qatar_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -229,6 +240,7 @@ johannesburg:
   county: Johannesburg
   country: South Africa
   tripcomurl: https://www.trip.com/hotels/list?city=759&display=Johannesburg&optionId=759&optionType=City&optionName=Johannesburg&Allianceid=7375838&SID=279148115&trip_sub1=johannesburg&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5663
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Africa_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -250,6 +262,7 @@ cape town:
   county: Cape Town
   country: South Africa
   tripcomurl: https://www.trip.com/hotels/list?city=835&display=Cape%20Town&optionId=835&optionType=City&optionName=Cape%20Town&Allianceid=7375838&SID=279148115&trip_sub1=cape%20town&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1063
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Africa_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true

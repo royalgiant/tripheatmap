@@ -9,6 +9,7 @@ tokyo:
   county: Tokyo Metropolis
   country: Japan
   tripcomurl: https://www.trip.com/hotels/list?city=228&display=Tokyo&optionId=228&optionType=City&optionName=Tokyo&Allianceid=7375838&SID=279148115&trip_sub1=tokyo&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5085
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -30,6 +31,7 @@ osaka:
   county: Osaka
   country: Japan
   tripcomurl: https://www.trip.com/hotels/list?city=219&display=Osaka&optionId=219&optionType=City&optionName=Osaka&Allianceid=7375838&SID=279148115&trip_sub1=osaka&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9590
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -51,6 +53,7 @@ kyoto:
   county: Kyoto
   country: Japan
   tripcomurl: https://www.trip.com/hotels/list?city=734&display=Kyoto&optionId=734&optionType=City&optionName=Kyoto&Allianceid=7375838&SID=279148115&trip_sub1=kyoto&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1784
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -72,6 +75,7 @@ yokohama:
   county: Yokohama
   country: Japan
   tripcomurl: https://www.trip.com/hotels/list?city=271&display=Yokohama&optionId=271&optionType=City&optionName=Yokohama&Allianceid=7375838&SID=279148115&trip_sub1=yokohama&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4590
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -93,6 +97,7 @@ fukuoka:
   county: Fukuoka
   country: Japan
   tripcomurl: https://www.trip.com/hotels/list?city=230&display=Fukuoka&optionId=230&optionType=City&optionName=Fukuoka&Allianceid=7375838&SID=279148115&trip_sub1=fukuoka&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16527
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Japan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -114,6 +119,7 @@ bangkok:
   county: Bangkok
   country: Thailand
   tripcomurl: https://www.trip.com/hotels/list?city=359&display=Bangkok&optionId=359&optionType=City&optionName=Bangkok&Allianceid=7375838&SID=279148115&trip_sub1=bangkok&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9395
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -135,6 +141,7 @@ chiang mai:
   county: Chiang Mai
   country: Thailand
   tripcomurl: https://www.trip.com/hotels/list?city=623&display=Chiang%20Mai&optionId=623&optionType=City&optionName=Chiang%20Mai&Allianceid=7375838&SID=279148115&trip_sub1=chiang%20mai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7401
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -156,6 +163,7 @@ phuket:
   county: Phuket
   country: Thailand
   tripcomurl: https://www.trip.com/hotels/list?city=725&display=Phuket&optionId=725&optionType=City&optionName=Phuket&Allianceid=7375838&SID=279148115&trip_sub1=phuket&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16056
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -177,6 +185,7 @@ pattaya:
   county: Pattaya
   country: Thailand
   tripcomurl: https://www.trip.com/hotels/list?city=747&display=Pattaya&optionId=747&optionType=City&optionName=Pattaya&Allianceid=7375838&SID=279148115&trip_sub1=pattaya&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8584
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Thailand_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -198,6 +207,7 @@ ho chi minh city:
   county: Ho Chi Minh
   country: Vietnam
   tripcomurl: https://www.trip.com/hotels/list?city=301&display=Ho%20Chi%20Minh%20City&optionId=301&optionType=City&optionName=Ho%20Chi%20Minh%20City&Allianceid=7375838&SID=279148115&trip_sub1=ho%20chi%20minh%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13170
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -219,6 +229,7 @@ hanoi:
   county: Hanoi
   country: Vietnam
   tripcomurl: https://www.trip.com/hotels/list?city=286&display=Hanoi&optionId=286&optionType=City&optionName=Hanoi&Allianceid=7375838&SID=279148115&trip_sub1=hanoi&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2758
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -240,6 +251,7 @@ da nang:
   county: Da Nang
   country: Vietnam
   tripcomurl: https://www.trip.com/hotels/list?city=1356&display=Da%20Nang&optionId=1356&optionType=City&optionName=Da%20Nang&Allianceid=7375838&SID=279148115&trip_sub1=da%20nang&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16440
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -282,6 +294,7 @@ hong kong:
   county: Hong Kong
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=38&display=Hong%20Kong&optionId=38&optionType=City&optionName=Hong%20Kong&Allianceid=7375838&SID=279148115&trip_sub1=hong%20kong&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16808
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -303,6 +316,7 @@ macau:
   county: Macau
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=39&display=Macau&optionId=39&optionType=City&optionName=Macau&Allianceid=7375838&SID=279148115&trip_sub1=macau&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=21397
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -324,6 +338,7 @@ shanghai:
   county: Shanghai
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=17&display=Shanghai&optionId=17&optionType=City&optionName=Shanghai&Allianceid=7375838&SID=279148115&trip_sub1=shanghai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3987
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -345,6 +360,7 @@ beijing:
   county: Beijing
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=1&display=Beijing&optionId=1&optionType=City&optionName=Beijing&Allianceid=7375838&SID=279148115&trip_sub1=beijing&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1569
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -366,6 +382,7 @@ shenzhen:
   county: Shenzhen
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=28&display=Shenzhen&optionId=28&optionType=City&optionName=Shenzhen&Allianceid=7375838&SID=279148115&trip_sub1=shenzhen&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12333
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -387,6 +404,7 @@ guangzhou:
   county: Guangzhou
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=152&display=Guangzhou&optionId=152&optionType=City&optionName=Guangzhou&Allianceid=7375838&SID=279148115&trip_sub1=guangzhou&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10112
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -408,6 +426,7 @@ zhuhai:
   county: Zhuhai
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=153&display=Zhuhai&optionId=153&optionType=City&optionName=Zhuhai&Allianceid=7375838&SID=279148115&trip_sub1=zhuhai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10022
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -429,6 +448,7 @@ chengdu:
   county: Chengdu
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=158&display=Chengdu&optionId=158&optionType=City&optionName=Chengdu&Allianceid=7375838&SID=279148115&trip_sub1=chengdu&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4729
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -450,6 +470,7 @@ guilin:
   county: Guilin
   country: China
   tripcomurl: https://www.trip.com/hotels/list?city=370&display=Guilin&optionId=370&optionType=City&optionName=Guilin&Allianceid=7375838&SID=279148115&trip_sub1=guilin&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15591
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -471,6 +492,7 @@ kuala lumpur:
   county: Kuala Lumpur
   country: Malaysia
   tripcomurl: https://www.trip.com/hotels/list?city=45&display=Kuala%20Lumpur&optionId=45&optionType=City&optionName=Kuala%20Lumpur&Allianceid=7375838&SID=279148115&trip_sub1=kuala%20lumpur&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14524
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Malaysia_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -492,6 +514,7 @@ seoul:
   county: Seoul
   country: South Korea
   tripcomurl: https://www.trip.com/hotels/list?city=235&display=Seoul&optionId=235&optionType=City&optionName=Seoul&Allianceid=7375838&SID=279148115&trip_sub1=seoul&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14690
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Korea_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -534,6 +557,7 @@ taipei:
   county: Taipei
   country: Taiwan
   tripcomurl: https://www.trip.com/hotels/list?city=303&display=Taipei&optionId=303&optionType=City&optionName=Taipei&Allianceid=7375838&SID=279148115&trip_sub1=taipei&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4951
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Taiwan_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -576,6 +600,7 @@ jakarta:
   county: Jakarta
   country: Indonesia
   tripcomurl: https://www.trip.com/hotels/list?city=365&display=Jakarta&optionId=365&optionType=City&optionName=Jakarta&Allianceid=7375838&SID=279148115&trip_sub1=jakarta&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8691
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Indonesia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -597,6 +622,7 @@ mumbai:
   county: Mumbai
   country: India
   tripcomurl: https://www.trip.com/hotels/list?city=308&display=Mumbai&optionId=308&optionType=City&optionName=Mumbai&Allianceid=7375838&SID=279148115&trip_sub1=mumbai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16850
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -618,6 +644,7 @@ delhi:
   county: Delhi
   country: India
   tripcomurl: https://www.trip.com/hotels/list?city=313&display=New%20Delhi&optionId=313&optionType=City&optionName=New%20Delhi&Allianceid=7375838&SID=279148115&trip_sub1=delhi&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17993
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -639,6 +666,7 @@ jaipur:
   county: Jaipur
   country: India
   tripcomurl: https://www.trip.com/hotels/list?city=315&display=Jaipur&optionId=315&optionType=City&optionName=Jaipur&Allianceid=7375838&SID=279148115&trip_sub1=jaipur&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8845
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -660,6 +688,7 @@ chennai:
   county: Chennai
   country: India
   tripcomurl: https://www.trip.com/hotels/list?city=345&display=Chennai&optionId=345&optionType=City&optionName=Chennai&Allianceid=7375838&SID=279148115&trip_sub1=chennai&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17269
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -681,6 +710,7 @@ agra:
   county: Agra
   country: India
   tripcomurl: https://www.trip.com/hotels/list?city=1253&display=Agra&optionId=1253&optionType=City&optionName=Agra&Allianceid=7375838&SID=279148115&trip_sub1=agra&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9641
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/India_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -702,6 +732,7 @@ manila:
   county: Manila
   country: Philippines
   tripcomurl: https://www.trip.com/hotels/list?city=275&display=Manila&optionId=275&optionType=City&optionName=Manila&Allianceid=7375838&SID=279148115&trip_sub1=manila&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1622
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Philippines_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -723,6 +754,7 @@ singapore:
   county: Singapore
   country: Singapore
   tripcomurl: https://www.trip.com/hotels/list?city=73&display=Singapore&optionId=73&optionType=City&optionName=Singapore&Allianceid=7375838&SID=279148115&trip_sub1=singapore&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4064
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Singapore_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true

@@ -9,6 +9,7 @@ bahamas:
   county: Bahamas
   country: Bahamas
   tripcomurl: https://www.trip.com/hotels/w/home?Allianceid=7375838&SID=279148115&trip_sub1=bahamas&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10440
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Bahamas_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true

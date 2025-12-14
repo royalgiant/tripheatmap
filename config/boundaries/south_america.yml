@@ -9,6 +9,7 @@ sao paulo:
   county: São Paulo
   country: Brazil
   tripcomurl: https://www.trip.com/hotels/list?city=415&display=Sao%20Paulo&optionId=415&optionType=City&optionName=Sao%20Paulo&Allianceid=7375838&SID=279148115&trip_sub1=sao%20paulo&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16638
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -30,6 +31,7 @@ rio de janeiro:
   county: Rio de Janeiro
   country: Brazil
   tripcomurl: https://www.trip.com/hotels/list?city=769&display=Rio%20de%20Janeiro&optionId=769&optionType=City&optionName=Rio%20de%20Janeiro&Allianceid=7375838&SID=279148115&trip_sub1=rio%20de%20janeiro&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7395
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -51,6 +53,7 @@ salvador:
   county: Salvador
   country: Brazil
   tripcomurl: https://www.trip.com/hotels/list?city=3434&display=Salvador&optionId=3434&optionType=City&optionName=Salvador&Allianceid=7375838&SID=279148115&trip_sub1=salvador&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4617
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -72,6 +75,7 @@ brasilia:
   county: Brasilia
   country: Brazil
   tripcomurl: https://www.trip.com/hotels/list?city=1255&display=Brasilia&optionId=1255&optionType=City&optionName=Brasilia&Allianceid=7375838&SID=279148115&trip_sub1=brasilia&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1931
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Brazil_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -94,6 +98,7 @@ buenos aires:
   county: Buenos Aires
   country: Argentina
   tripcomurl: https://www.trip.com/hotels/list?city=807&display=Buenos%20Aires&optionId=807&optionType=City&optionName=Buenos%20Aires&Allianceid=7375838&SID=279148115&trip_sub1=buenos%20aires&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9294
   endpoint: https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ministerio-de-educacion/barrios/barrios.geojson
   type: geojson
   enabled: true
@@ -108,6 +113,7 @@ lima:
   county: Lima
   country: Peru
   tripcomurl: https://www.trip.com/hotels/list?city=295&display=Lima&optionId=295&optionType=City&optionName=Lima&Allianceid=7375838&SID=279148115&trip_sub1=lima&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7082
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Peru_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -129,6 +135,7 @@ cusco:
   county: Cusco
   country: Peru
   tripcomurl: https://www.trip.com/hotels/list?city=1392&display=Cusco&optionId=1392&optionType=City&optionName=Cusco&Allianceid=7375838&SID=279148115&trip_sub1=cusco&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16970
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Peru_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -150,6 +157,7 @@ cartagena:
   county: Cartagena
   country: Colombia
   tripcomurl: https://www.trip.com/hotels/list?city=1394&display=Cartagena&optionId=1394&optionType=City&optionName=Cartagena&Allianceid=7375838&SID=279148115&trip_sub1=cartagena&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10838
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -171,6 +179,7 @@ bogota:
   county: Bogotá
   country: Colombia
   tripcomurl: https://www.trip.com/hotels/list?city=322&display=Bogota&optionId=322&optionType=City&optionName=Bogota&Allianceid=7375838&SID=279148115&trip_sub1=bogota&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4926
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -192,6 +201,7 @@ cali:
   county: Cali
   country: Colombia
   tripcomurl: https://www.trip.com/hotels/list?city=1424&display=Cali&optionId=1424&optionType=City&optionName=Cali&Allianceid=7375838&SID=279148115&trip_sub1=cali&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15464
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -213,6 +223,7 @@ medellin:
   county: Medellín
   country: Colombia
   tripcomurl: https://www.trip.com/hotels/list?city=770&display=Medellin&optionId=770&optionType=City&optionName=Medellin&Allianceid=7375838&SID=279148115&trip_sub1=medellin&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10309
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Colombia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -234,6 +245,7 @@ punta cana:
   county: Punta Cana
   country: Dominican Republic
   tripcomurl: https://www.trip.com/hotels/list?city=766&display=Punta%20Cana&optionId=766&optionType=City&optionName=Punta%20Cana&Allianceid=7375838&SID=279148115&trip_sub1=punta%20cana&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3332
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Dominican_Republic_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true

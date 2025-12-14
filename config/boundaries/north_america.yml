@@ -9,6 +9,7 @@ mexico city:
   county: Mexico City
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=691&display=Mexico%20City&optionId=691&optionType=City&optionName=Mexico%20City&Allianceid=7375838&SID=279148115&trip_sub1=mexico%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2086
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -30,6 +31,7 @@ guadalajara:
   county: Guadalajara
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=1253&display=Guadalajara&optionId=1253&optionType=City&optionName=Guadalajara&Allianceid=7375838&SID=279148115&trip_sub1=guadalajara&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14757
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -51,6 +53,7 @@ monterrey:
   county: Monterrey
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=3697&display=Monterrey&optionId=3697&optionType=City&optionName=Monterrey&Allianceid=7375838&SID=279148115&trip_sub1=monterrey&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13791
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -72,6 +75,7 @@ cancun:
   county: Benito Juárez
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=812&display=Cancun&optionId=812&optionType=City&optionName=Cancun&Allianceid=7375838&SID=279148115&trip_sub1=cancun&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5954
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -93,6 +97,7 @@ san miguel de allende:
   county: San Miguel de Allende
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=36445&display=San%20Miguel%20de%20Allende&optionId=36445&optionType=City&optionName=San%20Miguel%20de%20Allende&Allianceid=7375838&SID=279148115&trip_sub1=san%20miguel%20de%20allende&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=86228
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -114,6 +119,7 @@ san jose del cabo:
   county: Los Cabos
   country: Mexico
   tripcomurl: https://www.trip.com/hotels/list?city=36441&display=San%20Jose%20del%20Cabo&optionId=36441&optionType=City&optionName=San%20Jose%20del%20Cabo&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose%20del%20cabo&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9342
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Mexico_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -135,6 +141,7 @@ toronto:
   county: Toronto
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=461&display=Toronto&optionId=461&optionType=City&optionName=Toronto&Allianceid=7375838&SID=279148115&trip_sub1=toronto&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4495
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -157,6 +164,7 @@ vancouver:
   county: Metro Vancouver
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=476&display=Vancouver&optionId=476&optionType=City&optionName=Vancouver&Allianceid=7375838&SID=279148115&trip_sub1=vancouver&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9023
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -178,6 +186,7 @@ montreal:
   county: Montreal
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=759&display=Montreal&optionId=759&optionType=City&optionName=Montreal&Allianceid=7375838&SID=279148115&trip_sub1=montreal&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9933
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -199,6 +208,7 @@ calgary:
   county: Calgary
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=761&display=Calgary&optionId=761&optionType=City&optionName=Calgary&Allianceid=7375838&SID=279148115&trip_sub1=calgary&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8913
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -220,6 +230,7 @@ ottawa:
   county: Ottawa
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=760&display=Ottawa&optionId=760&optionType=City&optionName=Ottawa&Allianceid=7375838&SID=279148115&trip_sub1=ottawa&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6845
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -241,6 +252,7 @@ edmonton:
   county: Edmonton
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=1245&display=Edmonton&optionId=1245&optionType=City&optionName=Edmonton&Allianceid=7375838&SID=279148115&trip_sub1=edmonton&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9212
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -262,6 +274,7 @@ winnipeg:
   county: Winnipeg
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=768&display=Winnipeg&optionId=768&optionType=City&optionName=Winnipeg&Allianceid=7375838&SID=279148115&trip_sub1=winnipeg&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3564
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -283,6 +296,7 @@ banff:
   county: Banff
   country: Canada
   tripcomurl: https://www.trip.com/hotels/list?city=7725&display=Banff&optionId=7725&optionType=City&optionName=Banff&Allianceid=7375838&SID=279148115&trip_sub1=banff&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9957
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Canada_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -305,6 +319,7 @@ new york:
   county_fips: '061'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=633&display=New%20York&optionId=633&optionType=City&optionName=New%20York&Allianceid=7375838&SID=279148115&trip_sub1=new%20york&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=318
   zillow: true
 los angeles:
   name: Los Angeles
@@ -314,6 +329,7 @@ los angeles:
   county_fips: '037'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=los%20angeles&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12772
   zillow: true
 houston:
   name: Houston
@@ -323,6 +339,7 @@ houston:
   county_fips: '201'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=347&display=Los%20Angeles&optionId=347&optionType=City&optionName=Los%20Angeles&Allianceid=7375838&SID=279148115&trip_sub1=houston&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1178
   zillow: true
 phoenix:
   name: Phoenix
@@ -332,6 +349,7 @@ phoenix:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25938&display=Phoenix&optionId=25938&optionType=City&optionName=Phoenix&Allianceid=7375838&SID=279148115&trip_sub1=phoenix&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10461
   zillow: true
 philadelphia:
   name: Philadelphia
@@ -343,6 +361,7 @@ philadelphia:
   - '045'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26153&display=Philadelphia&optionId=26153&optionType=City&optionName=Philadelphia&Allianceid=7375838&SID=279148115&trip_sub1=philadelphia&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12374
   zillow: true
   notes: Includes Delaware County to capture PHL Airport.
 san antonio:
@@ -353,6 +372,7 @@ san antonio:
   county_fips: '029'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1193&display=San%20Antonio&optionId=1193&optionType=City&optionName=San%20Antonio&Allianceid=7375838&SID=279148115&trip_sub1=san%20antonio&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9698
   zillow: true
 san diego:
   name: San Diego
@@ -362,6 +382,7 @@ san diego:
   county_fips: '073'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=698&display=San%20Diego&optionId=698&optionType=City&optionName=San%20Diego&Allianceid=7375838&SID=279148115&trip_sub1=san%20diego&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3068
   zillow: true
 fort worth:
   name: Fort Worth
@@ -371,6 +392,7 @@ fort worth:
   county_fips: '439'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=19936&display=Fort%20Worth&optionId=19936&optionType=City&optionName=Fort%20Worth&Allianceid=7375838&SID=279148115&trip_sub1=fort%20worth&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17487
   zillow: true
 jacksonville:
   name: Jacksonville
@@ -380,6 +402,7 @@ jacksonville:
   county_fips: '031'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25795&display=Jacksonville&optionId=25795&optionType=City&optionName=Jacksonville&Allianceid=7375838&SID=279148115&trip_sub1=jacksonville&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2018
   zillow: true
 san jose:
   name: San Jose
@@ -389,6 +412,7 @@ san jose:
   county_fips: '085'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1880&display=San%20Jose&optionId=1880&optionType=City&optionName=San%20Jose&Allianceid=7375838&SID=279148115&trip_sub1=san%20jose&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=615
   zillow: true
 charlotte:
   name: Charlotte
@@ -398,6 +422,7 @@ charlotte:
   county_fips: '119'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26852&display=Charlotte&optionId=26852&optionType=City&optionName=Charlotte&Allianceid=7375838&SID=279148115&trip_sub1=charlotte&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12113
   zillow: true
 columbus:
   name: Columbus
@@ -407,6 +432,7 @@ columbus:
   county_fips: '049'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26851&display=Columbus&optionId=26851&optionType=City&optionName=Columbus&Allianceid=7375838&SID=279148115&trip_sub1=columbus&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17099
   zillow: true
 indianapolis:
   name: Indianapolis
@@ -416,6 +442,7 @@ indianapolis:
   county_fips: '097'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1291&display=Indianapolis&optionId=1291&optionType=City&optionName=Indianapolis&Allianceid=7375838&SID=279148115&trip_sub1=indianapolis&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11863
   zillow: true
 san francisco:
   name: San Francisco
@@ -427,6 +454,7 @@ san francisco:
   - '081'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=313&display=San%20Francisco&optionId=313&optionType=City&optionName=San%20Francisco&Allianceid=7375838&SID=279148115&trip_sub1=san%20francisco&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13801
   zillow: true
   notes: Includes San Mateo County to capture SFO Airport.
 seattle:
@@ -437,6 +465,7 @@ seattle:
   county_fips: '033'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=511&display=Seattle&optionId=511&optionType=City&optionName=Seattle&Allianceid=7375838&SID=279148115&trip_sub1=seattle&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3687
   zillow: true
 denver:
   name: Denver
@@ -448,6 +477,7 @@ denver:
   - '001'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=20099&display=Denver&optionId=20099&optionType=City&optionName=Denver&Allianceid=7375838&SID=279148115&trip_sub1=denver&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2467
   zillow: true
   notes: Includes Adams County to fully capture Denver International Airport area.
 oklahoma city:
@@ -458,6 +488,7 @@ oklahoma city:
   county_fips: '109'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1440&display=Oklahoma%20City&optionId=1440&optionType=City&optionName=Oklahoma%20City&Allianceid=7375838&SID=279148115&trip_sub1=oklahoma%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13689
   zillow: true
 washington:
   name: Washington
@@ -471,6 +502,7 @@ washington:
   - '059'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26363&display=Washington%20D.C.&optionId=26363&optionType=City&optionName=Washington%20D.C.&Allianceid=7375838&SID=279148115&trip_sub1=washingtondc&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17753
   zillow: true
   notes: Includes Arlington, Loudoun, and Fairfax counties (VA) to capture DCA and
     IAD airports.
@@ -482,6 +514,7 @@ nashville:
   county_fips: '037'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3228&display=Nashville&optionId=3228&optionType=City&optionName=Nashville&Allianceid=7375838&SID=279148115&trip_sub1=nashville&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2703
   zillow: true
 dallas:
   name: Dallas
@@ -495,6 +528,7 @@ dallas:
   - '121'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=705&display=Dallas&optionId=705&optionType=City&optionName=Dallas&Allianceid=7375838&SID=279148115&trip_sub1=dallas&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8683
   zillow: true
   notes: 'Full DFW metroplex: Dallas (113), Tarrant (439), Collin (085 - Plano/Frisco),
     Denton (121 - Flower Mound/Lewisville).'
@@ -506,6 +540,7 @@ chicago:
   county_fips: '031'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=549&display=Chicago&optionId=549&optionType=City&optionName=Chicago&Allianceid=7375838&SID=279148115&trip_sub1=chicago&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13899
   zillow: true
 austin:
   name: Austin
@@ -515,6 +550,7 @@ austin:
   county_fips: '453'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25526&display=Austin&optionId=25526&optionType=City&optionName=Austin&Allianceid=7375838&SID=279148115&trip_sub1=austin&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4542
   zillow: true
 miami:
   name: Miami
@@ -524,6 +560,7 @@ miami:
   county_fips: '086'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25773&display=Miami&optionId=25773&optionType=City&optionName=Miami&Allianceid=7375838&SID=279148115&trip_sub1=miami&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15289
   zillow: true
 sacramento:
   name: Sacramento
@@ -533,6 +570,7 @@ sacramento:
   county_fips: '067'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1881&display=Sacramento&optionId=1881&optionType=City&optionName=Sacramento&Allianceid=7375838&SID=279148115&trip_sub1=sacramento&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8881
   zillow: true
 las vegas:
   name: Las Vegas
@@ -542,6 +580,7 @@ las vegas:
   county_fips: '003'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26282&display=Las%20Vegas&optionId=26282&optionType=City&optionName=Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=las%20vegas&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17072
   zillow: true
 el paso:
   name: El Paso
@@ -551,6 +590,7 @@ el paso:
   county_fips: '141'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1178&display=El%20Paso&optionId=1178&optionType=City&optionName=El%20Paso&Allianceid=7375838&SID=279148115&trip_sub1=el%20paso&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7692
   zillow: true
 boston:
   name: Boston
@@ -560,6 +600,7 @@ boston:
   county_fips: '025'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26848&display=Boston&optionId=26848&optionType=City&optionName=Boston&Allianceid=7375838&SID=279148115&trip_sub1=boston&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9254
   zillow: true
 detroit:
   name: Detroit
@@ -569,6 +610,7 @@ detroit:
   county_fips: '163'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=233&display=Detroit&optionId=233&optionType=City&optionName=Detroit&Allianceid=7375838&SID=279148115&trip_sub1=detroit&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3322
   zillow: true
 louisville:
   name: Louisville
@@ -578,6 +620,7 @@ louisville:
   county_fips: '111'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25945&display=Louisville&optionId=25945&optionType=City&optionName=Louisville&Allianceid=7375838&SID=279148115&trip_sub1=louisville&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17137
   zillow: true
 portland:
   name: Portland
@@ -587,6 +630,7 @@ portland:
   county_fips: '051'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Portland&optionId=XXXX&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portland&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17095
   zillow: true
 memphis:
   name: Memphis
@@ -596,6 +640,7 @@ memphis:
   county_fips: '157'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1234&display=Memphis&optionId=1234&optionType=City&optionName=Memphis&Allianceid=7375838&SID=279148115&trip_sub1=memphis&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3054
   zillow: true
 baltimore:
   name: Baltimore
@@ -605,6 +650,7 @@ baltimore:
   county_fips: '510'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1460&display=Baltimore&optionId=1460&optionType=City&optionName=Baltimore&Allianceid=7375838&SID=279148115&trip_sub1=baltimore&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7321
   zillow: true
 milwaukee:
   name: Milwaukee
@@ -614,6 +660,7 @@ milwaukee:
   county_fips: '079'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1181&display=Milwaukee&optionId=1181&optionType=City&optionName=Milwaukee&Allianceid=7375838&SID=279148115&trip_sub1=milwaukee&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6931
   zillow: true
 albuquerque:
   name: Albuquerque
@@ -623,6 +670,7 @@ albuquerque:
   county_fips: '001'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1848&display=Albuquerque&optionId=1848&optionType=City&optionName=Albuquerque&Allianceid=7375838&SID=279148115&trip_sub1=albuquerque&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2919
   zillow: true
 tucson:
   name: Tucson
@@ -632,6 +680,7 @@ tucson:
   county_fips: '019'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1192&display=Tucson&optionId=1192&optionType=City&optionName=Tucson&Allianceid=7375838&SID=279148115&trip_sub1=tucson&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9047
   zillow: true
 fresno:
   name: Fresno
@@ -641,6 +690,7 @@ fresno:
   county_fips: '019'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=6726&display=Fresno&optionId=6726&optionType=City&optionName=Fresno&Allianceid=7375838&SID=279148115&trip_sub1=fresno&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13602
   zillow: true
 atlanta:
   name: Atlanta
@@ -652,6 +702,7 @@ atlanta:
   - '063'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=27072&display=Atlanta&optionId=27072&optionType=City&optionName=Atlanta&Allianceid=7375838&SID=279148115&trip_sub1=atlanta&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2045
   zillow: true
   notes: Includes Clayton County to capture Hartsfield-Jackson Airport.
 mesa:
@@ -662,6 +713,7 @@ mesa:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3325&display=Mesa&optionId=3325&optionType=City&optionName=Mesa&Allianceid=7375838&SID=279148115&trip_sub1=mesa&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2364
   zillow: true
 kansas city:
   name: Kansas City
@@ -674,6 +726,7 @@ kansas city:
   - '047'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25410&display=Kansas%20City&optionId=25410&optionType=City&optionName=Kansas%20City&Allianceid=7375838&SID=279148115&trip_sub1=kansas%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10665
   zillow: true
   notes: Includes Platte and Clay counties to capture MCI Airport.
 raleigh:
@@ -684,6 +737,7 @@ raleigh:
   county_fips: '183'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1406&display=Raleigh&optionId=1406&optionType=City&optionName=Raleigh&Allianceid=7375838&SID=279148115&trip_sub1=raleigh&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4278
   zillow: true
 colorado springs:
   name: Colorado Springs
@@ -693,6 +747,7 @@ colorado springs:
   county_fips: '041'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25870&display=Colorado%20Springs&optionId=25870&optionType=City&optionName=Colorado%20Springs&Allianceid=7375838&SID=279148115&trip_sub1=colorado%20springs&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10680
   zillow: true
 omaha:
   name: Omaha
@@ -702,6 +757,7 @@ omaha:
   county_fips: '055'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1425&display=Omaha&optionId=1425&optionType=City&optionName=Omaha&Allianceid=7375838&SID=279148115&trip_sub1=omaha&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13630
   zillow: true
 virginia beach:
   name: Virginia Beach
@@ -711,6 +767,7 @@ virginia beach:
   county_fips: '810'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=9208&display=Virginia%20Beach&optionId=9208&optionType=City&optionName=Virginia%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=virginia%20beach&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8163
   zillow: true
 long beach:
   name: Long Beach
@@ -720,6 +777,7 @@ long beach:
   county_fips: '037'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=33610&display=Long%20Beach&optionId=33610&optionType=City&optionName=Long%20Beach&Allianceid=7375838&SID=279148115&trip_sub1=long%20beach&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=717291
   zillow: true
 oakland:
   name: Oakland
@@ -729,6 +787,7 @@ oakland:
   county_fips: '001'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1435&display=Oakland&optionId=1435&optionType=City&optionName=Oakland&Allianceid=7375838&SID=279148115&trip_sub1=oakland&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17078
   zillow: true
 minneapolis:
   name: Minneapolis
@@ -738,6 +797,7 @@ minneapolis:
   county_fips: '053'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1302&display=Minneapolis&optionId=1302&optionType=City&optionName=Minneapolis&Allianceid=7375838&SID=279148115&trip_sub1=minneapolis&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10358
   zillow: true
 tampa:
   name: Tampa
@@ -747,6 +807,7 @@ tampa:
   county_fips: '057'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1399&display=Tampa&optionId=1399&optionType=City&optionName=Tampa&Allianceid=7375838&SID=279148115&trip_sub1=tampa&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2374
   zillow: true
 bakersfield:
   name: Bakersfield
@@ -756,6 +817,7 @@ bakersfield:
   county_fips: '029'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=4023&display=Bakersfield&optionId=4023&optionType=City&optionName=Bakersfield&Allianceid=7375838&SID=279148115&trip_sub1=bakersfield&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14094
   zillow: true
 tulsa:
   name: Tulsa
@@ -765,6 +827,7 @@ tulsa:
   county_fips: '143'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1857&display=Tulsa&optionId=1857&optionType=City&optionName=Tulsa&Allianceid=7375838&SID=279148115&trip_sub1=tulsa&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12393
   zillow: true
 aurora:
   name: Aurora
@@ -774,6 +837,7 @@ aurora:
   county_fips: '001'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26729&display=Aurora&optionId=26729&optionType=City&optionName=Aurora&Allianceid=7375838&SID=279148115&trip_sub1=aurora&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17426
   zillow: true
 arlington:
   name: Arlington
@@ -783,6 +847,7 @@ arlington:
   county_fips: '439'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26813&display=Arlington&optionId=26813&optionType=City&optionName=Arlington&Allianceid=7375838&SID=279148115&trip_sub1=arlingtontx&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=21745
   zillow: true
 wichita:
   name: Wichita
@@ -792,6 +857,7 @@ wichita:
   county_fips: '173'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1856&display=Wichita&optionId=1856&optionType=City&optionName=Wichita&Allianceid=7375838&SID=279148115&trip_sub1=wichita&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12289
   zillow: true
 cleveland:
   name: Cleveland
@@ -801,6 +867,7 @@ cleveland:
   county_fips: '035'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1185&display=Cleveland&optionId=1185&optionType=City&optionName=Cleveland&Allianceid=7375838&SID=279148115&trip_sub1=cleveland&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5368
   zillow: true
 henderson:
   name: Henderson
@@ -810,6 +877,7 @@ henderson:
   county_fips: '003'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25719&display=Henderson&optionId=25719&optionType=City&optionName=Henderson&Allianceid=7375838&SID=279148115&trip_sub1=henderson&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17072
   zillow: true
 new orleans:
   name: New Orleans
@@ -821,6 +889,7 @@ new orleans:
   - '051'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1026&display=New%20Orleans&optionId=1026&optionType=City&optionName=New%20Orleans&Allianceid=7375838&SID=279148115&trip_sub1=new%20orleans&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11531
   zillow: true
   notes: Includes Jefferson Parish to capture MSY Airport.
 honolulu:
@@ -831,6 +900,7 @@ honolulu:
   county_fips: '003'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=757&display=Honolulu&optionId=757&optionType=City&optionName=Honolulu&Allianceid=7375838&SID=279148115&trip_sub1=honolulu&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10921
   zillow: true
 anaheim:
   name: Anaheim
@@ -840,6 +910,7 @@ anaheim:
   county_fips: '059'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3777&display=Anaheim&optionId=3777&optionType=City&optionName=Anaheim&Allianceid=7375838&SID=279148115&trip_sub1=anaheim&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12223
   zillow: true
 orlando:
   name: Orlando
@@ -849,6 +920,7 @@ orlando:
   county_fips: '095'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1187&display=Orlando&optionId=1187&optionType=City&optionName=Orlando&Allianceid=7375838&SID=279148115&trip_sub1=orlando&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10757
   zillow: true
 lexington:
   name: Lexington
@@ -858,6 +930,7 @@ lexington:
   county_fips: '067'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Lexington&optionId=XXXX&optionType=City&optionName=Lexington&Allianceid=7375838&SID=279148115&trip_sub1=lexington&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=107
   zillow: true
 stockton:
   name: Stockton
@@ -867,6 +940,7 @@ stockton:
   county_fips: '077'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=XXXX&display=Stockton&optionId=XXXX&optionType=City&optionName=Stockton&Allianceid=7375838&SID=279148115&trip_sub1=stockton&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13336
   zillow: true
 riverside:
   name: Riverside
@@ -876,6 +950,7 @@ riverside:
   county_fips: '065'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=20379&display=Riverside&optionId=20379&optionType=City&optionName=Riverside&Allianceid=7375838&SID=279148115&trip_sub1=riverside&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=21764
   zillow: true
 irvine:
   name: Irvine
@@ -885,6 +960,7 @@ irvine:
   county_fips: '059'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=27020&display=Irvine&optionId=27020&optionType=City&optionName=Irvine&Allianceid=7375838&SID=279148115&trip_sub1=irvine&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17257
   zillow: true
 newark:
   name: Newark
@@ -894,6 +970,7 @@ newark:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26203&display=Newark&optionId=26203&optionType=City&optionName=Newark&Allianceid=7375838&SID=279148115&trip_sub1=newark&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3936
   zillow: true
 santa ana:
   name: Santa Ana
@@ -903,6 +980,7 @@ santa ana:
   county_fips: '059'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1396&display=Santa%20Ana&optionId=1396&optionType=City&optionName=Santa%20Ana&Allianceid=7375838&SID=279148115&trip_sub1=santa%20ana&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6579
   zillow: true
 corpus christi:
   name: Corpus Christi
@@ -912,6 +990,7 @@ corpus christi:
   county_fips: '355'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=5114&display=Corpus%20Christi&optionId=5114&optionType=City&optionName=Corpus%20Christi&Allianceid=7375838&SID=279148115&trip_sub1=corpus%20christi&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7436
   zillow: true
 cincinnati:
   name: Cincinnati
@@ -923,6 +1002,7 @@ cincinnati:
   - '015'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=1184&display=Cincinnati&optionId=1184&optionType=City&optionName=Cincinnati&Allianceid=7375838&SID=279148115&trip_sub1=cincinnati&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11780
   zillow: true
   notes: Includes Boone County, KY to capture CVG Airport.
 greensboro:
@@ -933,6 +1013,7 @@ greensboro:
   county_fips: '081'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=27101&display=Greensboro&optionId=27101&optionType=City&optionName=Greensboro&Allianceid=7375838&SID=279148115&trip_sub1=greensboro&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4689
   zillow: true
 pittsburgh:
   name: Pittsburgh
@@ -942,6 +1023,7 @@ pittsburgh:
   county_fips: '003'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=771&display=Pittsburgh&optionId=771&optionType=City&optionName=Pittsburgh&Allianceid=7375838&SID=279148115&trip_sub1=pittsburgh&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11488
   zillow: true
 durham:
   name: Durham
@@ -951,6 +1033,7 @@ durham:
   county_fips: '063'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26079&display=Durham&optionId=26079&optionType=City&optionName=Durham&Allianceid=7375838&SID=279148115&trip_sub1=durham&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2394
   zillow: true
 st paul:
   name: St. Paul
@@ -960,6 +1043,7 @@ st paul:
   county_fips: '123'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=7591&display=Saint%20Paul&optionId=7591&optionType=City&optionName=Saint%20Paul&Allianceid=7375838&SID=279148115&trip_sub1=stpaul&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=78865
 jersey city:
   name: Jersey City
   city: Jersey City
@@ -968,6 +1052,7 @@ jersey city:
   county_fips: '017'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=9767&display=Jersey%20City&optionId=9767&optionType=City&optionName=Jersey%20City&Allianceid=7375838&SID=279148115&trip_sub1=jersey%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5874
   zillow: true
 lincoln:
   name: Lincoln
@@ -977,6 +1062,7 @@ lincoln:
   county_fips: '109'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3842&display=Lincoln&optionId=3842&optionType=City&optionName=Lincoln&Allianceid=7375838&SID=279148115&trip_sub1=lincoln&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17259
   zillow: true
 north las vegas:
   name: North Las Vegas
@@ -986,6 +1072,7 @@ north las vegas:
   county_fips: '003'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=25866&display=North%20Las%20Vegas&optionId=25866&optionType=City&optionName=North%20Las%20Vegas&Allianceid=7375838&SID=279148115&trip_sub1=north%20las%20vegas&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17072
   zillow: true
 plano:
   name: Plano
@@ -995,6 +1082,7 @@ plano:
   county_fips: '085'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=19889&display=Plano&optionId=19889&optionType=City&optionName=Plano&Allianceid=7375838&SID=279148115&trip_sub1=plano&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=953
   zillow: true
 gilbert:
   name: Gilbert
@@ -1004,6 +1092,7 @@ gilbert:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=43701&display=Gilbert&optionId=43701&optionType=City&optionName=Gilbert&Allianceid=7375838&SID=279148115&trip_sub1=gilbert&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=100029
   zillow: true
 charleston:
   name: Charleston
@@ -1013,6 +1102,7 @@ charleston:
   county_fips: '019'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=4188&display=Charleston&optionId=4188&optionType=City&optionName=Charleston&Allianceid=7375838&SID=279148115&trip_sub1=charleston&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2217
   zillow: true
 savannah:
   name: Savannah
@@ -1022,6 +1112,7 @@ savannah:
   county_fips: '051'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26631&display=Savannah&optionId=26631&optionType=City&optionName=Savannah&Allianceid=7375838&SID=279148115&trip_sub1=savannah&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15032
   zillow: true
 scottsdale:
   name: Scottsdale
@@ -1031,6 +1122,7 @@ scottsdale:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3807&display=Scottsdale&optionId=3807&optionType=City&optionName=Scottsdale&Allianceid=7375838&SID=279148115&trip_sub1=scottsdale&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14350
   zillow: true
 salt lake city:
   name: Salt Lake City
@@ -1040,6 +1132,7 @@ salt lake city:
   county_fips: '035'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=700&display=Salt%20Lake%20City&optionId=700&optionType=City&optionName=Salt%20Lake%20City&Allianceid=7375838&SID=279148115&trip_sub1=salt%20lake%20city&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8052
   zillow: true
 santa fe:
   name: Santa Fe
@@ -1049,6 +1142,7 @@ santa fe:
   county_fips: '049'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=5806&display=Santa%20Fe&optionId=5806&optionType=City&optionName=Santa%20Fe&Allianceid=7375838&SID=279148115&trip_sub1=santa%20fe&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9589
   zillow: true
 st louis:
   name: St. Louis
@@ -1060,6 +1154,7 @@ st louis:
   - '189'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=798983&display=Saint%20Louis&optionId=798983&optionType=City&optionName=Saint%20Louis&Allianceid=7375838&SID=279148115&trip_sub1=stlouis&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16443
   notes: Includes St. Louis County to capture Lambert Airport.
 anchorage:
   name: Anchorage
@@ -1069,6 +1164,7 @@ anchorage:
   county_fips: '020'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=752&display=Anchorage&optionId=752&optionType=City&optionName=Anchorage&Allianceid=7375838&SID=279148115&trip_sub1=anchorage&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11740
   zillow: true
 boulder:
   name: Boulder
@@ -1078,6 +1174,7 @@ boulder:
   county_fips: '013'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=20065&display=Boulder&optionId=20065&optionType=City&optionName=Boulder&Allianceid=7375838&SID=279148115&trip_sub1=boulder&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2938
   zillow: true
 napa:
   name: Napa
@@ -1087,6 +1184,7 @@ napa:
   county_fips: '055'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=9995&display=Napa&optionId=9995&optionType=City&optionName=Napa&Allianceid=7375838&SID=279148115&trip_sub1=napa&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15448
   zillow: true
 sedona:
   name: Sedona
@@ -1097,6 +1195,7 @@ sedona:
   county_fips: '025'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=3808&display=Sedona&optionId=3808&optionType=City&optionName=Sedona&Allianceid=7375838&SID=279148115&trip_sub1=sedona&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9768
   endpoint: https://services.arcgis.com/ZzrwjTRez6FJiOq4/arcgis/rest/services/City_Boundary_Data/FeatureServer/0/query?where=CITY_NAME='Sedona'&outFields=*&outSR=4326&f=geojson
   type: geojson
   enabled: false
@@ -1113,6 +1212,7 @@ aspen:
   county_fips: '097'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=4153&display=Aspen&optionId=4153&optionType=City&optionName=Aspen&Allianceid=7375838&SID=279148115&trip_sub1=aspen&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5401
   endpoint: https://data.colorado.gov/resource/u943-ics6.geojson?municipality=Aspen
   type: geojson
   enabled: false
@@ -1129,6 +1229,7 @@ portland me:
   county_fips: '005'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26336&display=Portland&optionId=26336&optionType=City&optionName=Portland&Allianceid=7375838&SID=279148115&trip_sub1=portlandme&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=18724
   population_source: census
   notes: Distinguishes Portland, Maine from Portland, Oregon.
 the hamptons:
@@ -1150,6 +1251,7 @@ lake george:
   county_fips: '113'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=26105&display=Lake%20George&optionId=26105&optionType=City&optionName=Lake%20George&Allianceid=7375838&SID=279148115&trip_sub1=lake%20george&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5214
   population_source: census
 branson:
   name: Branson
@@ -1160,4 +1262,5 @@ branson:
   county_fips: '213'
   country: United States
   tripcomurl: https://www.trip.com/hotels/list?city=19768&display=Branson&optionId=19768&optionType=City&optionName=Branson&Allianceid=7375838&SID=279148115&trip_sub1=branson&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11267
   population_source: census

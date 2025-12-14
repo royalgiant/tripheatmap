@@ -9,6 +9,7 @@ london:
   county: Greater London
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=338&display=London&optionId=338&optionType=City&optionName=London&Allianceid=7375838&SID=279148115&trip_sub1=london&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=233
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -59,6 +60,7 @@ birmingham:
   county: West Midlands
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=1270&display=Birmingham&optionId=1270&optionType=City&optionName=Birmingham&Allianceid=7375838&SID=279148115&trip_sub1=birmingham&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2021
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -78,6 +80,7 @@ manchester:
   county: Greater Manchester
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=722&display=Manchester&optionId=722&optionType=City&optionName=Manchester&Allianceid=7375838&SID=279148115&trip_sub1=manchester&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12349
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -97,6 +100,7 @@ liverpool:
   county: Merseyside
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=689&display=Liverpool&optionId=689&optionType=City&optionName=Liverpool&Allianceid=7375838&SID=279148115&trip_sub1=liverpool&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8248
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -116,6 +120,7 @@ leeds:
   county: West Yorkshire
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=1733&display=Leeds&optionId=1733&optionType=City&optionName=Leeds&Allianceid=7375838&SID=279148115&trip_sub1=leeds&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5598
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -135,6 +140,7 @@ sheffield:
   county: South Yorkshire
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=3191&display=Sheffield&optionId=3191&optionType=City&optionName=Sheffield&Allianceid=7375838&SID=279148115&trip_sub1=sheffield&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14934
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -154,6 +160,7 @@ bristol:
   county: Bristol
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=838&display=Bristol&optionId=838&optionType=City&optionName=Bristol&Allianceid=7375838&SID=279148115&trip_sub1=bristol&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6084
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -174,6 +181,7 @@ glasgow:
   county: Glasgow City
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=780&display=Glasgow&optionId=780&optionType=City&optionName=Glasgow&Allianceid=7375838&SID=279148115&trip_sub1=glasgow&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=18926
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -193,6 +201,7 @@ edinburgh:
   county: City of Edinburgh
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=706&display=Edinburgh&optionId=706&optionType=City&optionName=Edinburgh&Allianceid=7375838&SID=279148115&trip_sub1=edinburgh&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=18924
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -212,6 +221,7 @@ cardiff:
   county: Cardiff
   country: United Kingdom
   tripcomurl: https://www.trip.com/hotels/list?city=1475&display=Cardiff&optionId=1475&optionType=City&optionName=Cardiff&Allianceid=7375838&SID=279148115&trip_sub1=cardiff&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=18929
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/UK_GBR_4.json
   type: geojson
   enabled: true
@@ -231,6 +241,7 @@ berlin:
   county: Berlin
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=193&display=Berlin&optionId=193&optionType=City&optionName=Berlin&Allianceid=7375838&SID=279148115&trip_sub1=berlin&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2366
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -253,6 +264,7 @@ munich:
   county: Upper Bavaria
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=363&display=Munich&optionId=363&optionType=City&optionName=Munich&Allianceid=7375838&SID=279148115&trip_sub1=munich&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16017
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -274,6 +286,7 @@ hamburg:
   county: Hamburg
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=763&display=Hamburg&optionId=763&optionType=City&optionName=Hamburg&Allianceid=7375838&SID=279148115&trip_sub1=hamburg&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=7169
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -295,6 +308,7 @@ frankfurt:
   county: Darmstadt Region
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=250&display=Frankfurt&optionId=250&optionType=City&optionName=Frankfurt&Allianceid=7375838&SID=279148115&trip_sub1=frankfurt&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15847
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -316,6 +330,7 @@ cologne:
   county: Cologne
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=709&display=Cologne&optionId=709&optionType=City&optionName=Cologne&Allianceid=7375838&SID=279148115&trip_sub1=cologne&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16190
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -337,6 +352,7 @@ stuttgart:
   county: Stuttgart
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=765&display=Stuttgart&optionId=765&optionType=City&optionName=Stuttgart&Allianceid=7375838&SID=279148115&trip_sub1=stuttgart&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9527
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -358,6 +374,7 @@ dusseldorf:
   county: Düsseldorf
   country: Germany
   tripcomurl: https://www.trip.com/hotels/list?city=762&display=Dusseldorf&optionId=762&optionType=City&optionName=Dusseldorf&Allianceid=7375838&SID=279148115&trip_sub1=dusseldorf&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16448
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Germany_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -379,6 +396,7 @@ amsterdam:
   county: Amsterdam
   country: Netherlands
   tripcomurl: https://www.trip.com/hotels/list?city=176&display=Amsterdam&optionId=176&optionType=City&optionName=Amsterdam&Allianceid=7375838&SID=279148115&trip_sub1=amsterdam&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13868
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -400,6 +418,7 @@ rotterdam:
   county: Rotterdam
   country: Netherlands
   tripcomurl: https://www.trip.com/hotels/list?city=718&display=Rotterdam&optionId=718&optionType=City&optionName=Rotterdam&Allianceid=7375838&SID=279148115&trip_sub1=rotterdam&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2396
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -441,6 +460,7 @@ utrecht:
   county: Utrecht
   country: Netherlands
   tripcomurl: https://www.trip.com/hotels/list?city=719&display=Utrecht&optionId=719&optionType=City&optionName=Utrecht&Allianceid=7375838&SID=279148115&trip_sub1=utrecht&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6838
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -462,6 +482,7 @@ eindhoven:
   county: Eindhoven
   country: Netherlands
   tripcomurl: https://www.trip.com/hotels/list?city=1731&display=Eindhoven&optionId=1731&optionType=City&optionName=Eindhoven&Allianceid=7375838&SID=279148115&trip_sub1=eindhoven&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2316
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -483,6 +504,7 @@ zurich:
   county: Zurich
   country: Switzerland
   tripcomurl: https://www.trip.com/hotels/list?city=434&display=Zurich&optionId=434&optionType=City&optionName=Zurich&Allianceid=7375838&SID=279148115&trip_sub1=zurich&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16462
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -504,6 +526,7 @@ geneva:
   county: Geneva
   country: Switzerland
   tripcomurl: https://www.trip.com/hotels/list?city=666&display=Geneva&optionId=666&optionType=City&optionName=Geneva&Allianceid=7375838&SID=279148115&trip_sub1=geneva&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16592
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -525,6 +548,7 @@ basel:
   county: Basel
   country: Switzerland
   tripcomurl: https://www.trip.com/hotels/list?city=806&display=Basel&optionId=806&optionType=City&optionName=Basel&Allianceid=7375838&SID=279148115&trip_sub1=basel&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12552
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -546,6 +570,7 @@ lausanne:
   county: Lausanne
   country: Switzerland
   tripcomurl: https://www.trip.com/hotels/list?city=3154&display=Lausanne&optionId=3154&optionType=City&optionName=Lausanne&Allianceid=7375838&SID=279148115&trip_sub1=lausanne&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2003
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -567,6 +592,7 @@ bern:
   county: Bern
   country: Switzerland
   tripcomurl: https://www.trip.com/hotels/list?city=834&display=Berne&optionId=834&optionType=City&optionName=Berne&Allianceid=7375838&SID=279148115&trip_sub1=Bern&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4690
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Switzerland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -588,6 +614,7 @@ stockholm:
   county: Stockholm
   country: Sweden
   tripcomurl: https://www.trip.com/hotels/list?city=420&display=Stockholm&optionId=420&optionType=City&optionName=Stockholm&Allianceid=7375838&SID=279148115&trip_sub1=stockholm&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1618
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -609,6 +636,7 @@ gothenburg:
   county: Gothenburg
   country: Sweden
   tripcomurl: https://www.trip.com/hotels/list?city=804&display=Gothenburg&optionId=804&optionType=City&optionName=Gothenburg&Allianceid=7375838&SID=279148115&trip_sub1=gothenburg&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16062
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -630,6 +658,7 @@ malmo:
   county: Malmo
   country: Sweden
   tripcomurl: https://www.trip.com/hotels/list?city=3747&display=Malmo&optionId=3747&optionType=City&optionName=Malmo&Allianceid=7375838&SID=279148115&trip_sub1=malmo&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16163
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -651,6 +680,7 @@ uppsala:
   county: Uppsala
   country: Sweden
   tripcomurl: https://www.trip.com/hotels/list?city=9167&display=Uppsala&optionId=9167&optionType=City&optionName=Uppsala&Allianceid=7375838&SID=279148115&trip_sub1=uppsala&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3698
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Sweden_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -672,6 +702,7 @@ copenhagen:
   county: Copenhagen
   country: Denmark
   tripcomurl: https://www.trip.com/hotels/list?city=260&display=Copenhagen&optionId=260&optionType=City&optionName=Copenhagen&Allianceid=7375838&SID=279148115&trip_sub1=copenhagen&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16480
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -693,6 +724,7 @@ aarhus:
   county: Aarhus
   country: Denmark
   tripcomurl: https://www.trip.com/hotels/list?city=3324&display=Aarhus&optionId=3324&optionType=City&optionName=Aarhus&Allianceid=7375838&SID=279148115&trip_sub1=aarhus&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16353
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -714,6 +746,7 @@ odense:
   county: Odense
   country: Denmark
   tripcomurl: https://www.trip.com/hotels/list?city=781&display=Odense&optionId=781&optionType=City&optionName=Odense&Allianceid=7375838&SID=279148115&trip_sub1=odense&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12579
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -735,6 +768,7 @@ aalborg:
   county: Aalborg
   country: Denmark
   tripcomurl: https://www.trip.com/hotels/list?city=1441&display=Aalborg&optionId=1441&optionType=City&optionName=Aalborg&Allianceid=7375838&SID=279148115&trip_sub1=aalborg&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8016
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Denmark_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -756,6 +790,7 @@ brussels:
   county: Brussels
   country: Belgium
   tripcomurl: https://www.trip.com/hotels/list?city=196&display=Brussels&optionId=196&optionType=City&optionName=Brussels&Allianceid=7375838&SID=279148115&trip_sub1=brussels&trip_sub3=D7597578
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15904
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -777,6 +812,7 @@ antwerp:
   county: Antwerp
   country: Belgium
   tripcomurl: https://www.trip.com/hotels/list?city=1767&display=Antwerp&optionId=1767&optionType=City&optionName=Antwerp&Allianceid=7375838&SID=279148115&trip_sub1=antwerp&trip_sub3=D7597858
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16169
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -798,6 +834,7 @@ ghent:
   county: East Flanders
   country: Belgium
   tripcomurl: https://www.trip.com/hotels/list?city=3423&display=Ghent&optionId=3423&optionType=City&optionName=Ghent&Allianceid=7375838&SID=279148115&trip_sub1=ghent&trip_sub3=D7597858
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16593
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -819,6 +856,7 @@ charleroi:
   county: Hainaut
   country: Belgium
   tripcomurl: https://www.trip.com/hotels/list?city=9474&display=Charleroi&optionId=9474&optionType=City&optionName=Charleroi&Allianceid=7375838&SID=279148115&trip_sub1=charleroi&trip_sub3=D7597858
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6910
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -840,6 +878,7 @@ liege:
   county: Liège
   country: Belgium
   tripcomurl: https://www.trip.com/hotels/list?city=37620&display=Liege&optionId=37620&optionType=City&optionName=Liege&Allianceid=7375838&SID=279148115&trip_sub1=Liege&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8339
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Belgium_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -861,6 +900,7 @@ paris:
   county: Paris
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=192&display=Paris&optionId=192&optionType=City&optionName=Paris&Allianceid=7375838&SID=279148115&trip_sub1=paris&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15470
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -882,6 +922,7 @@ lyon:
   county: Rhône
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=713&display=Lyon&optionId=713&optionType=City&optionName=Lyon&Allianceid=7375838&SID=279148115&trip_sub1=lyon&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11361
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -903,6 +944,7 @@ marseille:
   county: Bouches-du-Rhône
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=712&display=Marseille&optionId=712&optionType=City&optionName=Marseille&Allianceid=7375838&SID=279148115&trip_sub1=marseille&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1030
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -924,6 +966,7 @@ nice:
   county: Alpes-Maritimes
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=775&display=Nice&optionId=775&optionType=City&optionName=Nice&Allianceid=7375838&SID=279148115&trip_sub1=nice&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5277
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -945,6 +988,7 @@ toulouse:
   county: Haute-Garonne
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=1361&display=Toulouse&optionId=1361&optionType=City&optionName=Toulouse&Allianceid=7375838&SID=279148115&trip_sub1=toulouse&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14562
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -966,6 +1010,7 @@ lille:
   county: Nord
   country: France
   tripcomurl: https://www.trip.com/hotels/list?city=1462&display=Lille&optionId=1462&optionType=City&optionName=Lille&Allianceid=7375838&SID=279148115&trip_sub1=lille&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8179
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/France_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -987,6 +1032,7 @@ vienna:
   county: Vienna
   country: Austria
   tripcomurl: https://www.trip.com/hotels/list?city=651&display=Vienna&optionId=651&optionType=City&optionName=Vienna&Allianceid=7375838&SID=279148115&trip_sub1=vienna&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16582
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1008,6 +1054,7 @@ salzburg:
   county: Salzburg
   country: Austria
   tripcomurl: https://www.trip.com/hotels/list?city=739&display=Salzburg&optionId=739&optionType=City&optionName=Salzburg&Allianceid=7375838&SID=279148115&trip_sub1=salzburg&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11876
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1029,6 +1076,7 @@ graz:
   county: Graz
   country: Austria
   tripcomurl: https://www.trip.com/hotels/list?city=805&display=Graz&optionId=805&optionType=City&optionName=Graz&Allianceid=7375838&SID=279148115&trip_sub1=graz&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11013
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1050,6 +1098,7 @@ linz:
   county: Linz
   country: Austria
   tripcomurl: https://www.trip.com/hotels/list?city=815&display=Linz&optionId=815&optionType=City&optionName=Linz&Allianceid=7375838&SID=279148115&trip_sub1=linz&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11386
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Austria_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1071,6 +1120,7 @@ budapest:
   county: Budapest
   country: Hungary
   tripcomurl: https://www.trip.com/hotels/list?city=191&display=Budapest&optionId=191&optionType=City&optionName=Budapest&Allianceid=7375838&SID=279148115&trip_sub1=budapest&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10647
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Hungary_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1092,6 +1142,7 @@ warsaw:
   county: Warsaw
   country: Poland
   tripcomurl: https://www.trip.com/hotels/list?city=743&display=Warsaw&optionId=743&optionType=City&optionName=Warsaw&Allianceid=7375838&SID=279148115&trip_sub1=warsaw&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16587
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Poland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1113,6 +1164,7 @@ krakow:
   county: Krakow
   country: Poland
   tripcomurl: https://www.trip.com/hotels/list?city=837&display=Krakow&optionId=837&optionType=City&optionName=Krakow&Allianceid=7375838&SID=279148115&trip_sub1=krakow&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15790
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Poland_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1134,6 +1186,7 @@ moscow:
   county: Moscow
   country: Russia
   tripcomurl: https://www.trip.com/hotels/list?city=400&display=Moscow&optionId=400&optionType=City&optionName=Moscow&Allianceid=7375838&SID=279148115&trip_sub1=moscow&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16580
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Russia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1155,6 +1208,7 @@ st petersburg:
   county: St. Petersburg
   country: Russia
   tripcomurl: https://www.trip.com/hotels/list?city=777&display=St.%20Petersburg&optionId=777&optionType=City&optionName=St.%20Petersburg&Allianceid=7375838&SID=279148115&trip_sub1=st%20petersburg&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16534
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Russia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1176,6 +1230,7 @@ reykjavik:
   county: Reykjavik
   country: Iceland
   tripcomurl: https://www.trip.com/hotels/list?city=856&display=Reykjavik&optionId=856&optionType=City&optionName=Reykjavik&Allianceid=7375838&SID=279148115&trip_sub1=reykjavik&trip_sub3=D7593154
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=13864
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Iceland_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1197,6 +1252,7 @@ oslo:
   county: Oslo
   country: Norway
   tripcomurl: https://www.trip.com/hotels/list?city=827&display=Oslo&optionId=827&optionType=City&optionName=Oslo&Allianceid=7375838&SID=279148115&trip_sub1=oslo&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12746
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1218,6 +1274,7 @@ bergen:
   county: Bergen
   country: Norway
   tripcomurl: https://www.trip.com/hotels/list?city=821&display=Bergen&optionId=821&optionType=City&optionName=Bergen&Allianceid=7375838&SID=279148115&trip_sub1=bergen&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14414
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1239,6 +1296,7 @@ trondheim:
   county: Trondheim
   country: Norway
   tripcomurl: https://www.trip.com/hotels/list?city=1734&display=Trondheim&optionId=1734&optionType=City&optionName=Trondheim&Allianceid=7375838&SID=279148115&trip_sub1=trondheim&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=592
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1260,6 +1318,7 @@ stavanger:
   county: Stavanger
   country: Norway
   tripcomurl: https://www.trip.com/hotels/list?city=787&display=Stavanger&optionId=787&optionType=City&optionName=Stavanger&Allianceid=7375838&SID=279148115&trip_sub1=stavanger&trip_sub3=D7597865
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6796
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Norway_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1281,6 +1340,7 @@ madrid:
   county: Madrid
   country: Spain
   tripcomurl: https://www.trip.com/hotels/list?city=357&display=Madrid&optionId=357&optionType=City&optionName=Madrid&Allianceid=7375838&SID=279148115&trip_sub1=madrid&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=5531
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1302,6 +1362,7 @@ barcelona:
   county: Barcelona
   country: Spain
   tripcomurl: https://www.trip.com/hotels/list?city=40795&display=Barcelona&optionId=40795&optionType=City&optionName=Barcelona&Allianceid=7375838&SID=279148115&trip_sub1=barcelona&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2002
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1323,6 +1384,7 @@ valencia:
   county: Valencia
   country: Spain
   tripcomurl: https://www.trip.com/hotels/list?city=1351&display=Valencia&optionId=1351&optionType=City&optionName=Valencia&Allianceid=7375838&SID=279148115&trip_sub1=valencia&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1623
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1344,6 +1406,7 @@ seville:
   county: Seville
   country: Spain
   tripcomurl: https://www.trip.com/hotels/list?city=1350&display=Seville&optionId=1350&optionType=City&optionName=Seville&Allianceid=7375838&SID=279148115&trip_sub1=seville&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16577
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Spain_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1365,6 +1428,7 @@ rome:
   county: Rome
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=343&display=Rome&optionId=343&optionType=City&optionName=Rome&Allianceid=7375838&SID=279148115&trip_sub1=rome&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16594
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1386,6 +1450,7 @@ milan:
   county: Milan
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=361&display=Milan&optionId=361&optionType=City&optionName=Milan&Allianceid=7375838&SID=279148115&trip_sub1=milan&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16585
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1407,6 +1472,7 @@ naples:
   county: Naples
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=1262&display=Naples&optionId=1262&optionType=City&optionName=Naples&Allianceid=7375838&SID=279148115&trip_sub1=naples&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16572
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1428,6 +1494,7 @@ venice:
   county: Venice
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=688&display=Venice&optionId=688&optionType=City&optionName=Venice&Allianceid=7375838&SID=279148115&trip_sub1=venice&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17164
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1449,6 +1516,7 @@ lisbon:
   county: Lisbon
   country: Portugal
   tripcomurl: https://www.trip.com/hotels/list?city=1231&display=Lisbon&optionId=1231&optionType=City&optionName=Lisbon&Allianceid=7375838&SID=279148115&trip_sub1=lisbon&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16364
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1470,6 +1538,7 @@ porto:
   county: Porto
   country: Portugal
   tripcomurl: https://www.trip.com/hotels/list?city=826&display=Porto&optionId=826&optionType=City&optionName=Porto&Allianceid=7375838&SID=279148115&trip_sub1=porto&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8738
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Portugal_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1491,6 +1560,7 @@ athens:
   county: Athens
   country: Greece
   tripcomurl: https://www.trip.com/hotels/list?city=710&display=Athens&optionId=710&optionType=City&optionName=Athens&Allianceid=7375838&SID=279148115&trip_sub1=athens&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16571
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1512,6 +1582,7 @@ thessaloniki:
   county: Thessaloniki
   country: Greece
   tripcomurl: https://www.trip.com/hotels/list?city=3584&display=Thessaloniki&optionId=3584&optionType=City&optionName=Thessaloniki&Allianceid=7375838&SID=279148115&trip_sub1=thessaloniki&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=8711
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1533,6 +1604,7 @@ heraklion:
   county: Heraklion
   country: Greece
   tripcomurl: https://www.trip.com/hotels/list?city=1415&display=Heraklion&optionId=1415&optionType=City&optionName=Heraklion&Allianceid=7375838&SID=279148115&trip_sub1=heraklion&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=105119
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1554,6 +1626,7 @@ rhodes:
   county: Rhodes
   country: Greece
   tripcomurl: https://www.trip.com/hotels/list?city=1438&display=Rhodes&optionId=1438&optionType=City&optionName=Rhodes&Allianceid=7375838&SID=279148115&trip_sub1=rhodes&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16051
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Greece_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1575,6 +1648,7 @@ prague:
   county: Prague
   country: Czech Republic
   tripcomurl: https://www.trip.com/hotels/list?city=1288&display=Prague&optionId=1288&optionType=City&optionName=Prague&Allianceid=7375838&SID=279148115&trip_sub1=prague&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=15977
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Czechia_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1596,6 +1670,7 @@ dublin:
   county: Dublin
   country: Ireland
   tripcomurl: https://www.trip.com/hotels/list?city=803&display=Dublin&optionId=803&optionType=City&optionName=Dublin&Allianceid=7375838&SID=279148115&trip_sub1=dublin&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=1131
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Ireland_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1677,6 +1752,7 @@ florence:
   county: Florence
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=687&display=Florence&optionId=687&optionType=City&optionName=Florence&Allianceid=7375838&SID=279148115&trip_sub1=florence&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16573
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1698,6 +1774,7 @@ verona:
   county: Verona
   country: Italy
   tripcomurl: https://www.trip.com/hotels/list?city=1420&display=Verona&optionId=1420&optionType=City&optionName=Verona&Allianceid=7375838&SID=279148115&trip_sub1=verona&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=4257
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true

@@ -9,6 +9,7 @@ sydney:
   county: Sydney
   country: Australia
   tripcomurl: https://www.trip.com/hotels/list?city=501&display=Sydney&optionId=501&optionType=City&optionName=Sydney&Allianceid=7375838&SID=279148115&trip_sub1=sydney&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=14370
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -30,6 +31,7 @@ melbourne:
   county: Melbourne
   country: Australia
   tripcomurl: https://www.trip.com/hotels/list?city=358&display=Melbourne&optionId=358&optionType=City&optionName=Melbourne&Allianceid=7375838&SID=279148115&trip_sub1=melbourne&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=10372
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -51,6 +53,7 @@ brisbane:
   county: Brisbane
   country: Australia
   tripcomurl: https://www.trip.com/hotels/list?city=680&display=Brisbane&optionId=680&optionType=City&optionName=Brisbane&Allianceid=7375838&SID=279148115&trip_sub1=brisbane&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9466
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -72,6 +75,7 @@ perth:
   county: Perth
   country: Australia
   tripcomurl: https://www.trip.com/hotels/list?city=681&display=Perth&optionId=681&optionType=City&optionName=Perth&Allianceid=7375838&SID=279148115&trip_sub1=perth&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11980
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -93,6 +97,7 @@ adelaide:
   county: Adelaide
   country: Australia
   tripcomurl: https://www.trip.com/hotels/list?city=1243&display=Adelaide&optionId=1243&optionType=City&optionName=Adelaide&Allianceid=7375838&SID=279148115&trip_sub1=adelaide&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=11981
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Australia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -114,6 +119,7 @@ auckland:
   county: Auckland
   country: New Zealand
   tripcomurl: https://www.trip.com/hotels/list?city=678&display=Auckland&optionId=678&optionType=City&optionName=Auckland&Allianceid=7375838&SID=279148115&trip_sub1=auckland&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=3750
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -135,6 +141,7 @@ wellington:
   county: Wellington
   country: New Zealand
   tripcomurl: https://www.trip.com/hotels/list?city=843&display=Wellington&optionId=843&optionType=City&optionName=Wellington&Allianceid=7375838&SID=279148115&trip_sub1=wellington&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=2704
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -156,6 +163,7 @@ christchurch:
   county: Christchurch
   country: New Zealand
   tripcomurl: https://www.trip.com/hotels/list?city=7505&display=Christchurch&optionId=7505&optionType=City&optionName=Christchurch&Allianceid=7375838&SID=279148115&trip_sub1=christchurch&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=6167
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/New_Zealand_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
