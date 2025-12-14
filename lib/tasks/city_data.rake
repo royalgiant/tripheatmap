@@ -80,7 +80,7 @@ namespace :city do
     puts "=" * 80
 
     CityDataImporter::CITY_NAMES.each do |city_key, city_name|
-      display_name = CityDataImporter::DISPLAY_NAMES[city_key]
+      display_name = CityDataImporter::DISPLAY_NAMES[city_key] || city_name.titleize
       neighborhoods_count = Neighborhood.for_city(city_name).count
       places_count = NeighborhoodPlacesStat.joins(:neighborhood)
         .where(neighborhoods: { city: city_name }).count
@@ -93,7 +93,7 @@ namespace :city do
         "❌ No data"
       end
 
-      puts "#{display_name.ljust(15)} #{status.ljust(25)} " \
+      puts "#{display_name.ljust(20)} #{status.ljust(25)} " \
            "Neighborhoods: #{neighborhoods_count}, Places: #{places_count}"
     end
 

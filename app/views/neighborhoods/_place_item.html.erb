@@ -89,13 +89,17 @@
         </a>
 
         <% if place.trip_affiliate_url.present? %>
-          <a
-            href="<%= place.trip_affiliate_url %>"
-            target="_blank"
-            rel="noopener nofollow"
-            class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded transition-colors">
-            Check Trip.com
-          </a>
+          <div class="inline-block">
+            <a
+              href="<%= trip_com_url_with_search(place) %>"
+              target="_blank"
+              rel="noopener nofollow"
+              class="inline-flex items-center px-3 py-1.5 text-white text-xs font-medium rounded transition-colors"
+              style="background-color: #0F294D; hover:background-color: #1a3a5c;">
+              Trip.com Availability
+            </a>
+            <p class="text-xs text-gray-500 mt-1 max-w-xs">Tip: If not redirected directly, backspace a few characters in Trip.com's prefilled search box to populate the property you're looking for</p>
+          </div>
         <% end %>
 
         

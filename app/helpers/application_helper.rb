@@ -20,6 +20,23 @@ module ApplicationHelper
     "https://www.google.com/maps/search/#{encoded_name}/@#{lat},#{lon},#{zoom}z?entry=ttu"
   end
 
+  def trip_com_url_with_search(place)
+    return nil unless place.trip_affiliate_url.present?
+
+    base_url = place.trip_affiliate_url
+
+    location_parts = [place.name]
+    location_parts << place.neighborhood.city.titleize if place.neighborhood&.city.present?
+    location_parts << place.state if place.state.present?
+    location_parts << place.country if place.country.present?
+
+    search_string = location_parts.join(', ')
+    encoded_search = ERB::Util.url_encode(search_string)
+
+    connector = base_url.include?('?') ? '&' : '?'
+    "#{base_url}#{connector}destName=#{encoded_search}&searchWord=#{encoded_search}"
+  end
+
   # Helper to display star ratings with half stars using Tailwind CSS
   def star_rating(rating)
     return unless rating.present?

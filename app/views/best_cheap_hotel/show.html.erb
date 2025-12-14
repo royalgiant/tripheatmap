@@ -82,6 +82,12 @@
       </div>
     </section>
 
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+      <p class="text-sm text-blue-700">
+        <strong>Trip.com Tip:</strong> If not redirected directly to the property, backspace a few characters in Trip.com's prefilled search box to populate the property you're looking for.
+      </p>
+    </div>
+
     <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
       <ul role="list" class="divide-y divide-gray-200" id="hotel-list">
         <% @cheap_hotels.each do |hotel| %>
@@ -139,8 +145,8 @@
 
               <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
                 <% if hotel.trip_affiliate_url.present? %>
-                  <a href="<%= hotel.trip_affiliate_url %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full sm:w-auto">
-                    Check Availability
+                  <a href="<%= trip_com_url_with_search(hotel) %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 w-full sm:w-auto" style="background-color: #0F294D;" onmouseover="this.style.backgroundColor='#1a3a5c'" onmouseout="this.style.backgroundColor='#0F294D'">
+                    Trip.com Availability
                   </a>
                 <% elsif hotel.booking_url.present? %>
                   <a href="<%= hotel.booking_url %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-full sm:w-auto">
