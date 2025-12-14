@@ -401,6 +401,69 @@ guangzhou:
       max_lon: 113.7
   population_source: manual
   notes: Guangzhou city districts in Guangdong Province.
+zhuhai:
+  name: Zhuhai
+  city: Zhuhai
+  state: Guangdong
+  county: Zhuhai
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=153&display=Zhuhai&optionId=153&optionType=City&optionName=Zhuhai&Allianceid=7375838&SID=279148115&trip_sub1=zhuhai&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 22.2
+      max_lat: 22.5
+      min_lon: 113.5
+      max_lon: 113.7
+  population_source: manual
+  notes: Zhuhai city districts in Guangdong Province.
+chengdu:
+  name: Chengdu
+  city: Chengdu
+  state: Sichuan
+  county: Chengdu
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=158&display=Chengdu&optionId=158&optionType=City&optionName=Chengdu&Allianceid=7375838&SID=279148115&trip_sub1=chengdu&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 30.4
+      max_lat: 31.0
+      min_lon: 103.8
+      max_lon: 104.5
+  population_source: manual
+  notes: Chengdu city districts in Sichuan Province.
+guilin:
+  name: Guilin
+  city: Guilin
+  state: Guangxi
+  county: Guilin
+  country: China
+  tripcomurl: https://www.trip.com/hotels/list?city=370&display=Guilin&optionId=370&optionType=City&optionName=Guilin&Allianceid=7375838&SID=279148115&trip_sub1=guilin&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/China_ADM3_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 25.0
+      max_lat: 25.5
+      min_lon: 110.1
+      max_lon: 110.5
+  population_source: manual
+  notes: Guilin city districts in Guangxi Province.
 kuala lumpur:
   name: Kuala Lumpur
   city: Kuala Lumpur

@@ -2,16 +2,24 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  get 'best-luxury-hotels', to: 'best_luxury_hotel#index', as: 'best_luxury_hotels_index'
-  get 'best-luxury-hotels-in-:city', to: 'best_luxury_hotel#show', as: 'best_luxury_hotels'
-  get 'best-boutique-hotels', to: 'best_boutique_hotel#index', as: 'best_boutique_hotels_index'
-  get 'best-boutique-hotels-in-:city', to: 'best_boutique_hotel#show', as: 'best_boutique_hotels'
-  get 'best-cheap-hotels', to: 'best_cheap_hotel#index', as: 'best_cheap_hotels_index'
-  get 'best-cheap-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_cheap_hotels'
-  get 'best-affordable-hotels', to: 'best_cheap_hotel#index', as: 'best_affordable_hotels_index'
-  get 'best-affordable-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_affordable_hotels'
-  get 'best-budget-hotels', to: 'best_cheap_hotel#index', as: 'best_budget_hotels_index'
-  get 'best-budget-hotels-in-:city', to: 'best_cheap_hotel#show', as: 'best_budget_hotels'
+  scope 'best', as: 'best' do
+    get 'luxury-hotels', to: 'best_luxury_hotel#index', as: 'luxury_hotels_index'
+    get 'luxury-hotels/:city', to: 'best_luxury_hotel#show', as: 'luxury_hotels'
+
+    get 'boutique-hotels', to: 'best_boutique_hotel#index', as: 'boutique_hotels_index'
+    get 'boutique-hotels/:city', to: 'best_boutique_hotel#show', as: 'boutique_hotels'
+
+    get 'cheap-hotels', to: 'best_cheap_hotel#index', as: 'cheap_hotels_index'
+    get 'cheap-hotels/:city', to: 'best_cheap_hotel#show', as: 'cheap_hotels'
+    get 'affordable-hotels', to: 'best_cheap_hotel#index', as: 'affordable_hotels_index'
+    get 'affordable-hotels/:city', to: 'best_cheap_hotel#show', as: 'affordable_hotels'
+    get 'budget-hotels', to: 'best_cheap_hotel#index', as: 'budget_hotels_index'
+    get 'budget-hotels/:city', to: 'best_cheap_hotel#show', as: 'budget_hotels'
+
+    get 'neighborhoods', to: 'best_neighborhood#index', as: 'neighborhood_index'
+    get 'neighborhoods/:city', to: 'best_neighborhood#show', as: 'neighborhood'
+  end
+
   get 'hotels-in-:city-near-:neighborhood', to: 'hotels_near#show', as: 'hotels_near'
   
   scope 'hotels-near', as: 'hotels_near' do
@@ -32,8 +40,6 @@ Rails.application.routes.draw do
     get 'landmarks/:city/:landmark', to: 'hotels_near_landmark#show', as: 'landmark'
   end
   
-  get 'best-neighborhoods', to: 'best_neighborhood#index', as: 'best_neighborhood_index'
-  get 'best-neighborhood-in-:city', to: 'best_neighborhood#show', as: 'best_neighborhood'
   resources :neighborhoods, only: [:show], param: :slug
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'
