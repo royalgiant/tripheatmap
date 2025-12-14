@@ -6,8 +6,12 @@ module ContinentHelper
          "Sweden", "Denmark", "Belgium", "France", "Austria", "Norway", "Spain",
          "Portugal", "Greece", "Czech Republic", "Hungary", "Iceland", "Poland", "Russia"
       "Europe"
-    when "Canada", "United States", "Mexico", "Bahamas", "Costa Rica", "Dominican Republic", "Panama"
+    when "Canada", "United States", "Mexico"
       "North America"
+    when "Costa Rica", "Panama"
+      "Central America"
+    when "Bahamas", "Dominican Republic"
+      "Caribbean"
     when "Australia", "New Zealand"
       "Oceania"
     when "Singapore", "Hong Kong SAR", "United Arab Emirates", "Japan", "Thailand", "Vietnam",

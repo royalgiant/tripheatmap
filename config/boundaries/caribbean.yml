@@ -1,0 +1,25 @@
+# Caribbean Cities Configuration
+# Neighborhood boundaries for cities in the Caribbean
+
+---
+bahamas:
+  name: Bahamas
+  city: Bahamas
+  state: Bahamas
+  county: Bahamas
+  country: Bahamas
+  tripcomurl: https://www.trip.com/hotels/w/home?Allianceid=7375838&SID=279148115&trip_sub1=bahamas&trip_sub3=D7599167
+  endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Bahamas_ADM2_simplified.simplified.geojson
+  type: geojson
+  enabled: true
+  field_mappings:
+    name: shapeName
+    geoid: shapeID
+  filters:
+    bbox:
+      min_lat: 20.0
+      max_lat: 27.5
+      min_lon: -80.5
+      max_lon: -72.0
+  population_source: manual
+  notes: Entire Bahamas archipelago using ADM2 districts.
