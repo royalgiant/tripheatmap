@@ -17,8 +17,6 @@ class CityNeighborhoodImporter
     raise ArgumentError, "City '#{city_key}' not found in configuration" unless @config
     raise ArgumentError, "City '#{city_key}' is disabled" if @config["enabled"] == false
 
-    # CityNeighborhoodImporter is only for USA cities with custom endpoints
-    # International cities should use GadmGlobalNeighborhoodImporter
     if @config["country"].present? && @config["country"] != "United States"
       raise ArgumentError, "City '#{city_key}' is not a US city (country: #{@config['country']}). Use GadmGlobalNeighborhoodImporter instead."
     end
@@ -53,8 +51,6 @@ class CityNeighborhoodImporter
     city_config = BoundariesConfig.city_config(city_key)
     return false unless city_config && city_config["endpoint"].present? && city_config["enabled"] != false
 
-    # Only USA cities should use CityNeighborhoodImporter
-    # International cities use GadmGlobalNeighborhoodImporter
     country = city_config["country"]
     country.nil? || country == "United States"
   rescue

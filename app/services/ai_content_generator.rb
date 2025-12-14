@@ -45,8 +45,7 @@ class AiContentGenerator
       {"description":"...","about":"...","time_to_visit":"...","getting_around":"..."}
     PROMPT
 
-    # gpt-5-nano is a reasoning model - needs extra tokens for reasoning + output
-    response = call_openai_api(prompt, max_tokens: 8000)
+    response = call_openai_api(prompt, max_tokens: 4000)
     parse_json_response(response)
   rescue => e
     Rails.logger.error "OpenAI API error generating neighborhood content: #{e.message}"

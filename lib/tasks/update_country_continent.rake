@@ -6,7 +6,6 @@ namespace :neighborhoods do
     puts "=" * 80
     puts ""
 
-    # Load ContinentHelper
     require_relative '../../app/services/concerns/continent_helper'
 
     class ContinentUpdater
