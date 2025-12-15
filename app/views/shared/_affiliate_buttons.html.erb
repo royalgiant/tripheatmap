@@ -1,0 +1,23 @@
+<%#
+  Shared partial for Trip.com and Agoda affiliate buttons
+  Required local variable: place (a Place object with trip_affiliate_url and/or agoda_affiliate_url)
+%>
+<% if place.trip_affiliate_url.present? %>
+  <a href="<%= trip_com_url_with_search(place) %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center gap-1.5 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 w-full sm:w-auto" style="background-color: #0F294D;" onmouseover="this.style.backgroundColor='#1a3a5c'" onmouseout="this.style.backgroundColor='#0F294D'">
+    <%= image_tag 'trip.com_logo.png', class: 'w-4 h-4', alt: 'Trip.com' %>
+    Trip.com
+  </a>
+<% end %>
+
+<% if place.agoda_affiliate_url.present? %>
+  <a href="<%= agoda_url_with_search(place) %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center gap-1.5 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 w-full sm:w-auto" style="background-color: #D7272D;" onmouseover="this.style.backgroundColor='#B91E23'" onmouseout="this.style.backgroundColor='#D7272D'">
+    <%= image_tag 'agoda_logo.png', class: 'w-4 h-4', alt: 'Agoda' %>
+    Agoda
+  </a>
+<% end %>
+
+<% if place.booking_url.present? && !place.trip_affiliate_url.present? && !place.agoda_affiliate_url.present? %>
+  <a href="<%= place.booking_url %>" target="_blank" rel="noopener nofollow" class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-full sm:w-auto">
+    Visit Official Site
+  </a>
+<% end %>

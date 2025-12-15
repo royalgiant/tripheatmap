@@ -273,6 +273,7 @@ ha long bay:
   county: Ha Long
   country: Vietnam
   tripcomurl: https://www.trip.com/hotels/list?city=2453&display=Ha%20Long&optionId=2453&optionType=City&optionName=Ha%20Long&Allianceid=7375838&SID=279148115&trip_sub1=ha%20long&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=17182
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Vietnam_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -536,6 +537,7 @@ jeju city:
   county: Jeju
   country: South Korea
   tripcomurl: https://www.trip.com/hotels/list?city=2337&display=Jeju&optionId=2337&optionType=City&optionName=Jeju&Allianceid=7375838&SID=279148115&trip_sub1=jeju&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16901
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/South_Korea_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -579,6 +581,7 @@ denpasar:
   county: Denpasar
   country: Indonesia
   tripcomurl: https://www.trip.com/hotels/list?city=364&display=Bali&optionId=364&optionType=City&optionName=Bali&Allianceid=7375838&SID=279148115&trip_sub1=bali&trip_sub3=D7599167
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9291
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Indonesia_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true

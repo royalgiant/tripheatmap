@@ -439,6 +439,7 @@ the hague:
   state: South Holland
   county: The Hague
   country: Netherlands
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=16278
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Netherlands_ADM2_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1691,6 +1692,7 @@ costermano sul garda:
   state: Veneto
   county: Verona
   country: Italy
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=75808
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1711,6 +1713,7 @@ lake como:
   state: Lombardy
   county: Como
   country: Italy
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=12575
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true
@@ -1731,6 +1734,7 @@ amalfi coast:
   state: Campania
   county: Salerno
   country: Italy
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=9286
   endpoint: https://tripheatmap.s3.us-east-005.backblazeb2.com/Italy_ADM3_simplified.simplified.geojson
   type: geojson
   enabled: true

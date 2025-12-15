@@ -31,12 +31,22 @@ class OverpassImporter
     @errors = []
     @city_configs = BoundariesConfig.all_cities
 
-    # Pre-compute city URL map for O(1) lookup
-    @city_url_map = {}
+    # Pre-compute city URL maps for O(1) lookup
+    @city_trip_url_map = {}
+    @city_agoda_url_map = {}
     @city_configs.each do |_key, config|
-      next unless config['tripcomurl'].present?
-      @city_url_map[config['city'].to_s.downcase] = config['tripcomurl'] if config['city']
-      @city_url_map[config['name'].to_s.downcase] = config['tripcomurl'] if config['name']
+      city_key = config['city'].to_s.downcase
+      name_key = config['name'].to_s.downcase
+
+      if config['tripcomurl'].present?
+        @city_trip_url_map[city_key] = config['tripcomurl'] if config['city']
+        @city_trip_url_map[name_key] = config['tripcomurl'] if config['name']
+      end
+
+      if config['agodacomurl'].present?
+        @city_agoda_url_map[city_key] = config['agodacomurl'] if config['city']
+        @city_agoda_url_map[name_key] = config['agodacomurl'] if config['name']
+      end
     end
   end
 
@@ -294,6 +304,7 @@ class OverpassImporter
         tags: tags,
         booking_url: tags['website'],
         trip_affiliate_url: get_trip_affiliate_url(neighborhood.city),
+        agoda_affiliate_url: get_agoda_affiliate_url(neighborhood.city),
         slug: slug,
         city: neighborhood&.city,
         state: neighborhood&.state,
@@ -343,7 +354,12 @@ class OverpassImporter
 
   def get_trip_affiliate_url(city_name)
     return nil unless city_name.present?
-    @city_url_map[city_name.downcase]
+    @city_trip_url_map[city_name.downcase]
+  end
+
+  def get_agoda_affiliate_url(city_name)
+    return nil unless city_name.present?
+    @city_agoda_url_map[city_name.downcase]
   end
 
   # Build address string from OSM tags

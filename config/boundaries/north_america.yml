@@ -1240,6 +1240,7 @@ the hamptons:
   county: Suffolk
   county_fips: '103'
   country: United States
+  agodacomurl: https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1954867&city=667845
   population_source: census
   notes: Uses Suffolk County East End tracts to approximate the Hamptons.
 lake george:
