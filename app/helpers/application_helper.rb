@@ -51,7 +51,14 @@ module ApplicationHelper
     encoded_search = ERB::Util.url_encode(search_string)
 
     connector = base_url.include?('?') ? '&' : '?'
-    "#{base_url}#{connector}&textToSearch=#{encoded_search}"
+    url = "#{base_url}#{connector}textToSearch=#{encoded_search}"
+
+    if place.agoda_metadata.present? && place.agoda_metadata["hotel_id"].present?
+      hotel_id = place.agoda_metadata["hotel_id"]
+      url += "&hotel=#{hotel_id}&selectedproperty=#{hotel_id}"
+    end
+
+    url
   end
 
   # Helper to display star ratings with half stars using Tailwind CSS

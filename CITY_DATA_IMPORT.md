@@ -431,3 +431,47 @@ end
 - **Full Paris import**: ~15-20 minutes
 
 Use background jobs (Sidekiq) for production imports to avoid timeouts.
+
+## AGODA METADATA IMPORT
+
+Agoda metadata (hotel IDs, photos, overviews) is imported from a large Excel file and matched to existing hotels/hostels in the database using spatial proximity and fuzzy name matching.
+
+**Important**: This import is too resource-intensive to run directly on production. Instead, run it locally and push the updates to production.
+
+### Import Process
+
+#### Step 1: Run locally
+```bash
+bundle exec rake "agoda:import_metadata"
+```
+
+#### Step 2: Export updates
+```bash
+psql tripheatmap_development -c "COPY (
+  SELECT 'UPDATE places SET agoda_metadata = ' || quote_literal(agoda_metadata::text) || '::jsonb WHERE id = ' || id || ';'
+  FROM places
+  WHERE agoda_metadata IS NOT NULL
+) TO STDOUT" > agoda_updates.sql
+```
+
+#### Step 3: Upload and apply to production
+```bash
+scp agoda_updates.sql root@95.216.161.144:/tmp/
+
+ssh root@95.216.161.144 "docker exec -i \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production < /tmp/agoda_updates.sql && rm /tmp/agoda_updates.sql"
+
+```
+
+#### Step 4: Verify (optional)
+```bash
+ssh root@95.216.161.144 "docker exec \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production -c \"SELECT COUNT(*) FROM places WHERE agoda_metadata IS NOT NULL;\""
+```
+
+#### Step 5: Cleanup
+```bash
+rm agoda_updates.sql
+```
+
+### Data Source
+- **File**: `https://tripheatmap.s3.us-east-005.backblazeb2.com/agoda.xlsx`
+- **Columns**: hotel_id, hotel_name, longitude, latitude, photo1-5, overview
