@@ -1,0 +1,58 @@
+    <section aria-labelledby="filter-heading" class="grid items-center border-b border-gray-200 pb-6 mb-6">
+      <h2 id="filter-heading" class="sr-only">Filters</h2>
+      <div class="relative col-start-1 row-start-1 py-4">
+        <div class="flex max-w-7xl space-x-6 text-sm">
+          <div>
+            <button type="button" id="filter-toggle" class="group flex items-center font-medium text-gray-700 hover:text-gray-900">
+              <svg class="mr-2 h-5 w-5 flex-none text-gray-400 group-hover:text-gray-500" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 0 1 .628.74v2.288a2.25 2.25 0 0 1-.659 1.59l-4.682 4.683a2.25 2.25 0 0 0-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 0 1 8 18.25v-5.757a2.25 2.25 0 0 0-.659-1.591L2.659 6.22A2.25 2.25 0 0 1 2 4.629V2.34a.75.75 0 0 1 .628-.74Z" clip-rule="evenodd" />
+              </svg>
+              <span id="filter-count-text">Filters</span>
+            </button>
+          </div>
+          <div class="pl-6 border-l border-gray-200">
+            <button type="button" id="clear-filters" class="text-gray-500 hover:text-gray-900 invisible">Clear all</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="filter-panel" class="hidden border-t border-gray-200 py-10">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
+          <fieldset>
+            <legend class="block font-medium text-gray-900">Price</legend>
+            <div class="space-y-3 pt-6">
+              <% ['$', '$$', '$$$', '$$$$'].each do |price| %>
+                <div class="flex items-center">
+                  <input id="price-<%= price.length %>" name="price[]" value="<%= price %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <label for="price-<%= price.length %>" class="ml-3 text-sm text-gray-600"><%= price %></label>
+                </div>
+              <% end %>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="block font-medium text-gray-900">Rating</legend>
+            <div class="space-y-3 pt-6">
+              <% [['4.5', '4.5+ Stars'], ['4.0', '4.0+ Stars'], ['3.5', '3.5+ Stars'], ['3.0', '3.0+ Stars']].each do |rating_val, label| %>
+                <div class="flex items-center">
+                  <input id="rating-<%= rating_val %>" name="rating[]" value="<%= rating_val %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <label for="rating-<%= rating_val %>" class="ml-3 text-sm text-gray-600"><%= label %></label>
+                </div>
+              <% end %>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="block font-medium text-gray-900">Neighborhood</legend>
+            <div class="space-y-3 pt-6 max-h-60 overflow-y-auto">
+              <% hotels.map(&:neighborhood).compact.uniq.sort_by(&:name).each do |hood| %>
+                <div class="flex items-center">
+                  <input id="hood-<%= hood.id %>" name="neighborhood[]" value="<%= hood.id %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <label for="hood-<%= hood.id %>" class="ml-3 text-sm text-gray-600"><%= hood.name %></label>
+                </div>
+              <% end %>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </section>

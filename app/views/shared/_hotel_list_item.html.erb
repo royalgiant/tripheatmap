@@ -1,0 +1,99 @@
+<li
+  class="hotel-item flex flex-col sm:flex-row gap-x-6 py-5 hover:bg-gray-50 transition duration-150 ease-in-out px-4 sm:px-6"
+  data-price="<%= hotel.price_range %>"
+  data-rating="<%= hotel.rating %>"
+  data-neighborhood-id="<%= hotel.neighborhood&.id %>"
+>
+  <div class="flex-auto min-w-0">
+    <div class="flex items-baseline justify-between gap-x-4">
+      <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
+        <%= hotel.name %>
+      </h3>
+      
+      <div class="hidden sm:flex items-center gap-x-2 flex-shrink-0">
+        <% if hotel.respond_to?(:distance_meters) && hotel.distance_meters.present? %>
+          <span class="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-500/10">
+            <%= number_to_human(hotel.distance_meters, units: { unit: 'm', thousand: 'km' }, precision: 1, strip_insignificant_zeros: true) %> away
+          </span>
+        <% end %>
+        <% if hotel.price_range.present? %>
+          <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10">
+            <%= hotel.price_range %>
+          </span>
+        <% end %>
+        <% if hotel.rating.present? %>
+          <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20">
+            <%= hotel.rating %> ★
+          </span>
+        <% end %>
+        <% if hotel.average_price.present? && hotel.average_price > 0 %>
+          <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+            <%= number_to_currency(hotel.average_price, precision: 0) %>/night avg
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mt-1 flex flex-col text-sm leading-5 text-gray-500 gap-y-1">
+      <div class="flex items-center gap-x-1 truncate">
+        <svg class="h-4 w-4 flex-none text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        
+        <% if local_assigns[:nearby_landmark_name].present? %>
+          <span class="font-medium text-gray-700">Near <%= nearby_landmark_name %></span>
+          <span class="hidden sm:inline text-gray-300">|</span>
+          <% if hotel.neighborhood %>
+            <span><%= hotel.neighborhood.name %>,</span>
+          <% end %>
+          <span><%= city_display_name %></span>
+        <% else %>
+          <% if hotel.neighborhood %>
+            <span class="font-medium text-gray-700"><%= hotel.neighborhood.name %></span>
+            <span class="hidden sm:inline text-gray-300">|</span>
+            <span><%= city_display_name %></span>
+          <% else %>
+            <span class="font-medium text-gray-700"><%= city_display_name %></span>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <% if hotel.address.present? %>
+        <span class="truncate">Hotel Address: <%= hotel.address %></span>
+      <% end %>
+    </div>
+
+    <div class="mt-2 flex sm:hidden items-center gap-x-2 flex-wrap">
+      <% if hotel.respond_to?(:distance_meters) && hotel.distance_meters.present? %>
+        <span class="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-500/10">
+          <%= number_to_human(hotel.distance_meters, units: { unit: 'm', thousand: 'km' }, precision: 1, strip_insignificant_zeros: true) %> away
+        </span>
+      <% end %>
+      <% if hotel.price_range.present? %>
+        <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10"><%= hotel.price_range %></span>
+      <% end %>
+      <% if hotel.rating.present? %>
+        <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20"><%= hotel.rating %> ★</span>
+      <% end %>
+    </div>
+
+    <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
+      <%= render 'shared/affiliate_buttons', place: hotel %>
+
+      <div class="flex gap-3 w-full sm:w-auto">
+        <a href="<%= google_maps_url(hotel) %>" target="_blank" rel="noopener" class="flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto">
+          Directions
+        </a>
+
+        <% if hotel.neighborhood %>
+          <%= link_to "Neighborhood", neighborhood_path(hotel.neighborhood.slug), class: "flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto" %>
+        <% end %>
+        
+        <% if hotel.agoda_metadata.present? %>
+          <%= link_to "More Details", place_path(hotel.slug), data: { turbo_frame: "place_details_modal" }, class: "flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</li>
