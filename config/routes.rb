@@ -40,6 +40,11 @@ Rails.application.routes.draw do
     get 'landmarks/:city/:landmark', to: 'hotels_near_landmark#show', as: 'landmark'
   end
   
+  resources :places, only: [:show], param: :slug do
+    collection do
+      get :close
+    end
+  end
   resources :neighborhoods, only: [:show], param: :slug
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'
