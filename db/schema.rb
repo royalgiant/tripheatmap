@@ -10,24 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
   enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
-
-  # ============================================================================
-  # POSTGIS TIGER GEOCODER TABLES (US Census Bureau geocoding data)
-  # These tables are auto-created by the postgis_tiger_geocoder extension
-  # They are currently EMPTY and unused (app focuses on international cities)
-  # Only useful for US address geocoding - not needed for this application
-  # ============================================================================
 
   create_table "addr", primary_key: "gid", id: :serial, force: :cascade do |t|
     t.bigint "tlid"
@@ -207,6 +201,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.index ["tlid"], name: "idx_edges_tlid"
   end
 
+  create_table "error_logs", force: :cascade do |t|
+    t.string "context", null: false
+    t.text "error_message", null: false
+    t.string "error_code"
+    t.json "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["context"], name: "index_error_logs_on_context"
+    t.index ["created_at"], name: "index_error_logs_on_created_at"
+  end
+
   create_table "faces", primary_key: "gid", id: :serial, force: :cascade do |t|
     t.decimal "tfid", precision: 10
     t.string "statefp00", limit: 2
@@ -287,6 +292,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.index ["the_geom"], name: "tiger_faces_the_geom_gist", using: :gist
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "place_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_favorites_on_place_id"
+    t.index ["user_id", "place_id"], name: "index_favorites_on_user_id_and_place_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "featnames", primary_key: "gid", id: :serial, force: :cascade do |t|
     t.bigint "tlid"
     t.string "fullname", limit: 100
@@ -361,236 +376,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.text "staging_schema"
   end
 
-  create_table "pagc_gaz", id: :serial, force: :cascade do |t|
-    t.integer "seq"
-    t.text "word"
-    t.text "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "pagc_lex", id: :serial, force: :cascade do |t|
-    t.integer "seq"
-    t.text "word"
-    t.text "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "pagc_rules", id: :serial, force: :cascade do |t|
-    t.text "rule"
-    t.boolean "is_custom", default: true
-  end
-
-  create_table "place", primary_key: "plcidfp", id: { type: :string, limit: 7 }, force: :cascade do |t|
-    t.serial "gid", null: false
-    t.string "statefp", limit: 2
-    t.string "placefp", limit: 5
-    t.string "placens", limit: 8
-    t.string "name", limit: 100
-    t.string "namelsad", limit: 100
-    t.string "lsad", limit: 2
-    t.string "classfp", limit: 2
-    t.string "cpi", limit: 1
-    t.string "pcicbsa", limit: 1
-    t.string "pcinecta", limit: 1
-    t.string "mtfcc", limit: 5
-    t.string "funcstat", limit: 1
-    t.bigint "aland"
-    t.bigint "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
-    t.index ["the_geom"], name: "tiger_place_the_geom_gist", using: :gist
-    t.unique_constraint ["gid"], name: "uidx_tiger_place_gid"
-  end
-
-  create_table "place_lookup", primary_key: ["st_code", "pl_code"], force: :cascade do |t|
-    t.integer "st_code", null: false
-    t.string "state", limit: 2
-    t.integer "pl_code", null: false
-    t.string "name", limit: 90
-    t.index "soundex((name)::text)", name: "place_lookup_name_idx"
-    t.index ["state"], name: "place_lookup_state_idx"
-  end
-
-  create_table "secondary_unit_lookup", primary_key: "name", id: { type: :string, limit: 20 }, force: :cascade do |t|
-    t.string "abbrev", limit: 5
-    t.index ["abbrev"], name: "secondary_unit_lookup_abbrev_idx"
-  end
-
-  create_table "state", primary_key: "statefp", id: { type: :string, limit: 2 }, force: :cascade do |t|
-    t.serial "gid", null: false
-    t.string "region", limit: 2
-    t.string "division", limit: 2
-    t.string "statens", limit: 8
-    t.string "stusps", limit: 2, null: false
-    t.string "name", limit: 100
-    t.string "lsad", limit: 2
-    t.string "mtfcc", limit: 5
-    t.string "funcstat", limit: 1
-    t.bigint "aland"
-    t.bigint "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
-    t.index ["the_geom"], name: "idx_tiger_state_the_geom_gist", using: :gist
-    t.unique_constraint ["gid"], name: "uidx_tiger_state_gid"
-    t.unique_constraint ["stusps"], name: "uidx_tiger_state_stusps"
-  end
-
-  create_table "state_lookup", primary_key: "st_code", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name", limit: 40
-    t.string "abbrev", limit: 3
-    t.string "statefp", limit: 2
-
-    t.unique_constraint ["abbrev"], name: "state_lookup_abbrev_key"
-    t.unique_constraint ["name"], name: "state_lookup_name_key"
-    t.unique_constraint ["statefp"], name: "state_lookup_statefp_key"
-  end
-
-  create_table "street_type_lookup", primary_key: "name", id: { type: :string, limit: 50 }, force: :cascade do |t|
-    t.string "abbrev", limit: 50
-    t.boolean "is_hw", default: false, null: false
-    t.index ["abbrev"], name: "street_type_lookup_abbrev_idx"
-  end
-
-  create_table "tabblock", primary_key: "tabblock_id", id: { type: :string, limit: 16 }, force: :cascade do |t|
-    t.serial "gid", null: false
-    t.string "statefp", limit: 2
-    t.string "countyfp", limit: 3
-    t.string "tractce", limit: 6
-    t.string "blockce", limit: 4
-    t.string "name", limit: 20
-    t.string "mtfcc", limit: 5
-    t.string "ur", limit: 1
-    t.string "uace", limit: 5
-    t.string "funcstat", limit: 1
-    t.float "aland"
-    t.float "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
-    t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
-    t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
-    t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
-  end
-
-  create_table "tabblock20", primary_key: "geoid", id: { type: :string, limit: 15 }, force: :cascade do |t|
-    t.string "statefp", limit: 2
-    t.string "countyfp", limit: 3
-    t.string "tractce", limit: 6
-    t.string "blockce", limit: 4
-    t.string "name", limit: 10
-    t.string "mtfcc", limit: 5
-    t.string "ur", limit: 1
-    t.string "uace", limit: 5
-    t.string "uatype", limit: 1
-    t.string "funcstat", limit: 1
-    t.float "aland"
-    t.float "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
-    t.float "housing"
-    t.float "pop"
-  end
-
-  create_table "tract", primary_key: "tract_id", id: { type: :string, limit: 11 }, force: :cascade do |t|
-    t.serial "gid", null: false
-    t.string "statefp", limit: 2
-    t.string "countyfp", limit: 3
-    t.string "tractce", limit: 6
-    t.string "name", limit: 7
-    t.string "namelsad", limit: 20
-    t.string "mtfcc", limit: 5
-    t.string "funcstat", limit: 1
-    t.float "aland"
-    t.float "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
-    t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
-    t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
-    t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
-  end
-
-  create_table "zcta5", primary_key: ["zcta5ce", "statefp"], force: :cascade do |t|
-    t.serial "gid", null: false
-    t.string "statefp", limit: 2, null: false
-    t.string "zcta5ce", limit: 5, null: false
-    t.string "classfp", limit: 2
-    t.string "mtfcc", limit: 5
-    t.string "funcstat", limit: 1
-    t.float "aland"
-    t.float "awater"
-    t.string "intptlat", limit: 11
-    t.string "intptlon", limit: 12
-    t.string "partflg", limit: 1
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
-  end
-
-  create_table "zip_lookup", primary_key: "zip", id: :integer, default: nil, force: :cascade do |t|
-    t.integer "st_code"
-    t.string "state", limit: 2
-    t.integer "co_code"
-    t.string "county", limit: 90
-    t.integer "cs_code"
-    t.string "cousub", limit: 90
-    t.integer "pl_code"
-    t.string "place", limit: 90
-    t.integer "cnt"
-  end
-
-  create_table "zip_lookup_all", id: false, force: :cascade do |t|
-    t.integer "zip"
-    t.integer "st_code"
-    t.string "state", limit: 2
-    t.integer "co_code"
-    t.string "county", limit: 90
-    t.integer "cs_code"
-    t.string "cousub", limit: 90
-    t.integer "pl_code"
-    t.string "place", limit: 90
-    t.integer "cnt"
-  end
-
-  create_table "zip_lookup_base", primary_key: "zip", id: { type: :string, limit: 5 }, force: :cascade do |t|
-    t.string "state", limit: 40
-    t.string "county", limit: 90
-    t.string "city", limit: 90
-    t.string "statefp", limit: 2
-  end
-
-  create_table "zip_state", primary_key: ["zip", "stusps"], force: :cascade do |t|
-    t.string "zip", limit: 5, null: false
-    t.string "stusps", limit: 2, null: false
-    t.string "statefp", limit: 2
-  end
-
-  create_table "zip_state_loc", primary_key: ["zip", "stusps", "place"], force: :cascade do |t|
-    t.string "zip", limit: 5, null: false
-    t.string "stusps", limit: 2, null: false
-    t.string "statefp", limit: 2
-    t.string "place", limit: 100, null: false
-  end
-
-  # ============================================================================
-  # APPLICATION TABLES (TripHeatMap)
-  # These are the actual tables used by the application
-  # ============================================================================
-
-  create_table "error_logs", force: :cascade do |t|
-    t.string "context", null: false
-    t.text "error_message", null: false
-    t.string "error_code"
-    t.json "metadata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["context"], name: "index_error_logs_on_context"
-    t.index ["created_at"], name: "index_error_logs_on_created_at"
-  end
-
   create_table "neighborhood_places_stats", force: :cascade do |t|
     t.bigint "neighborhood_id", null: false
     t.integer "restaurant_count"
@@ -642,6 +427,59 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.index ["geoid"], name: "index_neighborhoods_on_geoid"
     t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist
     t.index ["slug"], name: "index_neighborhoods_on_slug", unique: true
+  end
+
+  create_table "pagc_gaz", id: :serial, force: :cascade do |t|
+    t.integer "seq"
+    t.text "word"
+    t.text "stdword"
+    t.integer "token"
+    t.boolean "is_custom", default: true, null: false
+  end
+
+  create_table "pagc_lex", id: :serial, force: :cascade do |t|
+    t.integer "seq"
+    t.text "word"
+    t.text "stdword"
+    t.integer "token"
+    t.boolean "is_custom", default: true, null: false
+  end
+
+  create_table "pagc_rules", id: :serial, force: :cascade do |t|
+    t.text "rule"
+    t.boolean "is_custom", default: true
+  end
+
+  create_table "place", primary_key: "plcidfp", id: { type: :string, limit: 7 }, force: :cascade do |t|
+    t.serial "gid", null: false
+    t.string "statefp", limit: 2
+    t.string "placefp", limit: 5
+    t.string "placens", limit: 8
+    t.string "name", limit: 100
+    t.string "namelsad", limit: 100
+    t.string "lsad", limit: 2
+    t.string "classfp", limit: 2
+    t.string "cpi", limit: 1
+    t.string "pcicbsa", limit: 1
+    t.string "pcinecta", limit: 1
+    t.string "mtfcc", limit: 5
+    t.string "funcstat", limit: 1
+    t.bigint "aland"
+    t.bigint "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+    t.index ["the_geom"], name: "tiger_place_the_geom_gist", using: :gist
+    t.unique_constraint ["gid"], name: "uidx_tiger_place_gid"
+  end
+
+  create_table "place_lookup", primary_key: ["st_code", "pl_code"], force: :cascade do |t|
+    t.integer "st_code", null: false
+    t.string "state", limit: 2
+    t.integer "pl_code", null: false
+    t.string "name", limit: 90
+    t.index "soundex((name)::text)", name: "place_lookup_name_idx"
+    t.index ["state"], name: "place_lookup_state_idx"
   end
 
   create_table "places", force: :cascade do |t|
@@ -710,6 +548,47 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.index ["post_id"], name: "index_reddit_posts_on_post_id", unique: true
   end
 
+  create_table "secondary_unit_lookup", primary_key: "name", id: { type: :string, limit: 20 }, force: :cascade do |t|
+    t.string "abbrev", limit: 5
+    t.index ["abbrev"], name: "secondary_unit_lookup_abbrev_idx"
+  end
+
+  create_table "state", primary_key: "statefp", id: { type: :string, limit: 2 }, force: :cascade do |t|
+    t.serial "gid", null: false
+    t.string "region", limit: 2
+    t.string "division", limit: 2
+    t.string "statens", limit: 8
+    t.string "stusps", limit: 2, null: false
+    t.string "name", limit: 100
+    t.string "lsad", limit: 2
+    t.string "mtfcc", limit: 5
+    t.string "funcstat", limit: 1
+    t.bigint "aland"
+    t.bigint "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+    t.index ["the_geom"], name: "idx_tiger_state_the_geom_gist", using: :gist
+    t.unique_constraint ["gid"], name: "uidx_tiger_state_gid"
+    t.unique_constraint ["stusps"], name: "uidx_tiger_state_stusps"
+  end
+
+  create_table "state_lookup", primary_key: "st_code", id: :integer, default: nil, force: :cascade do |t|
+    t.string "name", limit: 40
+    t.string "abbrev", limit: 3
+    t.string "statefp", limit: 2
+
+    t.unique_constraint ["abbrev"], name: "state_lookup_abbrev_key"
+    t.unique_constraint ["name"], name: "state_lookup_name_key"
+    t.unique_constraint ["statefp"], name: "state_lookup_statefp_key"
+  end
+
+  create_table "street_type_lookup", primary_key: "name", id: { type: :string, limit: 50 }, force: :cascade do |t|
+    t.string "abbrev", limit: 50
+    t.boolean "is_hw", default: false, null: false
+    t.index ["abbrev"], name: "street_type_lookup_abbrev_idx"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.string "plan_id"
     t.string "customer_id"
@@ -722,6 +601,66 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "tabblock", primary_key: "tabblock_id", id: { type: :string, limit: 16 }, force: :cascade do |t|
+    t.serial "gid", null: false
+    t.string "statefp", limit: 2
+    t.string "countyfp", limit: 3
+    t.string "tractce", limit: 6
+    t.string "blockce", limit: 4
+    t.string "name", limit: 20
+    t.string "mtfcc", limit: 5
+    t.string "ur", limit: 1
+    t.string "uace", limit: 5
+    t.string "funcstat", limit: 1
+    t.float "aland"
+    t.float "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
+    t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
+    t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
+  end
+
+  create_table "tabblock20", primary_key: "geoid", id: { type: :string, limit: 15 }, force: :cascade do |t|
+    t.string "statefp", limit: 2
+    t.string "countyfp", limit: 3
+    t.string "tractce", limit: 6
+    t.string "blockce", limit: 4
+    t.string "name", limit: 10
+    t.string "mtfcc", limit: 5
+    t.string "ur", limit: 1
+    t.string "uace", limit: 5
+    t.string "uatype", limit: 1
+    t.string "funcstat", limit: 1
+    t.float "aland"
+    t.float "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+    t.float "housing"
+    t.float "pop"
+  end
+
+  create_table "tract", primary_key: "tract_id", id: { type: :string, limit: 11 }, force: :cascade do |t|
+    t.serial "gid", null: false
+    t.string "statefp", limit: 2
+    t.string "countyfp", limit: 3
+    t.string "tractce", limit: 6
+    t.string "name", limit: 7
+    t.string "namelsad", limit: 20
+    t.string "mtfcc", limit: 5
+    t.string "funcstat", limit: 1
+    t.float "aland"
+    t.float "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
+    t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
+    t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
   end
 
   create_table "users", force: :cascade do |t|
@@ -750,6 +689,68 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_15_041504) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "zcta5", primary_key: ["zcta5ce", "statefp"], force: :cascade do |t|
+    t.serial "gid", null: false
+    t.string "statefp", limit: 2, null: false
+    t.string "zcta5ce", limit: 5, null: false
+    t.string "classfp", limit: 2
+    t.string "mtfcc", limit: 5
+    t.string "funcstat", limit: 1
+    t.float "aland"
+    t.float "awater"
+    t.string "intptlat", limit: 11
+    t.string "intptlon", limit: 12
+    t.string "partflg", limit: 1
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+  end
+
+  create_table "zip_lookup", primary_key: "zip", id: :integer, default: nil, force: :cascade do |t|
+    t.integer "st_code"
+    t.string "state", limit: 2
+    t.integer "co_code"
+    t.string "county", limit: 90
+    t.integer "cs_code"
+    t.string "cousub", limit: 90
+    t.integer "pl_code"
+    t.string "place", limit: 90
+    t.integer "cnt"
+  end
+
+  create_table "zip_lookup_all", id: false, force: :cascade do |t|
+    t.integer "zip"
+    t.integer "st_code"
+    t.string "state", limit: 2
+    t.integer "co_code"
+    t.string "county", limit: 90
+    t.integer "cs_code"
+    t.string "cousub", limit: 90
+    t.integer "pl_code"
+    t.string "place", limit: 90
+    t.integer "cnt"
+  end
+
+  create_table "zip_lookup_base", primary_key: "zip", id: { type: :string, limit: 5 }, force: :cascade do |t|
+    t.string "state", limit: 40
+    t.string "county", limit: 90
+    t.string "city", limit: 90
+    t.string "statefp", limit: 2
+  end
+
+  create_table "zip_state", primary_key: ["zip", "stusps"], force: :cascade do |t|
+    t.string "zip", limit: 5, null: false
+    t.string "stusps", limit: 2, null: false
+    t.string "statefp", limit: 2
+  end
+
+  create_table "zip_state_loc", primary_key: ["zip", "stusps", "place"], force: :cascade do |t|
+    t.string "zip", limit: 5, null: false
+    t.string "stusps", limit: 2, null: false
+    t.string "statefp", limit: 2
+    t.string "place", limit: 100, null: false
+  end
+
+  add_foreign_key "favorites", "places"
+  add_foreign_key "favorites", "users"
   add_foreign_key "neighborhood_places_stats", "neighborhoods"
   add_foreign_key "places", "neighborhoods"
   add_foreign_key "subscriptions", "users"

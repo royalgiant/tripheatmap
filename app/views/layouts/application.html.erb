@@ -65,11 +65,11 @@
   <body class="h-full bg-white text-black">
     <%= render 'layouts/city_selector' %>
 
-    <div class="text-center mx-5">
+    <div class="text-center mx-5 bg-white">
       <%= render partial: 'layouts/flash_messages' %>
     </div>
-    
-    <div class="min-h-screen">
+
+    <div class="min-h-screen bg-white">
       <%= yield %>
     </div>
     <%= turbo_frame_tag "place_details_modal" %>

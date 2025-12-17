@@ -7,10 +7,13 @@
 >
   <div class="flex-auto min-w-0">
     <div class="flex items-baseline justify-between gap-x-4">
-      <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
-        <%= hotel.name %>
-      </h3>
-      
+      <div class="flex items-center gap-x-2 flex-1 min-w-0">
+        <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors truncate">
+          <%= hotel.name %>
+        </h3>
+        <%= render 'favorites/button', place: hotel %>
+      </div>
+
       <div class="hidden sm:flex items-center gap-x-2 flex-shrink-0">
         <% if hotel.respond_to?(:distance_meters) && hotel.distance_meters.present? %>
           <span class="inline-flex items-center rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-500/10">
@@ -76,6 +79,11 @@
       <% end %>
       <% if hotel.rating.present? %>
         <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20"><%= hotel.rating %> ★</span>
+      <% end %>
+      <% if hotel.average_price.present? && hotel.average_price > 0 %>
+        <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+          <%= number_to_currency(hotel.average_price, precision: 0) %>/night avg
+        </span>
       <% end %>
     </div>
 

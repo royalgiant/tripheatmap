@@ -45,6 +45,8 @@ Rails.application.routes.draw do
       get :close
     end
   end
+
+  resources :favorites, only: [:index, :create, :destroy]
   resources :neighborhoods, only: [:show], param: :slug
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'

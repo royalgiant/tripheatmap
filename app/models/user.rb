@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   has_many :subscriptions, dependent: :destroy
   has_many :places, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_places, through: :favorites, source: :place
 
   EARLY_ADOPTER = "early_adopter".freeze
   ADMIN = "admin"
@@ -52,5 +54,9 @@ class User < ApplicationRecord
     namespace_uuid = UUIDTools::UUID.parse(Rails.application.credentials[Rails.env.to_sym].dig(:superwall, :uuid))
     UUIDTools::UUID.sha1_create(namespace_uuid, self.id.to_s).to_s
   end
-         
+
+  def favorited?(place)
+    favorited_places.exists?(place.id)
+  end
+
 end

@@ -84,9 +84,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
             </button>
-            <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 z-10 mt-2 w-56 origin-top md:origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 top-full z-50 mt-2 w-56 origin-top md:origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <div class="flex flex-col">
                 <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
+                <%= link_to 'Favorites', favorites_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% if current_user.subscribed? || current_user.role == 'admin' %>
                   <%= link_to 'My Rentals', rentals_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% end %>

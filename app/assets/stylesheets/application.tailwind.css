@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* Make button_to forms inline for favorite buttons */
+  .favorite-btn {
+    @apply inline-block;
+  }
+  .favorite-btn form {
+    @apply inline-block;
+  }
+  .favorite-btn button {
+    @apply p-0 border-0 bg-transparent cursor-pointer;
+  }
+}

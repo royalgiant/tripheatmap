@@ -1,8 +1,11 @@
 <li class="border-b pb-3 mb-3 transition-colors duration-500" id="place-<%= place.id %>">
-  <div class="font-medium text-base">
-    <a href="#" class="place-name-link hover:text-blue-600 cursor-pointer" data-place-id="<%= place.id %>">
-      <%= place.name %>
-    </a>
+  <div class="flex items-start justify-between gap-x-2">
+    <div class="font-medium text-base flex-1 min-w-0">
+      <a href="#" class="place-name-link hover:text-blue-600 cursor-pointer" data-place-id="<%= place.id %>">
+        <%= place.name %>
+      </a>
+    </div>
+    <%= render 'favorites/button', place: place %>
   </div>
 
   <!-- Rating and Price Range -->

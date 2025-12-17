@@ -1,6 +1,8 @@
 class Place < ApplicationRecord
   belongs_to :neighborhood, optional: true
   belongs_to :user, optional: true
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
 
   validates :name, presence: true
   validates :place_type, presence: true

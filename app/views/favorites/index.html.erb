@@ -1,0 +1,127 @@
+<% content_for :head do %>
+  <title>My Favorites - TripHeatMap</title>
+  <meta name="description" content="View all your favorited places on TripHeatMap">
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">My Favorites</h1>
+    <p class="text-xl text-gray-600">
+      <%= pluralize(@favorited_places.count, 'place') %> you've saved for later
+    </p>
+  </div>
+
+  <% if @favorited_places.any? %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @favorited_places.each do |place| %>
+          <li class="flex flex-col sm:flex-row gap-x-6 py-5 hover:bg-gray-50 transition duration-150 ease-in-out px-4 sm:px-6">
+            <div class="flex-auto min-w-0">
+              <div class="flex items-baseline justify-between gap-x-4">
+                <div class="flex items-center gap-x-2 flex-1 min-w-0">
+                  <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors truncate">
+                    <%= place.name %>
+                  </h3>
+                  <%= render 'favorites/button', place: place %>
+                </div>
+
+                <div class="hidden sm:flex items-center gap-x-2 flex-shrink-0">
+                  <% if place.place_type.present? %>
+                    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+                      <%= place.place_type.titleize %>
+                    </span>
+                  <% end %>
+                  <% if place.price_range.present? %>
+                    <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10">
+                      <%= place.price_range %>
+                    </span>
+                  <% end %>
+                  <% if place.rating.present? %>
+                    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20">
+                      <%= place.rating %> ★
+                    </span>
+                  <% end %>
+                  <% if place.average_price.present? && place.average_price > 0 %>
+                    <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20" title="Price estimated by AI analysis">
+                      <%= number_to_currency(place.average_price, precision: 0) %>/night avg (AI est.)
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="mt-1 flex flex-col text-sm leading-5 text-gray-500 gap-y-1">
+                <div class="flex items-center gap-x-1 truncate">
+                  <svg class="h-4 w-4 flex-none text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <% if place.neighborhood %>
+                    <span class="font-medium text-gray-700"><%= place.neighborhood.name %></span>
+                    <% if place.city.present? %>
+                      <span class="hidden sm:inline text-gray-300">|</span>
+                      <span><%= place.city.titleize %></span>
+                    <% end %>
+                  <% elsif place.city.present? %>
+                    <span class="font-medium text-gray-700"><%= place.city.titleize %></span>
+                  <% end %>
+                </div>
+
+                <% if place.address.present? %>
+                  <span class="truncate">Address: <%= place.address %></span>
+                <% end %>
+              </div>
+
+              <div class="mt-2 flex sm:hidden items-center gap-x-2 flex-wrap">
+                <% if place.place_type.present? %>
+                  <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+                    <%= place.place_type.titleize %>
+                  </span>
+                <% end %>
+                <% if place.price_range.present? %>
+                  <span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10"><%= place.price_range %></span>
+                <% end %>
+                <% if place.rating.present? %>
+                  <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20"><%= place.rating %> ★</span>
+                <% end %>
+                <% if place.average_price.present? && place.average_price > 0 %>
+                  <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20" title="Price estimated by AI analysis">
+                    <%= number_to_currency(place.average_price, precision: 0) %>/night avg (AI est.)
+                  </span>
+                <% end %>
+              </div>
+
+              <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                <% if place.place_type == 'hotel' || place.place_type == 'hostel' %>
+                  <%= render 'shared/affiliate_buttons', place: place %>
+                <% end %>
+
+                <div class="flex gap-3 w-full sm:w-auto">
+                  <a href="<%= google_maps_url(place) %>" target="_blank" rel="noopener" class="flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto">
+                    Directions
+                  </a>
+
+                  <% if place.neighborhood %>
+                    <%= link_to "Neighborhood", neighborhood_path(place.neighborhood.slug), class: "flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto" %>
+                  <% end %>
+
+                  <% if place.agoda_metadata.present? %>
+                    <%= link_to "More Details", place_path(place.slug), data: { turbo_frame: "place_details_modal" }, class: "flex-1 sm:flex-none inline-flex justify-center items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none w-full sm:w-auto" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="text-6xl mb-4">❤️</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Favorites Yet</h3>
+      <p class="text-gray-600 max-w-md mx-auto mb-6">
+        Start exploring and click the heart icon on places you'd like to save for later!
+      </p>
+      <%= link_to "Explore Cities", where_to_stay_index_path, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 text-sm font-medium transition-colors" %>
+    </div>
+  <% end %>
+</div>
