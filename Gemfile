@@ -102,6 +102,7 @@ gem 'roo', '~> 2.10'
 gem "activerecord-postgis-adapter"
 gem "rgeo"
 gem "rgeo-geojson"
+gem "geocoder"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

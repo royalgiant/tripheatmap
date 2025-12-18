@@ -11,6 +11,8 @@ class Place < ApplicationRecord
 
   before_save :generate_slug, if: :should_generate_slug?
 
+  geocoded_by :latitude => :lat, :longitude => :lon
+
   PLACE_TYPES = %w[
     restaurant cafe bar hotel hostel airbnb vrbo
     attraction museum monument viewpoint airport university beach

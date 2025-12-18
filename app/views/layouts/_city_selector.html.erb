@@ -5,7 +5,6 @@
       <div class="flex items-center justify-between md:justify-start gap-3">
         <%= link_to "TripHeatMap", root_path, class: "text-lg font-semibold text-white hover:text-blue-400 transition-colors" %>
         <span class="hidden md:inline text-gray-500">|</span>
-        <!-- Popular Searches Dropdown -->
         <div class="relative hidden md:block">
           <button type="button" class="inline-flex items-center gap-x-1 text-sm font-medium leading-6 text-gray-300 hover:text-white px-3 py-2 rounded-md focus:outline-none transition-colors" id="popular-searches-button" aria-expanded="false" aria-haspopup="true">
             Popular Searches
@@ -25,6 +24,21 @@
               <%= link_to "Hotels Near Universities", hotels_near_university_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Hotels Near Convention Centers", hotels_near_convention_center_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative hidden md:block">
+          <button type="button" class="inline-flex items-center gap-x-1 text-sm font-medium leading-6 text-gray-300 hover:text-white px-3 py-2 rounded-md focus:outline-none transition-colors" id="tools-button" aria-expanded="false" aria-haspopup="true">
+            Tools
+            <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.17 8.29a.75.75 0 01.06-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="absolute left-0 md:right-0 z-10 mt-2 w-56 origin-top-left md:origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="tools-button" tabindex="-1" id="tools-menu">
+            <div class="py-1" role="none">
+              <%= link_to "Hotels Near Me", hotels_near_me_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
             </div>
           </div>
         </div>
@@ -109,6 +123,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-gray-800">
       <div class="space-y-2">
+        <div class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Popular Searches</div>
         <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
@@ -118,6 +133,9 @@
         <%= link_to "Hotels Near Universities", hotels_near_university_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Hotels Near Convention Centers", hotels_near_convention_center_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+
+        <div class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4">Tools</div>
+        <%= link_to "Hotels Near Me", hotels_near_me_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
       </div>
     </div>
   </div>
@@ -148,6 +166,17 @@
     $(document).click(function(e) {
       if (!$(e.target).closest('#popular-searches-button').length && !$(e.target).closest('#popular-searches-menu').length) {
         $('#popular-searches-menu').addClass('hidden');
+      }
+    });
+
+    $('#tools-button').click(function(e){
+      e.stopPropagation();
+      $('#tools-menu').toggleClass('hidden');
+    });
+
+    $(document).click(function(e) {
+      if (!$(e.target).closest('#tools-button').length && !$(e.target).closest('#tools-menu').length) {
+        $('#tools-menu').addClass('hidden');
       }
     });
 

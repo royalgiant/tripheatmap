@@ -1,0 +1,65 @@
+<% content_for :head do %>
+  <title>Hotels Near Me - Find Hotels Near Your Location | TripHeatMap</title>
+  <meta name="description" content="Find the best hotels near your current location. Compare prices, ratings, and availability for hotels in <%= @city_name %>.">
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">Hotels Near Me</h1>
+    <% if @city_display_name %>
+      <p class="text-xl text-gray-600 mb-4">
+        Showing hotels near <%= @city_display_name %>
+      </p>
+    <% else %>
+      <p class="text-xl text-gray-600 mb-4">
+        Discover great hotels in your area
+      </p>
+    <% end %>
+
+    <div class="max-w-xs mx-auto">
+      <label for="city-selector" class="block text-sm font-medium text-gray-700 mb-2">
+        Change location
+      </label>
+      <select
+        id="city-selector"
+        class="block w-full p-2 text-base text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+        onchange="if(this.value) window.location.href=this.value"
+      >
+        <% Neighborhood.where.not(city: nil).select(:city).distinct.order(:city).pluck(:city).each do |city| %>
+          <option value="<%= hotels_near_me_path(city: city.parameterize) %>">
+            <%= city.titleize %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <% if @hotels.any? %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @hotels.each do |hotel| %>
+          <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_name %>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="text-6xl mb-4">🏨</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Hotels Found Nearby</h3>
+      <p class="text-gray-600 max-w-md mx-auto mb-6">
+        We couldn't find any hotels near your location. Try browsing hotels by city instead.
+      </p>
+      <%= link_to "Browse All Cities", where_to_stay_index_path, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 text-sm font-medium transition-colors" %>
+    </div>
+  <% end %>
+  <% if @other_cities.present? %>
+    <div class="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Explore Other Cities</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <% @other_cities.each do |city| %>
+          <%= link_to city.titleize, hotels_near_me_path(city: city.parameterize), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

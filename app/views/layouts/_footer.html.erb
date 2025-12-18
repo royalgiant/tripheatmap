@@ -18,7 +18,7 @@
           </a>
         </div>
       </div>
-      <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-3 xl:col-span-2 xl:mt-0">
+      <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
         <div>
           <h3 class="text-sm font-semibold leading-6 text-white">Popular Searches</h3>
           <ul role="list" class="mt-3 space-y-4">
@@ -48,6 +48,14 @@
             </li>
             <li>
               <%= link_to "Where to Stay (All Cities)", where_to_stay_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold leading-6 text-white">Tools</h3>
+          <ul role="list" class="mt-3 space-y-4">
+            <li>
+              <%= link_to "Hotels Near Me", hotels_near_me_index_path, class: "text-sm leading-6 text-gray-300 hover:text-white" %>
             </li>
           </ul>
         </div>

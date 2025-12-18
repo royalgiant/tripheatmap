@@ -184,6 +184,9 @@ GEM
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
+    geocoder (1.8.6)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -570,6 +573,7 @@ DEPENDENCIES
   faker
   faraday
   foreman (~> 0.87.2)
+  geocoder
   hiredis
   httparty (~> 0.22.0)
   importmap-rails

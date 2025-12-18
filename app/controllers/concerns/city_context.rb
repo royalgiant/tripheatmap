@@ -20,7 +20,8 @@ module CityContext
   end
 
   def city_display_name
-    city_name.split.map(&:capitalize).join(' ')
+    return @city_display_name if @city_display_name.present?
+    city_name&.split&.map(&:capitalize)&.join(' ')
   end
 
   def fetch_related_cities

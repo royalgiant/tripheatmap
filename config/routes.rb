@@ -21,8 +21,11 @@ Rails.application.routes.draw do
   end
 
   get 'hotels-in-:city-near-:neighborhood', to: 'hotels_near#show', as: 'hotels_near'
-  
+
   scope 'hotels-near', as: 'hotels_near' do
+    get 'me', to: 'hotels_near_me#index', as: 'me_index'
+    get 'me/:city', to: 'hotels_near_me#show', as: 'me'
+
     get 'airports', to: 'hotels_near_airport#index', as: 'airport_index'
     get 'airports/:city', to: 'hotels_near_airport#city', as: 'airport_city'
     get 'airports/:city/:airport', to: 'hotels_near_airport#show', as: 'airport'
