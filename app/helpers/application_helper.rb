@@ -6,13 +6,13 @@ module ApplicationHelper
   def google_maps_url(place_or_options = nil, name: nil, lat: nil, lon: nil, zoom: 15)
     if place_or_options.is_a?(Hash)
       name = place_or_options[:name]
-      lat = place_or_options[:lat]
-      lon = place_or_options[:lon]
+      lat = place_or_options[:latitude]
+      lon = place_or_options[:longitude]
       zoom = place_or_options[:zoom] || 15
-    elsif place_or_options.respond_to?(:name) && place_or_options.respond_to?(:lat) && place_or_options.respond_to?(:lon)
+    elsif place_or_options.respond_to?(:name) && place_or_options.respond_to?(:latitude) && place_or_options.respond_to?(:longitude)
       name = place_or_options.name
-      lat = place_or_options.lat
-      lon = place_or_options.lon
+      lat = place_or_options.latitude
+      lon = place_or_options.longitude
     end
 
     return nil unless name.present? && lat.present? && lon.present?

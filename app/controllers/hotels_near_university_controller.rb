@@ -104,7 +104,7 @@ class HotelsNearUniversityController < ApplicationController
         SELECT
           places.*,
           ST_Distance(
-            ST_SetSRID(ST_MakePoint(places.lon, places.lat), 4326)::geography,
+            ST_SetSRID(ST_MakePoint(places.longitude, places.latitude), 4326)::geography,
             ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography
           ) AS distance_meters
         FROM places
@@ -115,17 +115,17 @@ class HotelsNearUniversityController < ApplicationController
           AND places.name != 'Unnamed'
           AND places.name != ''
           AND ST_DWithin(
-            ST_SetSRID(ST_MakePoint(places.lon, places.lat), 4326)::geography,
+            ST_SetSRID(ST_MakePoint(places.longitude, places.latitude), 4326)::geography,
             ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography,
             ?
           )
         ORDER BY distance_meters ASC, rating DESC NULLS LAST, review_count DESC NULLS LAST
       SQL
-      university.lon,
-      university.lat,
+      university.longitude,
+      university.latitude,
       @city_name.downcase,
-      university.lon,
-      university.lat,
+      university.longitude,
+      university.latitude,
       radius_meters
     ])
 

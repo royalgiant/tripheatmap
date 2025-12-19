@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_19_214703) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -419,6 +419,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
     t.text "time_to_visit"
     t.text "getting_around"
     t.decimal "area_sq_km", precision: 10, scale: 2
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.index ["centroid"], name: "index_neighborhoods_on_centroid", using: :gist
     t.index ["city"], name: "index_neighborhoods_on_city"
     t.index ["continent"], name: "index_neighborhoods_on_continent"
@@ -426,6 +428,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
     t.index ["country"], name: "index_neighborhoods_on_country"
     t.index ["geoid"], name: "index_neighborhoods_on_geoid"
     t.index ["geom"], name: "index_neighborhoods_on_geom", using: :gist
+    t.index ["latitude", "longitude"], name: "index_neighborhoods_on_latitude_and_longitude"
     t.index ["slug"], name: "index_neighborhoods_on_slug", unique: true
   end
 
@@ -486,8 +489,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
     t.bigint "neighborhood_id"
     t.string "name"
     t.string "place_type"
-    t.decimal "lat", precision: 10, scale: 6
-    t.decimal "lon", precision: 10, scale: 6
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.string "address"
     t.jsonb "tags", default: {}
     t.datetime "created_at", null: false
@@ -514,7 +517,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_022252) do
     t.index ["city"], name: "index_places_on_city"
     t.index ["country", "continent"], name: "index_places_on_country_and_continent"
     t.index ["google_place_id"], name: "index_places_on_google_place_id", unique: true
-    t.index ["lat", "lon"], name: "index_places_on_lat_and_lon"
+    t.index ["latitude", "longitude"], name: "index_places_on_latitude_and_longitude"
     t.index ["neighborhood_id", "place_type"], name: "index_places_on_neighborhood_id_and_place_type"
     t.index ["neighborhood_id"], name: "index_places_on_neighborhood_id"
     t.index ["place_type"], name: "index_places_on_place_type"

@@ -88,7 +88,7 @@ class HotelsNearLandmarkController < ApplicationController
         SELECT
           places.*,
           ST_Distance(
-            ST_SetSRID(ST_MakePoint(places.lon, places.lat), 4326)::geography,
+            ST_SetSRID(ST_MakePoint(places.longitude, places.latitude), 4326)::geography,
             ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography
           ) AS distance_meters
         FROM places
@@ -99,17 +99,17 @@ class HotelsNearLandmarkController < ApplicationController
           AND places.name != 'Unnamed'
           AND places.name != ''
           AND ST_DWithin(
-            ST_SetSRID(ST_MakePoint(places.lon, places.lat), 4326)::geography,
+            ST_SetSRID(ST_MakePoint(places.longitude, places.latitude), 4326)::geography,
             ST_SetSRID(ST_MakePoint(?, ?), 4326)::geography,
             ?
           )
         ORDER BY distance_meters ASC, rating DESC NULLS LAST, review_count DESC NULLS LAST
       SQL
-      landmark.lon,
-      landmark.lat,
+      landmark.longitude,
+      landmark.latitude,
       @city_name.downcase,
-      landmark.lon,
-      landmark.lat,
+      landmark.longitude,
+      landmark.latitude,
       radius_meters
     ])
 

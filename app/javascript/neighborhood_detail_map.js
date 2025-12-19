@@ -42,8 +42,8 @@ async function initNeighborhoodDetailMap() {
     mapboxgl.accessToken = token;
 
     // Calculate center point from all places
-    const avgLat = placesData.reduce((sum, p) => sum + parseFloat(p.lat), 0) / placesData.length;
-    const avgLon = placesData.reduce((sum, p) => sum + parseFloat(p.lon), 0) / placesData.length;
+    const avgLat = placesData.reduce((sum, p) => sum + parseFloat(p.latitude), 0) / placesData.length;
+    const avgLon = placesData.reduce((sum, p) => sum + parseFloat(p.longitude), 0) / placesData.length;
 
     const map = new mapboxgl.Map({
       container: el,
@@ -88,8 +88,8 @@ async function initNeighborhoodDetailMap() {
 
       // Add markers for each place
       placesData.forEach(place => {
-        const originalLat = parseFloat(place.lat);
-        const originalLon = parseFloat(place.lon);
+        const originalLat = parseFloat(place.latitude);
+        const originalLon = parseFloat(place.longitude);
 
         if (isNaN(originalLat) || isNaN(originalLon)) {
           console.warn('Invalid coordinates for place:', place.name);
@@ -228,7 +228,7 @@ async function initNeighborhoodDetailMap() {
 
             // Pan to marker location
             map.flyTo({
-              center: [markerData.lon, markerData.lat],
+              center: [markerData.longitude, markerData.latitude],
               zoom: 15,
               duration: 1000
             });
@@ -244,8 +244,8 @@ async function initNeighborhoodDetailMap() {
       // Fit map to show all markers
       const bounds = new mapboxgl.LngLatBounds();
       placesData.forEach(place => {
-        const lat = parseFloat(place.lat);
-        const lon = parseFloat(place.lon);
+        const lat = parseFloat(place.latitude);
+        const lon = parseFloat(place.longitude);
         if (!isNaN(lat) && !isNaN(lon)) {
           bounds.extend([lon, lat]);
         }

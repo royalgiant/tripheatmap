@@ -6,12 +6,12 @@ class Place < ApplicationRecord
 
   validates :name, presence: true
   validates :place_type, presence: true
-  validates :lat, :lon, presence: true
+  validates :latitude, :longitude, presence: true
   validates :neighborhood_id, presence: true, unless: :airport?
 
   before_save :generate_slug, if: :should_generate_slug?
 
-  geocoded_by :latitude => :lat, :longitude => :lon
+  geocoded_by :latitude => :latitude, :longitude => :longitude
 
   PLACE_TYPES = %w[
     restaurant cafe bar hotel hostel airbnb vrbo

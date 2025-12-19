@@ -10,25 +10,7 @@
       Showing hotels near <%= @city_display_name %>
     </p>
 
-    <div class="max-w-xs mx-auto">
-      <label for="city-selector" class="block text-sm font-medium text-gray-700 mb-2">
-        Change location
-      </label>
-      <select
-        id="city-selector"
-        class="block w-full pl-4 pr-10 py-2.5 text-base text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
-        onchange="if(this.value) window.location.href=this.value"
-      >
-        <option value="<%= hotels_near_me_path(city: @city_display_name.parameterize) %>">
-          <%= @city_display_name %>
-        </option>
-        <% Neighborhood.where.not(city: nil).select(:city).distinct.order(:city).pluck(:city).each do |city| %>
-          <option value="<%= hotels_near_me_path(city: city.parameterize) %>" <%= 'selected' if city == @city_display_name %>>
-            <%= city.titleize %>
-          </option>
-        <% end %>
-      </select>
-    </div>
+    <%= render 'location_selector' %>
   </div>
 
   <% if @hotels.any? %>
@@ -40,14 +22,7 @@
       </ul>
     </div>
 
-    <div class="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Explore Other Cities</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <% @other_cities.each do |city| %>
-          <%= link_to city.titleize, hotels_near_me_path(city: city.parameterize), class: "text-blue-600 hover:text-blue-800 hover:underline" %>
-        <% end %>
-      </div>
-    </div>
+    <%= render 'explore_cities' %>
   <% else %>
     <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
       <div class="text-6xl mb-4">🏨</div>

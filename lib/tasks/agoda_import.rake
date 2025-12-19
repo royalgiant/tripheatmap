@@ -153,17 +153,17 @@ namespace :agoda do
           a.photo4,
           a.photo5,
           a.overview,
-          ST_Distance(ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography, a.geog) as distance_meters
+          ST_Distance(ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography, a.geog) as distance_meters
         FROM places p
         JOIN agoda_hotels_temp a ON ST_DWithin(
-          ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography,
+          ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography,
           a.geog,
           50
         )
         WHERE p.place_type IN ('hotel', 'hostel')
           AND p.agoda_metadata IS NULL
-          AND p.lat IS NOT NULL
-          AND p.lon IS NOT NULL
+          AND p.latitude IS NOT NULL
+          AND p.longitude IS NOT NULL
         ORDER BY p.id, distance_meters ASC
       )
       UPDATE places
@@ -199,18 +199,18 @@ namespace :agoda do
           a.photo4,
           a.photo5,
           a.overview,
-          ST_Distance(ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography, a.geog) as distance_meters,
+          ST_Distance(ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography, a.geog) as distance_meters,
           similarity(LOWER(p.name), LOWER(a.hotel_name)) as name_similarity
         FROM places p
         JOIN agoda_hotels_temp a ON ST_DWithin(
-          ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography,
+          ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography,
           a.geog,
           200
         )
         WHERE p.place_type IN ('hotel', 'hostel')
           AND p.agoda_metadata IS NULL
-          AND p.lat IS NOT NULL
-          AND p.lon IS NOT NULL
+          AND p.latitude IS NOT NULL
+          AND p.longitude IS NOT NULL
           AND similarity(LOWER(p.name), LOWER(a.hotel_name)) > 0.6
         ORDER BY p.id, distance_meters ASC, name_similarity DESC
       )
@@ -248,18 +248,18 @@ namespace :agoda do
           a.photo4,
           a.photo5,
           a.overview,
-          ST_Distance(ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography, a.geog) as distance_meters,
+          ST_Distance(ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography, a.geog) as distance_meters,
           similarity(LOWER(p.name), LOWER(a.hotel_name)) as name_similarity
         FROM places p
         JOIN agoda_hotels_temp a ON ST_DWithin(
-          ST_SetSRID(ST_MakePoint(p.lon, p.lat), 4326)::geography,
+          ST_SetSRID(ST_MakePoint(p.longitude, p.latitude), 4326)::geography,
           a.geog,
           500
         )
         WHERE p.place_type IN ('hotel', 'hostel')
           AND p.agoda_metadata IS NULL
-          AND p.lat IS NOT NULL
-          AND p.lon IS NOT NULL
+          AND p.latitude IS NOT NULL
+          AND p.longitude IS NOT NULL
           AND similarity(LOWER(p.name), LOWER(a.hotel_name)) > 0.7
         ORDER BY p.id, distance_meters ASC, name_similarity DESC
       )

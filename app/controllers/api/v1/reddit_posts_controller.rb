@@ -11,7 +11,7 @@ class Api::V1::RedditPostsController < ApplicationController
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: [post.lon, post.lat]
+          coordinates: [post.longitude, post.latitude]
         },
         properties: {
           id: post.id,

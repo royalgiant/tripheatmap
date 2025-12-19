@@ -4,11 +4,13 @@ class Neighborhood < ApplicationRecord
 
   validates :name, :city, :state, presence: true
 
-  # Normalize city names to lowercase before validation
+  geocoded_by :latitude => :latitude, :longitude => :longitude
+
   before_validation :normalize_city_name
   before_validation :generate_slug, if: :slug_should_be_generated?
   before_save :calculate_area_sq_km, if: :should_calculate_area?
   before_save :calculate_centroid, if: :should_calculate_centroid?
+  before_save :update_lat_lon_from_centroid, if: :should_update_lat_lon?
 
   scope :with_geom, -> { where.not(geom: nil) }
 
@@ -69,5 +71,14 @@ class Neighborhood < ApplicationRecord
       "SELECT ST_Centroid(ST_GeomFromText('#{geom.as_text}', 4326)::geography)"
     )
     self.centroid = result if result
+  end
+
+  def should_update_lat_lon?
+    centroid.present? && (centroid_changed? || latitude.blank? || longitude.blank?)
+  end
+
+  def update_lat_lon_from_centroid
+    self.latitude = centroid.latitude
+    self.longitude = centroid.longitude
   end
 end
