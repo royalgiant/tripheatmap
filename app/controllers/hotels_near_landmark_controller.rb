@@ -48,6 +48,11 @@ class HotelsNearLandmarkController < ApplicationController
     @seo_title = "Hotels near #{@landmark.name} in #{@city_display_name} (#{Time.current.year}) | Best Stays"
     @seo_description = "Find the best hotels near #{@landmark.name} in #{@city_display_name}. #{@hotels.count} hotels within walking distance."
     @canonical_url = hotels_near_landmark_url(@city_slug, @landmark.slug)
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   private

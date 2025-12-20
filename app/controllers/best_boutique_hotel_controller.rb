@@ -16,6 +16,11 @@ class BestBoutiqueHotelController < ApplicationController
     @seo_title = "Best Boutique Hotels in #{@city_display_name} (#{Time.current.year}) | Charming Stays"
     @seo_description = "Find the most charming and unique boutique hotels in #{@city_display_name}. Curated list of highly-rated properties for an authentic stay."
     @canonical_url = best_boutique_hotels_url(@url_slug)
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   private

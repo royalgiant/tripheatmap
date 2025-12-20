@@ -75,6 +75,11 @@ class HotelsNearMeController < ApplicationController
     else
       @hotels = base_query.limit(50)
     end
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   def set_other_cities

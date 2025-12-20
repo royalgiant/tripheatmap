@@ -5,6 +5,7 @@ class FavoritesController < ApplicationController
   # GET /favorites
   def index
     @favorited_places = current_user.favorited_places.includes(:neighborhood).order('favorites.created_at DESC')
+    @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
   end
 
   # POST /favorites

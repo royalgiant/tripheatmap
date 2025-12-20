@@ -43,6 +43,12 @@ class HotelsNearConventionCenterController < ApplicationController
     @seo_title = "Hotels near #{@convention_center.name} in #{@city_display_name} (#{Time.current.year}) | Conference Hotels"
     @seo_description = "Find the best hotels near #{@convention_center.name} in #{@city_display_name}. #{@hotels.count} hotels within walking distance of the convention center."
     @canonical_url = hotels_near_convention_center_url(@convention_center.slug, @city_slug)
+
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   def show_smart

@@ -17,6 +17,11 @@ class BestCheapHotelController < ApplicationController
     @seo_title = "Best Cheap Hotels in #{@city_display_name} (#{Time.current.year}) | Budget & Affordable Stays"
     @seo_description = "Find the best budget-friendly and affordable hotels in #{@city_display_name}. Quality accommodations at great prices."
     @canonical_url = best_cheap_hotels_url(@url_slug)
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   private

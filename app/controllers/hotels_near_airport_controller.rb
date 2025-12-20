@@ -43,6 +43,11 @@ class HotelsNearAirportController < ApplicationController
     @seo_title = "Hotels near #{@airport.name} in #{@city_display_name} (#{Time.current.year}) | Airport Hotels"
     @seo_description = "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@hotels.count} hotels within short distance of the terminal."
     @canonical_url = hotels_near_airport_url(@airport.slug, @city_slug)
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   def show_smart

@@ -16,7 +16,11 @@ class BestLuxuryHotelController < ApplicationController
     @related_cities = fetch_related_cities
     @seo_title = "Best Luxury Hotels in #{@city_display_name} (#{Time.current.year}) | Top 5 Star Stays"
     @seo_description = "Discover the most exclusive and highly-rated luxury hotels in #{@city_display_name}. Find 5-star accommodations and top-tier service."
-    @canonical_url = best_luxury_hotels_url(@url_slug)
+    if current_user
+      @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
+    else
+      @favorites_by_place_id = {}
+    end
   end
 
   private
