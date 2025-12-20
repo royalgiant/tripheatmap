@@ -5,7 +5,6 @@ class HotelFilters {
     this.panel = document.getElementById('filter-panel');
     this.countText = document.getElementById('filter-count-text');
     this.clearButton = document.getElementById('clear-filters');
-    this.hotelItems = document.querySelectorAll('.hotel-item');
     this.checkboxes = document.querySelectorAll('.filter-checkbox');
     this.priceSlider = document.getElementById('price-slider');
     this.priceSliderLabel = document.getElementById('price-slider-label');
@@ -79,14 +78,14 @@ class HotelFilters {
     const selectedPrices = Array.from(document.querySelectorAll('input[name="price[]"]:checked')).map(cb => cb.value);
     const selectedRatings = Array.from(document.querySelectorAll('input[name="rating[]"]:checked')).map(cb => parseFloat(cb.value));
     const selectedHoods = Array.from(document.querySelectorAll('input[name="neighborhood[]"]:checked')).map(cb => cb.value);
-    
+
     let maxAvgPrice = Infinity;
     let sliderActive = false;
     
     if (this.priceSlider) {
       const sliderVal = parseFloat(this.priceSlider.value);
       const sliderMax = parseFloat(this.priceSlider.max);
-      
+
       if (sliderVal < sliderMax) {
         maxAvgPrice = sliderVal;
         sliderActive = true;
@@ -95,11 +94,11 @@ class HotelFilters {
 
     // Update Filter Count Text and Clear Button visibility
     const totalFilters = selectedPrices.length + selectedRatings.length + selectedHoods.length + (sliderActive ? 1 : 0);
-    
+
     if (this.countText) {
       this.countText.textContent = totalFilters > 0 ? `${totalFilters} Filters` : 'Filters';
     }
-    
+
     if (this.clearButton) {
       if (totalFilters > 0) {
         this.clearButton.classList.remove('invisible');
@@ -108,7 +107,10 @@ class HotelFilters {
       }
     }
 
-    this.hotelItems.forEach(item => {
+    // Query hotel items fresh each time to include lazy-loaded content
+    const hotelItems = document.querySelectorAll('.hotel-item');
+
+    hotelItems.forEach(item => {
       const price = item.dataset.price;
       const rating = parseFloat(item.dataset.rating);
       const hoodId = String(item.dataset.neighborhoodId || '');
@@ -117,17 +119,17 @@ class HotelFilters {
       const priceMatch = selectedPrices.length === 0 || selectedPrices.includes(price);
       const ratingMatch = selectedRatings.length === 0 || selectedRatings.some(minRating => rating >= minRating);
       const hoodMatch = selectedHoods.length === 0 || selectedHoods.includes(hoodId);
-      
+
       // Avg Price Match logic:
       // If slider is NOT active (i.e. set to max/Any), everything matches.
       // If slider IS active, we check if the hotel's price is <= maxAvgPrice.
-      // Hotels with no avg price (NaN) should probably be hidden when a strict budget is set, 
+      // Hotels with no avg price (NaN) should probably be hidden when a strict budget is set,
       // or shown? Typically hidden if strict filter.
       // Let's assume hidden if strict filter, visible if 'Any'.
       let avgPriceMatch = true;
       if (sliderActive) {
         if (isNaN(avgPrice)) {
-          avgPriceMatch = false; 
+          avgPriceMatch = false;
         } else {
           avgPriceMatch = avgPrice <= maxAvgPrice;
         }

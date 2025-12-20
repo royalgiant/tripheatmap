@@ -10,23 +10,46 @@ class BestBoutiqueHotelController < ApplicationController
   def show
     @city_display_name = city_display_name
     @country = @city_config['country'] || 'United States'
-    @boutique_hotels = boutique_hotels
-    @has_hotels = @boutique_hotels.any?
+    all_hotels = boutique_hotels
+    @total_count = all_hotels.count
+    @has_hotels = @total_count > 0
+    neighborhood_counts = all_hotels
+      .group_by(&:neighborhood)
+      .transform_values(&:count)
+      .sort_by { |k, v| -v }
+    @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
+
     @related_cities = fetch_related_cities
     @seo_title = "Best Boutique Hotels in #{@city_display_name} (#{Time.current.year}) | Charming Stays"
     @seo_description = "Find the most charming and unique boutique hotels in #{@city_display_name}. Curated list of highly-rated properties for an authentic stay."
     @canonical_url = best_boutique_hotels_url(@url_slug)
 
+    @page = params[:page]&.to_i || 1
+    @per_page = 200
+    @has_more = @total_count > (@page * @per_page)
+
+    @boutique_hotels = all_hotels.limit(@per_page).offset((@page - 1) * @per_page)
     @nearby_restaurants = nearby_places('restaurant', 100)
     @nearby_cafes = nearby_places('cafe', 50)
     @nearby_bars = nearby_places('bar', 50)
-    @all_map_places = (@boutique_hotels.to_a + @nearby_restaurants + @nearby_cafes + @nearby_bars)
+    @all_map_places = (all_hotels.select(:id, :name, :place_type, :latitude, :longitude, :address, :trip_affiliate_url, :average_price, :neighborhood_id).to_a + @nearby_restaurants + @nearby_cafes + @nearby_bars)
     @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
 
     if current_user
       @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
     else
       @favorites_by_place_id = {}
+    end
+
+    if request.headers["Turbo-Frame"].present? && @page > 1
+      render partial: "hotels_page", locals: {
+        hotels: @boutique_hotels,
+        city_display_name: @city_display_name,
+        page: @page,
+        has_more: @has_more,
+        url_slug: @url_slug,
+        path_helper: :best_boutique_hotels_path
+      }
     end
   end
 
@@ -48,6 +71,7 @@ class BestBoutiqueHotelController < ApplicationController
 
   def boutique_hotels
     Place
+      .includes(:neighborhood)
       .joins(:neighborhood)
       .where(neighborhoods: { city: city_name.downcase })
       .where(place_type: 'hotel', category: 'boutique')
@@ -59,14 +83,32 @@ class BestBoutiqueHotelController < ApplicationController
   end
 
   def nearby_places(place_type, limit)
-    hotel_neighborhoods = @boutique_hotels.map(&:neighborhood_id).uniq
+    hotel_neighborhood_ids = @boutique_hotels.map(&:neighborhood_id).compact.uniq
+    
+    return [] if hotel_neighborhood_ids.empty?
 
-    Place
-      .where(neighborhood_id: hotel_neighborhoods, place_type: place_type)
-      .where.not(latitude: nil, longitude: nil)
-      .select(:id, :name, :place_type, :latitude, :longitude, :address, :rating, :review_count, :trip_affiliate_url)
-      .order(rating: :desc, review_count: :desc)
-      .limit(limit)
-      .to_a
+    target_neighborhoods = hotel_neighborhood_ids.first(20)
+    
+    # Calculate how many places per neighborhood to approximate the total limit
+    # Ensure at least 3-20
+    per_hood_limit = (limit / target_neighborhoods.size.to_f).ceil.clamp(3, 20)
+
+    sql = <<~SQL
+      SELECT sub.* FROM (
+        SELECT id, name, place_type, latitude, longitude, address, rating, review_count, trip_affiliate_url, neighborhood_id,
+               ROW_NUMBER() OVER (
+                 PARTITION BY neighborhood_id 
+                 ORDER BY rating DESC, review_count DESC
+               ) as rn
+        FROM places
+        WHERE neighborhood_id IN (?)
+          AND place_type = ?
+          AND latitude IS NOT NULL AND longitude IS NOT NULL
+      ) sub
+      WHERE rn <= ?
+    SQL
+
+    query = ActiveRecord::Base.sanitize_sql_array([sql, target_neighborhoods, place_type, per_hood_limit])
+    Place.find_by_sql(query)
   end
 end

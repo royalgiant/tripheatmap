@@ -26,10 +26,14 @@
 
   <div class="text-center mb-12">
     <h1 class="text-4xl font-bold text-gray-900 mb-4">
-      <%= @hotels.count %> Hotels near <%= @landmark.name %> in <%= @city_display_name %>
+      Best Hotels near <%= @landmark.name %> in <%= @city_display_name %>
     </h1>
     <p class="text-xl text-gray-600 mb-4">
-      Find the best hotels within walking distance of <%= @landmark.name %>.
+      <% if @top_neighborhoods.any? %>
+        Find the best hotels near <%= @landmark.name %> featuring top-rated stays in <%= @top_neighborhoods.join(' and ') %>.
+      <% else %>
+        Find the best hotels within walking distance of <%= @landmark.name %>.
+      <% end %>
     </p>
     <a href="<%= google_maps_url(@landmark) %>" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
       <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,8 +47,14 @@
   <% if @has_hotels %>
     <div class="mb-8">
       <div class="flex flex-wrap gap-3 mb-4 justify-center">
-        <button class="hotel-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-orange-500 text-white border-2 border-orange-500 hover:bg-orange-600" data-place-type="hotel">
-          Hotels
+        <button class="hotel-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-green-500 text-white border-2 border-green-500 hover:bg-green-600" data-place-type="hotel_under_100">
+          Under $100
+        </button>
+        <button class="hotel-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-orange-500 text-white border-2 border-orange-500 hover:bg-orange-600" data-place-type="hotel_100_200">
+          $100-$200
+        </button>
+        <button class="hotel-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-red-500 text-white border-2 border-red-500 hover:bg-red-600" data-place-type="hotel_200_plus">
+          $200+
         </button>
         <button class="hotel-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-blue-500 text-white border-2 border-blue-500 hover:bg-blue-600" data-place-type="restaurant">
           Restaurants
@@ -60,7 +70,7 @@
       <div class="relative w-full rounded-lg overflow-hidden shadow-lg border border-gray-200" style="height: 600px;">
         <div id="hotel-detail-map"
           data-mapbox-token="<%= @mapbox_token %>"
-          data-places="<%= @all_map_places.to_json(only: [:id, :name, :place_type, :latitude, :longitude, :address, :trip_affiliate_url]) %>"
+          data-places="<%= @all_map_places.to_json(only: [:id, :name, :place_type, :latitude, :longitude, :address, :trip_affiliate_url, :average_price]) %>"
           style="width: 100%; height: 100%;">
         </div>
       </div>
@@ -68,9 +78,9 @@
 
     <%= render 'shared/hotel_filters', hotels: @hotels %>
 
-    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-      <p class="text-sm text-blue-700">
-        <strong>Trip.com Tip:</strong> If not redirected directly to the property, backspace a few characters in Trip.com's prefilled search box to populate the property you're looking for.
+    <div class="bg-gray-50 border-l-4 border-yellow-400 p-4 mb-6">
+      <p class="text-xs text-gray-600">
+        <strong>Pro Tip:</strong> If not redirected directly to the property, backspace a few characters in Trip.com's prefilled search box to populate the property you're looking for.
       </p>
     </div>
 
@@ -78,6 +88,14 @@
       <ul role="list" class="divide-y divide-gray-200" id="hotel-list">
         <% @hotels.each do |hotel| %>
           <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name, nearby_landmark_name: @landmark.name %>
+        <% end %>
+
+        <% if @has_more %>
+          <%= turbo_frame_tag "hotels_page_#{@page + 1}", src: hotels_near_landmark_path(@city_slug, @landmark.slug, page: @page + 1), loading: :lazy do %>
+            <li class="flex justify-center py-8">
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "hotels_page_#{page}" do %>
+  <% hotels.each do |hotel| %>
+    <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: city_display_name, nearby_landmark_name: @university&.name %>
+  <% end %>
+
+  <% if has_more %>
+    <%= turbo_frame_tag "hotels_page_#{page + 1}", src: hotels_near_university_path(city_slug, university_slug, page: page + 1), loading: :lazy do %>
+      <li class="flex justify-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </li>
+    <% end %>
+  <% end %>
+<% end %>

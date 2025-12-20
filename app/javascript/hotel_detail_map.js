@@ -23,7 +23,9 @@ async function initHotelDetailMap() {
       restaurant: true,
       cafe: true,
       bar: true,
-      hotel: true
+      hotel_under_100: true,
+      hotel_100_200: true,
+      hotel_200_plus: true
     };
 
     if (placesData.length === 0) {
@@ -56,7 +58,14 @@ async function initHotelDetailMap() {
         restaurant: '#3B82F6',  // Blue
         cafe: '#10B981',        // Green
         bar: '#A855F7',         // Purple
-        hotel: '#F59E0B'        // Orange
+        hotel: '#F59E0B'        // Orange (default, will be overridden by price)
+      };
+
+      const getHotelColor = (avgPrice) => {
+        if (!avgPrice || isNaN(avgPrice)) return '#9CA3AF'; // Gray for no price data
+        if (avgPrice < 100) return '#10B981';  // Green for under $100
+        if (avgPrice < 200) return '#F59E0B';  // Orange for $100-$200
+        return '#EF4444';  // Red for $200+
       };
 
       // Store markers by place ID for hotel list item clicks
@@ -67,7 +76,9 @@ async function initHotelDetailMap() {
         restaurant: [],
         cafe: [],
         bar: [],
-        hotel: []
+        hotel_under_100: [],
+        hotel_100_200: [],
+        hotel_200_plus: []
       };
 
       // Track currently open popup
@@ -109,9 +120,16 @@ async function initHotelDetailMap() {
           coordinateMap[coordKey] = 1;
         }
 
+        let markerColor;
+        if (place.place_type === 'hotel') {
+          markerColor = getHotelColor(parseFloat(place.average_price));
+        } else {
+          markerColor = markerColors[place.place_type] || '#888';
+        }
+
         const markerEl = document.createElement('div');
         markerEl.style.cssText = `
-          background-color: ${markerColors[place.place_type] || '#888'};
+          background-color: ${markerColor};
           width: 12px;
           height: 12px;
           border-radius: 50%;
@@ -124,7 +142,7 @@ async function initHotelDetailMap() {
           <div style="font-size:14px; max-width: 250px;">
             <b style="font-size:15px;">${place.name}</b><br/>
             <div style="margin: 6px 0; color: #666;">
-              <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColors[place.place_type]}; color: white; font-size: 12px;">
+              <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColor}; color: white; font-size: 12px;">
                 ${place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1)}
               </span>
             </div>
@@ -159,8 +177,22 @@ async function initHotelDetailMap() {
 
         markersByPlaceId[place.id] = { marker, popup, lat, lon };
 
-        if (markersByType[place.place_type]) {
-          markersByType[place.place_type].push(marker);
+        let typeKey = place.place_type;
+        if (place.place_type === 'hotel') {
+          const price = parseFloat(place.average_price);
+          if (!price || isNaN(price)) {
+            typeKey = 'hotel_100_200'; // Default for hotels without price data
+          } else if (price < 100) {
+            typeKey = 'hotel_under_100';
+          } else if (price < 200) {
+            typeKey = 'hotel_100_200';
+          } else {
+            typeKey = 'hotel_200_plus';
+          }
+        }
+
+        if (markersByType[typeKey]) {
+          markersByType[typeKey].push(marker);
         }
 
         popup.on('open', () => {
@@ -173,24 +205,51 @@ async function initHotelDetailMap() {
         // Only add click behavior for hotels to scroll to the list
         if (place.place_type === 'hotel') {
           markerEl.addEventListener('click', () => {
-            const hotelElement = document.querySelector(`#hotel-list li[data-hotel-id="${place.id}"]`);
-
-            if (hotelElement) {
-              // Scroll to the hotel in the list
-              hotelElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-              });
-
-              // Highlight the hotel temporarily
-              hotelElement.style.backgroundColor = '#fef3c7';
-              setTimeout(() => {
-                hotelElement.style.backgroundColor = '';
-              }, 2000);
-            }
+            scrollToHotelInList(place.id);
           });
         }
       });
+
+      // Function to scroll to hotel in list, handling lazy-loaded hotels
+      function scrollToHotelInList(hotelId) {
+        const attemptScroll = (attempts = 0) => {
+          const hotelElement = document.querySelector(`#hotel-list li[data-hotel-id="${hotelId}"]`);
+
+          if (hotelElement) {
+            // Found it! Scroll to it
+            hotelElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+
+            // Highlight the hotel temporarily
+            hotelElement.style.setProperty('background-color', '#fef3c7', 'important');
+            setTimeout(() => {
+              hotelElement.style.removeProperty('background-color');
+            }, 5000);
+          } else {
+            // Not found yet. Try to load the next page if available
+            // Look for a turbo-frame that hasn't loaded yet (still has src attribute)
+            const unloadedFrames = Array.from(document.querySelectorAll('turbo-frame[src][loading="lazy"]'));
+            const nextFrame = unloadedFrames[0];
+
+            if (nextFrame && attempts < 100) {
+              // Scroll the turbo frame into view to trigger loading
+              nextFrame.scrollIntoView({ behavior: 'instant', block: 'end' });
+              // Wait for it to start loading, then try again
+              setTimeout(() => attemptScroll(attempts + 1), 300);
+            } else if (attempts < 100) {
+              // Keep trying in case loading is in progress
+              setTimeout(() => attemptScroll(attempts + 1), 200);
+            } else {
+              // Give up after many attempts
+              console.log(`Hotel ${hotelId} not found in list after attempting to load all pages`);
+            }
+          }
+        };
+
+        attemptScroll();
+      }
 
       document.addEventListener('click', (e) => {
         const link = e.target.closest('.hotel-name-map-link');
@@ -248,11 +307,20 @@ async function initHotelDetailMap() {
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       `;
       legend.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 8px; color: #333;">Place Types</div>
+        <div style="font-weight: bold; margin-bottom: 8px; color: #333;">Hotels (by price)</div>
+        <div style="margin-bottom: 4px;">
+          <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          Under $100
+        </div>
         <div style="margin-bottom: 4px;">
           <span style="display:inline-block; width:12px; height:12px; background:#F59E0B; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          Hotels
+          $100 - $200
         </div>
+        <div style="margin-bottom: 12px;">
+          <span style="display:inline-block; width:12px; height:12px; background:#EF4444; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+          $200+
+        </div>
+        <div style="font-weight: bold; margin-bottom: 8px; color: #333; padding-top: 8px; border-top: 1px solid #e5e7eb;">Other Places</div>
         <div style="margin-bottom: 4px;">
           <span style="display:inline-block; width:12px; height:12px; background:#3B82F6; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
           Restaurants

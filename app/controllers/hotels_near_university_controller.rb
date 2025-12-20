@@ -38,22 +38,51 @@ class HotelsNearUniversityController < ApplicationController
   end
 
   def show
-    @hotels = hotels_near_university(@university, radius_km: 3.0)
-    @has_hotels = @hotels.any?
+    # Get all hotels for counting and map
+    all_hotels = hotels_near_university(@university, radius_km: 3.0)
+    @total_count = all_hotels.count
+    @has_hotels = @total_count > 0
+    neighborhood_counts = all_hotels
+      .group_by(&:neighborhood)
+      .transform_values(&:count)
+      .sort_by { |k, v| -v }
+    @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
     @seo_title = "Hotels near #{@university.name} in #{@city_display_name} (#{Time.current.year}) | Campus Hotels"
-    @seo_description = "Find the best hotels near #{@university.name} in #{@city_display_name}. #{@hotels.count} hotels within walking distance of campus."
+    @seo_description = "Find the best hotels near #{@university.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of campus."
     @canonical_url = hotels_near_university_url(@university.slug, @city_slug)
+
+    @page = params[:page]&.to_i || 1
+    @per_page = 200
+    @has_more = @total_count > (@page * @per_page)
+
+    start_index = (@page - 1) * @per_page
+    @hotels = all_hotels[start_index, @per_page] || []
 
     @nearby_restaurants = nearby_places('restaurant', 100)
     @nearby_cafes = nearby_places('cafe', 50)
     @nearby_bars = nearby_places('bar', 50)
-    @all_map_places = (@hotels.to_a + @nearby_restaurants + @nearby_cafes + @nearby_bars)
+
+    all_hotels_for_map = all_hotels.map do |h|
+      { id: h.id, name: h.name, place_type: h.place_type, latitude: h.latitude, longitude: h.longitude, address: h.address, trip_affiliate_url: h.trip_affiliate_url, average_price: h.average_price }
+    end
+    @all_map_places = (all_hotels_for_map + @nearby_restaurants + @nearby_cafes + @nearby_bars)
     @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
 
     if current_user
       @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
     else
       @favorites_by_place_id = {}
+    end
+
+    if request.headers["Turbo-Frame"].present? && @page > 1
+      render partial: "hotels_page", locals: {
+        hotels: @hotels,
+        city_display_name: @city_display_name,
+        page: @page,
+        has_more: @has_more,
+        university_slug: @university.slug,
+        city_slug: @city_slug
+      }
     end
   end
 
@@ -198,7 +227,37 @@ class HotelsNearUniversityController < ApplicationController
   end
 
   def nearby_places(place_type, limit)
-    hotel_neighborhoods = @hotels.map(&:neighborhood_id).compact.uniq
+    hotel_neighborhood_ids = @hotels.map(&:neighborhood_id).compact.uniq
+    
+    return [] if hotel_neighborhood_ids.empty?
+
+    target_neighborhoods = hotel_neighborhood_ids.first(20)
+    
+    # Calculate how many places per neighborhood to approximate the total limit
+    # Ensure at least 3-20
+    per_hood_limit = (limit / target_neighborhoods.size.to_f).ceil.clamp(3, 20)
+
+    sql = <<~SQL
+      SELECT sub.* FROM (
+        SELECT id, name, place_type, latitude, longitude, address, rating, review_count, trip_affiliate_url, neighborhood_id,
+               ROW_NUMBER() OVER (
+                 PARTITION BY neighborhood_id 
+                 ORDER BY rating DESC, review_count DESC
+               ) as rn
+        FROM places
+        WHERE neighborhood_id IN (?)
+          AND place_type = ?
+          AND latitude IS NOT NULL AND longitude IS NOT NULL
+      ) sub
+      WHERE rn <= ?
+    SQL
+
+    query = ActiveRecord::Base.sanitize_sql_array([sql, target_neighborhoods, place_type, per_hood_limit])
+    Place.find_by_sql(query)
+  end
+
+  def nearby_places_for_hotels(place_type, limit, hotels)
+    hotel_neighborhoods = hotels.map(&:neighborhood_id).compact.uniq
 
     Place
       .where(neighborhood_id: hotel_neighborhoods, place_type: place_type)
