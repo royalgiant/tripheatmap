@@ -41,9 +41,10 @@ class MapsController < ApplicationController
 
   # Calculate total amenities for a city
   def calculate_total_amenities(city_name)
-    NeighborhoodPlacesStat.joins(:neighborhood)
+    Place.joins(:neighborhood)
       .where(neighborhoods: { city: city_name })
-      .sum(:total_amenities)
+      .where(place_type: ['restaurant', 'cafe', 'bar'])
+      .count
   end
 
   # Set up all city-related instance variables

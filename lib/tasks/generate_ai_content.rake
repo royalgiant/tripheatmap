@@ -37,10 +37,12 @@ namespace :city do
     # Get neighborhoods with stats that don't have content yet
     neighborhoods_without_content = Neighborhood
       .for_city(city_name)
-      .includes(:neighborhood_places_stat)
-      .where.not(neighborhood_places_stats: { vibrancy_index: nil })
+      .includes(:neighborhood_places_stat, :places)
+      .where.not(neighborhood_places_stats: { id: nil })
       .where(description: nil)
-      .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC"))
+      .to_a
+      .select { |n| n.neighborhood_places_stat.vibrancy_index > 0 }
+      .sort_by { |n| -n.neighborhood_places_stat.vibrancy_index }
 
     if neighborhoods_without_content.empty?
       puts "✅ All neighborhoods already have AI-generated content!"
@@ -138,10 +140,12 @@ namespace :city do
       # Get neighborhoods without content
       neighborhoods_without_content = Neighborhood
         .for_city(city_name)
-        .includes(:neighborhood_places_stat)
-        .where.not(neighborhood_places_stats: { vibrancy_index: nil })
+        .includes(:neighborhood_places_stat, :places)
+        .where.not(neighborhood_places_stats: { id: nil })
         .where(description: nil)
-        .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC"))
+        .to_a
+        .select { |n| n.neighborhood_places_stat.vibrancy_index > 0 }
+        .sort_by { |n| -n.neighborhood_places_stat.vibrancy_index }
 
       next if neighborhoods_without_content.empty?
 

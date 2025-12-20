@@ -50,6 +50,44 @@ class NeighborhoodGeoJsonService
         WHERE neighborhood_id IN (SELECT id FROM target_neighborhoods)
         AND place_type IN ('airbnb', 'vrbo')
         GROUP BY neighborhood_id
+      ),
+      amenity_counts AS (
+        SELECT neighborhood_id,
+               COUNT(*) FILTER (WHERE place_type = 'restaurant') as restaurant_count,
+               COUNT(*) FILTER (WHERE place_type = 'cafe') as cafe_count,
+               COUNT(*) FILTER (WHERE place_type = 'bar') as bar_count,
+               COUNT(*) FILTER (WHERE place_type = 'hotel') as hotel_count,
+               COUNT(*) FILTER (WHERE place_type = 'hostel') as hostel_count
+        FROM places
+        WHERE neighborhood_id IN (SELECT id FROM target_neighborhoods)
+        AND place_type IN ('restaurant', 'cafe', 'bar', 'hotel', 'hostel')
+        GROUP BY neighborhood_id
+      ),
+      vibrancy_scores AS (
+        SELECT
+          n.id as neighborhood_id,
+          CASE
+            WHEN n.area_sq_km IS NULL OR n.area_sq_km <= 0 THEN 0
+            ELSE (
+              -- Simplified vibrancy calculation based on density and volume
+              -- Density factor (60%): amenities per km², capped at saturation point
+              (0.6 * LEAST(
+                (COALESCE(a.restaurant_count, 0) + COALESCE(a.cafe_count, 0) + COALESCE(a.bar_count, 0)) /
+                NULLIF(n.area_sq_km, 0) /
+                CASE
+                  WHEN n.area_sq_km < 0.5 THEN 150.0
+                  WHEN n.area_sq_km < 2.0 THEN 80.0
+                  WHEN n.area_sq_km < 5.0 THEN 40.0
+                  ELSE 20.0
+                END,
+                1.0
+              )) +
+              -- Volume factor (40%): total count with diminishing returns
+              (0.4 * (1 - EXP(-(COALESCE(a.restaurant_count, 0) + COALESCE(a.cafe_count, 0) + COALESCE(a.bar_count, 0)) / 20.0)))
+            ) * 10.0
+          END as vibrancy_index
+        FROM target_neighborhoods n
+        LEFT JOIN amenity_counts a ON n.id = a.neighborhood_id
       )
       SELECT json_build_object(
         'type', 'FeatureCollection',
@@ -70,23 +108,24 @@ class NeighborhoodGeoJsonService
               'state', n.state,
               'population', n.population,
               'slug', n.slug,
-              'restaurant_count', COALESCE(s.restaurant_count, 0),
-              'cafe_count', COALESCE(s.cafe_count, 0),
-              'bar_count', COALESCE(s.bar_count, 0),
-              'hotel_count', COALESCE(s.hotel_count, 0),
-              'hostel_count', COALESCE(s.hostel_count, 0),
-              'total_accommodations', COALESCE(s.total_accommodations, 0),
+              'restaurant_count', COALESCE(a.restaurant_count, 0),
+              'cafe_count', COALESCE(a.cafe_count, 0),
+              'bar_count', COALESCE(a.bar_count, 0),
+              'hotel_count', COALESCE(a.hotel_count, 0),
+              'hostel_count', COALESCE(a.hostel_count, 0),
+              'total_accommodations', (COALESCE(a.hotel_count, 0) + COALESCE(a.hostel_count, 0)),
               'airbnb_count', COALESCE(r.airbnb_count, 0),
               'vrbo_count', COALESCE(r.vrbo_count, 0),
-              'total_amenities', (COALESCE(s.total_amenities, 0) + COALESCE(r.airbnb_count, 0) + COALESCE(r.vrbo_count, 0)),
-              'vibrancy_index', COALESCE(s.vibrancy_index, 0)
+              'total_amenities', (COALESCE(a.restaurant_count, 0) + COALESCE(a.cafe_count, 0) + COALESCE(a.bar_count, 0) + COALESCE(r.airbnb_count, 0) + COALESCE(r.vrbo_count, 0)),
+              'vibrancy_index', COALESCE(v.vibrancy_index, 0)
             )
           )
         ), '[]'::json)
       ) as geojson
       FROM target_neighborhoods n
-      LEFT JOIN neighborhood_places_stats s ON n.id = s.neighborhood_id
       LEFT JOIN rental_counts r ON n.id = r.neighborhood_id
+      LEFT JOIN amenity_counts a ON n.id = a.neighborhood_id
+      LEFT JOIN vibrancy_scores v ON n.id = v.neighborhood_id
     SQL
   end
 end

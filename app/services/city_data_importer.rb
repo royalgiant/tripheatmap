@@ -190,9 +190,11 @@ class CityDataImporter
     begin
       neighborhoods_with_stats = Neighborhood
         .for_city(city_name)
-        .includes(:neighborhood_places_stat)
-        .where.not(neighborhood_places_stats: { vibrancy_index: nil })
-        .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC"))
+        .includes(:neighborhood_places_stat, :places)
+        .where.not(neighborhood_places_stats: { id: nil })
+        .to_a
+        .select { |n| n.neighborhood_places_stat.vibrancy_index > 0 }
+        .sort_by { |n| -n.neighborhood_places_stat.vibrancy_index }
 
       if neighborhoods_with_stats.empty?
         Rails.logger.warn "No neighborhoods with stats found. Skipping AI content generation."

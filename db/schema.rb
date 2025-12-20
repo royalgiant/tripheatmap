@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_19_214703) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -378,24 +378,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_19_214703) do
 
   create_table "neighborhood_places_stats", force: :cascade do |t|
     t.bigint "neighborhood_id", null: false
-    t.integer "restaurant_count"
-    t.integer "cafe_count"
-    t.integer "bar_count"
-    t.integer "total_amenities"
-    t.decimal "vibrancy_index"
     t.datetime "last_updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "bars_vibrancy"
-    t.decimal "restaurants_vibrancy"
-    t.decimal "cafes_vibrancy"
-    t.integer "hotel_count", default: 0
-    t.integer "hostel_count", default: 0
-    t.integer "total_accommodations", default: 0
-    t.decimal "avg_hotel_rating", precision: 2, scale: 1
-    t.decimal "avg_hostel_rating", precision: 2, scale: 1
     t.index ["neighborhood_id"], name: "index_neighborhood_places_stats_on_neighborhood_id"
-    t.index ["vibrancy_index"], name: "index_neighborhood_places_stats_on_vibrancy_index"
   end
 
   create_table "neighborhoods", force: :cascade do |t|

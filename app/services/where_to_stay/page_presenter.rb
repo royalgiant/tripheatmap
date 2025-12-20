@@ -194,8 +194,7 @@ module WhereToStay
       Neighborhood
         .for_city(city_param)
         .with_geom
-        .includes(:neighborhood_places_stat)
-        .order(Arel.sql("neighborhood_places_stats.vibrancy_index DESC NULLS LAST"))
+        .includes(:neighborhood_places_stat, :places)
     end
 
     def city_param

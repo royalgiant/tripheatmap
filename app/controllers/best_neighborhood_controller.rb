@@ -21,11 +21,14 @@ class BestNeighborhoodController < ApplicationController
   private
 
   def high_vibrancy_neighborhoods
-    Neighborhood
+    neighborhoods = Neighborhood
       .for_city(city_name.downcase)
-      .includes(:neighborhood_places_stat)
-      .where('neighborhood_places_stats.vibrancy_index > ?', 6.0)
-      .order(Arel.sql('neighborhood_places_stats.vibrancy_index DESC'))
+      .includes(:neighborhood_places_stat, :places)
+      .where.not(neighborhood_places_stats: { id: nil })
+
+    neighborhoods
+      .select { |n| n.neighborhood_places_stat.vibrancy_index > 6.0 }
+      .sort_by { |n| -n.neighborhood_places_stat.vibrancy_index }
   end
 
   def related_city_path(slug)
