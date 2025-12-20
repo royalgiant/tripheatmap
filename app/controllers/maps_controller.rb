@@ -1,21 +1,12 @@
 class MapsController < ApplicationController
   def index
     setup_city_data
-    @mapbox_token = mapbox_token
-  end
-
-  def city
-    @city = params[:city]
-    @posts = RedditPost.analyzed
-      .where(city: @city)
-      .where.not(lat: nil, lon: nil)
-      .order(created_at: :desc)
-    @mapbox_token = mapbox_token
+    @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 
   def places
     setup_city_data
-    @mapbox_token = mapbox_token
+    @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 
   private
@@ -54,10 +45,5 @@ class MapsController < ApplicationController
     @city_display = lookup_city_display_name(@city)
     @neighborhoods = fetch_neighborhoods(@city)
     @total_amenities = calculate_total_amenities(@city)
-  end
-
-  # Get Mapbox token for current environment
-  def mapbox_token
-    Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 end

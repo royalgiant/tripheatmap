@@ -43,6 +43,13 @@ class HotelsNearAirportController < ApplicationController
     @seo_title = "Hotels near #{@airport.name} in #{@city_display_name} (#{Time.current.year}) | Airport Hotels"
     @seo_description = "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@hotels.count} hotels within short distance of the terminal."
     @canonical_url = hotels_near_airport_url(@airport.slug, @city_slug)
+
+    @nearby_restaurants = nearby_places('restaurant', 100)
+    @nearby_cafes = nearby_places('cafe', 50)
+    @nearby_bars = nearby_places('bar', 50)
+    @all_map_places = (@hotels.to_a + @nearby_restaurants + @nearby_cafes + @nearby_bars)
+    @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
+
     if current_user
       @favorites_by_place_id = current_user.favorites.pluck(:place_id, :id).to_h
     else
@@ -143,6 +150,18 @@ class HotelsNearAirportController < ApplicationController
     end
 
     hotels
+  end
+
+  def nearby_places(place_type, limit)
+    hotel_neighborhoods = @hotels.map(&:neighborhood_id).compact.uniq
+
+    Place
+      .where(neighborhood_id: hotel_neighborhoods, place_type: place_type)
+      .where.not(latitude: nil, longitude: nil)
+      .select(:id, :name, :place_type, :latitude, :longitude, :address, :rating, :review_count, :trip_affiliate_url)
+      .order(rating: :desc, review_count: :desc)
+      .limit(limit)
+      .to_a
   end
 
   def cities_with_airports

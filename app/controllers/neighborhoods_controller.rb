@@ -22,7 +22,7 @@ class NeighborhoodsController < ApplicationController
     @airbnb_count = @neighborhood.places.where(place_type: 'airbnb').count
     @vrbo_count = @neighborhood.places.where(place_type: 'vrbo').count
 
-    @mapbox_token = mapbox_token
+    @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 
   def places_list
@@ -52,11 +52,5 @@ class NeighborhoodsController < ApplicationController
     @vrbos = @places.select { |p| p.place_type == 'vrbo' }
 
     render partial: 'places_list_content'
-  end
-
-  private
-
-  def mapbox_token
-    Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 end

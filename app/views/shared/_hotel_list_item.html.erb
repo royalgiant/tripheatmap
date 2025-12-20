@@ -4,12 +4,15 @@
   data-rating="<%= hotel.rating %>"
   data-neighborhood-id="<%= hotel.neighborhood&.id %>"
   data-average-price="<%= hotel.average_price %>"
+  data-hotel-id="<%= hotel.id %>"
 >
   <div class="flex-auto min-w-0">
     <div class="flex items-baseline justify-between gap-x-4">
       <div class="flex items-center gap-x-2 flex-1 min-w-0">
-        <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors truncate">
-          <%= hotel.name %>
+        <h3 class="text-lg font-bold text-gray-900 truncate">
+          <button class="hotel-name-map-link hover:text-blue-600 transition-colors text-left w-full truncate" data-hotel-id="<%= hotel.id %>" type="button">
+            <%= hotel.name %>
+          </button>
         </h3>
         <%= render 'favorites/button', place: hotel %>
       </div>

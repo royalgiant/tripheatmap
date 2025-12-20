@@ -56,7 +56,6 @@ Rails.application.routes.draw do
     end
   end
   get 'maps/index'
-  get 'maps/city/:city', to: 'maps#city', as: 'city_map'
   get 'maps/places/:city', to: 'maps#places', as: 'places_map'
   get 'maps/places', to: 'maps#places'
   get 'where-to-stay', to: 'where_to_stay#index', as: 'where_to_stay_index'
