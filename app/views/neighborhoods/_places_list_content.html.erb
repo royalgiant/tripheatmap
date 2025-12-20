@@ -1,0 +1,89 @@
+<%= turbo_frame_tag "places_list" do %>
+  <% if @places.any? %>
+    <!-- Restaurants -->
+    <% if @restaurants.any? %>
+      <div class="mb-6 places-section" data-place-type="restaurant">
+        <h3 class="text-xl font-semibold mb-3 text-blue-600">
+          Restaurants (<%= @restaurants.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @restaurants, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Cafes -->
+    <% if @cafes.any? %>
+      <div class="mb-6 places-section" data-place-type="cafe">
+        <h3 class="text-xl font-semibold mb-3 text-green-600">
+          Cafes (<%= @cafes.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @cafes, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Bars -->
+    <% if @bars.any? %>
+      <div class="mb-6 places-section" data-place-type="bar">
+        <h3 class="text-xl font-semibold mb-3 text-purple-600">
+          Bars (<%= @bars.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @bars, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Hotels -->
+    <% if @hotels.any? %>
+      <div class="mb-6 places-section" data-place-type="hotel">
+        <h3 class="text-xl font-semibold mb-3 text-orange-600">
+          Hotels (<%= @hotels.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @hotels, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Hostels -->
+    <% if @hostels.any? %>
+      <div class="mb-6 places-section" data-place-type="hostel">
+        <h3 class="text-xl font-semibold mb-3 text-yellow-600">
+          Hostels (<%= @hostels.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @hostels, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Airbnb -->
+    <% if @airbnbs.any? %>
+      <div class="mb-6 places-section" data-place-type="airbnb">
+        <h3 class="text-xl font-semibold mb-3 text-red-600">
+          Airbnb (<%= @airbnbs.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @airbnbs, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- VRBO -->
+    <% if @vrbos.any? %>
+      <div class="mb-6 places-section" data-place-type="vrbo">
+        <h3 class="text-xl font-semibold mb-3" style="color: #003D79;">
+          VRBO (<%= @vrbos.count %>)
+        </h3>
+        <ul>
+          <%= render partial: 'place_item', collection: @vrbos, as: :place %>
+        </ul>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-gray-500">No places data available for this neighborhood yet.</p>
+  <% end %>
+<% end %>

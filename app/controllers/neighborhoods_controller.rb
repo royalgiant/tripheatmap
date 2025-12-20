@@ -10,6 +10,30 @@ class NeighborhoodsController < ApplicationController
 
     @places = @neighborhood.places
                           .where(place_type: VALID_PLACE_TYPES)
+                          .select(:id, :name, :place_type, :latitude, :longitude, :address, :booking_url)
+                          .to_a
+    
+    @stats = @neighborhood.neighborhood_places_stat || @neighborhood.build_neighborhood_places_stat
+    @restaurants = @places.select { |p| p.place_type == 'restaurant' }
+    @cafes = @places.select { |p| p.place_type == 'cafe' }
+    @bars = @places.select { |p| p.place_type == 'bar' }
+    @hotels = @places.select { |p| p.place_type == 'hotel' }
+    @hostels = @places.select { |p| p.place_type == 'hostel' }
+    @airbnb_count = @neighborhood.places.where(place_type: 'airbnb').count
+    @vrbo_count = @neighborhood.places.where(place_type: 'vrbo').count
+
+    @mapbox_token = mapbox_token
+  end
+
+  def places_list
+    @neighborhood = Neighborhood.find_by(slug: params[:slug])
+
+    if @neighborhood.nil?
+      head :not_found and return
+    end
+
+    @places = @neighborhood.places
+                          .where(place_type: VALID_PLACE_TYPES)
                           .order(:place_type, :name)
                           .to_a
 
@@ -27,11 +51,7 @@ class NeighborhoodsController < ApplicationController
     @airbnbs = @places.select { |p| p.place_type == 'airbnb' }
     @vrbos = @places.select { |p| p.place_type == 'vrbo' }
 
-    # Get stats for summary
-    @stats = @neighborhood.neighborhood_places_stat
-
-    # Mapbox token for rendering map
-    @mapbox_token = mapbox_token
+    render partial: 'places_list_content'
   end
 
   private

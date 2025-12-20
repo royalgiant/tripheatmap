@@ -50,7 +50,11 @@ Rails.application.routes.draw do
   end
 
   resources :favorites, only: [:index, :create, :destroy]
-  resources :neighborhoods, only: [:show], param: :slug
+  resources :neighborhoods, only: [:show], param: :slug do
+    member do
+      get :places_list
+    end
+  end
   get 'maps/index'
   get 'maps/city/:city', to: 'maps#city', as: 'city_map'
   get 'maps/places/:city', to: 'maps#places', as: 'places_map'

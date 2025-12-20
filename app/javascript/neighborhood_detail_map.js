@@ -119,7 +119,6 @@ async function initNeighborhoodDetailMap() {
           coordinateMap[coordKey] = 1;
         }
 
-        // Create custom marker
         const markerEl = document.createElement('div');
         markerEl.style.cssText = `
           background-color: ${markerColors[place.place_type] || '#888'};
@@ -131,7 +130,6 @@ async function initNeighborhoodDetailMap() {
           cursor: pointer;
         `;
 
-        // Create popup HTML with booking button if available
         let popupHTML = `
           <div style="font-size:14px; max-width: 250px;">
             <b style="font-size:15px;">${place.name}</b><br/>
@@ -155,27 +153,21 @@ async function initNeighborhoodDetailMap() {
             </div>
           `;
         }
-
         popupHTML += `</div>`;
 
-        const popup = new mapboxgl.Popup({ offset: 15 })
-          .setHTML(popupHTML);
+        const popup = new mapboxgl.Popup({ offset: 15 }).setHTML(popupHTML);
 
-        // Create marker with popup
         const marker = new mapboxgl.Marker(markerEl)
           .setLngLat([lon, lat])
           .setPopup(popup)
           .addTo(map);
 
-        // Store marker reference for list item clicks
         markersByPlaceId[place.id] = { marker, popup, lat, lon };
         
-        // Store marker by type for filtering
         if (markersByType[place.place_type]) {
           markersByType[place.place_type].push(marker);
         }
 
-        // Listen for popup open to track it and close others
         popup.on('open', () => {
           if (currentPopup && currentPopup !== popup) {
             currentPopup.remove();
@@ -183,19 +175,15 @@ async function initNeighborhoodDetailMap() {
           currentPopup = popup;
         });
 
-        // Add click handler to scroll to place in list
         markerEl.addEventListener('click', () => {
           const placeElement = document.getElementById(`place-${place.id}`);
           const placesList = document.getElementById('places-list');
 
           if (placeElement && placesList) {
-            // Calculate the position relative to the scrollable container
             const containerTop = placesList.scrollTop;
             const containerHeight = placesList.clientHeight;
             const elementTop = placeElement.offsetTop;
             const elementHeight = placeElement.clientHeight;
-
-            // Scroll so the element is centered in the container
             const scrollTo = elementTop - (containerHeight / 2) + (elementHeight / 2);
 
             placesList.scrollTo({
@@ -203,7 +191,6 @@ async function initNeighborhoodDetailMap() {
               behavior: 'smooth'
             });
 
-            // Highlight the element briefly
             placeElement.style.backgroundColor = '#fef3c7';
             setTimeout(() => {
               placeElement.style.backgroundColor = '';
@@ -212,36 +199,32 @@ async function initNeighborhoodDetailMap() {
         });
       });
 
-      // Add click handlers to place name links in list
-      document.querySelectorAll('.place-name-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('.place-name-link');
+        if (link) {
           e.preventDefault();
           const placeId = parseInt(link.dataset.placeId);
           const markerData = markersByPlaceId[placeId];
 
           if (markerData) {
-            // Close previously open popup
             if (currentPopup) {
               currentPopup.remove();
               currentPopup = null;
             }
 
-            // Pan to marker location
             map.flyTo({
-              center: [markerData.longitude, markerData.latitude],
+              center: [markerData.lon, markerData.lat],
               zoom: 15,
               duration: 1000
             });
 
-            // Toggle popup after pan
             setTimeout(() => {
               markerData.marker.togglePopup();
             }, 500);
           }
-        });
+        }
       });
 
-      // Fit map to show all markers
       const bounds = new mapboxgl.LngLatBounds();
       placesData.forEach(place => {
         const lat = parseFloat(place.latitude);

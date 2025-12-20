@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "places_page_#{page}" do %>
+  <ul>
+    <%= render partial: 'place_item', collection: places, as: :place %>
+  </ul>
+
+  <% if has_more_places %>
+    <%= turbo_frame_tag "places_page_#{page + 1}", src: neighborhood_path(neighborhood.slug, place_type: place_type_filter, page: page + 1), loading: :lazy do %>
+      <div class="text-center py-4">
+        <div class="inline-block animate-pulse text-gray-500">Loading more...</div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
