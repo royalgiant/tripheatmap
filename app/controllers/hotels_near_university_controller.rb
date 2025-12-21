@@ -1,5 +1,6 @@
 class HotelsNearUniversityController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_and_university, only: [:show]
 
@@ -40,6 +41,7 @@ class HotelsNearUniversityController < ApplicationController
   def show
     # Get all hotels for counting and map
     all_hotels = hotels_near_university(@university, radius_km: 3.0)
+    all_hotels = apply_filters(all_hotels)
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -47,9 +49,16 @@ class HotelsNearUniversityController < ApplicationController
       .transform_values(&:count)
       .sort_by { |k, v| -v }
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
-    @seo_title = "Hotels near #{@university.name} in #{@city_display_name} (#{Time.current.year}) | Campus Hotels"
-    @seo_description = "Find the best hotels near #{@university.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of campus."
-    @canonical_url = hotels_near_university_url(@university.slug, @city_slug)
+
+    seo_data = generate_seo_metadata(
+      base_title: "Hotels near #{@university.name} in #{@city_display_name}",
+      base_description: "Find the best hotels near #{@university.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of campus",
+      fallback_title: "Hotels near #{@university.name} in #{@city_display_name} (#{Time.current.year}) | Campus Hotels",
+      fallback_description: "Find the best hotels near #{@university.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of campus."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:hotels_near_university_url, @city_slug, @university.slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -81,7 +90,8 @@ class HotelsNearUniversityController < ApplicationController
         page: @page,
         has_more: @has_more,
         university_slug: @university.slug,
-        city_slug: @city_slug
+        city_slug: @city_slug,
+        filter_params: @filter_params
       }
     end
   end

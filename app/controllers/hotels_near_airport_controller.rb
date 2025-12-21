@@ -1,5 +1,6 @@
 class HotelsNearAirportController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_and_airport, only: [:show]
 
@@ -39,6 +40,7 @@ class HotelsNearAirportController < ApplicationController
 
   def show
     all_hotels = hotels_near_airport(@airport, radius_km: 5.0)
+    all_hotels = apply_filters(all_hotels)
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -46,9 +48,16 @@ class HotelsNearAirportController < ApplicationController
       .transform_values(&:count)
       .sort_by { |k, v| -v }
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
-    @seo_title = "Hotels near #{@airport.name} in #{@city_display_name} (#{Time.current.year}) | Airport Hotels"
-    @seo_description = "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@total_count} hotels within short distance of the terminal."
-    @canonical_url = hotels_near_airport_url(@airport.slug, @city_slug)
+
+    seo_data = generate_seo_metadata(
+      base_title: "Hotels near #{@airport.name} in #{@city_display_name}",
+      base_description: "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@total_count} hotels within short distance of the terminal",
+      fallback_title: "Hotels near #{@airport.name} in #{@city_display_name} (#{Time.current.year}) | Airport Hotels",
+      fallback_description: "Find the best hotels near #{@airport.name} in #{@city_display_name}. #{@total_count} hotels within short distance of the terminal."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:hotels_near_airport_url, @city_slug, @airport.slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -79,7 +88,8 @@ class HotelsNearAirportController < ApplicationController
         page: @page,
         has_more: @has_more,
         airport_slug: @airport.slug,
-        city_slug: @city_slug
+        city_slug: @city_slug,
+        filter_params: @filter_params
       }
     end
   end

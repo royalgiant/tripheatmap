@@ -1,5 +1,6 @@
 class HotelsNearConventionCenterController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_and_convention_center, only: [:show]
 
@@ -39,6 +40,7 @@ class HotelsNearConventionCenterController < ApplicationController
 
   def show
     all_hotels = hotels_near_convention_center(@convention_center, radius_km: 3.0)
+    all_hotels = apply_filters(all_hotels)
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -46,9 +48,16 @@ class HotelsNearConventionCenterController < ApplicationController
       .transform_values(&:count)
       .sort_by { |k, v| -v }
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
-    @seo_title = "Hotels near #{@convention_center.name} in #{@city_display_name} (#{Time.current.year}) | Conference Hotels"
-    @seo_description = "Find the best hotels near #{@convention_center.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of the convention center."
-    @canonical_url = hotels_near_convention_center_url(@convention_center.slug, @city_slug)
+
+    seo_data = generate_seo_metadata(
+      base_title: "Hotels near #{@convention_center.name} in #{@city_display_name}",
+      base_description: "Find the best hotels near #{@convention_center.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of the convention center",
+      fallback_title: "Hotels near #{@convention_center.name} in #{@city_display_name} (#{Time.current.year}) | Conference Hotels",
+      fallback_description: "Find the best hotels near #{@convention_center.name} in #{@city_display_name}. #{@total_count} hotels within walking distance of the convention center."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:hotels_near_convention_center_url, @city_slug, @convention_center.slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -79,7 +88,8 @@ class HotelsNearConventionCenterController < ApplicationController
         page: @page,
         has_more: @has_more,
         convention_center_slug: @convention_center.slug,
-        city_slug: @city_slug
+        city_slug: @city_slug,
+        filter_params: @filter_params
       }
     end
   end

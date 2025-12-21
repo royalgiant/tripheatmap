@@ -1,16 +1,15 @@
-// Hotel Filters Component
+// Hotel Filters with client-side filtering + URL updates (no page reload)
 class HotelFilters {
   constructor() {
+    this.form = document.querySelector('form[data-hotel-filters-form]');
     this.toggleButton = document.getElementById('filter-toggle');
     this.panel = document.getElementById('filter-panel');
-    this.countText = document.getElementById('filter-count-text');
-    this.clearButton = document.getElementById('clear-filters');
-    this.checkboxes = document.querySelectorAll('.filter-checkbox');
     this.priceSlider = document.getElementById('price-slider');
     this.priceSliderLabel = document.getElementById('price-slider-label');
+    this.filterCountText = document.getElementById('filter-count-text');
 
-    if (!this.toggleButton || !this.panel) {
-      console.log('HotelFilters: Toggle button or panel not found.');
+    if (!this.form) {
+      console.log('HotelFilters: Form not found.');
       return;
     }
 
@@ -18,70 +17,63 @@ class HotelFilters {
   }
 
   init() {
-    console.log('HotelFilters: Initializing...');
+    console.log('HotelFilters: Initializing client-side filters with URL updates...');
     this.attachEventListeners();
-    // Initialize state
-    this.filterHotels(); 
+    this.updateFilterCount();
+    this.updateSliderLabel();
+    // Apply initial filters based on URL params
+    this.filterHotels();
   }
 
   attachEventListeners() {
     // Toggle Filter Panel
-    this.toggleButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log('HotelFilters: Toggle clicked');
-      this.panel.classList.toggle('hidden');
-    });
-
-    // Filter Logic on Change
-    this.checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', () => this.filterHotels());
-    });
-    
-    // Slider Logic
-    if (this.priceSlider) {
-      this.priceSlider.addEventListener('input', (e) => {
-        this.updateSliderLabel(e.target.value);
-      });
-      
-      this.priceSlider.addEventListener('change', () => {
-        this.filterHotels();
-      });
-    }
-
-    // Clear All
-    if (this.clearButton) {
-      this.clearButton.addEventListener('click', (e) => {
+    if (this.toggleButton && this.panel) {
+      this.toggleButton.addEventListener('click', (e) => {
         e.preventDefault();
-        this.checkboxes.forEach(cb => cb.checked = false);
-        
-        if (this.priceSlider) {
-          this.priceSlider.value = this.priceSlider.max;
-          this.updateSliderLabel(this.priceSlider.max);
-        }
-        
-        this.filterHotels();
+        this.panel.classList.toggle('hidden');
       });
     }
-  }
-  
-  updateSliderLabel(value) {
-    if (!this.priceSliderLabel) return;
-    
-    if (parseFloat(value) >= parseFloat(this.priceSlider.max)) {
-      this.priceSliderLabel.textContent = 'Any';
-    } else {
-      this.priceSliderLabel.textContent = `< $${value}`;
-    }
+
+    // Prevent form submission (we'll handle filtering client-side)
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    // Apply filters on change (client-side, no page reload)
+    const filterInputs = this.form.querySelectorAll('.filter-checkbox, #price-slider');
+    filterInputs.forEach(input => {
+      if (input.type === 'range') {
+        // Debounce slider changes
+        input.addEventListener('input', () => this.updateSliderLabel());
+        input.addEventListener('change', () => {
+          clearTimeout(this.sliderTimeout);
+          this.sliderTimeout = setTimeout(() => {
+            this.filterHotels();
+            this.updateURL();
+          }, 500);
+        });
+      } else {
+        // Filter immediately for checkboxes
+        input.addEventListener('change', () => {
+          this.filterHotels();
+          this.updateURL();
+        });
+      }
+    });
   }
 
   filterHotels() {
-    const selectedPrices = Array.from(document.querySelectorAll('input[name="price[]"]:checked')).map(cb => cb.value);
-    const selectedRatings = Array.from(document.querySelectorAll('input[name="rating[]"]:checked')).map(cb => parseFloat(cb.value));
-    const selectedHoods = Array.from(document.querySelectorAll('input[name="neighborhood[]"]:checked')).map(cb => cb.value);
+    const selectedPriceRadio = this.form.querySelector('input[name="price"]:checked');
+    const selectedPrice = selectedPriceRadio ? selectedPriceRadio.value : '';
+
+    const selectedRatingRadio = this.form.querySelector('input[name="rating"]:checked');
+    const selectedRating = selectedRatingRadio && selectedRatingRadio.value ? parseFloat(selectedRatingRadio.value) : null;
+
+    const selectedNeighborhoods = Array.from(this.form.querySelectorAll('input[name="neighborhood[]"]:checked')).map(cb => cb.value);
 
     let maxAvgPrice = Infinity;
     let sliderActive = false;
-    
+
     if (this.priceSlider) {
       const sliderVal = parseFloat(this.priceSlider.value);
       const sliderMax = parseFloat(this.priceSlider.max);
@@ -92,20 +84,7 @@ class HotelFilters {
       }
     }
 
-    // Update Filter Count Text and Clear Button visibility
-    const totalFilters = selectedPrices.length + selectedRatings.length + selectedHoods.length + (sliderActive ? 1 : 0);
-
-    if (this.countText) {
-      this.countText.textContent = totalFilters > 0 ? `${totalFilters} Filters` : 'Filters';
-    }
-
-    if (this.clearButton) {
-      if (totalFilters > 0) {
-        this.clearButton.classList.remove('invisible');
-      } else {
-        this.clearButton.classList.add('invisible');
-      }
-    }
+    this.updateFilterCount();
 
     // Query hotel items fresh each time to include lazy-loaded content
     const hotelItems = document.querySelectorAll('.hotel-item');
@@ -113,19 +92,13 @@ class HotelFilters {
     hotelItems.forEach(item => {
       const price = item.dataset.price;
       const rating = parseFloat(item.dataset.rating);
-      const hoodId = String(item.dataset.neighborhoodId || '');
+      const neighborhoodSlug = String(item.dataset.neighborhoodSlug || '');
       const avgPrice = parseFloat(item.dataset.averagePrice);
 
-      const priceMatch = selectedPrices.length === 0 || selectedPrices.includes(price);
-      const ratingMatch = selectedRatings.length === 0 || selectedRatings.some(minRating => rating >= minRating);
-      const hoodMatch = selectedHoods.length === 0 || selectedHoods.includes(hoodId);
+      const priceMatch = !selectedPrice || selectedPrice === price;
+      const ratingMatch = !selectedRating || rating >= selectedRating;
+      const neighborhoodMatch = selectedNeighborhoods.length === 0 || selectedNeighborhoods.includes(neighborhoodSlug);
 
-      // Avg Price Match logic:
-      // If slider is NOT active (i.e. set to max/Any), everything matches.
-      // If slider IS active, we check if the hotel's price is <= maxAvgPrice.
-      // Hotels with no avg price (NaN) should probably be hidden when a strict budget is set,
-      // or shown? Typically hidden if strict filter.
-      // Let's assume hidden if strict filter, visible if 'Any'.
       let avgPriceMatch = true;
       if (sliderActive) {
         if (isNaN(avgPrice)) {
@@ -135,26 +108,98 @@ class HotelFilters {
         }
       }
 
-      if (priceMatch && ratingMatch && hoodMatch && avgPriceMatch) {
+      if (priceMatch && ratingMatch && neighborhoodMatch && avgPriceMatch) {
         item.style.display = '';
       } else {
         item.style.display = 'none';
       }
     });
   }
+
+  updateURL() {
+    // Build clean URL without page reload using History API
+    const formData = new FormData(this.form);
+    const queryParts = [];
+
+    // Handle price filter (radio button)
+    const price = formData.get('price');
+    if (price) {
+      queryParts.push(`price=${price}`);
+    }
+
+    // Handle rating filter (radio button)
+    const rating = formData.get('rating');
+    if (rating) {
+      queryParts.push(`rating=${rating}`);
+    }
+
+    // Handle neighborhood filters (checkboxes)
+    const neighborhoods = formData.getAll('neighborhood[]');
+    neighborhoods.forEach(n => {
+      queryParts.push(`neighborhood=${encodeURIComponent(n)}`);
+    });
+
+    // Handle max price slider
+    const maxPrice = formData.get('max_price');
+    const sliderMax = parseFloat(this.priceSlider?.max);
+    if (maxPrice && parseFloat(maxPrice) < sliderMax) {
+      queryParts.push(`max_price=${maxPrice}`);
+    }
+
+    // Build new URL with unencoded $ symbols
+    const queryString = queryParts.join('&').replace(/%24/g, '$');
+    const newURL = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
+
+    // Update URL without reload
+    window.history.pushState({}, '', newURL);
+  }
+
+  updateSliderLabel() {
+    if (!this.priceSlider || !this.priceSliderLabel) return;
+
+    const value = parseFloat(this.priceSlider.value);
+    const max = parseFloat(this.priceSlider.dataset.max || this.priceSlider.max);
+
+    if (value >= max) {
+      this.priceSliderLabel.textContent = 'Any';
+    } else {
+      this.priceSliderLabel.textContent = `< $${Math.round(value)}`;
+    }
+  }
+
+  updateFilterCount() {
+    if (!this.filterCountText || !this.form) return;
+
+    let count = 0;
+
+    // Count price radio (if not "Any")
+    const priceRadio = this.form.querySelector('input[name="price"]:checked');
+    if (priceRadio && priceRadio.value) count++;
+
+    // Count rating radio (if not "Any")
+    const ratingRadio = this.form.querySelector('input[name="rating"]:checked');
+    if (ratingRadio && ratingRadio.value) count++;
+
+    // Count neighborhood checkboxes
+    const checkedNeighborhoods = this.form.querySelectorAll('input[name="neighborhood[]"]:checked');
+    count += checkedNeighborhoods.length;
+
+    // Check if slider is active (not at max)
+    if (this.priceSlider) {
+      const value = parseFloat(this.priceSlider.value);
+      const max = parseFloat(this.priceSlider.dataset.max || this.priceSlider.max);
+      if (value < max) count++;
+    }
+
+    this.filterCountText.textContent = count > 0 ? `${count} Filters` : 'Filters';
+  }
 }
 
 // Initialize on page load
 function initHotelFilters() {
-  const toggle = document.getElementById('filter-toggle');
-  if (toggle) {
-    // Check if we've already attached a listener to avoid duplicates if Turbo caches the page? 
-    // Actually, creating a new class instance adds new listeners. 
-    // Ideally we should disconnect old ones, but for now let's just run it.
-    // A simple guard to prevent double initialization on the same element could be adding a data attribute.
-    if (toggle.dataset.filtersInitialized === "true") return;
-    toggle.dataset.filtersInitialized = "true";
-    
+  const form = document.querySelector('form[data-hotel-filters-form]');
+  if (form && !form.dataset.filtersInitialized) {
+    form.dataset.filtersInitialized = "true";
     new HotelFilters();
   }
 }

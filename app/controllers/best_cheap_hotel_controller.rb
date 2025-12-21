@@ -1,5 +1,6 @@
 class BestCheapHotelController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_context, only: [:show]
 
@@ -11,7 +12,10 @@ class BestCheapHotelController < ApplicationController
   def show
     @city_display_name = city_display_name
     @country = @city_config['country'] || 'United States'
+
     all_hotels = cheap_hotels
+    all_hotels = apply_filters(all_hotels)
+
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -21,9 +25,16 @@ class BestCheapHotelController < ApplicationController
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
 
     @related_cities = fetch_related_cities
-    @seo_title = "Best Cheap Hotels in #{@city_display_name} (#{Time.current.year}) | Budget & Affordable Stays"
-    @seo_description = "Find the best budget-friendly and affordable hotels in #{@city_display_name}. Quality accommodations at great prices."
-    @canonical_url = best_cheap_hotels_url(@url_slug)
+
+    seo_data = generate_seo_metadata(
+      base_title: "Best Cheap Hotels in #{@city_display_name}",
+      base_description: "Find the best budget-friendly and affordable hotels in #{@city_display_name}",
+      fallback_title: "Best Cheap Hotels in #{@city_display_name} (#{Time.current.year}) | Budget & Affordable Stays",
+      fallback_description: "Find the best budget-friendly and affordable hotels in #{@city_display_name}. Quality accommodations at great prices."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:best_cheap_hotels_url, @url_slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -48,7 +59,8 @@ class BestCheapHotelController < ApplicationController
         page: @page,
         has_more: @has_more,
         url_slug: @url_slug,
-        path_helper: :best_cheap_hotels_path
+        path_helper: :best_cheap_hotels_path,
+        filter_params: @filter_params
       }
     end
   end

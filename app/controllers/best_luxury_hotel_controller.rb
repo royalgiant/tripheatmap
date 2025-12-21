@@ -1,5 +1,6 @@
 class BestLuxuryHotelController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_context, only: [:show]
 
@@ -13,6 +14,8 @@ class BestLuxuryHotelController < ApplicationController
     @country = @city_config['country'] || 'United States'
 
     all_hotels = luxury_hotels
+    all_hotels = apply_filters(all_hotels)
+
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -22,8 +25,18 @@ class BestLuxuryHotelController < ApplicationController
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
 
     @related_cities = fetch_related_cities
-    @seo_title = "Best Luxury Hotels in #{@city_display_name} (#{Time.current.year}) | Top 5 Star Stays"
-    @seo_description = "Discover the most exclusive and highly-rated luxury hotels in #{@city_display_name}. Find 5-star accommodations and top-tier service."
+
+    # Generate SEO metadata based on filters
+    seo_data = generate_seo_metadata(
+      base_title: "Best Luxury Hotels in #{@city_display_name}",
+      base_description: "Discover the most exclusive and highly-rated luxury hotels in #{@city_display_name}",
+      fallback_title: "Best Luxury Hotels in #{@city_display_name} (#{Time.current.year}) | Top 5 Star Stays",
+      fallback_description: "Discover the most exclusive and highly-rated luxury hotels in #{@city_display_name}. Find 5-star accommodations and top-tier service."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:best_luxury_hotels_url, @url_slug)
+
     @page = params[:page]&.to_i || 1
     @per_page = 200
     @has_more = @total_count > (@page * @per_page)
@@ -47,7 +60,8 @@ class BestLuxuryHotelController < ApplicationController
         page: @page,
         has_more: @has_more,
         url_slug: @url_slug,
-        path_helper: :best_luxury_hotels_path
+        path_helper: :best_luxury_hotels_path,
+        filter_params: @filter_params
       }
     end
   end

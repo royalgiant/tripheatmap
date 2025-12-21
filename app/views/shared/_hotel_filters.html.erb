@@ -1,3 +1,4 @@
+<%= form_with url: request.path, method: :get, data: { turbo_frame: "_top", hotel_filters_form: true } do |f| %>
 <section aria-labelledby="filter-heading" class="grid items-center border-b border-gray-200 pb-6 mb-6">
       <h2 id="filter-heading" class="sr-only">Filters</h2>
       <div class="relative col-start-1 row-start-1 py-4">
@@ -11,19 +12,23 @@
             </button>
           </div>
           <div class="pl-6 border-l border-gray-200">
-            <button type="button" id="clear-filters" class="text-gray-500 hover:text-gray-900 invisible">Clear all</button>
+            <%= link_to "Clear all", request.path, class: "text-gray-500 hover:text-gray-900", id: "clear-filters", style: (@filter_params.blank? ? "visibility: hidden;" : "") %>
           </div>
         </div>
       </div>
-      
+
       <div id="filter-panel" class="hidden border-t border-gray-200 py-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
           <fieldset class="col-span-1">
             <legend class="block font-medium text-gray-900">Price</legend>
             <div class="space-y-2 pt-2">
+              <div class="flex items-center">
+                <input id="price-any" name="price" value="" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox" <%= 'checked' if @filter_params[:price].blank? %>>
+                <label for="price-any" class="ml-2 text-sm text-gray-600">Any</label>
+              </div>
               <% ['$', '$$', '$$$', '$$$$'].each do |price| %>
                 <div class="flex items-center">
-                  <input id="price-<%= price.length %>" name="price[]" value="<%= price %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <input id="price-<%= price.length %>" name="price" value="<%= price %>" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox" <%= 'checked' if @filter_params[:price] == price %>>
                   <label for="price-<%= price.length %>" class="ml-2 text-sm text-gray-600"><%= price %></label>
                 </div>
               <% end %>
@@ -33,9 +38,13 @@
           <fieldset class="col-span-1">
             <legend class="block font-medium text-gray-900">Rating</legend>
             <div class="space-y-2 pt-2">
+              <div class="flex items-center">
+                <input id="rating-any" name="rating" value="" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox" <%= 'checked' if @filter_params[:rating].blank? %>>
+                <label for="rating-any" class="ml-2 text-sm text-gray-600">Any</label>
+              </div>
               <% [['4.5', '4.5+'], ['4.0', '4.0+'], ['3.5', '3.5+'], ['3.0', '3.0+']].each do |rating_val, label| %>
                 <div class="flex items-center">
-                  <input id="rating-<%= rating_val %>" name="rating[]" value="<%= rating_val %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
+                  <input id="rating-<%= rating_val %>" name="rating" value="<%= rating_val %>" type="radio" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox" <%= 'checked' if @filter_params[:rating]&.first&.to_s == rating_val %>>
                   <label for="rating-<%= rating_val %>" class="ml-2 text-sm text-gray-600"><%= label %></label>
                 </div>
               <% end %>
@@ -53,16 +62,18 @@
             <div class="space-y-2 pt-2">
               <div class="flex justify-between text-xs text-gray-600">
                 <span><%= number_to_currency(min_price, precision: 0) %></span>
-                <span id="price-slider-label" class="font-medium">Any</span>
+                <span id="price-slider-label" class="font-medium"><%= @filter_params[:max_price] ? "< $#{@filter_params[:max_price].to_i}" : "Any" %></span>
               </div>
-              <input 
-                type="range" 
-                id="price-slider" 
-                min="<%= min_price %>" 
-                max="<%= max_price %>" 
-                value="<%= max_price %>" 
+              <input
+                type="range"
+                id="price-slider"
+                name="max_price"
+                min="<%= min_price %>"
+                max="<%= max_price %>"
+                value="<%= @filter_params[:max_price] || max_price %>"
                 step="10"
                 class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                data-max="<%= max_price %>"
               >
             </div>
           </fieldset>
@@ -73,8 +84,8 @@
             <div class="space-y-2 pt-2 max-h-48 overflow-y-auto">
               <% hotels.map(&:neighborhood).compact.uniq.sort_by(&:name).each do |hood| %>
                 <div class="flex items-center justify-center">
-                  <input id="hood-<%= hood.id %>" name="neighborhood[]" value="<%= hood.id %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox">
-                  <label for="hood-<%= hood.id %>" class="ml-2 text-sm text-gray-600 truncate" title="<%= hood.name %>"><%= hood.name %></label>
+                  <input id="hood-<%= hood.slug %>" name="neighborhood[]" value="<%= hood.slug %>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 filter-checkbox" <%= 'checked' if @filter_params[:neighborhood_slugs]&.include?(hood.slug) %>>
+                  <label for="hood-<%= hood.slug %>" class="ml-2 text-sm text-gray-600 truncate" title="<%= hood.name %>"><%= hood.name %></label>
                 </div>
               <% end %>
             </div>
@@ -82,3 +93,4 @@
         </div>
       </div>
     </section>
+<% end %>

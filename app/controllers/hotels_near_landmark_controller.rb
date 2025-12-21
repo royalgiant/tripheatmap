@@ -1,5 +1,6 @@
 class HotelsNearLandmarkController < ApplicationController
   include CityContext
+  include HotelFiltering
 
   before_action :set_city_and_landmark, only: [:show]
 
@@ -44,6 +45,7 @@ class HotelsNearLandmarkController < ApplicationController
 
   def show
     all_hotels = hotels_near_landmark(@landmark, radius_km: 5.0)
+    all_hotels = apply_filters(all_hotels)
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -51,9 +53,16 @@ class HotelsNearLandmarkController < ApplicationController
       .transform_values(&:count)
       .sort_by { |k, v| -v }
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
-    @seo_title = "Hotels near #{@landmark.name} in #{@city_display_name} (#{Time.current.year}) | Best Stays"
-    @seo_description = "Find the best hotels near #{@landmark.name} in #{@city_display_name}. #{@total_count} hotels within walking distance."
-    @canonical_url = hotels_near_landmark_url(@city_slug, @landmark.slug)
+
+    seo_data = generate_seo_metadata(
+      base_title: "Hotels near #{@landmark.name} in #{@city_display_name}",
+      base_description: "Find the best hotels near #{@landmark.name} in #{@city_display_name}. #{@total_count} hotels within walking distance",
+      fallback_title: "Hotels near #{@landmark.name} in #{@city_display_name} (#{Time.current.year}) | Best Stays",
+      fallback_description: "Find the best hotels near #{@landmark.name} in #{@city_display_name}. #{@total_count} hotels within walking distance."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:hotels_near_landmark_url, @city_slug, @landmark.slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -84,7 +93,8 @@ class HotelsNearLandmarkController < ApplicationController
         page: @page,
         has_more: @has_more,
         landmark_slug: @landmark.slug,
-        city_slug: @city_slug
+        city_slug: @city_slug,
+        filter_params: @filter_params
       }
     end
   end

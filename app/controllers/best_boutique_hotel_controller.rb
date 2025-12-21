@@ -1,5 +1,6 @@
 class BestBoutiqueHotelController < ApplicationController
   include CityContext
+  include HotelFiltering
   before_action :set_city_context, only: [:show]
 
   def index
@@ -10,7 +11,10 @@ class BestBoutiqueHotelController < ApplicationController
   def show
     @city_display_name = city_display_name
     @country = @city_config['country'] || 'United States'
+
     all_hotels = boutique_hotels
+    all_hotels = apply_filters(all_hotels)
+
     @total_count = all_hotels.count
     @has_hotels = @total_count > 0
     neighborhood_counts = all_hotels
@@ -20,9 +24,17 @@ class BestBoutiqueHotelController < ApplicationController
     @top_neighborhoods = neighborhood_counts.first(2).map { |neighborhood, count| neighborhood&.name }.compact
 
     @related_cities = fetch_related_cities
-    @seo_title = "Best Boutique Hotels in #{@city_display_name} (#{Time.current.year}) | Charming Stays"
-    @seo_description = "Find the most charming and unique boutique hotels in #{@city_display_name}. Curated list of highly-rated properties for an authentic stay."
-    @canonical_url = best_boutique_hotels_url(@url_slug)
+
+    # Generate SEO metadata based on filters
+    seo_data = generate_seo_metadata(
+      base_title: "Best Boutique Hotels in #{@city_display_name}",
+      base_description: "Find the most charming and unique boutique hotels in #{@city_display_name}",
+      fallback_title: "Best Boutique Hotels in #{@city_display_name} (#{Time.current.year}) | Charming Stays",
+      fallback_description: "Find the most charming and unique boutique hotels in #{@city_display_name}. Curated list of highly-rated properties for an authentic stay."
+    )
+    @seo_title = seo_data[:title]
+    @seo_description = seo_data[:description]
+    @canonical_url = canonical_url_with_filters(:best_boutique_hotels_url, @url_slug)
 
     @page = params[:page]&.to_i || 1
     @per_page = 200
@@ -48,7 +60,8 @@ class BestBoutiqueHotelController < ApplicationController
         page: @page,
         has_more: @has_more,
         url_slug: @url_slug,
-        path_helper: :best_boutique_hotels_path
+        path_helper: :best_boutique_hotels_path,
+        filter_params: @filter_params
       }
     end
   end
@@ -84,11 +97,11 @@ class BestBoutiqueHotelController < ApplicationController
 
   def nearby_places(place_type, limit)
     hotel_neighborhood_ids = @boutique_hotels.map(&:neighborhood_id).compact.uniq
-    
+
     return [] if hotel_neighborhood_ids.empty?
 
     target_neighborhoods = hotel_neighborhood_ids.first(20)
-    
+
     # Calculate how many places per neighborhood to approximate the total limit
     # Ensure at least 3-20
     per_hood_limit = (limit / target_neighborhoods.size.to_f).ceil.clamp(3, 20)
@@ -97,7 +110,7 @@ class BestBoutiqueHotelController < ApplicationController
       SELECT sub.* FROM (
         SELECT id, name, place_type, latitude, longitude, address, rating, review_count, trip_affiliate_url, neighborhood_id,
                ROW_NUMBER() OVER (
-                 PARTITION BY neighborhood_id 
+                 PARTITION BY neighborhood_id
                  ORDER BY rating DESC, review_count DESC
                ) as rn
         FROM places
@@ -111,4 +124,5 @@ class BestBoutiqueHotelController < ApplicationController
     query = ActiveRecord::Base.sanitize_sql_array([sql, target_neighborhoods, place_type, per_hood_limit])
     Place.find_by_sql(query)
   end
+
 end
