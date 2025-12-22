@@ -53,9 +53,9 @@
 
           <% 
              prices = hotels.map(&:average_price).compact.map(&:to_f)
-             if prices.any?
-               min_price = prices.min.floor
-               max_price = prices.max.ceil
+             if prices.any? || @slider_max_price
+               min_price = prices.any? ? prices.min.floor : 0
+               max_price = @slider_max_price || prices.max&.ceil || 500
           %>
           <fieldset class="col-span-2 md:col-span-1 md:col-start-3">
             <legend class="block font-medium text-gray-900 text-center">Max Nightly Price (AI estimated)</legend>

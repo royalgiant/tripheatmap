@@ -1,6 +1,6 @@
 require "test_helper"
 
-class HotelsNearLandmarkControllerTest < ActionDispatch::IntegrationTest
+class HotelsNearAirportControllerTest < ActionDispatch::IntegrationTest
   setup do
     @city = Neighborhood.create!(
       name: "Test Neighborhood",
@@ -12,32 +12,32 @@ class HotelsNearLandmarkControllerTest < ActionDispatch::IntegrationTest
     )
     @city.update_column(:city, "toronto")
 
-    @landmark = Place.create!(
-      name: "Test Landmark",
-      place_type: "attraction",
-      slug: "test-landmark",
+    @airport = Place.create!(
+      name: "Test Airport",
+      place_type: "airport",
+      slug: "test-airport",
       city: "toronto",
       latitude: 43.6532,
       longitude: -79.3832,
       neighborhood: @city
     )
-    @landmark.update_column(:city, "toronto")
+    @airport.update_column(:city, "toronto")
 
     @hotel_1 = Place.create!(
-      name: "Landmark Hotel 1",
+      name: "Airport Hotel 1",
       place_type: "hotel",
       price_range: "$",
       rating: 4.5,
       review_count: 100,
       latitude: 43.6532,
-      longitude: -79.3832,
+      longitude: -79.3832, # Same location, distance 0
       neighborhood: @city,
       city: "toronto"
     )
     @hotel_1.update_column(:city, "toronto")
 
     @hotel_2 = Place.create!(
-      name: "Landmark Hotel 2",
+      name: "Airport Hotel 2",
       place_type: "hotel",
       price_range: "$$",
       rating: 4.0,
@@ -51,46 +51,46 @@ class HotelsNearLandmarkControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get hotels_near_landmark_index_path
+    get hotels_near_airport_index_path
     assert_response :success
   end
 
   test "should get city index" do
-    get hotels_near_landmark_city_path('toronto')
+    get hotels_near_airport_city_path('toronto')
     assert_response :success
   end
 
-  test "should get show for landmark" do
-    get hotels_near_landmark_path('toronto', @landmark.slug)
+  test "should get show for airport" do
+    get hotels_near_airport_path('toronto', @airport.slug)
     assert_response :success
   end
 
   test "should filter by price range" do
-    get hotels_near_landmark_path('toronto', @landmark.slug, price: '$')
+    get hotels_near_airport_path('toronto', @airport.slug, price: '$')
     assert_response :success
     assert_select 'title', /budget/i
   end
 
   test "should filter by rating" do
-    get hotels_near_landmark_path('toronto', @landmark.slug, rating: '4.5')
+    get hotels_near_airport_path('toronto', @airport.slug, rating: '4.5')
     assert_response :success
     assert_select 'title', /4.5\+ rated/i
   end
 
   test "should filter by max price" do
-    get hotels_near_landmark_path('toronto', @landmark.slug, max_price: 100)
+    get hotels_near_airport_path('toronto', @airport.slug, max_price: 100)
     assert_response :success
     assert_select 'title', /under \$100/i
   end
 
   test "canonical URL should include filter params" do
-    get hotels_near_landmark_path('toronto', @landmark.slug, price: '$$')
+    get hotels_near_airport_path('toronto', @airport.slug, price: '$$')
     assert_response :success
     assert_select 'link[rel=canonical][href*="price"]'
   end
 
   test "should preserve checked filter state from URL params" do
-    get hotels_near_landmark_path('toronto', @landmark.slug, price: '$$')
+    get hotels_near_airport_path('toronto', @airport.slug, price: '$$')
     assert_response :success
     assert_select 'input[name="price"][value="$$"][checked]'
   end

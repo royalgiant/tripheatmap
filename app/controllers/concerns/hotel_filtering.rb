@@ -64,6 +64,7 @@ module HotelFiltering
       filtered = filtered.where(neighborhood_id: @filter_params[:neighborhood_ids])
     end
 
+    @slider_max_price = filtered.maximum(:average_price)&.ceil
     if @filter_params[:max_price].present?
       filtered = filtered.where('average_price <= ? OR average_price IS NULL', @filter_params[:max_price])
     end
@@ -86,6 +87,9 @@ module HotelFiltering
     if @filter_params[:neighborhood_ids].present?
       filtered = filtered.select { |hotel| @filter_params[:neighborhood_ids].include?(hotel.neighborhood_id) }
     end
+
+    prices = filtered.map(&:average_price).compact
+    @slider_max_price = prices.max&.ceil
 
     if @filter_params[:max_price].present?
       filtered = filtered.select { |hotel| hotel.average_price.nil? || hotel.average_price <= @filter_params[:max_price] }
