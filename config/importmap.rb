@@ -7,3 +7,4 @@ pin "mapbox_heatmap", to: "mapbox_heatmap.js", preload: true
 pin "places_map", to: "places_map.js", preload: true
 pin "city_selector", to: "city_selector.js", preload: true
 pin "hotel_filters", to: "hotel_filters.js", preload: true
+pin "saved_searches", to: "saved_searches.js", preload: true

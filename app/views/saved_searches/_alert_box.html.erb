@@ -1,0 +1,22 @@
+<%
+  type ||= 'info'
+  alert_classes = case type
+    when 'warning'
+      { bg: 'bg-yellow-50', border: 'border-yellow-400', text: 'text-yellow-800', icon: 'fa-exclamation-triangle' }
+    when 'success'
+      { bg: 'bg-green-50', border: 'border-green-400', text: 'text-green-700', icon: 'fa-check-circle' }
+    when 'error'
+      { bg: 'bg-red-50', border: 'border-red-400', text: 'text-red-700', icon: 'fa-exclamation-circle' }
+    else # 'info'
+      { bg: 'bg-blue-50', border: 'border-blue-400', text: 'text-blue-700', icon: 'fa-info-circle' }
+  end
+
+  icon ||= alert_classes[:icon]
+%>
+
+<div class="<%= alert_classes[:bg] %> border-l-4 <%= alert_classes[:border] %> p-4 mb-6">
+  <p class="text-sm <%= alert_classes[:text] %> <%= 'font-medium' if type == 'warning' %>">
+    <i class="fa-solid <%= icon %> mr-2"></i>
+    <%= message %>
+  </p>
+</div>

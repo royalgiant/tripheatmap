@@ -14,6 +14,26 @@
           <div class="pl-6 border-l border-gray-200">
             <%= link_to "Clear all", request.path, class: "text-gray-500 hover:text-gray-900", id: "clear-filters", style: (@filter_params.blank? ? "visibility: hidden;" : "") %>
           </div>
+          <div class="pl-6 border-l border-gray-200">
+            <%= link_to new_saved_search_path(
+                  location: @city_display_name,
+                  max_price: @filter_params[:max_price],
+                  rating: @filter_params[:rating]&.first,
+                  price: @filter_params[:price],
+                  neighborhood: @filter_params[:neighborhood_slugs]
+                ),
+                id: "save-search-btn",
+                class: "group flex items-center font-medium transition-colors #{ @filter_params.blank? ? 'text-gray-300 cursor-not-allowed' : 'text-blue-600 hover:text-blue-800' }",
+                data: {
+                  turbo_frame: "save_search_modal",
+                  save_search_trigger: true
+                },
+                title: @filter_params.blank? ? "Apply filters (Price, Rating, or Neighborhood) to save this search" : "Save this search and get notified of deals",
+                style: (@filter_params.blank? ? "pointer-events: none;" : "") do %>
+              <i class="fa-solid fa-bell mr-2 <%= @filter_params.blank? ? 'text-gray-300' : 'text-blue-500' %>"></i>
+              <span>Save Search</span>
+            <% end %>
+          </div>
         </div>
       </div>
 
@@ -71,7 +91,7 @@
                 min="<%= min_price %>"
                 max="<%= max_price %>"
                 value="<%= @filter_params[:max_price] || max_price %>"
-                step="10"
+                step="5"
                 class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 data-max="<%= max_price %>"
               >

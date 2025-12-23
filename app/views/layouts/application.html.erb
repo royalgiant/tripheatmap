@@ -62,7 +62,7 @@
     <%= yield :head %>
   </head>
 
-  <body class="h-full bg-white text-black">
+  <body class="h-full bg-white text-black" <%= user_signed_in? ? 'data-user-logged-in="true"' : '' %>>
     <%= render 'layouts/city_selector' %>
 
     <div class="text-center mx-5 bg-white">
@@ -73,6 +73,7 @@
       <%= yield %>
     </div>
     <%= turbo_frame_tag "place_details_modal" %>
+    <%= turbo_frame_tag "save_search_modal" %>
   </body>
 
   <%= render 'layouts/footer' %>

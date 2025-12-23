@@ -5,4 +5,5 @@
 //= link mapbox_heatmap.js
 //= link city_selector.js
 //= link hotel_filters.js
+//= link saved_searches.js
 //= link_tree ../builds

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_22_225821) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -85,7 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
@@ -537,6 +537,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
     t.index ["post_id"], name: "index_reddit_posts_on_post_id", unique: true
   end
 
+  create_table "saved_searches", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "location", null: false
+    t.integer "max_price_cents", null: false
+    t.decimal "min_rating", precision: 2, scale: 1
+    t.string "price_range"
+    t.string "neighborhood"
+    t.jsonb "filters", default: {}
+    t.date "checkin_date"
+    t.date "checkout_date"
+    t.string "status", default: "active"
+    t.boolean "email_verified", default: false
+    t.integer "notification_count", default: 0
+    t.datetime "last_notified_at"
+    t.text "original_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location", "max_price_cents"], name: "index_saved_searches_on_location_price"
+    t.index ["user_id", "location", "max_price_cents", "min_rating", "neighborhood"], name: "index_saved_searches_on_user_and_criteria"
+    t.index ["user_id"], name: "index_saved_searches_on_user_id"
+  end
+
   create_table "secondary_unit_lookup", primary_key: "name", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "abbrev", limit: 5
     t.index ["abbrev"], name: "secondary_unit_lookup_abbrev_idx"
@@ -607,7 +629,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
@@ -646,7 +668,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"multi_polygon"}
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
@@ -742,5 +764,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_20_125335) do
   add_foreign_key "favorites", "users"
   add_foreign_key "neighborhood_places_stats", "neighborhoods"
   add_foreign_key "places", "neighborhoods"
+  add_foreign_key "saved_searches", "users"
   add_foreign_key "subscriptions", "users"
 end

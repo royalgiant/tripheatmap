@@ -49,6 +49,7 @@ class HotelFilters {
           clearTimeout(this.sliderTimeout);
           this.sliderTimeout = setTimeout(() => {
             this.filterHotels();
+            this.updateFilterCount();
             this.updateURL();
           }, 500);
         });
@@ -56,6 +57,7 @@ class HotelFilters {
         // Filter immediately for checkboxes
         input.addEventListener('change', () => {
           this.filterHotels();
+          this.updateFilterCount();
           this.updateURL();
         });
       }
@@ -192,6 +194,36 @@ class HotelFilters {
     }
 
     this.filterCountText.textContent = count > 0 ? `${count} Filters` : 'Filters';
+    this.updateSaveSearchButton(count > 0);
+  }
+
+  updateSaveSearchButton(hasFilters) {
+    const $saveSearchBtn = $('#save-search-btn');
+    if (!$saveSearchBtn.length) return;
+
+    const $icon = $saveSearchBtn.find('.fa-bell');
+
+    if (hasFilters) {
+      $saveSearchBtn
+        .removeClass('text-gray-300 cursor-not-allowed')
+        .addClass('text-blue-600 hover:text-blue-800')
+        .css('pointer-events', '')
+        .attr('title', 'Save this search and get notified of deals');
+
+      $icon
+        .removeClass('text-gray-300')
+        .addClass('text-blue-500');
+    } else {
+      $saveSearchBtn
+        .removeClass('text-blue-600 hover:text-blue-800')
+        .addClass('text-gray-300 cursor-not-allowed')
+        .css('pointer-events', 'none')
+        .attr('title', 'Apply filters (Price, Rating, or Neighborhood) to save this search');
+
+      $icon
+        .removeClass('text-blue-500')
+        .addClass('text-gray-300');
+    }
   }
 }
 

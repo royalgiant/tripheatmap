@@ -1,0 +1,98 @@
+<tr id="saved_search_<%= saved_search.id %>" class="hover:bg-gray-50">
+  <!-- Location -->
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="flex items-center">
+      <i class="fa-solid fa-map-marker-alt text-blue-500 mr-2"></i>
+      <div class="text-sm font-medium text-gray-900">
+        <%= saved_search.location&.titleize %>
+      </div>
+    </div>
+  </td>
+
+  <!-- Filters -->
+  <td class="px-6 py-4">
+    <div class="text-sm text-gray-900">
+      <%= saved_search.filter_summary %>
+    </div>
+    <% if saved_search.filters['neighborhood_slugs'].present? %>
+      <div class="text-xs text-gray-500 mt-1">
+        <%= saved_search.filters['neighborhood_slugs'].join(', ') %>
+      </div>
+    <% end %>
+  </td>
+
+  <!-- Travel Dates -->
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-gray-900">
+      <%= saved_search.date_range %>
+    </div>
+  </td>
+
+  <!-- Status -->
+  <td class="px-6 py-4 whitespace-nowrap">
+    <% if saved_search.status == 'active' %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        <i class="fa-solid fa-check-circle mr-1"></i>
+        Active
+      </span>
+    <% elsif saved_search.status == 'paused' %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+        <i class="fa-solid fa-pause-circle mr-1"></i>
+        Paused
+      </span>
+    <% else %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+        <i class="fa-solid fa-times-circle mr-1"></i>
+        Expired
+      </span>
+    <% end %>
+  </td>
+
+  <!-- Created -->
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-gray-900">
+      <%= saved_search.created_at.strftime("%b %d, %Y") %>
+    </div>
+    <div class="text-xs text-gray-500">
+      <%= time_ago_in_words(saved_search.created_at) %> ago
+    </div>
+  </td>
+
+  <!-- Actions -->
+  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    <div class="flex justify-end gap-2">
+      <!-- Pause/Resume Button -->
+      <%= button_to pause_saved_search_path(saved_search),
+          method: :patch,
+          data: { turbo_frame: "_top", turbo_method: :patch },
+          class: "inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors" do %>
+        <% if saved_search.status == 'active' %>
+          <i class="fa-solid fa-pause mr-1"></i>
+          Pause
+        <% else %>
+          <i class="fa-solid fa-play mr-1"></i>
+          Resume
+        <% end %>
+      <% end %>
+
+      <!-- View Original Search Button -->
+      <% if saved_search.original_url.present? %>
+        <%= link_to saved_search.original_url,
+            class: "inline-flex items-center px-3 py-1 border border-blue-300 rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors",
+            target: "_blank" do %>
+          <i class="fa-solid fa-external-link-alt mr-1"></i>
+          View
+        <% end %>
+      <% end %>
+
+      <!-- Delete Button -->
+      <%= button_to saved_search_path(saved_search),
+          method: :delete,
+          data: { turbo_confirm: "Are you sure you want to delete this saved search?", turbo_frame: "_top" },
+          class: "inline-flex items-center px-3 py-1 border border-red-300 rounded-md text-red-700 bg-red-50 hover:bg-red-100 transition-colors" do %>
+        <i class="fa-solid fa-trash mr-1"></i>
+        Delete
+      <% end %>
+    </div>
+  </td>
+</tr>

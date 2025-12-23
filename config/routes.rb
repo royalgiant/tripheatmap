@@ -50,6 +50,11 @@ Rails.application.routes.draw do
   end
 
   resources :favorites, only: [:index, :create, :destroy]
+  resources :saved_searches, only: [:index, :new, :create, :destroy] do
+    member do
+      patch :pause
+    end
+  end
   resources :neighborhoods, only: [:show], param: :slug do
     member do
       get :places_list

@@ -8,5 +8,6 @@ import "./neighborhood_detail_map"
 import "./hotel_detail_map"
 import "./city_selector"
 import "hotel_filters"
+import "./saved_searches"
 
 Turbo.start()

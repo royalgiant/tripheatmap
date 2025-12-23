@@ -102,6 +102,7 @@
               <div class="flex flex-col">
                 <%= link_to 'Profile', edit_user_registration_path(current_user), class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <%= link_to 'Favorites', favorites_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
+                <%= link_to 'Saved Searches', saved_searches_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% if current_user.subscribed? || current_user.role == 'admin' %>
                   <%= link_to 'My Rentals', rentals_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' %>
                 <% end %>

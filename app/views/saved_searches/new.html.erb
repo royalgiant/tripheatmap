@@ -1,0 +1,13 @@
+<%= render 'saved_searches/modal_wrapper',
+           title: 'Save Search & Unlock Deals',
+           icon: 'fa-bell',
+           color: 'blue',
+           scrollable: true do %>
+
+  <%= render 'saved_searches/alert_box',
+             type: 'info',
+             message: '<strong>Note:</strong> This is not a price alert. We collect demand from travelers like you to negotiate better directly with hotels to get you a better rate. Our prices are AI-estimated (updated bi-annually).'.html_safe %>
+
+  <%= render 'saved_searches/form', saved_search: @saved_search %>
+
+<% end %>

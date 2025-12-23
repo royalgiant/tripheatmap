@@ -1,0 +1,163 @@
+<%= form_with(model: saved_search, data: { turbo_frame: "save_search_modal" }) do |f| %>
+  <% if saved_search.errors.any? %>
+    <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <i class="fa-solid fa-exclamation-triangle text-red-400"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-red-700 font-medium">
+            <%= pluralize(saved_search.errors.count, "error") %> prohibited this search from being saved:
+          </p>
+          <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+            <% saved_search.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="space-y-6">
+    <!-- Location (Read-only, pre-filled) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Location <span class="text-red-500">*</span>
+      </label>
+      <div class="relative">
+        <%= f.text_field :location,
+            value: saved_search.location&.titleize,
+            class: "w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 font-medium",
+            readonly: true %>
+        <i class="fa-solid fa-map-marker-alt absolute right-3 top-4 text-gray-400"></i>
+      </div>
+    </div>
+
+    <!-- Email (Read-only for authenticated users) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Email <span class="text-red-500">*</span>
+      </label>
+      <div class="relative">
+        <input type="email"
+               value="<%= current_user.email %>"
+               class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 font-medium"
+               readonly>
+        <i class="fa-solid fa-envelope absolute right-3 top-4 text-gray-400"></i>
+      </div>
+    </div>
+
+    <!-- Max Budget -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Maximum Nightly Price (Hard Limit) <span class="text-red-500">*</span>
+      </label>
+      <div class="relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">$</span>
+        <input type="number"
+               id="max_price_display"
+               name="max_price_display"
+               value="<%= saved_search.max_price_cents ? (saved_search.max_price_cents / 100.0).to_i : params[:max_price]&.to_i %>"
+               class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+               placeholder="150"
+               min="1"
+               step="1"
+               required>
+        <%= f.hidden_field :max_price_cents, id: "max_price_cents_hidden" %>
+      </div>
+      <p class="mt-1 text-xs text-gray-500">Enter your absolute maximum budget per night</p>
+    </div>
+
+    <!-- Travel Dates (Optional) -->
+    <%= render 'saved_searches/date_fields', f: f %>
+
+    <!-- Filter Summary (Read-only display) -->
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+      <h3 class="text-sm font-medium text-gray-700 mb-2">Applied Filters:</h3>
+      <div class="flex flex-wrap gap-2">
+        <% if params[:rating].present? %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <i class="fa-solid fa-star mr-1"></i>
+            <%= params[:rating] %>+ Stars
+          </span>
+        <% end %>
+
+        <% if params[:price].present? %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+            <i class="fa-solid fa-dollar-sign mr-1"></i>
+            <%= params[:price] %>
+          </span>
+        <% end %>
+
+        <% if params[:neighborhood].present? %>
+          <% Array(params[:neighborhood]).each do |hood| %>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+              <i class="fa-solid fa-map-pin mr-1"></i>
+              <%= hood.titleize %>
+            </span>
+          <% end %>
+        <% end %>
+
+        <% if params[:max_price].present? %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+            <i class="fa-solid fa-tag mr-1"></i>
+            Max $<%= params[:max_price].to_i %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Hidden fields for filters -->
+    <%= f.hidden_field :min_rating, value: params[:rating] %>
+    <%= f.hidden_field :price_range, value: params[:price] %>
+    <%= f.hidden_field :neighborhood, value: params[:neighborhood].is_a?(Array) ? params[:neighborhood].first : params[:neighborhood] %>
+    <%= f.hidden_field :original_url, value: request.referer %>
+
+    <!-- Submit Button -->
+    <div class="flex gap-3">
+      <button type="button"
+              onclick="document.getElementById('save_search_modal').innerHTML = ''"
+              class="flex-1 px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors text-center">
+        Cancel
+      </button>
+
+      <%= f.submit "Save",
+          class: "flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors cursor-pointer" %>
+    </div>
+  </div>
+
+  <script>
+      (function() {
+      function setupMaxPriceConversion() {
+        const form = document.querySelector('form[action*="saved_searches"]');
+        const displayInput = document.getElementById('max_price_display');
+        const hiddenInput = document.getElementById('max_price_cents_hidden');
+
+        if (form && displayInput && hiddenInput) {
+          form.addEventListener('submit', function(e) {
+            const dollars = parseFloat(displayInput.value);
+            if (dollars && !isNaN(dollars)) {
+              const cents = Math.round(dollars * 100);
+              hiddenInput.value = cents;
+            }
+
+            const $saveSearchBtn = $('#save-search-btn');
+            const $icon = $saveSearchBtn.find('.fa-bell');
+            $saveSearchBtn.removeClass('text-blue-600 hover:text-blue-800').addClass('text-gray-300 cursor-not-allowed').css('pointer-events', 'none');
+            $icon.removeClass('text-blue-500').addClass('text-gray-300');
+            $('#filter-count-text').text('Filters');
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupMaxPriceConversion);
+      } else {
+        setupMaxPriceConversion();
+      }
+
+      document.addEventListener('turbo:load', setupMaxPriceConversion);
+    })();
+  </script>
+<% end %>
