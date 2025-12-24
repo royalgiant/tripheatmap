@@ -35,6 +35,10 @@ class User < ApplicationRecord
   end
 
   def subscribed?
+    has_lifetime_access || has_recurring_subscription?
+  end
+
+  def has_recurring_subscription?
     subscriptions.where(status: ["active", "trailing"]).any? do |subscription|
       Time.now <= subscription.current_period_end
     end

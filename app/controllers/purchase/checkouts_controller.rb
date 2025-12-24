@@ -4,12 +4,16 @@ class Purchase::CheckoutsController < ApplicationController
     price = params[:price_id] # passed in via the hidden field in pricing.html.erb
     # https://stripe.com/docs/payments/checkout/free-trials
 
+    # Determine if this is a one-time payment (lifetime) or subscription
+    lifetime_price_id = Rails.application.credentials.dig(Rails.env.to_sym, :stripe, :pricing, :lifetime_host_price)
+    is_lifetime = (price == lifetime_price_id)
+
     session_params = {
       client_reference_id: current_user.id,
       success_url: root_url + "purchase/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: pricing_url,
       payment_method_types: ['card'],
-      mode: 'subscription',
+      mode: is_lifetime ? 'payment' : 'subscription',
       line_items: [{
         quantity: 1,
         price: price,

@@ -86,25 +86,30 @@ class WebhooksController < ApplicationController
     user = User.find(checkout_session.client_reference_id)
     user.update(stripe_id: checkout_session.customer)
 
-    # Retrieve new subscription via Stripe API using susbscription id
-    stripe_subscription = Stripe::Subscription.retrieve(checkout_session.subscription)
-    
-    # Get period dates from subscription item
-    subscription_item = stripe_subscription.items.data.first
-    current_period_start = subscription_item.current_period_start
-    current_period_end = subscription_item.current_period_end
+    # Check if this is a one-time payment (lifetime) or subscription
+    if checkout_session.subscription.present?
+      stripe_subscription = Stripe::Subscription.retrieve(checkout_session.subscription)
 
-    # Create new subscription with Stripe subscription details and user data
-    Subscription.create(
-      customer_id: stripe_subscription.customer,
-      current_period_start: Time.at(current_period_start).to_datetime,
-      current_period_end: Time.at(current_period_end).to_datetime,
-      plan_id: stripe_subscription.plan.id,
-      interval: stripe_subscription.plan.interval,
-      status: stripe_subscription.status,
-      subscription_id: stripe_subscription.id,
-      user_id: user.id,
-    )
+      # Get period dates from subscription item
+      subscription_item = stripe_subscription.items.data.first
+      current_period_start = subscription_item.current_period_start
+      current_period_end = subscription_item.current_period_end
+
+      # Create new subscription with Stripe subscription details and user data
+      Subscription.create(
+        customer_id: stripe_subscription.customer,
+        current_period_start: Time.at(current_period_start).to_datetime,
+        current_period_end: Time.at(current_period_end).to_datetime,
+        plan_id: stripe_subscription.plan.id,
+        interval: stripe_subscription.plan.interval,
+        status: stripe_subscription.status,
+        subscription_id: stripe_subscription.id,
+        user_id: user.id,
+      )
+    else
+      # Handle one-time payment (lifetime)
+      user.update(has_lifetime_access: true)
+    end
   end
 end
 

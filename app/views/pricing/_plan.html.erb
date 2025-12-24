@@ -1,12 +1,15 @@
 <% featured = plan[:featured] %>
+<% is_leads_tier = plan[:tier] == "leads" %>
 <div class="relative flex flex-col rounded-3xl border <%= featured ? 'border-blue-600 bg-white shadow-2xl shadow-blue-100' : 'border-gray-200 bg-white shadow-sm' %> p-8">
   <% if featured %>
     <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Most Popular</div>
+  <% elsif is_leads_tier %>
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">+ Best Value</div>
   <% end %>
 
   <div class="space-y-4">
     <div>
-      <p class="text-sm font-semibold text-blue-600 mb-2"><%= plan[:tagline] %></p>
+      <p class="text-sm font-semibold <%= featured ? 'text-blue-600' : 'text-gray-600' %> mb-2"><%= plan[:tagline] %></p>
       <h3 class="text-2xl font-bold text-gray-900 mb-2"><%= plan[:name] %></h3>
       <p class="text-gray-600 text-sm mb-2"><%= plan[:description] %></p>
     </div>
@@ -26,10 +29,16 @@
     <% end %>
   </ul>
 
-  <% if current_user.present? && current_user&.subscribed? %>
+  <% if current_user.present? && current_user.has_recurring_subscription? %>
     <div class="text-center mt-8">
       <div>
         <%= button_to("Manage billing", billings_path, data: {turbo: false}, class: "cursor-pointer w-full rounded-xl bg-gray-900 text-white border border-gray-900 hover:bg-gray-800 px-5 py-3 text-sm font-semibold") %>
+      </div>
+    </div>
+  <% elsif current_user.present? && plan[:tier] == "basic" && current_user.has_lifetime_access %>
+    <div class="mt-8">
+      <div class="w-full rounded-xl bg-gray-100 text-gray-600 px-5 py-3 text-center font-semibold">
+        Already purchased
       </div>
     </div>
   <% elsif current_user.present? %>
