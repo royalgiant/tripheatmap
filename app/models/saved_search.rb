@@ -6,6 +6,16 @@ class SavedSearch < ApplicationRecord
   validates :min_rating, inclusion: { in: [3.0, 3.5, 4.0, 4.5, 5.0] }, allow_nil: true
   validates :status, inclusion: { in: %w[active paused expired] }
 
+  before_validation :normalize_location
+
+  private
+
+  def normalize_location
+    self.location = location.downcase if location.present?
+  end
+
+  public
+
   scope :active, -> { where(status: 'active') }
   scope :for_location, ->(location) { where(location: location) }
   scope :under_price, ->(price_cents) { where('max_price_cents <= ?', price_cents) }

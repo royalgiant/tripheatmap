@@ -9,5 +9,14 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  # Configure default URL options for mailers
+  setup do
+    Rails.application.routes.default_url_options[:host] = 'www.example.com'
+  end
+
   # Add more helper methods to be used by all tests here...
+end
+
+class ActionDispatch::IntegrationTest
+  include FactoryBot::Syntax::Methods
 end
