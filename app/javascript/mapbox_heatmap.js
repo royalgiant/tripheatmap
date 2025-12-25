@@ -1,4 +1,5 @@
 import mapboxgl from "mapbox-gl";
+import { escapeHtml } from "./helpers";
 
 async function initMap() {
   const el = document.getElementById("map");
@@ -109,7 +110,7 @@ async function initMap() {
         .setLngLat(feature.geometry.coordinates)
         .setHTML(`
           <div style="font-size:14px;">
-            <b>${feature.properties.point_count} incidents</b><br/>
+            <b>${escapeHtml(feature.properties.point_count)} incidents</b><br/>
             <small>Click to zoom in</small>
           </div>
         `)
@@ -136,16 +137,16 @@ async function initMap() {
         .setLngLat(e.features[0].geometry.coordinates)
         .setHTML(`
           <div style="font-size:14px; max-width: 300px;">
-            <b style="font-size:16px;">${city}${neighborhood && neighborhood !== city ? " – " + neighborhood : ""}</b><br/>
+            <b style="font-size:16px;">${escapeHtml(city)}${neighborhood && neighborhood !== city ? " – " + escapeHtml(neighborhood) : ""}</b><br/>
             <div style="margin: 8px 0;">
               Risk: <b style="text-transform:capitalize; color: ${
-                risk_level === 'dangerous' ? '#FF4500' : 
+                risk_level === 'dangerous' ? '#FF4500' :
                 risk_level === 'caution' ? '#FFD700' : '#00FF7F'
-              }">${risk_level}</b> (${risk_score})
+              }">${escapeHtml(risk_level)}</b> (${escapeHtml(risk_score)})
             </div>
-            ${summary ? `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;"><small>${summary}</small></div>` : ''}
+            ${summary ? `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;"><small>${escapeHtml(summary)}</small></div>` : ''}
             <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
-              <small style="color: #60A5FA;">Click to view all ${city} incidents →</small>
+              <small style="color: #60A5FA;">Click to view all ${escapeHtml(city)} incidents →</small>
             </div>
           </div>
         `)

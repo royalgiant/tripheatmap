@@ -1,4 +1,5 @@
 import mapboxgl from "mapbox-gl";
+import { escapeHtml } from "./helpers";
 
 async function initHotelDetailMap() {
   try {
@@ -140,20 +141,20 @@ async function initHotelDetailMap() {
 
         let popupHTML = `
           <div style="font-size:14px; max-width: 250px;">
-            <b style="font-size:15px;">${place.name}</b><br/>
+            <b style="font-size:15px;">${escapeHtml(place.name)}</b><br/>
             <div style="margin: 6px 0; color: #666;">
               <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColor}; color: white; font-size: 12px;">
-                ${place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1)}
+                ${escapeHtml(place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1))}
               </span>
             </div>
-            ${place.address ? `<div style="font-size: 13px; color: #888; margin-bottom: 8px;">${place.address}</div>` : ''}
+            ${place.address ? `<div style="font-size: 13px; color: #888; margin-bottom: 8px;">${escapeHtml(place.address)}</div>` : ''}
         `;
 
         // Only show booking link for hotels
         if (place.place_type === 'hotel' && place.trip_affiliate_url) {
           popupHTML += `
             <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb;">
-              <a href="${place.trip_affiliate_url}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; color: #059669; text-decoration: none; font-weight: 600; font-size: 13px; padding: 4px 8px; background: #d1fae5; border-radius: 4px;">
+              <a href="${escapeHtml(place.trip_affiliate_url)}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; color: #059669; text-decoration: none; font-weight: 600; font-size: 13px; padding: 4px 8px; background: #d1fae5; border-radius: 4px;">
                 <svg style="width: 14px; height: 14px; margin-right: 4px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>

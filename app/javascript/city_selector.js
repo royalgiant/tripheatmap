@@ -1,3 +1,5 @@
+import { escapeHtml } from "./helpers";
+
 // City Selector Component
 class CitySelector {
   constructor() {
@@ -86,14 +88,14 @@ class CitySelector {
     this.noResultsMessage.classList.add('hidden');
 
     this.resultsContainer.innerHTML = cities.map(city => `
-      <a 
-        href="/maps/places/${city.slug}"
+      <a
+        href="/maps/places/${escapeHtml(city.slug)}"
         class="city-option flex items-center justify-between px-4 py-3 hover:bg-gray-700 transition-colors cursor-pointer group"
-        data-city-key="${city.key}"
+        data-city-key="${escapeHtml(city.key)}"
       >
         <div>
-          <div class="font-medium text-white group-hover:text-blue-400">${city.name}</div>
-          <div class="text-sm text-gray-400">${city.neighborhood_count} neighborhoods</div>
+          <div class="font-medium text-white group-hover:text-blue-400">${escapeHtml(city.name)}</div>
+          <div class="text-sm text-gray-400">${escapeHtml(city.neighborhood_count)} neighborhoods</div>
         </div>
         <svg class="w-5 h-5 text-gray-600 group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

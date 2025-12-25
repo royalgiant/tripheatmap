@@ -1,5 +1,6 @@
 import mapboxgl from "mapbox-gl";
 import cityCoordinates from "./city_coordinates";
+import { escapeHtml } from "./helpers";
 
 async function initPlacesMap() {
   try {
@@ -155,44 +156,44 @@ async function initPlacesMap() {
           .setLngLat(e.lngLat)
           .setHTML(`
             <div style="font-size:14px; max-width: 300px;">
-              <b style="font-size:16px;">${props.name}</b><br/>
+              <b style="font-size:16px;">${escapeHtml(props.name)}</b><br/>
               <div style="margin: 8px 0; color: #888;">
-                ${props.city}, ${props.state}
-                ${props.population ? ` · Pop: ${props.population.toLocaleString()}` : ''}
+                ${escapeHtml(props.city)}, ${escapeHtml(props.state)}
+                ${props.population ? ` · Pop: ${escapeHtml(props.population.toLocaleString())}` : ''}
               </div>
               <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
                 <div style="margin-bottom: 4px;">
-                  <b>Amenities:</b> ${props.total_amenities || 0} total
+                  <b>Amenities:</b> ${escapeHtml(props.total_amenities || 0)} total
                 </div>
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Restaurants: <b>${props.restaurant_count || 0}</b>
+                  Restaurants: <b>${escapeHtml(props.restaurant_count || 0)}</b>
                 </div>
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Cafes: <b>${props.cafe_count || 0}</b>
+                  Cafes: <b>${escapeHtml(props.cafe_count || 0)}</b>
                 </div>
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Bars: <b>${props.bar_count || 0}</b>
+                  Bars: <b>${escapeHtml(props.bar_count || 0)}</b>
                 </div>
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Hotels: <b>${props.hotel_count || 0}</b>
+                  Hotels: <b>${escapeHtml(props.hotel_count || 0)}</b>
                 </div>
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Hostels: <b>${props.hostel_count || 0}</b>
+                  Hostels: <b>${escapeHtml(props.hostel_count || 0)}</b>
                 </div>
                 ${props.airbnb_count ? `
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  Airbnb: <b>${props.airbnb_count}</b>
+                  Airbnb: <b>${escapeHtml(props.airbnb_count)}</b>
                 </div>` : ''}
                 ${props.vrbo_count ? `
                 <div style="margin-bottom: 4px; font-size: 13px;">
-                  VRBO: <b>${props.vrbo_count}</b>
+                  VRBO: <b>${escapeHtml(props.vrbo_count)}</b>
                 </div>` : ''}
                 ${props.vibrancy_index ? `
                   <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
                     Vibrancy Index: <b style="color: ${
                       props.vibrancy_index > 7 ? '#44ff44' :
                       props.vibrancy_index > 4 ? '#ffaa00' : '#ff4444'
-                    }">${Number(props.vibrancy_index).toFixed(1)}</b> / 10
+                    }">${escapeHtml(Number(props.vibrancy_index).toFixed(1))}</b> / 10
                   </div>
                 ` : ''}
               </div>
