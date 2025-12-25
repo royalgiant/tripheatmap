@@ -29,10 +29,11 @@
                 </div>
               </div>
 
-              <div class="mt-4 flex gap-2">
-                <%= link_to "View", rental.booking_url, target: "_blank", class: "flex-1 text-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
-                <%= link_to "Edit", edit_rental_path(rental), class: "flex-1 text-center bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
-                <%= button_to "Delete", rental_path(rental), method: :delete, data: { confirm: "Are you sure?" }, class: "flex-1 bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
+              <div class="mt-4 grid grid-cols-2 gap-2">
+                <%= link_to "View Listing", rental.booking_url, target: "_blank", class: "text-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
+                <%= link_to "View on Map", neighborhood_path(rental.neighborhood.slug, highlight: rental.id), target: "_blank", class: "text-center bg-green-100 hover:bg-green-200 text-green-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
+                <%= link_to "Edit", edit_rental_path(rental), class: "text-center bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
+                <%= button_to "Delete", rental_path(rental), method: :delete, data: { confirm: "Are you sure?" }, form_class: "contents", class: "w-full bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded text-sm font-medium transition-colors" %>
               </div>
             </div>
           </div>

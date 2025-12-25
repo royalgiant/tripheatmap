@@ -235,6 +235,48 @@ async function initNeighborhoodDetailMap() {
       });
       map.fitBounds(bounds, { padding: 50, maxZoom: 15 });
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const highlightId = urlParams.get('highlight');
+
+      if (highlightId) {
+        const placeId = parseInt(highlightId);
+        const markerData = markersByPlaceId[placeId];
+
+        if (markerData) {
+          setTimeout(() => {
+            map.flyTo({
+              center: [markerData.lon, markerData.lat],
+              zoom: 16,
+              duration: 1500
+            });
+
+            setTimeout(() => {
+              markerData.marker.togglePopup();
+            }, 800);
+
+            const $placeElement = $(`#place-${placeId}`);
+            const $placesList = $('#places-list');
+
+            if ($placeElement.length && $placesList.length) {
+              const containerHeight = $placesList.height();
+              const elementTop = $placeElement.position().top;
+              const elementHeight = $placeElement.outerHeight();
+              const currentScroll = $placesList.scrollTop();
+              const scrollTo = currentScroll + elementTop - (containerHeight / 2) + (elementHeight / 2);
+
+              $placesList.animate({
+                scrollTop: scrollTo
+              }, 500);
+
+              $placeElement.css('background-color', '#fef3c7');
+              setTimeout(() => {
+                $placeElement.css('background-color', '');
+              }, 3000);
+            }
+          }, 1000);
+        }
+      }
+
       // Add legend
       const legend = document.createElement('div');
       legend.style.cssText = `
