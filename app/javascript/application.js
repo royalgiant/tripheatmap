@@ -9,5 +9,6 @@ import "./hotel_detail_map"
 import "./city_selector"
 import "hotel_filters"
 import "./saved_searches"
+import "./carousel"
 
 Turbo.start()

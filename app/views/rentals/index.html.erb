@@ -24,6 +24,53 @@
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= rental.place_type == 'airbnb' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' %>">
                     <%= rental.place_type.titleize %>
                   </span>
+
+                  <% if rental.airbnb_vrbo_metadata.present? && (rental.airbnb_vrbo_metadata['main_image'].present? || rental.airbnb_vrbo_metadata['images'].present?) %>
+                    <% all_images = [rental.airbnb_vrbo_metadata['main_image'], *rental.airbnb_vrbo_metadata['images']].compact %>
+                    <% if all_images.any? %>
+                      <div class="mt-3 relative" data-carousel-id="rental-<%= rental.id %>">
+                        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden bg-gray-100">
+                          <% all_images.each_with_index do |image_url, index| %>
+                            <img src="<%= image_url %>"
+                                 alt="<%= rental.name %> - Image <%= index + 1 %>"
+                                 class="carousel-image w-full h-48 object-cover <%= index == 0 ? '' : 'hidden' %>"
+                                 data-carousel-index="<%= index %>">
+                          <% end %>
+                        </div>
+
+                        <% if all_images.length > 1 %>
+                          <!-- Previous Button -->
+                          <button type="button"
+                                  class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                                  data-carousel-id="rental-<%= rental.id %>"
+                                  aria-label="Previous image">
+                            <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </button>
+
+                          <!-- Next Button -->
+                          <button type="button"
+                                  class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                                  data-carousel-id="rental-<%= rental.id %>"
+                                  aria-label="Next image">
+                            <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+
+                          <!-- Dots Indicator -->
+                          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                            <% all_images.each_with_index do |_, index| %>
+                              <div class="carousel-dot w-2 h-2 rounded-full transition-all <%= index == 0 ? 'bg-white' : 'bg-white/50' %>"
+                                   data-carousel-index="<%= index %>"></div>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  <% end %>
+
                   <h3 class="mt-2 text-lg font-semibold text-gray-900"><%= rental.name %></h3>
                   <p class="mt-1 text-sm text-gray-500"><%= rental.address %></p>
                 </div>

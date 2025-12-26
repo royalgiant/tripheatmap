@@ -215,11 +215,11 @@ class RentalMetadataFetcher
     }
 
     text = doc.text
-    
-    details[:guests] = text.match(/(\d+)\s+guests?/)&.[](1)
-    details[:bedrooms] = text.match(/(\d+)\s+bedrooms?/)&.[](1)
-    details[:beds] = text.match(/(\d+)\s+beds?/)&.[](1)
-    details[:baths] = text.match(/(\d+(\.\d+)?)\s+baths?/)&.[](1)
+
+    details[:guests] = text.match(/(\d+)\s+guests?\b/)&.[](1)
+    details[:bedrooms] = text.match(/(\d+)\s+bedrooms?\b/)&.[](1)
+    details[:beds] = text.match(/(\d+)\s+beds?\b/)&.[](1)
+    details[:baths] = text.match(/(\d+(?:\.\d+)?)\s+baths?\b/)&.[](1)
 
     details
   end

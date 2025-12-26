@@ -69,9 +69,7 @@
     <%= form.url_field :booking_url, placeholder: "https://www.airbnb.com/rooms/20727150",
         id: "booking_url_field",
         class: "block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-400", required: true %>
-    <% if local_assigns[:show_booking_url_help] %>
-      <p class="mt-2 text-sm text-gray-500">Paste your Airbnb or VRBO listing URL</p>
-    <% end %>
+    <p class="mt-1 text-sm text-gray-500">When you save, we'll automatically fetch the metadata for your listing for Airbnb. This is currently unavailable for VRBO due to VRBO import restrictions.</p>
   </div>
 
   <div class="flex gap-4">
