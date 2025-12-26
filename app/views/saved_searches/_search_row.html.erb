@@ -58,24 +58,8 @@
     </div>
   </td>
 
-  <!-- Actions -->
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
     <div class="flex justify-end gap-2">
-      <!-- Pause/Resume Button -->
-      <%= button_to pause_saved_search_path(saved_search),
-          method: :patch,
-          data: { turbo_frame: "_top", turbo_method: :patch },
-          class: "inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors" do %>
-        <% if saved_search.status == 'active' %>
-          <i class="fa-solid fa-pause mr-1"></i>
-          Pause
-        <% else %>
-          <i class="fa-solid fa-play mr-1"></i>
-          Resume
-        <% end %>
-      <% end %>
-
-      <!-- View Original Search Button -->
       <% if saved_search.original_url.present? %>
         <%= link_to saved_search.original_url,
             class: "inline-flex items-center px-3 py-1 border border-blue-300 rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors",
@@ -85,13 +69,33 @@
         <% end %>
       <% end %>
 
-      <!-- Delete Button -->
+      <%= button_to pause_saved_search_path(saved_search),
+          method: :patch,
+          data: { turbo_frame: "_top", turbo_method: :patch },
+          class: "inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors" do %>
+        <% if saved_search.status == 'active' %>
+          <i class="fa-solid fa-pause mr-1"></i>
+          &#8203;
+        <% else %>
+          <i class="fa-solid fa-play mr-1"></i>
+          &#8203;
+        <% end %>
+      <% end %>
+
+      <%= link_to edit_saved_search_path(saved_search),
+          data: { turbo_frame: "edit_search_modal" },
+          class: "inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors",
+          title: "Edit" do %>
+        <i class="fa-solid fa-pencil"></i>
+      <% end %>
+
       <%= button_to saved_search_path(saved_search),
           method: :delete,
           data: { turbo_confirm: "Are you sure you want to delete this saved search?", turbo_frame: "_top" },
-          class: "inline-flex items-center px-3 py-1 border border-red-300 rounded-md text-red-700 bg-red-50 hover:bg-red-100 transition-colors" do %>
-        <i class="fa-solid fa-trash mr-1"></i>
-        Delete
+          form_class: "inline-block",
+          class: "inline-flex items-center px-3 py-1 border border-red-300 rounded-md text-red-700 bg-red-50 hover:bg-red-100 transition-colors",
+          title: "Delete" do %>
+        <i class="fa-solid fa-trash"></i>&#8203;
       <% end %>
     </div>
   </td>

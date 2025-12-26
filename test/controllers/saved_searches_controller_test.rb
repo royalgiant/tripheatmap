@@ -150,4 +150,95 @@ class SavedSearchesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "active", @saved_search.reload.status
   end
+
+  test "should get edit when logged in" do
+    sign_in @user
+    get edit_saved_search_url(@saved_search), as: :turbo_stream
+    assert_response :success
+  end
+
+  test "should not allow editing another user's saved_search" do
+    other_user = FactoryBot.create(:user)
+    other_search = FactoryBot.create(:saved_search, user: other_user)
+    sign_in @user
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      get edit_saved_search_url(other_search), as: :turbo_stream
+    end
+  end
+
+  test "should require authentication for edit" do
+    get edit_saved_search_url(@saved_search)
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should update saved_search with valid params" do
+    sign_in @user
+
+    patch saved_search_url(@saved_search), params: {
+      saved_search: {
+        max_price_cents: 25000,
+        min_rating: 4.0,
+        accept_offers: true
+      }
+    }, as: :turbo_stream
+
+    assert_response :success
+    @saved_search.reload
+    assert_equal 25000, @saved_search.max_price_cents
+    assert_equal 4.0, @saved_search.min_rating
+    assert @saved_search.accept_offers
+  end
+
+  test "should not allow updating another user's saved_search" do
+    other_user = FactoryBot.create(:user)
+    other_search = FactoryBot.create(:saved_search, user: other_user)
+    sign_in @user
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      patch saved_search_url(other_search), params: {
+        saved_search: { max_price_cents: 30000 }
+      }, as: :turbo_stream
+    end
+  end
+
+  test "should require authentication for update" do
+    patch saved_search_url(@saved_search), params: {
+      saved_search: { max_price_cents: 30000 }
+    }
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should create saved_search with accept_offers" do
+    sign_in @user
+
+    assert_difference("SavedSearch.count", 1) do
+      post saved_searches_url, params: {
+        saved_search: {
+          location: "chicago",
+          max_price_cents: 20000,
+          accept_offers: true
+        }
+      }, as: :turbo_stream
+    end
+
+    saved_search = SavedSearch.last
+    assert saved_search.accept_offers
+  end
+
+  test "should default accept_offers to false" do
+    sign_in @user
+
+    assert_difference("SavedSearch.count", 1) do
+      post saved_searches_url, params: {
+        saved_search: {
+          location: "chicago",
+          max_price_cents: 20000
+        }
+      }, as: :turbo_stream
+    end
+
+    saved_search = SavedSearch.last
+    assert_not saved_search.accept_offers
+  end
 end

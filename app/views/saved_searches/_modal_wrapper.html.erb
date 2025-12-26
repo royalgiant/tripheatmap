@@ -7,7 +7,7 @@
   # - scrollable: Optional boolean for scrollable content (default: false)
 
   color ||= 'blue'
-  max_width ||= 'max-w-2xl'
+  max_width ||= 'max-w-3xl'
   scrollable ||= false
 
   gradient_classes = {
@@ -22,7 +22,7 @@
 
 <%= turbo_frame_tag "save_search_modal" do %>
   <div class="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-xl <%= max_width %> w-full mx-4 <%= scrollable ? 'max-h-[90vh] overflow-y-auto' : '' %>">
+    <div class="bg-white rounded-lg shadow-xl <%= max_width %> w-full mx-4">
       <!-- Modal Header -->
       <div class="bg-gradient-to-r <%= gradient %> px-6 py-4 rounded-t-lg">
         <div class="flex justify-between items-center">

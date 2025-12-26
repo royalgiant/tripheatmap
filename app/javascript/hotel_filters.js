@@ -154,6 +154,32 @@ class HotelFilters {
 
     // Update URL without reload
     window.history.pushState({}, '', newURL);
+
+    this.updateSaveSearchButton(queryParts);
+  }
+
+  updateSaveSearchButton(queryParts) {
+    const $saveSearchBtn = $('#save-search-btn');
+    if (!$saveSearchBtn.length) return;
+
+    // Extract location from current path (pathParts[2] for all our URL patterns)
+    const pathParts = window.location.pathname.split('/').filter(p => p);
+    const location = pathParts.length >= 3 ? pathParts[2] : null;
+
+    const savedSearchParams = [];
+    if (location) {
+      const capitalizedLocation = location.charAt(0).toUpperCase() + location.slice(1);
+      savedSearchParams.push(`location=${encodeURIComponent(capitalizedLocation)}`);
+    }
+
+    queryParts.forEach(param => {
+      savedSearchParams.push(param);
+    });
+
+    const savedSearchQuery = savedSearchParams.length > 0 ? `?${savedSearchParams.join('&')}` : '';
+    const newHref = `/saved_searches/new${savedSearchQuery}`;
+
+    $saveSearchBtn.attr('href', newHref);
   }
 
   updateSliderLabel() {
@@ -194,10 +220,10 @@ class HotelFilters {
     }
 
     this.filterCountText.textContent = count > 0 ? `${count} Filters` : 'Filters';
-    this.updateSaveSearchButton(count > 0);
+    this.updateSaveSearchButtonState(count > 0);
   }
 
-  updateSaveSearchButton(hasFilters) {
+  updateSaveSearchButtonState(hasFilters) {
     const $saveSearchBtn = $('#save-search-btn');
     if (!$saveSearchBtn.length) return;
 

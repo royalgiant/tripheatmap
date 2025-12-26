@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_25_011222) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_26_030251) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -554,6 +554,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_25_011222) do
     t.text "original_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accept_offers", default: false, null: false
     t.index ["location", "max_price_cents"], name: "index_saved_searches_on_location_price"
     t.index ["user_id", "location", "max_price_cents", "min_rating", "neighborhood"], name: "index_saved_searches_on_user_and_criteria"
     t.index ["user_id"], name: "index_saved_searches_on_user_id"

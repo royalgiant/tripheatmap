@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   end
 
   resources :favorites, only: [:index, :create, :destroy]
-  resources :saved_searches, only: [:index, :new, :create, :destroy] do
+  resources :saved_searches, only: [:index, :new, :create, :edit, :update, :destroy] do
     member do
       patch :pause
     end

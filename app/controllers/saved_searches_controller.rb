@@ -1,7 +1,7 @@
 class SavedSearchesController < ApplicationController
   before_action :check_user_authentication, only: [:new]
-  before_action :authenticate_user!, only: [:create, :index, :destroy]
-  before_action :set_saved_search, only: [:destroy]
+  before_action :authenticate_user!, only: [:create, :index, :edit, :update, :destroy]
+  before_action :set_saved_search, only: [:edit, :update, :destroy]
 
   # GET /saved_searches (Dashboard)
   def index
@@ -11,6 +11,7 @@ class SavedSearchesController < ApplicationController
   # GET /saved_searches/new (Modal trigger - Turboframe)
   def new
     @saved_search = current_user.saved_searches.build(search_params_from_url)
+    @display_values = extract_display_values(@saved_search)
     render :new, status: :ok
   end
 
@@ -33,6 +34,26 @@ class SavedSearchesController < ApplicationController
         }
         format.html { redirect_back fallback_location: root_path }
       end
+    end
+  end
+
+  # GET /saved_searches/:id/edit
+  def edit
+    @display_values = extract_display_values(@saved_search)
+    render :edit, status: :ok
+  end
+
+  # PATCH /saved_searches/:id
+  def update
+    if @saved_search.update(saved_search_params)
+      render turbo_stream: [
+        turbo_stream.update("edit_search_modal", ""),
+        turbo_stream.replace("saved_search_#{@saved_search.id}",
+                            partial: "saved_searches/search_row",
+                            locals: { saved_search: @saved_search })
+      ]
+    else
+      render turbo_stream: turbo_stream.update("edit_search_modal", partial: "saved_searches/edit", locals: { saved_search: @saved_search })
     end
   end
 
@@ -111,6 +132,7 @@ class SavedSearchesController < ApplicationController
       :checkin_date,
       :checkout_date,
       :original_url,
+      :accept_offers,
       filters: {}
     )
     permitted[:location] = permitted[:location]&.downcase if permitted[:location].present?
@@ -128,5 +150,14 @@ class SavedSearchesController < ApplicationController
     nil
   rescue
     nil
+  end
+
+  def extract_display_values(saved_search)
+    {
+      rating: saved_search.persisted? ? saved_search.min_rating : params[:rating],
+      price: saved_search.persisted? ? saved_search.price_range : params[:price],
+      neighborhood: saved_search.persisted? ? saved_search.neighborhood : params[:neighborhood],
+      max_price: saved_search.persisted? ? (saved_search.max_price_cents / 100.0).to_i : params[:max_price]&.to_i
+    }
   end
 end
