@@ -131,9 +131,22 @@ async function initNeighborhoodDetailMap() {
           cursor: pointer;
         `;
 
+        // Build main image HTML if place has an image (no carousel in popup)
+        let imageHTML = '';
+        if (place.airbnb_vrbo_metadata && place.airbnb_vrbo_metadata.main_image) {
+          imageHTML = `
+            <div style="margin: 8px 0;">
+              <img src="${escapeHtml(place.airbnb_vrbo_metadata.main_image)}"
+                   alt="${escapeHtml(place.name)}"
+                   style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
+            </div>
+          `;
+        }
+
         let popupHTML = `
           <div style="font-size:14px; max-width: 250px;">
             <b style="font-size:15px;">${escapeHtml(place.name)}</b><br/>
+            ${imageHTML}
             <div style="margin: 6px 0; color: #666;">
               <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; background: ${markerColors[place.place_type]}; color: white; font-size: 12px;">
                 ${escapeHtml(place.place_type.charAt(0).toUpperCase() + place.place_type.slice(1))}

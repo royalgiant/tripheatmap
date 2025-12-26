@@ -8,16 +8,102 @@
     <%= render 'favorites/button', place: place %>
   </div>
 
+  <!-- Airbnb/VRBO Image Carousel and Metadata -->
+  <% if (place.place_type == 'airbnb' || place.place_type == 'vrbo') && place.airbnb_vrbo_metadata.present? %>
+    <% metadata = place.airbnb_vrbo_metadata %>
+    <% all_images = [metadata['main_image'], *metadata['images']].compact %>
+
+    <% if all_images.any? %>
+      <div class="mt-3 relative" data-carousel-id="place-item-<%= place.id %>">
+        <div class="rounded-lg overflow-hidden bg-gray-100">
+          <% all_images.each_with_index do |image_url, index| %>
+            <img src="<%= image_url %>"
+                 alt="<%= place.name %> - Image <%= index + 1 %>"
+                 class="carousel-image w-full h-64 object-cover <%= index == 0 ? '' : 'hidden' %>"
+                 data-carousel-index="<%= index %>">
+          <% end %>
+        </div>
+
+        <% if all_images.length > 1 %>
+          <button type="button"
+                  class="carousel-prev absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                  data-carousel-id="place-item-<%= place.id %>">
+            <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button type="button"
+                  class="carousel-next absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                  data-carousel-id="place-item-<%= place.id %>">
+            <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+            <% all_images.each_with_index do |_, index| %>
+              <div class="carousel-dot w-2 h-2 rounded-full transition-all <%= index == 0 ? 'bg-white' : 'bg-white/50' %>"
+                   data-carousel-index="<%= index %>"></div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if metadata.present? %>
+      <div class="mt-2 flex flex-wrap gap-2 text-xs">
+        <% if metadata['guests'].present? %>
+          <span class="inline-flex items-center bg-blue-50 text-blue-700 px-2 py-1 rounded">
+            👥 <%= metadata['guests'] %> guests
+          </span>
+        <% end %>
+        <% if metadata['bedrooms'].present? %>
+          <span class="inline-flex items-center bg-purple-50 text-purple-700 px-2 py-1 rounded">
+            🛏️ <%= metadata['bedrooms'] %> <%= metadata['bedrooms'] == 1 ? 'bedroom' : 'bedrooms' %>
+          </span>
+        <% end %>
+        <% if metadata['beds'].present? %>
+          <span class="inline-flex items-center bg-indigo-50 text-indigo-700 px-2 py-1 rounded">
+            🛌 <%= metadata['beds'] %> <%= metadata['beds'] == 1 ? 'bed' : 'beds' %>
+          </span>
+        <% end %>
+        <% if metadata['baths'].present? %>
+          <span class="inline-flex items-center bg-teal-50 text-teal-700 px-2 py-1 rounded">
+            🚿 <%= metadata['baths'] %> <%= metadata['baths'] == 1 ? 'bath' : 'baths' %>
+          </span>
+        <% end %>
+      </div>
+
+      <% if metadata['amenities'].present? && metadata['amenities'].any? %>
+        <div class="mt-2 text-xs text-gray-600">
+          <span class="font-medium">Amenities:</span>
+          <%= metadata['amenities'].take(5).join(', ') %><%= metadata['amenities'].length > 5 ? '...' : '' %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
   <!-- Rating and Price Range -->
   <div class="flex items-center mt-1 text-sm">
-    <% if place.rating.present? %>
+    <% rating_to_display = place.rating || (place.airbnb_vrbo_metadata&.dig('rating')) %>
+    <% review_count = place.review_count || (place.airbnb_vrbo_metadata&.dig('review_count')) %>
+
+    <% if rating_to_display.present? %>
       <div class="mr-2">
-        <%= star_rating(place.rating) %>
+        <%= star_rating(rating_to_display) %>
       </div>
-      <span class="text-gray-600 mr-2"><%= number_with_precision(place.rating, precision: 1) %></span>
+      <span class="text-gray-600 mr-2">
+        <%= number_with_precision(rating_to_display, precision: 1) %>
+        <% if review_count.present? %>
+          (<%= review_count %>)
+        <% end %>
+      </span>
     <% end %>
-    <% if place.price_range.present? %>
-      <span class="text-gray-700"><%= place.price_range %></span>
+    <% if place.price_range.present? || place.average_price.present? %>
+      <span class="text-gray-700">
+        <%= place.price_range || "$#{place.average_price}/night" %>
+      </span>
     <% end %>
   </div>
 

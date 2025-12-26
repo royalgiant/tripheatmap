@@ -10,7 +10,7 @@ class NeighborhoodsController < ApplicationController
 
     @places = @neighborhood.places
                           .where(place_type: VALID_PLACE_TYPES)
-                          .select(:id, :name, :place_type, :latitude, :longitude, :address, :booking_url)
+                          .select(:id, :name, :place_type, :latitude, :longitude, :address, :booking_url, :airbnb_vrbo_metadata)
                           .to_a
     
     @stats = @neighborhood.neighborhood_places_stat || @neighborhood.build_neighborhood_places_stat

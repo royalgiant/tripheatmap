@@ -1,104 +1,149 @@
 // app/javascript/carousel.js
-// Reusable image carousel component
+// Simple, reliable carousel for image galleries with lightbox
 
-export function initializeCarousels() {
-  const carousels = {};
+// Create lightbox modal (once)
+let lightbox = null;
+let lightboxImg = null;
+let lightboxImages = [];
+let lightboxIndex = 0;
 
-  // Initialize all carousels on the page
-  document.querySelectorAll('[data-carousel-id]').forEach(carouselContainer => {
-    const carouselId = carouselContainer.dataset.carouselId;
+function createLightbox() {
+  if (lightbox) return;
 
-    // Skip if already initialized
-    if (carousels[carouselId]) return;
+  lightbox = document.createElement('div');
+  lightbox.innerHTML = `
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; align-items: center; justify-content: center;" id="lightbox-modal">
+      <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 24px; line-height: 1;">&times;</button>
+      <button onclick="lightboxPrev()" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px;">&#8249;</button>
+      <img id="lightbox-image" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+      <button onclick="lightboxNext()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px;">&#8250;</button>
+      <div style="position: absolute; bottom: 20px; color: white; font-size: 16px;" id="lightbox-counter"></div>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
 
-    const images = carouselContainer.querySelectorAll('.carousel-image');
-    const dots = carouselContainer.querySelectorAll('.carousel-dot');
+  const modal = document.getElementById('lightbox-modal');
+  lightboxImg = document.getElementById('lightbox-image');
+
+  modal.onclick = (e) => { if (e.target === modal) closeLightbox(); };
+  document.addEventListener('keydown', (e) => {
+    if (!modal.style.display || modal.style.display === 'none') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxPrev();
+    if (e.key === 'ArrowRight') lightboxNext();
+  });
+}
+
+window.openLightbox = function(images, index) {
+  createLightbox();
+  lightboxImages = images;
+  lightboxIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox-modal').style.display = 'flex';
+};
+
+window.closeLightbox = function() {
+  document.getElementById('lightbox-modal').style.display = 'none';
+};
+
+window.lightboxPrev = function() {
+  lightboxIndex = lightboxIndex === 0 ? lightboxImages.length - 1 : lightboxIndex - 1;
+  updateLightbox();
+};
+
+window.lightboxNext = function() {
+  lightboxIndex = lightboxIndex === lightboxImages.length - 1 ? 0 : lightboxIndex + 1;
+  updateLightbox();
+};
+
+function updateLightbox() {
+  lightboxImg.src = lightboxImages[lightboxIndex];
+  document.getElementById('lightbox-counter').textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+}
+
+function setupCarousels() {
+  const carousels = document.querySelectorAll('[data-carousel-id]');
+
+  carousels.forEach(container => {
+    const carouselId = container.dataset.carouselId;
+    if (container.dataset.carouselInitialized === 'true') return;
+    container.dataset.carouselInitialized = 'true';
+
+    const images = container.querySelectorAll('.carousel-image');
+    const dots = container.querySelectorAll('.carousel-dot');
+    const prevBtn = document.querySelector(`.carousel-prev[data-carousel-id="${carouselId}"]`);
+    const nextBtn = document.querySelector(`.carousel-next[data-carousel-id="${carouselId}"]`);
 
     if (images.length === 0) return;
 
-    carousels[carouselId] = {
-      currentIndex: 0,
-      totalImages: images.length,
-      images: images,
-      dots: dots,
-      container: carouselContainer
-    };
-  });
+    let currentIndex = 0;
+    const imageSrcs = Array.from(images).map(img => img.src);
 
-  // Show specific image in a carousel
-  function showImage(carouselId, index) {
-    const carousel = carousels[carouselId];
-    if (!carousel) return;
+    function updateCarousel() {
+      images.forEach((img, idx) => {
+        if (idx === currentIndex) {
+          img.classList.remove('hidden');
+        } else {
+          img.classList.add('hidden');
+        }
+      });
 
-    // Wrap around
-    if (index < 0) {
-      index = carousel.totalImages - 1;
-    } else if (index >= carousel.totalImages) {
-      index = 0;
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) {
+          dot.classList.remove('bg-white/50');
+          dot.classList.add('bg-white');
+        } else {
+          dot.classList.remove('bg-white');
+          dot.classList.add('bg-white/50');
+        }
+      });
     }
 
-    // Hide all images and show the selected one
-    carousel.images.forEach((img, i) => {
-      if (i === index) {
-        img.classList.remove('hidden');
-      } else {
-        img.classList.add('hidden');
-      }
+    function goToPrev() {
+      currentIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      updateCarousel();
+    }
+
+    function goToNext() {
+      currentIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+      updateCarousel();
+    }
+
+    images.forEach((img, idx) => {
+      img.style.cursor = 'pointer';
+      img.onclick = () => openLightbox(imageSrcs, idx);
     });
 
-    // Update dots
-    carousel.dots.forEach((dot, i) => {
-      if (i === index) {
-        dot.classList.remove('bg-white/50');
-        dot.classList.add('bg-white');
-      } else {
-        dot.classList.remove('bg-white');
-        dot.classList.add('bg-white/50');
-      }
-    });
+    if (prevBtn) {
+      prevBtn.onclick = function(e) {
+        e.preventDefault();
+        goToPrev();
+      };
+    }
 
-    carousel.currentIndex = index;
-  }
+    if (nextBtn) {
+      nextBtn.onclick = function(e) {
+        e.preventDefault();
+        goToNext();
+      };
+    }
 
-  // Attach event listeners to navigation buttons
-  document.querySelectorAll('.carousel-prev').forEach(btn => {
-    // Remove old listeners by cloning (prevents duplicate handlers)
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-
-    newBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const carouselId = this.dataset.carouselId;
-      const carousel = carousels[carouselId];
-      if (carousel) {
-        showImage(carouselId, carousel.currentIndex - 1);
-      }
-    });
+    updateCarousel();
   });
-
-  document.querySelectorAll('.carousel-next').forEach(btn => {
-    // Remove old listeners by cloning (prevents duplicate handlers)
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-
-    newBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const carouselId = this.dataset.carouselId;
-      const carousel = carousels[carouselId];
-      if (carousel) {
-        showImage(carouselId, carousel.currentIndex + 1);
-      }
-    });
-  });
-
-  return carousels;
 }
 
-// Auto-initialize on DOM ready
-document.addEventListener('DOMContentLoaded', initializeCarousels);
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', setupCarousels);
 
-// Reinitialize on Turbo page loads (for Turbo Drive navigation)
-document.addEventListener('turbo:load', initializeCarousels);
+// Initialize on Turbo navigation
+document.addEventListener('turbo:load', setupCarousels);
 
-// Also support direct calls for manual initialization
+// Initialize when Turbo frames load (for lazy-loaded content)
+document.addEventListener('turbo:frame-load', setupCarousels);
+
+// Export for manual calls if needed
+export function initializeCarousels() {
+  setupCarousels();
+}
+
 window.initializeCarousels = initializeCarousels;

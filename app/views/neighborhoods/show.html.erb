@@ -83,7 +83,7 @@
         class="w-full rounded-lg"
         style="height: 800px;"
         data-mapbox-token="<%= @mapbox_token %>"
-        data-places="<%= @places.to_json(only: [:id, :name, :place_type, :latitude, :longitude, :address, :booking_url]) %>"
+        data-places="<%= @places.to_json(only: [:id, :name, :place_type, :latitude, :longitude, :address, :booking_url, :airbnb_vrbo_metadata]) %>"
         data-neighborhood="<%= @neighborhood.to_json(only: [:id, :name, :city]) %>">
       </div>
     </div>
