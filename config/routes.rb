@@ -47,7 +47,17 @@ Rails.application.routes.draw do
     get 'me', to: 'bnb_near_me#index', as: 'me_index'
     get 'me/:city', to: 'bnb_near_me#show', as: 'me'
   end
-  
+
+  scope 'bed-and-breakfast', as: 'bed_and_breakfast' do
+    get '', to: 'bed_and_breakfast#index', as: 'index'
+    get 'in/:city', to: 'bed_and_breakfast#show', as: 'in_city', defaults: { format: :html }
+    get ':city/:state', to: 'bed_and_breakfast#show', as: 'city_state', defaults: { format: :html }
+  end
+
+  get ':city/bed-and-breakfast', to: 'bed_and_breakfast#show',
+      as: 'city_bed_and_breakfast',
+      constraints: { city: /[a-z][a-z-]*/ }
+
   resources :places, only: [:show], param: :slug do
     collection do
       get :close

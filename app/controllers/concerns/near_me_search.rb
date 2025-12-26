@@ -52,11 +52,20 @@ module NearMeSearch
   end
 
   def set_city
-    @city_display_name = params[:city]&.titleize
+    city_param = params[:city]
+    normalized_city = city_param&.titleize&.downcase
+    neighborhood = Neighborhood.where(
+      "LOWER(REPLACE(city, '.', '')) = ?",
+      normalized_city&.gsub('.', '')
+    ).first
 
-    unless Neighborhood.exists?(city: @city_display_name.downcase)
+    unless neighborhood
       redirect_to index_path, alert: "City not found"
+      return
     end
+
+    @city_name_db = neighborhood.city  # e.g., "st. paul"
+    @city_display_name = neighborhood.city.split.map(&:capitalize).join(' ')  # e.g., "St. Paul"
   end
 
   def set_all_cities
@@ -69,9 +78,11 @@ module NearMeSearch
   def set_places
     return unless @city_display_name
 
+    city_for_query = @city_name_db || @city_display_name.downcase
+
     base_query = place_scope
                       .joins(:neighborhood)
-                      .where(neighborhoods: { city: @city_display_name.downcase })
+                      .where(neighborhoods: { city: city_for_query })
                       .includes(:neighborhood)
 
     places = if params[:latitude].present? && params[:longitude].present? && @latitude && @longitude
@@ -91,7 +102,8 @@ module NearMeSearch
 
   def set_other_cities
     if @city_display_name && @city_display_name != "your area"
-      @other_cities = Neighborhood.where.not(city: @city_display_name.downcase)
+      city_for_query = @city_name_db || @city_display_name.downcase
+      @other_cities = Neighborhood.where.not(city: city_for_query)
                                   .distinct
                                   .pluck(:city)
                                   .shuffle

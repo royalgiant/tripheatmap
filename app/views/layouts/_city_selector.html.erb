@@ -15,6 +15,7 @@
 
           <div class="absolute left-0 md:right-0 z-10 mt-2 w-56 origin-top-left md:origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="popular-searches-button" tabindex="-1" id="popular-searches-menu">
             <div class="py-1" role="none">
+              <%= link_to "Bed and Breakfasts", bed_and_breakfast_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Best Neighborhoods", best_neighborhood_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
               <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem", tabindex: "-1" %>
@@ -130,6 +131,7 @@
         <%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Best Cheap Hotels", best_cheap_hotels_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
+        <%= link_to "Bed and Breakfast", bed_and_breakfast_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Hotels Near Landmarks", hotels_near_landmark_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Hotels Near Airports", hotels_near_airport_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
         <%= link_to "Hotels Near Universities", hotels_near_university_index_path, class: "block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 rounded-md" %>
