@@ -1,0 +1,80 @@
+<div class="max-w-md mx-auto space-y-4">
+  <button
+    id="use-location-btn"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
+    onclick="requestUserLocation()"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+    </svg>
+    Use My Exact Location
+  </button>
+
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center">
+      <div class="w-full border-t border-gray-300"></div>
+    </div>
+    <div class="relative flex justify-center text-sm">
+      <span class="px-2 bg-white text-gray-500">or choose a city</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="city-selector" class="block text-sm font-medium text-gray-700 mb-2">
+      Change location
+    </label>
+    <select
+      id="city-selector"
+      class="block w-full pl-4 pr-10 py-2.5 text-base text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+      onchange="if(this.value) window.location.href=this.value"
+    >
+      <% @all_cities.each do |city| %>
+        <option value="<%= bnb_near_me_path(city: city.parameterize) %>" <%= 'selected' if defined?(@city_display_name) && city.downcase == @city_display_name.downcase %>>
+          <%= city.titleize %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+</div>
+
+<script>
+  function requestUserLocation() {
+    const btn = document.getElementById('use-location-btn');
+    const originalText = btn.innerHTML;
+
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Getting location...';
+
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        window.location.href = '<%= bnb_near_me_index_path %>?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude;
+      },
+      function(error) {
+        let message = 'Unable to get your location. ';
+        if (error.code === error.PERMISSION_DENIED) {
+          message += 'Please enable location permissions in your browser.';
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          message += 'Location information is unavailable.';
+        } else if (error.code === error.TIMEOUT) {
+          message += 'Location request timed out.';
+        }
+        alert(message);
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  }
+</script>

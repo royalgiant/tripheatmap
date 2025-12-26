@@ -1,0 +1,39 @@
+<% content_for :head do %>
+  <title>Bed and Breakfast Near Me in <%= @city_display_name %> - Best B&B Deals | TripHeatMap</title>
+  <meta name="description" content="Find the best bed and breakfasts near you in <%= @city_display_name %>. Compare prices, ratings, and availability for top-rated B&Bs.">
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">Bed and Breakfast Near Me</h1>
+    <p class="text-xl text-gray-600 mb-4">
+      Showing bed and breakfasts near <%= @city_display_name %>
+    </p>
+
+    <%= render 'location_selector' %>
+  </div>
+
+  <% if @bed_and_breakfasts.any? %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @bed_and_breakfasts.each do |bnb| %>
+          <%= render 'shared/hotel_list_item', hotel: bnb, city_display_name: @city_display_name %>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="text-6xl mb-4">🏡</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-2">No Bed and Breakfasts Found in <%= @city_display_name %></h3>
+      <p class="text-gray-600 max-w-md mx-auto mb-6">
+        We don't have B&B listings for <%= @city_display_name %> yet. Try browsing other cities or use our general search.
+      </p>
+      <div class="flex gap-4 justify-center">
+        <%= link_to "Find B&Bs Near Me", bnb_near_me_index_path, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-3 text-sm font-medium transition-colors" %>
+        <%= link_to "Browse All Cities", where_to_stay_index_path, class: "inline-block bg-gray-600 hover:bg-gray-700 text-white rounded-md px-6 py-3 text-sm font-medium transition-colors" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render 'explore_cities' %>
+</div>

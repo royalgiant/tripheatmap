@@ -25,6 +25,9 @@ class Place < ApplicationRecord
   scope :hotels, -> { where(place_type: 'hotel') }
   scope :hostels, -> { where(place_type: 'hostel') }
   scope :accommodations, -> { where(place_type: ['hotel', 'hostel']) }
+  scope :bed_and_breakfasts, -> {
+    where(place_type: ['hostel', 'airbnb', 'vrbo'])
+  }
   scope :airbnbs, -> { where(place_type: 'airbnb') }
   scope :vrbos, -> { where(place_type: 'vrbo') }
   scope :rentals, -> { where(place_type: ['airbnb', 'vrbo']) }

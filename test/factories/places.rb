@@ -3,8 +3,8 @@ FactoryBot.define do
     neighborhood { nil }
     name { "MyString" }
     place_type { "MyString" }
-    lat { "9.99" }
-    lon { "9.99" }
+    latitude { "9.99" }
+    longitude { "9.99" }
     address { "MyString" }
     tags { "" }
   end

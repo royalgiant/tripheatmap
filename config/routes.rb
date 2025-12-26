@@ -42,6 +42,11 @@ Rails.application.routes.draw do
     get 'landmarks/:city', to: 'hotels_near_landmark#city', as: 'landmark_city'
     get 'landmarks/:city/:landmark', to: 'hotels_near_landmark#show', as: 'landmark'
   end
+
+  scope 'bed-and-breakfast-near', as: 'bnb_near' do
+    get 'me', to: 'bnb_near_me#index', as: 'me_index'
+    get 'me/:city', to: 'bnb_near_me#show', as: 'me'
+  end
   
   resources :places, only: [:show], param: :slug do
     collection do
