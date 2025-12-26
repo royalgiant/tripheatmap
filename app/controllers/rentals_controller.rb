@@ -27,6 +27,7 @@ class RentalsController < ApplicationController
     @rental.neighborhood_id = neighborhood.id
 
     if @rental.save
+      fetch_and_update_metadata(@rental)
       redirect_to rentals_path, flash: { success: "Your rental has been added successfully!" }
     else
       @cities = CityDataImporter::CITY_NAMES.keys.sort
@@ -51,7 +52,7 @@ class RentalsController < ApplicationController
         neighborhood = find_neighborhood_by_coordinates(@rental.latitude, @rental.longitude)
         @rental.update(neighborhood_id: neighborhood&.id) if neighborhood
       end
-
+      fetch_and_update_metadata(@rental)
       redirect_to rentals_path, flash: { success: "Your rental has been updated successfully!" }
     else
       @cities = CityDataImporter::CITY_NAMES.keys.sort
@@ -66,6 +67,12 @@ class RentalsController < ApplicationController
   end
 
   private
+
+  def fetch_and_update_metadata(rental)
+    return unless rental.booking_url.present? && rental.place_type == "airbnb"
+    metadata = RentalMetadataFetcher.new(rental.booking_url).call
+    rental.update(airbnb_vrbo_metadata: metadata) if metadata.present?
+  end
 
   def rental_params
     params.require(:place).permit(:name, :address, :latitude, :longitude, :booking_url, :average_price, :rental_type)

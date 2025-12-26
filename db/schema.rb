@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_26_030251) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_26_205342) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -499,6 +499,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_26_030251) do
     t.decimal "average_price", precision: 10, scale: 2, comment: "Average nightly price in USD (AI-generated estimate)"
     t.string "agoda_affiliate_url"
     t.jsonb "agoda_metadata"
+    t.jsonb "airbnb_vrbo_metadata"
     t.index ["city", "place_type"], name: "index_places_on_city_and_place_type"
     t.index ["city"], name: "index_places_on_city"
     t.index ["country", "continent"], name: "index_places_on_country_and_continent"
