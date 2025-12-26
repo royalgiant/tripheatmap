@@ -12,7 +12,7 @@ class RentalsController < ApplicationController
   end
 
   def create
-    @rental = current_user.places.build(rental_params)
+    @rental = current_user.places.build(rental_params.except(:rental_type))
     @rental.place_type = params[:place][:rental_type] # 'airbnb' or 'vrbo'
 
     neighborhood = find_neighborhood_by_coordinates(@rental.latitude, @rental.longitude)
@@ -46,7 +46,7 @@ class RentalsController < ApplicationController
       @rental.place_type = params[:place][:rental_type]
     end
 
-    if @rental.update(rental_params)
+    if @rental.update(rental_params.except(:rental_type))
       if @rental.latitude_previously_changed? || @rental.longitude_previously_changed?
         neighborhood = find_neighborhood_by_coordinates(@rental.latitude, @rental.longitude)
         @rental.update(neighborhood_id: neighborhood&.id) if neighborhood
@@ -68,7 +68,7 @@ class RentalsController < ApplicationController
   private
 
   def rental_params
-    params.require(:place).permit(:name, :address, :latitude, :longitude, :booking_url)
+    params.require(:place).permit(:name, :address, :latitude, :longitude, :booking_url, :average_price, :rental_type)
   end
 
   def require_subscription_or_admin!
