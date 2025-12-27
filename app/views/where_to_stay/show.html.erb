@@ -1,3 +1,5 @@
+<%= render 'shared/deals_banner' %>
+
 <% content_for :head do %>
   <!-- SEO Meta Tags -->
   <title><%= @page.seo_title %></title>
@@ -32,7 +34,7 @@
   <% end %>
 <% end %>
 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-12">
   <header class="space-y-6">
     <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold">TripHeatmap · Data-backed stays</p>
     <h1 class="text-3xl sm:text-4xl font-bold text-gray-900"><%= @page.hero_heading %></h1>
