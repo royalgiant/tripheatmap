@@ -8,6 +8,9 @@ class StaticController < ApplicationController
   def about
   end
 
+  def deals
+  end
+
   def tripheatmap_how_to
   end
 

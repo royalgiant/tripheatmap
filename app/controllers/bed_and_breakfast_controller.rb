@@ -1,11 +1,25 @@
 class BedAndBreakfastController < ApplicationController
   include NearMeSearch
+  include HotelFiltering
 
   before_action :set_canonical_url, only: [:show]
 
   def index
     @cities = get_cities_with_bnb_counts
     @cities_grouped = get_cities_grouped_by_location(@cities)
+  end
+
+  def show
+    super
+
+    all_bnbs = @bed_and_breakfasts
+    all_bnbs = apply_filters(all_bnbs)
+    @bed_and_breakfasts = all_bnbs
+    @nearby_restaurants = nearby_places('restaurant', 100)
+    @nearby_cafes = nearby_places('cafe', 50)
+    @nearby_bars = nearby_places('bar', 50)
+    @all_map_places = (@bed_and_breakfasts.to_a + @nearby_restaurants + @nearby_cafes + @nearby_bars)
+    @mapbox_token = Rails.application.credentials.dig(Rails.env.to_sym, :mapbox, :public_key)
   end
 
   private
@@ -67,5 +81,35 @@ class BedAndBreakfastController < ApplicationController
   def set_canonical_url
     city_slug = params[:city]
     @canonical_url = bed_and_breakfast_in_city_url(city: city_slug)
+  end
+
+  def nearby_places(place_type, limit)
+    bnb_neighborhood_ids = @bed_and_breakfasts.map(&:neighborhood_id).compact.uniq
+
+    return [] if bnb_neighborhood_ids.empty?
+
+    target_neighborhoods = bnb_neighborhood_ids.first(20)
+
+    # Calculate how many places per neighborhood to approximate the total limit
+    # Ensure at least 3-20
+    per_hood_limit = (limit / target_neighborhoods.size.to_f).ceil.clamp(3, 20)
+
+    sql = <<~SQL
+      SELECT sub.* FROM (
+        SELECT id, name, place_type, latitude, longitude, address, rating, review_count, trip_affiliate_url, neighborhood_id,
+               ROW_NUMBER() OVER (
+                 PARTITION BY neighborhood_id
+                 ORDER BY rating DESC, review_count DESC
+               ) as rn
+        FROM places
+        WHERE neighborhood_id IN (?)
+          AND place_type = ?
+          AND latitude IS NOT NULL AND longitude IS NOT NULL
+      ) sub
+      WHERE rn <= ?
+    SQL
+
+    query = ActiveRecord::Base.sanitize_sql_array([sql, target_neighborhoods, place_type, per_hood_limit])
+    Place.find_by_sql(query)
   end
 end

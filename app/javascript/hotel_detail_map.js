@@ -26,7 +26,10 @@ async function initHotelDetailMap() {
       bar: true,
       hotel_under_100: true,
       hotel_100_200: true,
-      hotel_200_plus: true
+      hotel_200_plus: true,
+      airbnb: true,
+      vrbo: true,
+      hostel: true
     };
 
     if (placesData.length === 0) {
@@ -59,7 +62,10 @@ async function initHotelDetailMap() {
         restaurant: '#3B82F6',  // Blue
         cafe: '#10B981',        // Green
         bar: '#A855F7',         // Purple
-        hotel: '#F59E0B'        // Orange (default, will be overridden by price)
+        hotel: '#F59E0B',       // Orange (default, will be overridden by price)
+        airbnb: '#FF5A5F',      // Airbnb red
+        vrbo: '#003D79',        // VRBO blue
+        hostel: '#EAB308'       // Yellow
       };
 
       const getHotelColor = (avgPrice) => {
@@ -79,7 +85,10 @@ async function initHotelDetailMap() {
         bar: [],
         hotel_under_100: [],
         hotel_100_200: [],
-        hotel_200_plus: []
+        hotel_200_plus: [],
+        airbnb: [],
+        vrbo: [],
+        hostel: []
       };
 
       // Track currently open popup
@@ -150,8 +159,8 @@ async function initHotelDetailMap() {
             ${place.address ? `<div style="font-size: 13px; color: #888; margin-bottom: 8px;">${escapeHtml(place.address)}</div>` : ''}
         `;
 
-        // Only show booking link for hotels
-        if (place.place_type === 'hotel' && place.trip_affiliate_url) {
+        // Show booking link for hotels, airbnb, vrbo, hostel
+        if (['hotel', 'hostel', 'airbnb', 'vrbo'].includes(place.place_type) && place.trip_affiliate_url) {
           popupHTML += `
             <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb;">
               <a href="${escapeHtml(place.trip_affiliate_url)}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; color: #059669; text-decoration: none; font-weight: 600; font-size: 13px; padding: 4px 8px; background: #d1fae5; border-radius: 4px;">
@@ -203,8 +212,8 @@ async function initHotelDetailMap() {
           currentPopup = popup;
         });
 
-        // Only add click behavior for hotels to scroll to the list
-        if (place.place_type === 'hotel') {
+        // Add click behavior for hotels, airbnb, vrbo, hostel to scroll to the list
+        if (['hotel', 'hostel', 'airbnb', 'vrbo'].includes(place.place_type)) {
           markerEl.addEventListener('click', () => {
             scrollToHotelInList(place.id);
           });
@@ -307,34 +316,98 @@ async function initHotelDetailMap() {
         font-size: 12px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       `;
-      legend.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 8px; color: #333;">Hotels (by price)</div>
-        <div style="margin-bottom: 4px;">
-          <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          Under $100
-        </div>
-        <div style="margin-bottom: 4px;">
-          <span style="display:inline-block; width:12px; height:12px; background:#F59E0B; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          $100 - $200
-        </div>
-        <div style="margin-bottom: 12px;">
-          <span style="display:inline-block; width:12px; height:12px; background:#EF4444; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          $200+
-        </div>
-        <div style="font-weight: bold; margin-bottom: 8px; color: #333; padding-top: 8px; border-top: 1px solid #e5e7eb;">Other Places</div>
-        <div style="margin-bottom: 4px;">
-          <span style="display:inline-block; width:12px; height:12px; background:#3B82F6; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          Restaurants
-        </div>
-        <div style="margin-bottom: 4px;">
-          <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          Cafes
-        </div>
-        <div>
-          <span style="display:inline-block; width:12px; height:12px; background:#A855F7; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
-          Bars
-        </div>
-      `;
+      // Dynamically build legend based on what place types are present
+      let legendHTML = '';
+
+      const hasHotels = placesData.some(p => p.place_type === 'hotel');
+      const hasAirbnb = placesData.some(p => p.place_type === 'airbnb');
+      const hasVrbo = placesData.some(p => p.place_type === 'vrbo');
+      const hasHostel = placesData.some(p => p.place_type === 'hostel');
+      const hasRestaurants = placesData.some(p => p.place_type === 'restaurant');
+      const hasCafes = placesData.some(p => p.place_type === 'cafe');
+      const hasBars = placesData.some(p => p.place_type === 'bar');
+
+      if (hasHotels) {
+        legendHTML += `
+          <div style="font-weight: bold; margin-bottom: 8px; color: #333;">Hotels (by price)</div>
+          <div style="margin-bottom: 4px;">
+            <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+            Under $100
+          </div>
+          <div style="margin-bottom: 4px;">
+            <span style="display:inline-block; width:12px; height:12px; background:#F59E0B; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+            $100 - $200
+          </div>
+          <div style="margin-bottom: 12px;">
+            <span style="display:inline-block; width:12px; height:12px; background:#EF4444; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+            $200+
+          </div>
+        `;
+      }
+
+      if (hasAirbnb || hasVrbo || hasHostel) {
+        legendHTML += `<div style="font-weight: bold; margin-bottom: 8px; color: #333;${hasHotels ? ' padding-top: 8px; border-top: 1px solid #e5e7eb;' : ''}">Accommodations</div>`;
+
+        if (hasAirbnb) {
+          legendHTML += `
+            <div style="margin-bottom: 4px;">
+              <span style="display:inline-block; width:12px; height:12px; background:#FF5A5F; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              Airbnb
+            </div>
+          `;
+        }
+
+        if (hasVrbo) {
+          legendHTML += `
+            <div style="margin-bottom: 4px;">
+              <span style="display:inline-block; width:12px; height:12px; background:#003D79; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              VRBO
+            </div>
+          `;
+        }
+
+        if (hasHostel) {
+          legendHTML += `
+            <div style="margin-bottom: ${hasRestaurants || hasCafes || hasBars ? '12px' : '4px'};">
+              <span style="display:inline-block; width:12px; height:12px; background:#EAB308; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              Hostels
+            </div>
+          `;
+        }
+      }
+
+      if (hasRestaurants || hasCafes || hasBars) {
+        legendHTML += `<div style="font-weight: bold; margin-bottom: 8px; color: #333; padding-top: 8px; border-top: 1px solid #e5e7eb;">Other Places</div>`;
+
+        if (hasRestaurants) {
+          legendHTML += `
+            <div style="margin-bottom: 4px;">
+              <span style="display:inline-block; width:12px; height:12px; background:#3B82F6; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              Restaurants
+            </div>
+          `;
+        }
+
+        if (hasCafes) {
+          legendHTML += `
+            <div style="margin-bottom: 4px;">
+              <span style="display:inline-block; width:12px; height:12px; background:#10B981; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              Cafes
+            </div>
+          `;
+        }
+
+        if (hasBars) {
+          legendHTML += `
+            <div>
+              <span style="display:inline-block; width:12px; height:12px; background:#A855F7; border-radius:50%; border: 2px solid white; margin-right:6px;"></span>
+              Bars
+            </div>
+          `;
+        }
+      }
+
+      legend.innerHTML = legendHTML;
       el.appendChild(legend);
 
       console.log('Hotel detail map fully initialized with', placesData.length, 'markers');

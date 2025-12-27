@@ -101,6 +101,7 @@ Rails.application.routes.draw do
     get :terms
     get :privacy
     get :about
+    get :deals
     match :contact, via: [:get, :post]
   end
 

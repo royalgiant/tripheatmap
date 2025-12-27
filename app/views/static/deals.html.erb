@@ -1,0 +1,88 @@
+<% content_for :head do %>
+  <title>Get Exclusive Deals from Hosts - TripHeatMap</title>
+  <meta name="description" content="Save your search and let Airbnb and VRBO hosts reach out with exclusive deals just for you. Get special offers that don't exist anywhere else.">
+<% end %>
+
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white shadow-lg rounded-2xl p-8 sm:p-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Get Exclusive Deals from Hosts</h1>
+      <p class="text-xl text-gray-600 mb-10">
+        <%= link_to "Join now", signup_path, class: "text-blue-600 hover:text-blue-700 font-semibold underline" %> and save your hotel searches. Let hosts come to you with special offers you won't find anywhere else.
+      </p>
+
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">🎯 How It Works</h2>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6 rounded-r-lg">
+          <h3 class="font-bold text-blue-900 mb-3 text-lg">Step 1: Search for Your Perfect Stay</h3>
+          <p class="text-blue-900 mb-3">
+            Browse our popular searches to find the perfect place to stay:
+          </p>
+          <ul class="list-disc pl-5 text-blue-900 space-y-1">
+            <li><%= link_to "Bed & Breakfasts", bed_and_breakfast_index_path, class: "underline hover:text-blue-700" %></li>
+            <li><%= link_to "Best Boutique Hotels", best_boutique_hotels_index_path, class: "underline hover:text-blue-700" %></li>
+            <li><%= link_to "Best Luxury Hotels", best_luxury_hotels_index_path, class: "underline hover:text-blue-700" %></li>
+            <li><%= link_to "Budget-Friendly Hotels", best_cheap_hotels_index_path, class: "underline hover:text-blue-700" %></li>
+          </ul>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6 rounded-r-lg">
+          <h3 class="font-bold text-green-900 mb-3 text-lg">Step 2: Save Your Search</h3>
+          <p class="text-green-900 mb-4">
+            After you search for a city, you'll see a list of hotels, hostels, Airbnbs, and VRBOs.
+            Found what you're looking for? Save your search with your specific criteria (dates, location, budget, etc.).
+          </p>
+          <%= image_tag "deals_2_save_search.png", alt: "Save your search", class: "w-full rounded-lg shadow-md" %>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-500 p-6 mb-6 rounded-r-lg">
+          <h3 class="font-bold text-purple-900 mb-3 text-lg">Step 3: Let Hosts Come to You</h3>
+          <p class="text-purple-900 mb-4">
+            Here's where the magic happens! When you save a search, you can choose to let hosts know you're looking.
+            Airbnb and VRBO hosts usually only get visibility on their own platforms. But with TripHeatMap, select hosts can reach out directly <b>if you give them permission</b>.
+          </p>
+          <%= image_tag "deals_3_hosts_to_you.png", alt: "Let hosts come to you", class: "w-full rounded-lg shadow-md" %>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-500 p-6 mb-6 rounded-r-lg">
+          <h3 class="font-bold text-orange-900 mb-3 text-lg">Step 4: Receive Exclusive Offers</h3>
+          <p class="text-orange-900">
+            Hosts who have availability can send you special offers to win your business. These deals are often better than what you'll find on Airbnb or VRBO because the host is reaching out to you directly.
+          </p>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-12 mb-4">💰 Why This Works</h2>
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 mb-8">
+          <p class="text-gray-900 mb-4 font-medium">
+            <strong>You win:</strong> You get exclusive deals that are customized just for you. These offers don't exist anywhere else!
+          </p>
+          <p class="text-gray-900 font-medium">
+            <strong>Hosts win:</strong> They fill their empty calendar spots and get your business instead of their competitors.
+          </p>
+          <p class="text-gray-700 mt-4 text-base">
+            It's a win-win. You save money on a personalized deal, and hosts keep their properties booked.
+          </p>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-gray-900 mt-12 mb-4">🚀 Ready to Get Started?</h2>
+        <p class="text-gray-700 mb-6 text-lg">
+          Start searching for your next stay and save your search. Hosts will reach out with exclusive offers you can't get anywhere else.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <%= link_to bed_and_breakfast_index_path, class: "inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-colors text-lg shadow-lg hover:shadow-xl" do %>
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Start Searching
+          <% end %>
+
+          <%= link_to signup_path, class: "inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-full transition-colors text-lg border-2 border-gray-300" do %>
+            Join Now
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

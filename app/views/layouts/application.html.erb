@@ -81,6 +81,18 @@
       <%= render partial: 'layouts/flash_messages' %>
     </div>
 
+    <div class="max-w-4xl mx-auto bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-4xl p-3 sm:p-3 flex items-center justify-between shadow-sm mt-6">
+      <div class="flex-1">
+        <p class="text-gray-900 text-sm sm:text-base font-medium leading-tight">
+          💰 Get exclusive deals & discounts directly from Airbnb and VRBO hosts
+        </p>
+      </div>
+
+      <%= link_to deals_path, class: "ml-4 flex-shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out text-sm" do %>
+        Learn How
+      <% end %>
+    </div>
+
     <div class="min-h-screen bg-white">
       <%= yield %>
     </div>
