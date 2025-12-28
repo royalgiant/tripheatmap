@@ -1,0 +1,37 @@
+TripHeatMap - New Message
+===============================================
+
+YOU HAVE A NEW MESSAGE
+
+Hi <%= @recipient.email.split('@').first.titleize %>,
+
+You received a new message from <%= @sender_name %> about the offer for <%= @offer.place.name %>.
+
+-----------------------------------------------
+MESSAGE
+-----------------------------------------------
+
+From: <%= @sender_name %>
+Date: <%= @message.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+
+<%= @message.content %>
+
+-----------------------------------------------
+ABOUT THIS OFFER
+-----------------------------------------------
+
+Property: <%= @offer.place.name %>
+Price: $<%= @offer.offered_price_cents / 100 %>/night
+Dates: <%= @offer.saved_search.date_range %>
+Status: <%= @offer.status.humanize %>
+
+VIEW CONVERSATION & REPLY:
+<%= offer_url(@offer) %>
+
+-----------------------------------------------
+QUICK REPLY TIP: <%= @message.from_host? ? 'Respond to host questions promptly to ensure a smooth booking process.' : 'Answer your guest\'s questions to provide excellent service.' %>
+-----------------------------------------------
+
+You're receiving this because you have an active offer conversation.
+
+© <%= Time.current.year %> TripHeatMap. All rights reserved.

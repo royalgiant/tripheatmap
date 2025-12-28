@@ -1,0 +1,45 @@
+TripHeatMap - Exclusive Offers
+===============================================
+
+YOU RECEIVED <%= @offers_count %> NEW <%= @offers_count == 1 ? 'OFFER' : 'OFFERS' %>!
+
+Hi <%= @guest.email.split('@').first.titleize %>,
+
+Exciting news! <%= @offers_count %> <%= @offers_count == 1 ? 'host has' : 'hosts have' %> sent you exclusive offers based on your saved searches.
+Book directly and skip the platform commissions!
+
+-----------------------------------------------
+YOUR NEW OFFERS:
+-----------------------------------------------
+
+<% @offers.each_with_index do |offer, index| %>
+<%= index + 1 %>. <%= offer.place.name %>
+   <%= offer.place.address %>
+
+   YOUR EXCLUSIVE PRICE: $<%= offer.offered_price_cents / 100 %>/night
+<% if offer.discount_value.present? %>   <%= offer.discount_description %>
+<% end %><% if offer.place.average_price %>   Regular: $<%= offer.place.average_price %> • Save $<%= (offer.place.average_price - offer.offered_price_cents / 100.0).round %>
+<% end %>
+<% if offer.perks.present? && offer.perks.any? %>
+   Special Perks:
+<% offer.perks.each do |perk| %>   ✓ <%= perk %>
+<% end %><% end %>
+<% if offer.personal_message.present? %>
+   Message from Host:
+   "<%= offer.personal_message %>"
+<% end %>
+
+   ⏰ Expires in <%= offer.time_remaining %>
+
+<% end %>
+
+VIEW ALL OFFERS:
+<%= offers_url %>
+
+-----------------------------------------------
+HOW IT WORKS: Click the link above to see full details. When you find one you like, click "Book Now" to reserve on the platform, then click "I Booked This" to confirm and notify the host.
+-----------------------------------------------
+
+You're receiving this because you have active saved searches.
+
+© <%= Time.current.year %> TripHeatMap. All rights reserved.

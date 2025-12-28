@@ -39,3 +39,25 @@ update_hotels_monthly:
   class: UpdateHotelsJob
   description: 'Update hotels/hostels for all cities, remove closed businesses, add new ones'
   queue: default
+
+# Lead Generation Marketplace Jobs
+# Daily digest of new leads for hosts and new offers for guests
+daily_lead_offer_digest:
+  cron: '0 21 * * *'
+  class: DailyLeadAndOfferDigestJob
+  description: 'Notify hosts of new matching searches and guests of new offers (runs 9 PM daily)'
+  queue: default
+
+# Expire old offers that have passed their expiration date
+expire_offers_hourly:
+  cron: '0 * * * *'
+  class: ExpireOffersJob
+  description: 'Mark offers past expiration date as expired (runs hourly)'
+  queue: default
+
+# Clean up old expired/declined offers
+offer_cleanup_weekly:
+  cron: '0 2 * * 0'
+  class: OfferCleanupJob
+  description: 'Delete expired/declined offers older than 90 days (runs Sunday 2 AM)'
+  queue: default

@@ -1,0 +1,120 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <!-- Header -->
+  <tr>
+    <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 40px 30px; text-align: center;">
+      <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
+        TripHeatMap
+      </h1>
+      <p style="margin: 10px 0 0 0; color: #dbeafe; font-size: 14px;">New Message</p>
+    </td>
+  </tr>
+
+  <!-- Main Content -->
+  <tr>
+    <td style="background-color: #ffffff; padding: 40px 30px;">
+      <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 24px; font-weight: bold;">
+        You Have a New Message
+      </h2>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Hi <%= @recipient.email.split('@').first.titleize %>,
+      </p>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        You received a new message from <%= @sender_name %> about the offer for <strong><%= @offer.place.name %></strong>.
+      </p>
+
+      <!-- Message Card -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <tr>
+          <td style="background-color: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 25px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding-bottom: 15px;">
+                  <p style="margin: 0; color: #1e40af; font-size: 13px; font-weight: bold; text-transform: uppercase;">
+                    From: <%= @sender_name %>
+                  </p>
+                  <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 12px;">
+                    <%= @message.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top: 10px; border-top: 1px solid #bfdbfe;">
+                  <p style="margin: 0; color: #1f2937; font-size: 15px; line-height: 1.6; white-space: pre-wrap;"><%= @message.content %></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Offer Summary -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <tr>
+          <td style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
+            <h3 style="margin: 0 0 15px 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+              About This Offer
+            </h3>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                  <strong>Property:</strong> <%= @offer.place.name %>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                  <strong>Price:</strong> $<%= @offer.offered_price_cents / 100 %>/night
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                  <strong>Dates:</strong> <%= @offer.saved_search.date_range %>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                  <strong>Status:</strong> <%= @offer.status.humanize %>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA Button -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <a href="<%= offer_url(@offer) %>" style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 40px; border-radius: 8px;">
+              View Conversation & Reply
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Info Box -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px;">
+        <tr>
+          <td style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px;">
+            <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+              <strong>Quick Reply Tip:</strong> <%= @message.from_host? ? 'Respond to host questions promptly to ensure a smooth booking process.' : 'Answer your guest\'s questions to provide excellent service.' %>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">
+        You're receiving this because you have an active offer conversation.
+      </p>
+      <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+        &copy; <%= Time.current.year %> TripHeatMap. All rights reserved.
+      </p>
+    </td>
+  </tr>
+</table>

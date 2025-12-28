@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_places, through: :favorites, source: :place
   has_many :saved_searches, dependent: :destroy
+  has_many :received_offers, through: :saved_searches, source: :offers
+  has_many :sent_offers, through: :places, source: :offers
 
   EARLY_ADOPTER = "early_adopter".freeze
   ADMIN = "admin"

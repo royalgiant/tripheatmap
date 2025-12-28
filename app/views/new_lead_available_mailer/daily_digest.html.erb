@@ -1,0 +1,114 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <!-- Header -->
+  <tr>
+    <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 40px 30px; text-align: center;">
+      <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
+        TripHeatMap
+      </h1>
+      <p style="margin: 10px 0 0 0; color: #dbeafe; font-size: 14px;">Lead Marketplace</p>
+    </td>
+  </tr>
+
+  <!-- Main Content -->
+  <tr>
+    <td style="background-color: #ffffff; padding: 40px 30px;">
+      <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 24px; font-weight: bold;">
+        <%= @leads_count %> New <%= @leads_count == 1 ? 'Traveler is' : 'Travelers are' %> Looking in Your Area!
+      </h2>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Hi <%= @host.email.split('@').first.titleize %>,
+      </p>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Great news! <%= @leads_count %> <%= @leads_count == 1 ? 'traveler has' : 'travelers have' %> saved searches that match your properties.
+        Send them exclusive offers and book direct to avoid platform commissions.
+      </p>
+
+      <!-- Leads List -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <% @saved_searches.each_with_index do |search, index| %>
+          <tr>
+            <td style="background-color: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; <%= index > 0 ? 'margin-top: 15px;' : '' %>">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="padding-bottom: 10px;">
+                    <strong style="color: #1f2937; font-size: 18px;"><%= search.location.titleize %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                          <strong>Dates:</strong> <%= search.date_range %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                          <strong>Max Budget:</strong> $<%= search.max_price_cents / 100 %>/night
+                        </td>
+                      </tr>
+                      <% if search.min_rating %>
+                        <tr>
+                          <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                            <strong>Min Rating:</strong> <%= search.min_rating %>+ stars
+                          </td>
+                        </tr>
+                      <% end %>
+                      <% if search.number_of_guests %>
+                        <tr>
+                          <td style="padding: 5px 0; color: #6b7280; font-size: 14px;">
+                            <strong>Guests:</strong> <%= search.number_of_guests %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <% if index < @saved_searches.count - 1 %>
+            <tr><td style="height: 15px;"></td></tr>
+          <% end %>
+        <% end %>
+      </table>
+
+      <!-- CTA Button -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <a href="<%= offers_url %>" style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 40px; border-radius: 8px;">
+              View Leads & Send Offers
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Info Box -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px;">
+        <tr>
+          <td style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px;">
+            <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+              <strong>Pro tip:</strong> Be competitive with pricing and add special perks to stand out!
+              First to send usually wins the booking.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">
+        You're receiving this because you have an active monthly/annual subscription.
+      </p>
+      <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+        &copy; <%= Time.current.year %> TripHeatMap. All rights reserved.
+      </p>
+    </td>
+  </tr>
+</table>

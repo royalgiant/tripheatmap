@@ -1,0 +1,61 @@
+TripHeatMap - Offer Accepted
+===============================================
+
+🎉 YOUR OFFER WAS ACCEPTED!
+
+Hi <%= @host.email.split('@').first.titleize %>,
+
+Great news! Your exclusive offer for <%= @place.name %> has been accepted by a guest.
+They will complete the booking through <%= @place.place_type.titleize %> and you can expect their arrival soon.
+
+-----------------------------------------------
+BOOKING DETAILS
+-----------------------------------------------
+
+Your Property: <%= @place.name %>
+<% if @place.address %>               <%= @place.address %>
+<% end %>
+Offered Price: $<%= @offer.offered_price_cents / 100 %>/night
+<% if @offer.discount_value.present? %>               <%= @offer.discount_description %>
+<% end %>
+Guest's Dates: <%= @offer.saved_search.date_range %>
+<% if @offer.saved_search.number_of_guests %>Number of Guests: <%= @offer.saved_search.number_of_guests %>
+<% end %>
+<% if @offer.perks.present? && @offer.perks.any? %>
+Perks You Offered:
+<% @offer.perks.each do |perk| %>  ✓ <%= perk %>
+<% end %><% end %>
+
+-----------------------------------------------
+WHAT HAPPENS NEXT
+-----------------------------------------------
+
+1. The guest will complete payment through <%= @place.place_type.titleize %>
+2. You'll receive a booking notification from <%= @place.place_type.titleize %>
+3. Prepare your property for the guest's arrival
+4. Make sure to provide the perks you promised in the offer
+
+<% if @place.average_price %>
+-----------------------------------------------
+COMMISSION SAVED
+-----------------------------------------------
+
+By booking direct, you avoided platform commissions and kept 100% of your $<%= @offer.offered_price_cents / 100 %>/night rate.
+<%
+  stay_length = if @offer.saved_search.checkin_date && @offer.saved_search.checkout_date
+    (@offer.saved_search.checkout_date - @offer.saved_search.checkin_date).to_i
+  else
+    3  # default estimate
+  end
+  total_revenue = (@offer.offered_price_cents / 100.0) * stay_length
+%>
+<% if stay_length > 0 %>Estimated total revenue: $<%= total_revenue.round %> (based on <%= stay_length %> night<%= stay_length > 1 ? 's' : '' %>)
+<% end %>
+<% end %>
+
+VIEW BOOKING DETAILS:
+<%= offer_url(@offer) %>
+
+Keep up the great hosting!
+
+© <%= Time.current.year %> TripHeatMap. All rights reserved.

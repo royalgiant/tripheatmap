@@ -1,0 +1,47 @@
+TripHeatMap - Booking Confirmed
+===============================================
+
+✓ YOUR BOOKING IS CONFIRMED
+
+Hi <%= @guest.email.split('@').first.titleize %>,
+
+Congratulations! You've accepted the exclusive offer for <%= @place.name %>.
+The host has been notified and will expect your arrival.
+
+-----------------------------------------------
+BOOKING SUMMARY
+-----------------------------------------------
+
+Property: <%= @place.name %>
+<% if @place.address %>          <%= @place.address %>
+<% end %>
+Your Price: $<%= @offer.offered_price_cents / 100 %>/night
+<% if @offer.discount_value.present? %>            <%= @offer.discount_description %>
+<% end %>
+Dates: <%= @offer.saved_search.date_range %>
+<% if @offer.saved_search.number_of_guests %>Guests: <%= @offer.saved_search.number_of_guests %>
+<% end %>
+<% if @offer.perks.present? && @offer.perks.any? %>
+Special Perks:
+<% @offer.perks.each do |perk| %>  ✓ <%= perk %>
+<% end %><% end %>
+
+-----------------------------------------------
+NEXT STEPS
+-----------------------------------------------
+
+1. Check your email for booking confirmation from <%= @place.place_type.titleize %>
+2. Complete payment directly through <%= @place.place_type.titleize %>
+3. The host may reach out with additional details
+4. Review check-in instructions before your arrival
+
+VIEW BOOKING DETAILS:
+<%= offer_url(@offer) %>
+
+-----------------------------------------------
+SAFETY REMINDER: All payments should be completed through the official <%= @place.place_type.titleize %> platform. Never send money directly to hosts outside of the booking platform.
+-----------------------------------------------
+
+Have a wonderful stay!
+
+© <%= Time.current.year %> TripHeatMap. All rights reserved.

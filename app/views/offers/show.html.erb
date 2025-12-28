@@ -1,0 +1,211 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Back Button -->
+    <div class="mb-6">
+      <%= link_to offers_path, class: "inline-flex items-center text-blue-600 hover:text-blue-700 font-medium" do %>
+        <i class="fa-solid fa-arrow-left mr-2"></i> Back to Offers
+      <% end %>
+    </div>
+
+    <!-- Offer Card -->
+    <div class="bg-white shadow-lg rounded-lg border border-gray-200 overflow-hidden">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold mb-2"><%= @offer.place.name %></h1>
+            <p class="text-blue-100"><%= @offer.place.address %></p>
+          </div>
+          <div class="text-right">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium <%= @offer.status == 'accepted' ? 'bg-green-100 text-green-800' : @offer.status == 'expired' ? 'bg-gray-100 text-gray-800' : 'bg-white text-blue-700' %>">
+              <%= @offer.status.humanize %>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="p-6 space-y-6">
+        <!-- Price Section -->
+        <div class="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+          <div class="text-center">
+            <p class="text-sm text-green-700 font-semibold uppercase tracking-wide mb-2">Your Exclusive Price</p>
+            <div class="flex items-center justify-center gap-4 mb-2">
+              <p class="text-4xl font-bold text-green-700">$<%= @offer.offered_price_cents / 100 %></p>
+              <span class="text-gray-600">per night</span>
+            </div>
+            <% if @offer.discount_value.present? %>
+              <p class="text-lg text-green-600 font-semibold"><%= @offer.discount_description %></p>
+            <% end %>
+            <% if @offer.place.average_price %>
+              <p class="text-sm text-gray-600 mt-2">
+                Regular price: <span class="line-through">$<%= @offer.place.average_price %></span>
+                • You save: <span class="text-green-600 font-semibold">$<%= (@offer.place.average_price - @offer.offered_price_cents / 100.0).round %>/night</span>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Perks -->
+        <% if @offer.perks.present? && @offer.perks.any? %>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+              <i class="fa-solid fa-gift text-purple-600 mr-2"></i>
+              Special Perks Included
+            </h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <% @offer.perks.each do |perk| %>
+                <li class="flex items-center text-gray-700">
+                  <i class="fa-solid fa-check-circle text-green-600 mr-2"></i>
+                  <%= perk %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Host Message -->
+        <% if @offer.personal_message.present? %>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+              <i class="fa-solid fa-message text-blue-600 mr-2"></i>
+              Message from Host
+            </h3>
+            <div class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+              <p class="text-gray-700">"<%= @offer.personal_message %>"</p>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Your Search Details -->
+        <div class="bg-gray-50 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Your Original Search</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div>
+              <p class="text-gray-500">Location</p>
+              <p class="font-semibold text-gray-900"><%= @offer.saved_search.location.titleize %></p>
+            </div>
+            <div>
+              <p class="text-gray-500">Dates</p>
+              <p class="font-semibold text-gray-900"><%= @offer.saved_search.date_range %></p>
+            </div>
+            <div>
+              <p class="text-gray-500">Max Budget</p>
+              <p class="font-semibold text-gray-900">$<%= @offer.saved_search.max_price_cents / 100 %>/night</p>
+            </div>
+            <% if @offer.saved_search.number_of_guests %>
+              <div>
+                <p class="text-gray-500">Guests</p>
+                <p class="font-semibold text-gray-900"><%= @offer.saved_search.number_of_guests %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Property Details -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Property Details</h3>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <% if @offer.place.rating %>
+              <div class="flex items-center">
+                <i class="fa-solid fa-star text-yellow-500 mr-2"></i>
+                <span class="font-semibold text-gray-900"><%= @offer.place.rating %></span>
+                <% if @offer.place.review_count %>
+                  <span class="text-gray-500 ml-1">(<%= @offer.place.review_count %> reviews)</span>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="flex items-center">
+              <i class="fa-solid fa-home text-blue-600 mr-2"></i>
+              <span class="text-gray-700 capitalize"><%= @offer.place.place_type %></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expiration Warning -->
+        <% if @offer.status.in?(['sent', 'viewed']) %>
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <i class="fa-solid fa-clock text-yellow-400 text-lg"></i>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-yellow-700">
+                  <strong>Offer expires in <%= @offer.time_remaining %>.</strong>
+                  Book soon to secure this exclusive price!
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Action Buttons -->
+        <div class="border-t pt-6 space-y-3">
+          <% if @offer.status.in?(['sent', 'viewed']) %>
+            <!-- Book Now Button (Opens booking URL) -->
+            <% if @offer.place.booking_url.present? %>
+              <%= link_to @offer.place.booking_url, target: "_blank", rel: "noopener", class: "block w-full text-center px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors text-lg" do %>
+                <i class="fa-solid fa-external-link-alt mr-2"></i>
+                Book Now on <%= @offer.place.place_type.titleize %>
+              <% end %>
+              <p class="text-xs text-gray-500 text-center">Opens the property listing in a new tab</p>
+            <% end %>
+
+            <!-- I Booked This Button -->
+            <%= button_to accept_offer_path(@offer), method: :post, data: { confirm: "Confirm that you've booked this property? This will mark the offer as accepted and notify the host." }, class: "block w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors" do %>
+              <i class="fa-solid fa-check-circle mr-2"></i>
+              I Booked This Property
+            <% end %>
+
+            <!-- Decline Button -->
+            <%= button_to decline_offer_path(@offer), method: :post, data: { confirm: "Decline this offer?" }, class: "block w-full px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors" do %>
+              <i class="fa-solid fa-times-circle mr-2"></i>
+              Decline Offer
+            <% end %>
+
+            <!-- Report Spam -->
+            <div class="text-center">
+              <%= link_to "mailto:donald@tripheatmap.com?subject=Spam Report - Offer #{@offer.id}&body=User: #{current_user.email}%0APlace: #{@offer.place.name} (ID: #{@offer.place.id})%0ASavedSearch ID: #{@offer.saved_search_id}%0A%0APlease describe why you're reporting this as spam:", class: "text-sm text-red-600 hover:text-red-700 underline" do %>
+                <i class="fa-solid fa-flag mr-1"></i> Report Spam
+              <% end %>
+            </div>
+          <% elsif @offer.status == 'accepted' %>
+            <div class="bg-green-50 border-2 border-green-200 rounded-lg p-6 text-center">
+              <i class="fa-solid fa-check-circle text-green-600 text-4xl mb-3"></i>
+              <h3 class="text-xl font-semibold text-green-800 mb-2">Offer Accepted!</h3>
+              <p class="text-green-700">You accepted this offer on <%= @offer.accepted_at.strftime("%B %d, %Y") %>.</p>
+              <p class="text-sm text-green-600 mt-2">Check your email for booking confirmation.</p>
+            </div>
+          <% elsif @offer.status == 'expired' %>
+            <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center">
+              <i class="fa-solid fa-clock text-gray-400 text-4xl mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Offer Expired</h3>
+              <p class="text-gray-600">This offer expired on <%= @offer.expires_at.strftime("%B %d, %Y") %>.</p>
+            </div>
+          <% elsif @offer.status == 'declined' %>
+            <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center">
+              <i class="fa-solid fa-times-circle text-gray-400 text-4xl mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Offer Declined</h3>
+              <p class="text-gray-600">You declined this offer.</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <i class="fa-solid fa-shield-halved text-blue-400 text-lg"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-blue-700">
+            <strong>Safety Note:</strong> Always book through the official platform (<%= @offer.place.place_type.titleize %>).
+            Never send money directly to hosts outside of the booking platform.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,221 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Back Button -->
+    <div class="mb-6">
+      <%= link_to offers_path, class: "inline-flex items-center text-blue-600 hover:text-blue-700 font-medium" do %>
+        <i class="fa-solid fa-arrow-left mr-2"></i> Back to Leads
+      <% end %>
+    </div>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Send Exclusive Offer</h1>
+      <p class="text-gray-600">Create a personalized offer for this traveler</p>
+    </div>
+
+    <!-- Search Details Card -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-3">Traveler's Search Criteria</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div>
+          <p class="text-blue-700">Location</p>
+          <p class="font-semibold text-blue-900"><%= @saved_search.location.titleize %></p>
+        </div>
+        <div>
+          <p class="text-blue-700">Max Budget</p>
+          <p class="font-semibold text-blue-900">$<%= @saved_search.max_price_cents / 100 %>/night</p>
+        </div>
+        <div>
+          <p class="text-blue-700">Dates</p>
+          <p class="font-semibold text-blue-900"><%= @saved_search.date_range %></p>
+        </div>
+        <% if @saved_search.number_of_guests %>
+          <div>
+            <p class="text-blue-700">Guests</p>
+            <p class="font-semibold text-blue-900"><%= @saved_search.number_of_guests %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Offer Form -->
+    <%= form_with(model: @offer, url: offers_path, local: true, html: { class: "space-y-6" }) do |form| %>
+      <%= form.hidden_field :place_id, value: @place.id %>
+      <%= form.hidden_field :saved_search_id, value: @saved_search.id %>
+
+      <div class="bg-white shadow rounded-lg border border-gray-200 p-6 space-y-6">
+        <!-- Property Selection (if host has multiple) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Your Property</label>
+          <div class="p-4 bg-gray-50 border border-gray-300 rounded-lg">
+            <p class="font-semibold text-gray-900"><%= @place.name %></p>
+            <p class="text-sm text-gray-600"><%= @place.address %></p>
+            <p class="text-sm text-gray-500 mt-1">Regular price: $<%= @place.average_price || "N/A" %>/night</p>
+          </div>
+        </div>
+
+        <!-- Offered Price -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Nightly Rate <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <span class="absolute left-3 top-3 text-gray-500">$</span>
+            <%= form.number_field :offered_price_cents,
+                value: @offer.offered_price_cents / 100,
+                step: 1,
+                min: 1,
+                max: @saved_search.max_price_cents / 100,
+                class: "pl-7 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+                placeholder: "Enter your rate" %>
+          </div>
+          <p class="mt-1 text-sm text-gray-500">
+            Must be ≤ $<%= @saved_search.max_price_cents / 100 %> (guest's max budget)
+            <% if @place.average_price %>
+              • Your regular rate: $<%= @place.average_price %>
+            <% end %>
+          </p>
+        </div>
+
+        <!-- Discount Type -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Discount Type (Optional)</label>
+          <div class="grid grid-cols-2 gap-4">
+            <label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+              <%= form.radio_button :discount_type, "percentage", class: "mr-3" %>
+              <div>
+                <p class="font-medium text-gray-900">Percentage</p>
+                <p class="text-sm text-gray-500">e.g., 15% off</p>
+              </div>
+            </label>
+            <label class="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+              <%= form.radio_button :discount_type, "fixed_amount", class: "mr-3" %>
+              <div>
+                <p class="font-medium text-gray-900">Fixed Amount</p>
+                <p class="text-sm text-gray-500">e.g., $200 off</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Discount Value -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Discount Value</label>
+          <%= form.number_field :discount_value,
+              step: 0.01,
+              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+              placeholder: "e.g., 15 or 200" %>
+          <p class="mt-1 text-sm text-gray-500">Enter percentage (15) or dollar amount (200)</p>
+        </div>
+
+        <!-- Special Perks -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-3">Additional Perks (Optional)</label>
+          <div class="space-y-2">
+            <label class="flex items-center">
+              <%= check_box_tag 'offer[perks][]', 'Free late checkout', false, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+              <span class="text-sm text-gray-700">Free late checkout</span>
+            </label>
+            <label class="flex items-center">
+              <%= check_box_tag 'offer[perks][]', 'Early check-in included', false, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+              <span class="text-sm text-gray-700">Early check-in included</span>
+            </label>
+            <label class="flex items-center">
+              <%= check_box_tag 'offer[perks][]', 'Waived cleaning fee', false, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+              <span class="text-sm text-gray-700">Waived cleaning fee</span>
+            </label>
+            <label class="flex items-center">
+              <%= check_box_tag 'offer[perks][]', 'Free parking', false, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+              <span class="text-sm text-gray-700">Free parking</span>
+            </label>
+            <label class="flex items-center">
+              <%= check_box_tag 'offer[perks][]', 'Complimentary breakfast', false, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+              <span class="text-sm text-gray-700">Complimentary breakfast</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Personal Message -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Personal Message (Optional)
+          </label>
+          <%= form.text_area :personal_message,
+              rows: 4,
+              maxlength: 500,
+              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+              placeholder: "Add a personal touch to your offer..." %>
+          <p class="mt-1 text-sm text-gray-500">
+            <span id="char-count">0</span>/500 characters
+          </p>
+        </div>
+
+        <!-- Offer Expiration -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Offer Valid For <span class="text-red-500">*</span>
+          </label>
+          <div class="grid grid-cols-3 gap-4">
+            <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+              <%= form.radio_button :expires_at, 48.hours.from_now.to_s, checked: true, class: "mr-2" %>
+              <span class="text-sm font-medium text-gray-900">48 hours</span>
+            </label>
+            <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+              <%= form.radio_button :expires_at, 7.days.from_now.to_s, class: "mr-2" %>
+              <span class="text-sm font-medium text-gray-900">7 days</span>
+            </label>
+            <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
+              <%= form.radio_button :expires_at, 14.days.from_now.to_s, class: "mr-2" %>
+              <span class="text-sm font-medium text-gray-900">14 days</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex gap-4">
+        <%= form.submit "Send Offer to Guest", class: "flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors cursor-pointer" %>
+        <%= link_to "Cancel", offers_path, class: "px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors text-center" %>
+      </div>
+    <% end %>
+
+    <!-- Info Box -->
+    <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <i class="fa-solid fa-lightbulb text-yellow-400 text-lg"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-yellow-700">
+            <strong>Pro tip:</strong> Offers are sent in a daily digest at 9 PM to reduce email spam.
+            Be competitive with pricing and add perks to stand out from other hosts!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Character counter for personal message
+const textarea = document.querySelector('textarea[name="offer[personal_message]"]');
+const charCount = document.getElementById('char-count');
+
+if (textarea && charCount) {
+  textarea.addEventListener('input', () => {
+    charCount.textContent = textarea.value.length;
+  });
+}
+
+// Update offered_price_cents to be in cents when submitting
+const form = document.querySelector('form');
+const priceInput = document.querySelector('input[name="offer[offered_price_cents]"]');
+
+if (form && priceInput) {
+  form.addEventListener('submit', (e) => {
+    // Convert dollars to cents
+    const dollars = parseFloat(priceInput.value) || 0;
+    priceInput.value = Math.round(dollars * 100);
+  });
+}
+</script>

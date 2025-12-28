@@ -1,0 +1,152 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <!-- Header -->
+  <tr>
+    <td style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 40px 30px; text-align: center;">
+      <div style="background-color: #ffffff; border-radius: 50%; width: 80px; height: 80px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 48px;">✓</span>
+      </div>
+      <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
+        Booking Confirmed!
+      </h1>
+      <p style="margin: 10px 0 0 0; color: #dcfce7; font-size: 14px;">TripHeatMap</p>
+    </td>
+  </tr>
+
+  <!-- Main Content -->
+  <tr>
+    <td style="background-color: #ffffff; padding: 40px 30px;">
+      <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 24px; font-weight: bold;">
+        Your Booking is Confirmed
+      </h2>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Hi <%= @guest.email.split('@').first.titleize %>,
+      </p>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Congratulations! You've accepted the exclusive offer for <strong><%= @place.name %></strong>.
+        The host has been notified and will expect your arrival.
+      </p>
+
+      <!-- Booking Summary Card -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <tr>
+          <td style="background-color: #f0fdf4; border: 2px solid #86efac; border-radius: 8px; padding: 25px;">
+            <h3 style="margin: 0 0 20px 0; color: #166534; font-size: 20px; font-weight: bold;">
+              Booking Summary
+            </h3>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #d1fae5;">
+                  <p style="margin: 0; color: #6b7280; font-size: 13px; text-transform: uppercase;">Property</p>
+                  <p style="margin: 5px 0 0 0; color: #1f2937; font-size: 16px; font-weight: bold;"><%= @place.name %></p>
+                  <% if @place.address %>
+                    <p style="margin: 3px 0 0 0; color: #6b7280; font-size: 14px;"><%= @place.address %></p>
+                  <% end %>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #d1fae5;">
+                  <p style="margin: 0; color: #6b7280; font-size: 13px; text-transform: uppercase;">Your Price</p>
+                  <p style="margin: 5px 0 0 0; color: #15803d; font-size: 24px; font-weight: bold;">
+                    $<%= @offer.offered_price_cents / 100 %><span style="font-size: 14px; font-weight: normal;">/night</span>
+                  </p>
+                  <% if @offer.discount_value.present? %>
+                    <p style="margin: 3px 0 0 0; color: #166534; font-size: 14px;"><%= @offer.discount_description %></p>
+                  <% end %>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #d1fae5;">
+                  <p style="margin: 0; color: #6b7280; font-size: 13px; text-transform: uppercase;">Dates</p>
+                  <p style="margin: 5px 0 0 0; color: #1f2937; font-size: 16px;"><%= @offer.saved_search.date_range %></p>
+                </td>
+              </tr>
+
+              <% if @offer.saved_search.number_of_guests %>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #d1fae5;">
+                    <p style="margin: 0; color: #6b7280; font-size: 13px; text-transform: uppercase;">Guests</p>
+                    <p style="margin: 5px 0 0 0; color: #1f2937; font-size: 16px;"><%= @offer.saved_search.number_of_guests %></p>
+                  </td>
+                </tr>
+              <% end %>
+
+              <% if @offer.perks.present? && @offer.perks.any? %>
+                <tr>
+                  <td style="padding: 10px 0;">
+                    <p style="margin: 0; color: #6b7280; font-size: 13px; text-transform: uppercase;">Special Perks</p>
+                    <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 8px;">
+                      <% @offer.perks.each do |perk| %>
+                        <tr>
+                          <td style="padding: 3px 0; color: #15803d; font-size: 14px;">
+                            ✓ <%= perk %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </table>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Next Steps -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <tr>
+          <td style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 4px;">
+            <h3 style="margin: 0 0 15px 0; color: #1e40af; font-size: 18px; font-weight: bold;">
+              Next Steps
+            </h3>
+            <ol style="margin: 0; padding-left: 20px; color: #1f2937; font-size: 14px; line-height: 1.8;">
+              <li>Check your email for booking confirmation from <%= @place.place_type.titleize %></li>
+              <li>Complete payment directly through <%= @place.place_type.titleize %></li>
+              <li>The host may reach out with additional details</li>
+              <li>Review check-in instructions before your arrival</li>
+            </ol>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA Button -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <a href="<%= offer_url(@offer) %>" style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 40px; border-radius: 8px;">
+              View Booking Details
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Safety Note -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px;">
+        <tr>
+          <td style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 4px;">
+            <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+              <strong>Safety Reminder:</strong> All payments should be completed through the official <%= @place.place_type.titleize %> platform.
+              Never send money directly to hosts outside of the booking platform.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">
+        Have a wonderful stay!
+      </p>
+      <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+        &copy; <%= Time.current.year %> TripHeatMap. All rights reserved.
+      </p>
+    </td>
+  </tr>
+</table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_26_205342) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -418,6 +418,41 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_26_205342) do
     t.index ["slug"], name: "index_neighborhoods_on_slug", unique: true
   end
 
+  create_table "offer_messages", force: :cascade do |t|
+    t.bigint "offer_id", null: false
+    t.string "sender_type", null: false
+    t.bigint "sender_id", null: false
+    t.text "content", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id", "created_at"], name: "index_offer_messages_on_offer_id_and_created_at"
+    t.index ["offer_id"], name: "index_offer_messages_on_offer_id"
+    t.index ["sender_type", "sender_id"], name: "index_offer_messages_on_sender"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.bigint "place_id", null: false
+    t.bigint "saved_search_id", null: false
+    t.integer "offered_price_cents", null: false
+    t.string "discount_type"
+    t.decimal "discount_value", precision: 10, scale: 2
+    t.jsonb "perks", default: [], null: false
+    t.text "personal_message"
+    t.datetime "expires_at", null: false
+    t.string "status", default: "sent", null: false
+    t.datetime "viewed_at"
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_offers_on_expires_at"
+    t.index ["place_id", "saved_search_id"], name: "index_offers_on_place_id_and_saved_search_id", unique: true
+    t.index ["place_id"], name: "index_offers_on_place_id"
+    t.index ["saved_search_id", "status"], name: "index_offers_on_saved_search_id_and_status"
+    t.index ["saved_search_id"], name: "index_offers_on_saved_search_id"
+    t.index ["status"], name: "index_offers_on_status"
+  end
+
   create_table "pagc_gaz", id: :serial, force: :cascade do |t|
     t.integer "seq"
     t.text "word"
@@ -556,7 +591,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_26_205342) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accept_offers", default: false, null: false
+    t.integer "number_of_guests"
     t.index ["location", "max_price_cents"], name: "index_saved_searches_on_location_price"
+    t.index ["status"], name: "index_saved_searches_on_status"
     t.index ["user_id", "location", "max_price_cents", "min_rating", "neighborhood"], name: "index_saved_searches_on_user_and_criteria"
     t.index ["user_id"], name: "index_saved_searches_on_user_id"
   end
@@ -766,6 +803,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_26_205342) do
   add_foreign_key "favorites", "places"
   add_foreign_key "favorites", "users"
   add_foreign_key "neighborhood_places_stats", "neighborhoods"
+  add_foreign_key "offer_messages", "offers", on_delete: :cascade
+  add_foreign_key "offers", "places"
+  add_foreign_key "offers", "saved_searches"
   add_foreign_key "places", "neighborhoods"
   add_foreign_key "saved_searches", "users"
   add_foreign_key "subscriptions", "users"

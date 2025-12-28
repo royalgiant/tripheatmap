@@ -138,4 +138,4 @@ accessories:
   #   port: 6379
   #   cmd: "/bin/sh -c 'redis-server --requirepass $REDIS_PASSWORD'"
   #   directories:
-  #     - data:/data
+  #     - data:/data  

@@ -1,0 +1,33 @@
+TripHeatMap - Lead Marketplace
+===============================================
+
+<%= @leads_count %> NEW <%= @leads_count == 1 ? 'TRAVELER IS' : 'TRAVELERS ARE' %> LOOKING IN YOUR AREA!
+
+Hi <%= @host.email.split('@').first.titleize %>,
+
+Great news! <%= @leads_count %> <%= @leads_count == 1 ? 'traveler has' : 'travelers have' %> saved searches that match your properties.
+Send them exclusive offers and book direct to avoid platform commissions.
+
+-----------------------------------------------
+NEW LEADS:
+-----------------------------------------------
+
+<% @saved_searches.each_with_index do |search, index| %>
+<%= index + 1 %>. <%= search.location.titleize %>
+   Dates: <%= search.date_range %>
+   Max Budget: $<%= search.max_price_cents / 100 %>/night
+<% if search.min_rating %>   Min Rating: <%= search.min_rating %>+ stars
+<% end %><% if search.number_of_guests %>   Guests: <%= search.number_of_guests %>
+<% end %>
+<% end %>
+
+VIEW LEADS & SEND OFFERS:
+<%= offers_url %>
+
+-----------------------------------------------
+PRO TIP: Be competitive with pricing and add special perks to stand out! First to send usually wins the booking.
+-----------------------------------------------
+
+You're receiving this because you have an active monthly/annual subscription.
+
+© <%= Time.current.year %> TripHeatMap. All rights reserved.

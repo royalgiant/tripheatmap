@@ -2,6 +2,15 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  # Offers and Lead Marketplace
+  resources :offers, only: [:index, :show, :new, :create, :destroy] do
+    member do
+      post :accept
+      post :decline
+    end
+    resources :messages, only: [:create], controller: 'offer_messages'
+  end
+
   scope 'best', as: 'best' do
     get 'luxury-hotels', to: 'best_luxury_hotel#index', as: 'luxury_hotels_index'
     get 'luxury-hotels/:city', to: 'best_luxury_hotel#show', as: 'luxury_hotels'

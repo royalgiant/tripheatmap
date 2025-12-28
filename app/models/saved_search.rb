@@ -1,5 +1,6 @@
 class SavedSearch < ApplicationRecord
   belongs_to :user
+  has_many :offers, dependent: :destroy
 
   validates :location, :max_price_cents, presence: true
   validates :max_price_cents, numericality: { greater_than: 0 }

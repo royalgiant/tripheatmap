@@ -1,0 +1,154 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <!-- Header -->
+  <tr>
+    <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 40px 30px; text-align: center;">
+      <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
+        TripHeatMap
+      </h1>
+      <p style="margin: 10px 0 0 0; color: #dbeafe; font-size: 14px;">Exclusive Offers</p>
+    </td>
+  </tr>
+
+  <!-- Main Content -->
+  <tr>
+    <td style="background-color: #ffffff; padding: 40px 30px;">
+      <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 24px; font-weight: bold;">
+        You Received <%= @offers_count %> New <%= @offers_count == 1 ? 'Offer' : 'Offers' %>!
+      </h2>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Hi <%= @guest.email.split('@').first.titleize %>,
+      </p>
+
+      <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
+        Exciting news! <%= @offers_count %> <%= @offers_count == 1 ? 'host has' : 'hosts have' %> sent you exclusive offers based on your saved searches.
+        Book directly and skip the platform commissions!
+      </p>
+
+      <!-- Offers List -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
+        <% @offers.each_with_index do |offer, index| %>
+          <tr>
+            <td style="background-color: #f0fdf4; border: 2px solid #86efac; border-radius: 8px; padding: 20px; <%= index > 0 ? 'margin-top: 15px;' : '' %>">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <!-- Property Name -->
+                <tr>
+                  <td style="padding-bottom: 15px;">
+                    <strong style="color: #1f2937; font-size: 18px;"><%= offer.place.name %></strong>
+                    <br>
+                    <span style="color: #6b7280; font-size: 14px;"><%= offer.place.address %></span>
+                  </td>
+                </tr>
+
+                <!-- Price Section -->
+                <tr>
+                  <td style="background-color: #dcfce7; border-radius: 6px; padding: 15px; text-align: center; margin-bottom: 15px;">
+                    <p style="margin: 0 0 5px 0; color: #166534; font-size: 14px; font-weight: bold; text-transform: uppercase;">
+                      Your Exclusive Price
+                    </p>
+                    <p style="margin: 0; color: #15803d; font-size: 32px; font-weight: bold;">
+                      $<%= offer.offered_price_cents / 100 %>
+                      <span style="font-size: 16px; font-weight: normal;">/night</span>
+                    </p>
+                    <% if offer.discount_value.present? %>
+                      <p style="margin: 5px 0 0 0; color: #166534; font-size: 16px; font-weight: bold;">
+                        <%= offer.discount_description %>
+                      </p>
+                    <% end %>
+                    <% if offer.place.average_price %>
+                      <p style="margin: 8px 0 0 0; color: #6b7280; font-size: 14px;">
+                        Regular: <span style="text-decoration: line-through;">$<%= offer.place.average_price %></span>
+                        • Save $<%= (offer.place.average_price - offer.offered_price_cents / 100.0).round %>
+                      </p>
+                    <% end %>
+                  </td>
+                </tr>
+
+                <!-- Perks -->
+                <% if offer.perks.present? && offer.perks.any? %>
+                  <tr>
+                    <td style="padding: 15px 0;">
+                      <p style="margin: 0 0 10px 0; color: #7c3aed; font-size: 14px; font-weight: bold;">
+                        Special Perks Included:
+                      </p>
+                      <table border="0" cellpadding="0" cellspacing="0">
+                        <% offer.perks.each do |perk| %>
+                          <tr>
+                            <td style="padding: 3px 0; color: #4b5563; font-size: 14px;">
+                              ✓ <%= perk %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </table>
+                    </td>
+                  </tr>
+                <% end %>
+
+                <!-- Host Message -->
+                <% if offer.personal_message.present? %>
+                  <tr>
+                    <td style="background-color: #dbeafe; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 4px; margin-top: 15px;">
+                      <p style="margin: 0 0 8px 0; color: #1e40af; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                        Message from Host:
+                      </p>
+                      <p style="margin: 0; color: #1f2937; font-size: 14px; font-style: italic; line-height: 1.5;">
+                        "<%= offer.personal_message %>"
+                      </p>
+                    </td>
+                  </tr>
+                <% end %>
+
+                <!-- Expiration -->
+                <tr>
+                  <td style="padding-top: 15px;">
+                    <p style="margin: 0; color: #dc2626; font-size: 13px; font-weight: bold;">
+                      ⏰ Expires in <%= offer.time_remaining %>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <% if index < @offers.count - 1 %>
+            <tr><td style="height: 15px;"></td></tr>
+          <% end %>
+        <% end %>
+      </table>
+
+      <!-- CTA Button -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <a href="<%= offers_url %>" style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 40px; border-radius: 8px;">
+              View All Offers
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Info Box -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px;">
+        <tr>
+          <td style="background-color: #dbeafe; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 4px;">
+            <p style="margin: 0; color: #1e40af; font-size: 14px; line-height: 1.5;">
+              <strong>How it works:</strong> Click "View All Offers" to see full details. When you find one you like,
+              click "Book Now" to reserve on the platform, then click "I Booked This" to confirm and notify the host.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">
+        You're receiving this because you have active saved searches.
+      </p>
+      <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+        &copy; <%= Time.current.year %> TripHeatMap. All rights reserved.
+      </p>
+    </td>
+  </tr>
+</table>
