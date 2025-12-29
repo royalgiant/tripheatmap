@@ -71,7 +71,21 @@ class RentalsController < ApplicationController
   def fetch_and_update_metadata(rental)
     return unless rental.booking_url.present? && rental.place_type == "airbnb"
     metadata = RentalMetadataFetcher.new(rental.booking_url).call
-    rental.update(airbnb_vrbo_metadata: metadata) if metadata.present?
+
+    if metadata.present?
+      update_params = { airbnb_vrbo_metadata: metadata }
+      update_params[:rating] = metadata[:rating] if metadata[:rating].present?
+      update_params[:review_count] = metadata[:review_count] if metadata[:review_count].present?
+
+      if rental.neighborhood.present?
+        update_params[:city] = rental.neighborhood.city
+        update_params[:state] = rental.neighborhood.state
+        update_params[:country] = rental.neighborhood.country
+        update_params[:continent] = rental.neighborhood.continent
+      end
+
+      rental.update(update_params)
+    end
   end
 
   def rental_params
