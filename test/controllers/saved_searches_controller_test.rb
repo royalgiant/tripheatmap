@@ -241,4 +241,34 @@ class SavedSearchesControllerTest < ActionDispatch::IntegrationTest
     saved_search = SavedSearch.last
     assert_not saved_search.accept_offers
   end
+
+  test "should create saved_search with number_of_guests" do
+    sign_in @user
+
+    assert_difference("SavedSearch.count", 1) do
+      post saved_searches_url, params: {
+        saved_search: {
+          location: "chicago",
+          max_price_cents: 20000,
+          number_of_guests: 4
+        }
+      }, as: :turbo_stream
+    end
+
+    saved_search = SavedSearch.last
+    assert_equal 4, saved_search.number_of_guests
+  end
+
+  test "should update saved_search with number_of_guests" do
+    sign_in @user
+
+    patch saved_search_url(@saved_search), params: {
+      saved_search: {
+        number_of_guests: 6
+      }
+    }, as: :turbo_stream
+
+    assert_response :success
+    assert_equal 6, @saved_search.reload.number_of_guests
+  end
 end

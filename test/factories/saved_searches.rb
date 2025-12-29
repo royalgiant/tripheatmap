@@ -5,6 +5,7 @@ FactoryBot.define do
     max_price_cents { 15000 }
     min_rating { 4.0 }
     price_range { "$$" }
+    number_of_guests { 2 }
 
     trait :with_neighborhood do
       neighborhood { "downtown-new-york-ny" }

@@ -129,6 +129,7 @@ class SavedSearchesController < ApplicationController
       :min_rating,
       :price_range,
       :neighborhood,
+      :number_of_guests,
       :checkin_date,
       :checkout_date,
       :original_url,

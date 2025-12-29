@@ -76,6 +76,7 @@ class RentalsController < ApplicationController
       update_params = { airbnb_vrbo_metadata: metadata }
       update_params[:rating] = metadata[:rating] if metadata[:rating].present?
       update_params[:review_count] = metadata[:review_count] if metadata[:review_count].present?
+      update_params[:number_of_guests] = metadata[:guests] if metadata[:guests].present?
 
       if rental.neighborhood.present?
         update_params[:city] = rental.neighborhood.city
@@ -89,7 +90,7 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    params.require(:place).permit(:name, :address, :latitude, :longitude, :booking_url, :average_price, :rental_type)
+    params.require(:place).permit(:name, :address, :latitude, :longitude, :booking_url, :average_price, :number_of_guests, :rental_type)
   end
 
   def require_subscription_or_admin!

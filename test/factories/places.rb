@@ -9,5 +9,6 @@ FactoryBot.define do
     address { "123 Test St, New York, NY" }
     tags { "" }
     booking_url { "https://www.airbnb.com/rooms/12345" }
+    number_of_guests { 2 }
   end
 end

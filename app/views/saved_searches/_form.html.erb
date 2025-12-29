@@ -69,6 +69,21 @@
       <p class="mt-1 text-xs text-gray-500">Enter your absolute maximum budget per night</p>
     </div>
 
+    <!-- Number of Guests (Optional) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Number of Guests <span class="text-gray-400">(Optional)</span>
+      </label>
+      <div class="relative">
+        <%= f.number_field :number_of_guests,
+            class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+            placeholder: "2",
+            min: 1,
+            max: 16 %>
+      </div>
+      <p class="mt-1 text-xs text-gray-500">How many people will be staying?</p>
+    </div>
+
     <!-- Travel Dates (Optional) -->
     <%= render 'saved_searches/date_fields', f: f %>
 

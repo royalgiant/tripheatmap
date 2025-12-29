@@ -43,6 +43,7 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
           longitude: @neighborhood.longitude,
           booking_url: "https://www.airbnb.com/rooms/999",
           average_price: 150,
+          number_of_guests: 4,
           rental_type: "airbnb"
         }
       }
@@ -53,6 +54,7 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "airbnb", rental.place_type
     assert_equal "Test Rental", rental.name
     assert_equal 150, rental.average_price
+    assert_equal 4, rental.number_of_guests
   end
 
   test "should create vrbo rental" do
@@ -65,6 +67,7 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
           longitude: @neighborhood.longitude,
           booking_url: "https://www.vrbo.com/999",
           average_price: 200,
+          number_of_guests: 6,
           rental_type: "vrbo"
         }
       }
@@ -75,6 +78,7 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "vrbo", rental.place_type
     assert_equal "VRBO Rental", rental.name
     assert_equal 200, rental.average_price
+    assert_equal 6, rental.number_of_guests
   end
 
   test "should get edit" do
@@ -86,7 +90,8 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
     patch rental_url(@airbnb_rental), params: {
       place: {
         name: "Updated Name",
-        average_price: 175
+        average_price: 175,
+        number_of_guests: 8
       }
     }
 
@@ -94,6 +99,7 @@ class RentalsControllerTest < ActionDispatch::IntegrationTest
     @airbnb_rental.reload
     assert_equal "Updated Name", @airbnb_rental.name
     assert_equal 175, @airbnb_rental.average_price
+    assert_equal 8, @airbnb_rental.number_of_guests
   end
 
   test "should destroy rental" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_29_040905) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -85,7 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
@@ -535,6 +535,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
     t.string "agoda_affiliate_url"
     t.jsonb "agoda_metadata"
     t.jsonb "airbnb_vrbo_metadata"
+    t.integer "number_of_guests"
     t.index ["city", "place_type"], name: "index_places_on_city_and_place_type"
     t.index ["city"], name: "index_places_on_city"
     t.index ["country", "continent"], name: "index_places_on_country_and_continent"
@@ -668,7 +669,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "the_geom", limit: {:srid=>4269, :type=>"multi_polygon"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
@@ -707,7 +708,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_28_225157) do
     t.float "awater"
     t.string "intptlat", limit: 11
     t.string "intptlon", limit: 12
-    t.geometry "the_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "the_geom", limit: {:srid=>0, :type=>"multi_polygon"}
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
