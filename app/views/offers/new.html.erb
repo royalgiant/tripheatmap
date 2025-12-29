@@ -39,18 +39,23 @@
     </div>
 
     <!-- Offer Form -->
-    <%= form_with(model: @offer, url: offers_path, local: true, html: { class: "space-y-6" }) do |form| %>
-      <%= form.hidden_field :place_id, value: @place.id %>
+    <%= form_with(model: @offer, url: offers_path, local: true, html: { class: "space-y-6", id: "offer-form" }) do |form| %>
       <%= form.hidden_field :saved_search_id, value: @saved_search.id %>
 
       <div class="bg-white shadow rounded-lg border border-gray-200 p-6 space-y-6">
-        <!-- Property Selection (if host has multiple) -->
+        <!-- Property Selection -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Your Property</label>
-          <div class="p-4 bg-gray-50 border border-gray-300 rounded-lg">
-            <p class="font-semibold text-gray-900"><%= @place.name %></p>
-            <p class="text-sm text-gray-600"><%= @place.address %></p>
-            <p class="text-sm text-gray-500 mt-1">Regular price: $<%= @place.average_price || "N/A" %>/night</p>
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Your Property <span class="text-red-500">*</span>
+          </label>
+          <%= form.collection_select :place_id, @my_places, :id, :name,
+              { prompt: "Select a property" },
+              { class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5",
+                id: "property-select",
+                required: true } %>
+          <div id="property-details" class="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hidden">
+            <p class="text-sm text-gray-600"><span class="font-medium">Address:</span> <span id="property-address"></span></p>
+            <p class="text-sm text-gray-500 mt-1"><span class="font-medium">Regular price:</span> $<span id="property-price"></span>/night</p>
           </div>
         </div>
 
@@ -60,18 +65,17 @@
             Nightly Rate <span class="text-red-500">*</span>
           </label>
           <div class="relative">
-            <span class="absolute left-3 top-3 text-gray-500">$</span>
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-base">$</span>
             <%= form.number_field :offered_price_cents,
-                value: @offer.offered_price_cents / 100,
-                step: 1,
+                step: 0.01,
                 min: 1,
                 max: @saved_search.max_price_cents / 100,
-                class: "pl-7 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
-                placeholder: "Enter your rate" %>
+                class: "pl-8 pr-4 py-2.5 block w-full text-base rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+                placeholder: "e.g., 150" %>
           </div>
           <p class="mt-1 text-sm text-gray-500">
             Must be ≤ $<%= @saved_search.max_price_cents / 100 %> (guest's max budget)
-            <% if @place.average_price %>
+            <% if @place && @place.average_price %>
               • Your regular rate: $<%= @place.average_price %>
             <% end %>
           </p>
@@ -103,7 +107,7 @@
           <label class="block text-sm font-medium text-gray-700 mb-2">Discount Value</label>
           <%= form.number_field :discount_value,
               step: 0.01,
-              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+              class: "block w-full px-4 py-2.5 text-base rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
               placeholder: "e.g., 15 or 200" %>
           <p class="mt-1 text-sm text-gray-500">Enter percentage (15) or dollar amount (200)</p>
         </div>
@@ -143,8 +147,8 @@
           <%= form.text_area :personal_message,
               rows: 4,
               maxlength: 500,
-              class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
-              placeholder: "Add a personal touch to your offer..." %>
+              class: "block w-full px-4 py-3 text-base rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+              placeholder: "Add anything the guest needs to know, such as special instructions, requests, coupon or discount codes." %>
           <p class="mt-1 text-sm text-gray-500">
             <span id="char-count">0</span>/500 characters
           </p>
@@ -157,15 +161,15 @@
           </label>
           <div class="grid grid-cols-3 gap-4">
             <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
-              <%= form.radio_button :expires_at, 48.hours.from_now.to_s, checked: true, class: "mr-2" %>
+              <%= form.radio_button :expires_at, 3.days.from_now.to_s, checked: true, class: "mr-2" %>
               <span class="text-sm font-medium text-gray-900">48 hours</span>
             </label>
             <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
-              <%= form.radio_button :expires_at, 7.days.from_now.to_s, class: "mr-2" %>
+              <%= form.radio_button :expires_at, 8.days.from_now.to_s, class: "mr-2" %>
               <span class="text-sm font-medium text-gray-900">7 days</span>
             </label>
             <label class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition">
-              <%= form.radio_button :expires_at, 14.days.from_now.to_s, class: "mr-2" %>
+              <%= form.radio_button :expires_at, 15.days.from_now.to_s, class: "mr-2" %>
               <span class="text-sm font-medium text-gray-900">14 days</span>
             </label>
           </div>
@@ -197,25 +201,88 @@
 </div>
 
 <script>
-// Character counter for personal message
-const textarea = document.querySelector('textarea[name="offer[personal_message]"]');
-const charCount = document.getElementById('char-count');
+$(document).ready(function() {
+  const properties = <%= raw @my_places.map { |p| { id: p.id, name: p.name, address: p.address, price: p.average_price } }.to_json %>;
+  let currentRegularPrice = 0;
 
-if (textarea && charCount) {
-  textarea.addEventListener('input', () => {
-    charCount.textContent = textarea.value.length;
+  $('#property-select').on('change', function() {
+    const selectedId = parseInt($(this).val());
+    const property = properties.find(p => p.id === selectedId);
+
+    if (property) {
+      $('#property-details').removeClass('hidden');
+      $('#property-address').text(property.address || 'N/A');
+      $('#property-price').text(property.price || 'N/A');
+
+      currentRegularPrice = property.price || 0;
+
+      // Update nightly rate with property's average price
+      if (property.price) {
+        $('input[name="offer[offered_price_cents]"]').val(property.price);
+      }
+
+      // Recalculate discount with new property's regular price
+      calculateDiscountedPrice();
+    } else {
+      $('#property-details').addClass('hidden');
+      currentRegularPrice = 0;
+    }
   });
-}
 
-// Update offered_price_cents to be in cents when submitting
-const form = document.querySelector('form');
-const priceInput = document.querySelector('input[name="offer[offered_price_cents]"]');
+  // Trigger change event if a property is already selected
+  if ($('#property-select').val()) {
+    $('#property-select').trigger('change');
+  }
 
-if (form && priceInput) {
-  form.addEventListener('submit', (e) => {
-    // Convert dollars to cents
-    const dollars = parseFloat(priceInput.value) || 0;
-    priceInput.value = Math.round(dollars * 100);
+  function calculateDiscountedPrice() {
+    if (!currentRegularPrice) return;
+
+    const discountType = $('input[name="offer[discount_type]"]:checked').val();
+    const discountValue = parseFloat($('input[name="offer[discount_value]"]').val()) || 0;
+    const $priceInput = $('input[name="offer[offered_price_cents]"]');
+
+    if (discountValue <= 0) {
+      // No discount, use regular price
+      $priceInput.val(currentRegularPrice);
+      return;
+    }
+
+    let discountedPrice = currentRegularPrice;
+
+    if (discountType === 'percentage') {
+      const discountAmount = currentRegularPrice * (discountValue / 100);
+      discountedPrice = currentRegularPrice - discountAmount;
+    } else if (discountType === 'fixed_amount') {
+      discountedPrice = currentRegularPrice - discountValue;
+    }
+
+    // Ensure price doesn't go below $1
+    discountedPrice = Math.max(1, discountedPrice);
+
+    // Update the nightly rate field (rounded to 2 decimal places)
+    $priceInput.val(Math.round(discountedPrice * 100) / 100);
+  }
+
+  // Listen for discount type changes
+  $('input[name="offer[discount_type]"]').on('change', function() {
+    calculateDiscountedPrice();
   });
-}
+
+  // Listen for discount value changes
+  $('input[name="offer[discount_value]"]').on('input', function() {
+    calculateDiscountedPrice();
+  });
+
+  // Character counter for personal message
+  $('textarea[name="offer[personal_message]"]').on('input', function() {
+    $('#char-count').text($(this).val().length);
+  });
+
+  // Update offered_price_cents to be in cents when submitting
+  $('#offer-form').on('submit', function(e) {
+    const $priceInput = $('input[name="offer[offered_price_cents]"]');
+    const dollars = parseFloat($priceInput.val()) || 0;
+    $priceInput.val(Math.round(dollars * 100));
+  });
+});
 </script>

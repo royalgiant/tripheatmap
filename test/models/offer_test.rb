@@ -113,8 +113,8 @@ class OfferTest < ActiveSupport::TestCase
       expires_at: 48.hours.from_now
     )
 
-    # Try to create duplicate
-    assert_raises(ActiveRecord::RecordNotUnique) do
+    # Try to create duplicate - model validation catches it first
+    assert_raises(ActiveRecord::RecordInvalid) do
       Offer.create!(
         place: @place,
         saved_search: @saved_search,
@@ -248,5 +248,93 @@ class OfferTest < ActiveSupport::TestCase
     active_offers = Offer.active
     assert_includes active_offers, sent_offer
     assert_not_includes active_offers, expired_offer
+  end
+
+  test "prevents duplicate offers from same place to same saved search" do
+    # Create first offer
+    first_offer = Offer.create!(
+      place: @place,
+      saved_search: @saved_search,
+      offered_price_cents: 20000,
+      expires_at: 48.hours.from_now
+    )
+
+    assert first_offer.persisted?
+
+    # Attempt to create duplicate offer
+    duplicate_offer = Offer.new(
+      place: @place,
+      saved_search: @saved_search,
+      offered_price_cents: 18000,
+      expires_at: 72.hours.from_now
+    )
+
+    assert_not duplicate_offer.valid?
+    assert_includes duplicate_offer.errors[:saved_search_id], "already has an offer from this property"
+  end
+
+  test "allows offers from different places to same saved search" do
+    # Create first offer from @place
+    first_offer = Offer.create!(
+      place: @place,
+      saved_search: @saved_search,
+      offered_price_cents: 20000,
+      expires_at: 48.hours.from_now
+    )
+
+    # Create another place owned by a different host
+    another_host = FactoryBot.create(:user)
+    another_place = Place.create!(
+      name: "Another Property",
+      place_type: "airbnb",
+      city: "chicago",
+      average_price: 180,
+      rating: 4.6,
+      latitude: 41.8781,
+      longitude: -87.6298,
+      neighborhood: @neighborhood,
+      user: another_host
+    )
+
+    # Create second offer from different place
+    second_offer = Offer.new(
+      place: another_place,
+      saved_search: @saved_search,
+      offered_price_cents: 18000,
+      expires_at: 48.hours.from_now
+    )
+
+    assert second_offer.valid?
+    assert second_offer.save
+  end
+
+  test "allows offers from same place to different saved searches" do
+    # Create first offer
+    first_offer = Offer.create!(
+      place: @place,
+      saved_search: @saved_search,
+      offered_price_cents: 20000,
+      expires_at: 48.hours.from_now
+    )
+
+    # Create another saved search
+    another_search = SavedSearch.create!(
+      user: @guest,
+      location: "chicago",
+      max_price_cents: 30000,
+      min_rating: 4.0,
+      status: 'active'
+    )
+
+    # Create second offer to different saved search
+    second_offer = Offer.new(
+      place: @place,
+      saved_search: another_search,
+      offered_price_cents: 22000,
+      expires_at: 48.hours.from_now
+    )
+
+    assert second_offer.valid?
+    assert second_offer.save
   end
 end

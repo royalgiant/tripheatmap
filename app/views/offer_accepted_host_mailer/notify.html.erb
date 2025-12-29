@@ -2,9 +2,6 @@
   <!-- Header -->
   <tr>
     <td style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 40px 30px; text-align: center;">
-      <div style="background-color: #ffffff; border-radius: 50%; width: 80px; height: 80px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
-        <span style="font-size: 48px;">🎉</span>
-      </div>
       <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
         Your Offer Was Accepted!
       </h1>
@@ -20,7 +17,7 @@
       </h2>
 
       <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
-        Hi <%= @host.email.split('@').first.titleize %>,
+        Hi <%= @host.first_name.presence.titleize || @host.full_name&.split(' ')&.first.titleize || @host.email.split('@').first.titleize %>,
       </p>
 
       <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
@@ -112,33 +109,6 @@
           </td>
         </tr>
       </table>
-
-      <!-- Revenue Estimate -->
-      <% if @place.average_price %>
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 30px 0;">
-          <tr>
-            <td style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 4px;">
-              <h3 style="margin: 0 0 10px 0; color: #92400e; font-size: 16px; font-weight: bold;">
-                Commission Saved
-              </h3>
-              <p style="margin: 0; color: #78350f; font-size: 14px; line-height: 1.5;">
-                By booking direct, you avoided platform commissions and kept 100% of your $<%= @offer.offered_price_cents / 100 %>/night rate.
-                <%
-                  stay_length = if @offer.saved_search.checkin_date && @offer.saved_search.checkout_date
-                    (@offer.saved_search.checkout_date - @offer.saved_search.checkin_date).to_i
-                  else
-                    3  # default estimate
-                  end
-                  total_revenue = (@offer.offered_price_cents / 100.0) * stay_length
-                %>
-                <% if stay_length > 0 %>
-                  <br><strong>Estimated total revenue: $<%= total_revenue.round %></strong> (based on <%= stay_length %> night<%= stay_length > 1 ? 's' : '' %>)
-                <% end %>
-              </p>
-            </td>
-          </tr>
-        </table>
-      <% end %>
 
       <!-- CTA Button -->
       <table border="0" cellpadding="0" cellspacing="0" width="100%">

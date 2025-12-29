@@ -54,7 +54,7 @@ class WebhooksController < ApplicationController
       # Find the user by stripe id or customer id from Stripe event response
       user = User.find_by(stripe_id: event.data.object.customer)
       # Send an email to that customer detailing the problem with instructions on how to solve it.
-      if user.present?
+      if user.present? && user.email_preference&.receive_any_emails
         SubscriptionMailer.with(user: user).payment_failed.deliver_now
       end
     when 'customer.subscription.updated'

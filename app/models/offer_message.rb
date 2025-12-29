@@ -8,7 +8,11 @@ class OfferMessage < ApplicationRecord
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
-  scope :for_user, ->(user) { where(sender: user).or(where.not(sender: user)) }
+  scope :for_user, ->(user) {
+    joins(offer: [:place, :saved_search])
+      .where(places: { user_id: user.id })
+      .or(joins(offer: [:place, :saved_search]).where(saved_searches: { user_id: user.id }))
+  }
 
   # Callbacks
   after_create :send_notification
@@ -29,7 +33,11 @@ class OfferMessage < ApplicationRecord
   private
 
   def send_notification
-    # Send email notification to recipient
+    recipient = from_host? ? offer.guest_user : offer.host_user
+    preference = recipient.email_preference
+    return unless preference&.receive_any_emails
+    return unless preference&.receive_message_emails
+
     NewMessageMailer.notify(self).deliver_later
   end
 end

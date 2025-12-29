@@ -1,9 +1,9 @@
 TripHeatMap - Booking Confirmed
 ===============================================
 
-✓ YOUR BOOKING IS CONFIRMED
+YOUR BOOKING IS CONFIRMED
 
-Hi <%= @guest.email.split('@').first.titleize %>,
+Hi <%= @guest.first_name.presence.titleize || @guest.full_name&.split(' ')&.first.titleize || @guest.email.split('@').first.titleize %>,
 
 Congratulations! You've accepted the exclusive offer for <%= @place.name %>.
 The host has been notified and will expect your arrival.

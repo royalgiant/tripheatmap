@@ -21,6 +21,61 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
+        <div class="my-6 bg-white shadow rounded-lg border border-gray-200 p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Email Preferences</h3>
+
+          <%= f.fields_for :email_preference, resource.email_preference || resource.build_email_preference do |pref| %>
+            <div class="space-y-6">
+              <div>
+                <label class="flex items-center">
+                  <%= pref.check_box :receive_any_emails, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+                  <span class="text-sm font-medium text-gray-900">Receive emails from TripHeatMap</span>
+                </label>
+              </div>
+
+              <% if resource.has_lifetime_access? || resource.has_recurring_subscription? %>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">New Lead Notifications (Hosts)</label>
+                  <%= pref.select :new_lead_email_frequency,
+                        options_for_select([
+                          ['Never', 'never'],
+                          ['Daily Digest', 'daily_digest'],
+                          ['Weekly Digest', 'weekly_digest']
+                        ], pref.object.new_lead_email_frequency),
+                        {},
+                        class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5" %>
+                </div>
+              <% end %>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">New Offer Notifications (Guests)</label>
+                <%= pref.select :new_offer_email_frequency,
+                      options_for_select([
+                        ['Never', 'never'],
+                        ['Daily Digest', 'daily_digest'],
+                        ['Weekly Digest', 'weekly_digest']
+                      ], pref.object.new_offer_email_frequency),
+                      {},
+                      class: "block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5" %>
+              </div>
+
+              <div>
+                <label class="flex items-center">
+                  <%= pref.check_box :receive_message_emails, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+                  <span class="text-sm text-gray-700">Receive message notifications</span>
+                </label>
+              </div>
+
+              <div>
+                <label class="flex items-center">
+                  <%= pref.check_box :receive_offer_expiring_soon_emails, class: "rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2" %>
+                  <span class="text-sm text-gray-700">Receive offer expiration reminders</span>
+                </label>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
         <div class="my-3">
           <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", class: "w-full p-3 border border-gray-300 rounded" %>
         </div>

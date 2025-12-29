@@ -249,6 +249,66 @@ class OfferMessageTest < ActiveSupport::TestCase
     assert_not_includes unread_messages, read_message
   end
 
+  test "for_user scope returns all messages for user's offers" do
+    guest_message = OfferMessage.create!(
+      offer: @offer,
+      sender: @guest,
+      content: "Message from guest"
+    )
+
+    host_message = OfferMessage.create!(
+      offer: @offer,
+      sender: @host,
+      content: "Message from host"
+    )
+
+    other_user = FactoryBot.create(:user, email: "other@test.com")
+    other_property = Place.create!(
+      name: "Other Property",
+      place_type: "airbnb",
+      city: "austin",
+      average_price: 200,
+      rating: 4.5,
+      latitude: 30.2672,
+      longitude: -97.7431,
+      neighborhood: @neighborhood,
+      user: other_user
+    )
+    other_search = SavedSearch.create!(
+      user: other_user,
+      location: "austin",
+      max_price_cents: 25000,
+      status: 'active'
+    )
+    other_offer = Offer.create!(
+      place: other_property,
+      saved_search: other_search,
+      offered_price_cents: 20000,
+      expires_at: 48.hours.from_now,
+      status: 'sent'
+    )
+    other_message = OfferMessage.create!(
+      offer: other_offer,
+      sender: other_user,
+      content: "Message from other user"
+    )
+
+    guest_messages = OfferMessage.for_user(@guest)
+    assert_includes guest_messages, guest_message
+    assert_includes guest_messages, host_message
+    assert_not_includes guest_messages, other_message
+
+    host_messages = OfferMessage.for_user(@host)
+    assert_includes host_messages, guest_message
+    assert_includes host_messages, host_message
+    assert_not_includes host_messages, other_message
+
+    other_user_messages = OfferMessage.for_user(other_user)
+    assert_includes other_user_messages, other_message
+    assert_not_includes other_user_messages, guest_message
+    assert_not_includes other_user_messages, host_message
+  end
+
   # ========== CALLBACK TESTS ==========
 
   test "sends email notification after create" do

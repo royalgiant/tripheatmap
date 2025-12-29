@@ -2,7 +2,7 @@
   <section class="mx-auto max-w-6xl px-6 py-16 text-center space-y-6">
     <p class="text-sm uppercase tracking-[0.3em] text-blue-200">For Airbnb & VRBO Hosts</p>
     <h1 class="text-4xl md:text-5xl font-bold">Stop relying only on Airbnb & VRBO</h1>
-    <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+    <p class="text-xl text-blue-100 max-w-4xl mx-auto">
       Get found by Google and AI assistants like ChatGPT. Reach travelers researching neighborhoods instead of waiting for them to find you on booking platforms.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-10">
@@ -71,7 +71,7 @@
 
     <div class="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center">
       <h3 class="text-2xl md:text-3xl font-bold mb-4">We only get paid if you get paid</h3>
-      <p class="text-lg md:text-xl text-green-50 max-w-3xl mx-auto mb-6">
+      <p class="text-lg md:text-xl text-green-50 max-w-4xl mx-auto mb-6">
         Monthly/Annual plans come with no time limit refunds. Cancel anytime. If you're not getting value, you shouldn't pay. Simple as that. We succeed when you succeed.
       </p>
       <p class="text-sm text-green-100">Lifetime plan: 30-day money-back guarantee. No risk, no hassle.</p>
@@ -80,23 +80,118 @@
 </div>
 
 <div class="bg-white border-t border-gray-200">
-  <section class="mx-auto max-w-6xl px-6 py-16 space-y-8">
+  <section class="mx-auto max-w-6xl px-6 py-16 space-y-16">
     <div class="space-y-4 text-center">
       <p class="text-sm font-semibold text-blue-600 uppercase">See it in action</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Your listing on neighborhood pages</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">How it works: From visibility to booking</h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Get prominent placement on vibrant neighborhood pages with your photos, amenities, pricing, and direct booking link.
+        See the complete journey from getting discovered to closing the deal.
       </p>
     </div>
 
-    <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-      <%= image_tag "pricing_list_rental_here.png", alt: "Rental listing on neighborhood page", class: "w-full" %>
+    <!-- Step 1: Listing visibility -->
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">1</div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Your listing on neighborhood pages</h3>
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Get prominent placement on vibrant neighborhood pages with your photos, amenities, pricing, and a link to your Airbnb/VRBO listing.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+        <%= image_tag "pricing_list_rental_here.png", alt: "Rental listing on neighborhood page", class: "w-full" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Your property appears alongside restaurants, cafes, and bars that make the neighborhood vibrant—exactly where travelers are researching their next stay.
+        </p>
+      </div>
     </div>
 
-    <div class="text-center">
-      <p class="text-gray-600 max-w-3xl mx-auto">
-        Your property appears alongside restaurants, cafes, and bars that make the neighborhood vibrant—exactly where travelers are researching their next stay.
-      </p>
+    <!-- Step 2: Potential leads -->
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">2</div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">See hot leads before competitors</h3>
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Get notified when travelers save searches matching your property. These are ready-to-book leads who know their dates, budget, and preferred neighborhood.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+        <%= image_tag "pricing_potential_leads.png", alt: "Potential leads dashboard", class: "w-full" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          View all matching leads in your dashboard with their search criteria, dates, budget, and number of guests.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 3: Send offer -->
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">3</div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Send exclusive offers with discounts</h3>
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Stand out by offering a special discount, adding perks, and personalizing your message to win the booking.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+        <%= image_tag "pricing_host_sends_offer.png", alt: "Host sending offer", class: "w-full" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Create competitive offers with custom pricing, special perks like free breakfast or late checkout, and a personal message.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 4: Guest receives -->
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 font-bold text-lg mb-4">4</div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Guests receive your offer</h3>
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Travelers get notified of your exclusive offer with all the details about your property, pricing, and perks.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+        <%= image_tag "pricing_guests_receives_offer.png", alt: "Guest receives offer", class: "w-full" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Guests see your offer with the discounted price, special perks, and your personal message—making it easy to choose you.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 5: Guest accepts -->
+    <div class="space-y-6">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 font-bold text-lg mb-4">5</div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Guest accepts and books</h3>
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          When they accept, you get their contact info to finalize the booking on your platform of choice—Airbnb, VRBO, or direct.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+        <%= image_tag "pricing_guest_accepts_offer.png", alt: "Guest accepts offer", class: "w-full" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 max-w-4xl mx-auto">
+          Close the deal with verified contact information exchanged. Snag the booking you might've missed on Airbnb or VRBO.
+        </p>
+      </div>
     </div>
   </section>
 </div>
