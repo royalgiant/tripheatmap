@@ -1,10 +1,10 @@
-class DailyLeadAndOfferDigestJob < ApplicationJob
+class WeeklyLeadAndOfferDigestJob < ApplicationJob
   queue_as :default
 
   def perform
-    # This job runs daily at 9 PM
-    # 1. Notify hosts of new matching saved searches
-    # 2. Notify guests of new offers they received
+    # This job runs weekly on Sundays at 9 PM
+    # 1. Notify hosts of new matching saved searches from the past week
+    # 2. Notify guests of new offers they received from the past week
 
     notify_hosts_of_new_leads
     notify_guests_of_new_offers
@@ -13,10 +13,10 @@ class DailyLeadAndOfferDigestJob < ApplicationJob
   private
 
   def notify_hosts_of_new_leads
-    # Find all saved searches created in the last 24 hours
+    # Find all saved searches created in the last 7 days
     new_searches = SavedSearch
       .where(status: 'active')
-      .where('created_at >= ?', 24.hours.ago)
+      .where('created_at >= ?', 7.days.ago)
 
     return if new_searches.empty?
 
@@ -33,7 +33,7 @@ class DailyLeadAndOfferDigestJob < ApplicationJob
 
         preference = place.user.email_preference
         next unless preference&.receive_any_emails
-        next unless preference&.new_lead_daily_digest?
+        next unless preference&.new_lead_weekly_digest?
 
         hosts_to_notify[place.user] ||= []
         hosts_to_notify[place.user] << search
@@ -42,16 +42,16 @@ class DailyLeadAndOfferDigestJob < ApplicationJob
 
     # Send one digest email per host with all their new leads
     hosts_to_notify.each do |host, searches|
-      NewLeadAvailableMailer.daily_digest(host, searches).deliver_later
+      NewLeadAvailableMailer.weekly_digest(host, searches).deliver_later
     end
 
-    Rails.logger.info "[DailyLeadDigest] Notified #{hosts_to_notify.keys.count} hosts of #{new_searches.count} new searches"
+    Rails.logger.info "[WeeklyLeadDigest] Notified #{hosts_to_notify.keys.count} hosts of #{new_searches.count} new searches"
   end
 
   def notify_guests_of_new_offers
-    # Find all offers created in the last 24 hours
+    # Find all offers created in the last 7 days
     new_offers = Offer
-      .where('created_at >= ?', 24.hours.ago)
+      .where('created_at >= ?', 7.days.ago)
       .where(status: ['sent', 'viewed'])
       .includes(:saved_search, :place)
 
@@ -65,7 +65,7 @@ class DailyLeadAndOfferDigestJob < ApplicationJob
 
       preference = guest.email_preference
       next unless preference&.receive_any_emails
-      next unless preference&.new_offer_daily_digest?
+      next unless preference&.new_offer_weekly_digest?
 
       guests_to_notify[guest] ||= []
       guests_to_notify[guest] << offer
@@ -73,10 +73,10 @@ class DailyLeadAndOfferDigestJob < ApplicationJob
 
     # Send one digest email per guest with all their new offers
     guests_to_notify.each do |guest, offers|
-      NewOfferReceivedMailer.daily_digest(guest, offers).deliver_later
+      NewOfferReceivedMailer.weekly_digest(guest, offers).deliver_later
     end
 
-    Rails.logger.info "[DailyOfferDigest] Notified #{guests_to_notify.keys.count} guests of #{new_offers.count} new offers"
+    Rails.logger.info "[WeeklyOfferDigest] Notified #{guests_to_notify.keys.count} guests of #{new_offers.count} new offers"
   end
 
   def find_matching_places(search)

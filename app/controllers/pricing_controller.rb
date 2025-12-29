@@ -18,7 +18,7 @@ class PricingController < ApplicationController
           "Get discovered on Google before travelers search Airbnb",
           "Get recommended by AI assistants (ChatGPT, Claude, Gemini)",
           "Show up when travelers search vibrant neighborhoods for their next stay",
-          "Direct booking links from TripHeatMap",
+          "Links to your Airbnb/VRBO listing included",
           "Costs less than 1 night's stay",
           "30-day money-back guarantee"
         ],

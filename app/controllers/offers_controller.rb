@@ -18,41 +18,50 @@ class OffersController < ApplicationController
   def show
     authorize_offer_access!
     @offer.mark_viewed! if current_user == @offer.guest_user
+    @messages = @offer.messages.includes(:sender).order(created_at: :asc)
+    @new_message = OfferMessage.new
+    @can_message = current_user == @offer.guest_user || @messages.any?
   end
 
   # GET /offers/new?saved_search_id=123
   # Host: Send offer form
   def new
     @saved_search = SavedSearch.find(params[:saved_search_id])
-    @place = current_user.places.where.not(user_id: nil).first
 
-    # Check if offer already exists
-    existing_offer = Offer.find_by(place: @place, saved_search: @saved_search)
+    @my_places = current_user.places
+                             .where.not(user_id: nil)
+                             .where('city ILIKE ?', "%#{@saved_search.location}%")
+    @place = @my_places.first
+
+    existing_offer = Offer.joins(:place)
+                          .where(places: { user_id: current_user.id })
+                          .find_by(saved_search: @saved_search)
     if existing_offer
       redirect_to offer_path(existing_offer), alert: "You already sent an offer for this search. Delete it first to send a new one."
       return
     end
 
     @offer = Offer.new(
-      place: @place,
       saved_search: @saved_search,
-      offered_price_cents: @place.average_price * 100,
-      expires_at: 48.hours.from_now
+      expires_at: 3.days.from_now
     )
   end
 
   # POST /offers
   # Host: Create new offer
   def create
-    @place = current_user.places.find(params[:offer][:place_id])
     @saved_search = SavedSearch.find(params[:offer][:saved_search_id])
+    @place = current_user.places.find(params[:offer][:place_id])
+
+    @my_places = current_user.places
+                             .where.not(user_id: nil)
+                             .where('city ILIKE ?', "%#{@saved_search.location}%")
 
     @offer = Offer.new(offer_params)
     @offer.place = @place
     @offer.saved_search = @saved_search
 
     if @offer.save
-      # Notification will be sent via DailyLeadAndOfferDigestJob
       redirect_to offers_path, notice: "Offer sent successfully! The guest will be notified."
     else
       render :new, status: :unprocessable_entity
@@ -63,6 +72,7 @@ class OffersController < ApplicationController
   # Guest: Accept an offer
   def accept
     authorize_guest_access!
+    return if performed?
 
     ActiveRecord::Base.transaction do
       # Mark this offer as accepted
@@ -77,9 +87,15 @@ class OffersController < ApplicationController
       # Pause the saved search
       @offer.saved_search.update!(status: 'paused')
 
-      # Send confirmation emails
-      OfferAcceptedGuestMailer.notify(@offer).deliver_later
-      OfferAcceptedHostMailer.notify(@offer).deliver_later
+      guest_preference = @offer.guest_user.email_preference
+      if guest_preference&.receive_any_emails
+        OfferAcceptedGuestMailer.notify(@offer).deliver_later
+      end
+
+      host_preference = @offer.host_user.email_preference
+      if host_preference&.receive_any_emails
+        OfferAcceptedHostMailer.notify(@offer).deliver_later
+      end
     end
 
     redirect_to offer_path(@offer), notice: "Offer accepted! Check your email for booking instructions."
@@ -89,6 +105,7 @@ class OffersController < ApplicationController
   # Guest: Decline an offer
   def decline
     authorize_guest_access!
+    return if performed?
 
     @offer.update!(status: 'declined')
     redirect_to offers_path, notice: "Offer declined."
@@ -98,6 +115,7 @@ class OffersController < ApplicationController
   # Host: Delete a sent offer
   def destroy
     authorize_host_access!
+    return if performed?
 
     @offer.destroy
     redirect_to offers_path, notice: "Offer deleted. You can now send a new offer to this search."
@@ -134,40 +152,33 @@ class OffersController < ApplicationController
   end
 
   def can_see_lead_details?
-    # Only recurring subscribers can see unblurred leads
     current_user.has_recurring_subscription?
   end
 
   def authorize_offer_access!
     unless @offer.guest_user == current_user || @offer.host_user == current_user
-      redirect_to root_path, alert: "You don't have access to this offer."
+      redirect_to root_path, alert: "You don't have access to this offer." and return
     end
   end
 
   def authorize_guest_access!
     unless @offer.guest_user == current_user
-      redirect_to root_path, alert: "Only the guest can perform this action."
+      redirect_to root_path, alert: "Only the guest can perform this action." and return
     end
   end
 
   def authorize_host_access!
     unless @offer.host_user == current_user
-      redirect_to root_path, alert: "Only the host can perform this action."
+      redirect_to root_path, alert: "Only the host can perform this action." and return
     end
   end
 
   def render_host_dashboard
     @my_places = current_user.places.where.not(user_id: nil)
 
-    # Find matching saved searches
-    if can_see_lead_details?
-      @leads = find_matching_saved_searches(@my_places)
-      @can_see_leads = true
-    else
-      # Lifetime users see blurred leads
-      @leads_count = find_matching_saved_searches(@my_places).count
-      @can_see_leads = false
-    end
+    @leads = find_matching_saved_searches(@my_places)
+    @leads_count = @leads.count
+    @can_see_leads = can_see_lead_details?
 
     # Sent offers
     @sent_offers = Offer.where(place: @my_places)
@@ -207,11 +218,8 @@ class OffersController < ApplicationController
   def find_matching_saved_searches(places)
     return SavedSearch.none if places.empty?
 
-    # Get all active saved searches
-    searches = SavedSearch.where(status: 'active')
-
-    # Filter by location match
-    place_cities = places.map { |p| p.neighborhood&.city }.compact.uniq
+    searches = SavedSearch.where(status: 'active', accept_offers: true).where.not(user_id: current_user.id)
+    place_cities = places.map(&:city).compact.uniq
 
     if place_cities.any?
       searches = searches.where('location ILIKE ANY (ARRAY[?])', place_cities.map { |city| "%#{city}%" })
@@ -225,8 +233,11 @@ class OffersController < ApplicationController
     max_rating = places.maximum(:rating)
     searches = searches.where('min_rating IS NULL OR min_rating <= ?', max_rating || 5.0)
 
-    # Filter by number of guests if places have max_guests
-    # TODO: Add max_guests to places table if needed
+    # Filter by number of guests (saved search number_of_guests <= place capacity)
+    max_guests = places.maximum(:number_of_guests)
+    if max_guests.present?
+      searches = searches.where('number_of_guests IS NULL OR number_of_guests <= ?', max_guests)
+    end
 
     searches.includes(:user, :offers)
   end

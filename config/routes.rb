@@ -104,7 +104,7 @@ Rails.application.routes.draw do
     get "logout", to: "devise/sessions#destroy"
   end
 
-  root "where_to_stay#index"
+  root "best_neighborhood#index"
 
   scope controller: :static do
     get :terms

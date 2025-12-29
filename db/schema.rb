@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_29_040905) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_30_161033) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -199,6 +199,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_29_040905) do
     t.index ["countyfp"], name: "idx_tiger_edges_countyfp"
     t.index ["the_geom"], name: "idx_tiger_edges_the_geom_gist", using: :gist
     t.index ["tlid"], name: "idx_edges_tlid"
+  end
+
+  create_table "email_preferences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "receive_any_emails", default: true, null: false
+    t.integer "new_lead_email_frequency", default: 1, null: false
+    t.integer "new_offer_email_frequency", default: 1, null: false
+    t.boolean "receive_message_emails", default: true, null: false
+    t.boolean "receive_offer_expiring_soon_emails", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_email_preferences_on_user_id", unique: true
   end
 
   create_table "error_logs", force: :cascade do |t|
@@ -446,6 +458,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_29_040905) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expires_at"], name: "index_offers_on_expires_at"
+    t.index ["place_id", "saved_search_id"], name: "index_offers_on_place_and_saved_search", unique: true
     t.index ["place_id", "saved_search_id"], name: "index_offers_on_place_id_and_saved_search_id", unique: true
     t.index ["place_id"], name: "index_offers_on_place_id"
     t.index ["saved_search_id", "status"], name: "index_offers_on_saved_search_id_and_status"
@@ -801,6 +814,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_29_040905) do
     t.string "place", limit: 100, null: false
   end
 
+  add_foreign_key "email_preferences", "users"
   add_foreign_key "favorites", "places"
   add_foreign_key "favorites", "users"
   add_foreign_key "neighborhood_places_stats", "neighborhoods"

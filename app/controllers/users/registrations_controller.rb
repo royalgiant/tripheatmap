@@ -29,10 +29,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.provider == 'google_oauth2'
       params.delete('current_password')
       resource.password = params['password']
-
       resource.update_without_password(params)
     else
-      resource.update_with_password(params)
+      # Only require current password if user is changing email or password
+      if params[:password].blank? && params[:email] == resource.email
+        params.delete(:current_password)
+        resource.update_without_password(params)
+      else
+        resource.update_with_password(params)
+      end
     end
   end
 
@@ -57,7 +62,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(
+      :first_name, :last_name, :email, :password, :password_confirmation, :current_password,
+      email_preference_attributes: [
+        :id, :receive_any_emails, :new_lead_email_frequency, :new_offer_email_frequency,
+        :receive_message_emails, :receive_offer_expiring_soon_emails
+      ]
+    )
   end
 
   def check_turnstile

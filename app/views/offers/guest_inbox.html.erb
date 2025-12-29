@@ -7,7 +7,7 @@
         My Offers
       </h1>
       <p class="text-gray-600">
-        Exclusive offers from hosts based on your saved searches. Book directly and save on commissions.
+        Exclusive offers from hosts based on your saved searches.
       </p>
     </div>
 
@@ -62,7 +62,7 @@
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
                       <h4 class="text-lg font-semibold text-gray-900"><%= offer.place.name %></h4>
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= offer.status == 'accepted' ? 'bg-green-100 text-green-800' : offer.status == 'expired' ? 'bg-gray-100 text-gray-800' : 'bg-blue-100 text-blue-800' %>">
+                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= offer_status_badge_classes(offer.status) %>">
                         <%= offer.status.humanize %>
                       </span>
                     </div>
@@ -142,7 +142,7 @@
         <p class="text-gray-600 max-w-md mx-auto mb-6">
           Save your hotel searches and hosts will send you exclusive offers. You'll be notified daily at 9 PM.
         </p>
-        <%= link_to "Browse Hotels", root_path, class: "inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors" %>
+        <%= link_to "Browse Bed and Breakfasts", bed_and_breakfast_index_path, class: "inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors" %>
       </div>
     <% end %>
 
@@ -155,7 +155,7 @@
         <div class="ml-3">
           <p class="text-sm text-blue-700">
             <strong>How it works:</strong> When you save a search, hosts with matching properties can send you exclusive offers.
-            You receive a daily digest at 9 PM with all new offers. Book directly and avoid platform commissions!
+            You receive a daily digest at 9 PM with any new offers.
           </p>
         </div>
       </div>

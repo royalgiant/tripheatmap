@@ -2,9 +2,6 @@
   <!-- Header -->
   <tr>
     <td style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 40px 30px; text-align: center;">
-      <div style="background-color: #ffffff; border-radius: 50%; width: 80px; height: 80px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
-        <span style="font-size: 48px;">✓</span>
-      </div>
       <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
         Booking Confirmed!
       </h1>
@@ -20,7 +17,7 @@
       </h2>
 
       <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">
-        Hi <%= @guest.email.split('@').first.titleize %>,
+        Hi <%= @guest.first_name.presence.titleize || @guest.full_name&.split(' ')&.first.titleize || @guest.email.split('@').first.titleize %>,
       </p>
 
       <p style="margin: 0 0 30px 0; color: #4b5563; font-size: 16px; line-height: 1.6;">

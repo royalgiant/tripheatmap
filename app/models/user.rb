@@ -19,6 +19,10 @@ class User < ApplicationRecord
   has_many :saved_searches, dependent: :destroy
   has_many :received_offers, through: :saved_searches, source: :offers
   has_many :sent_offers, through: :places, source: :offers
+  has_one :email_preference, dependent: :destroy
+  accepts_nested_attributes_for :email_preference
+
+  after_create :create_email_preference, unless: -> { email_preference.present? }
 
   EARLY_ADOPTER = "early_adopter".freeze
   ADMIN = "admin"

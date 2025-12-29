@@ -3,7 +3,7 @@ TripHeatMap - New Message
 
 YOU HAVE A NEW MESSAGE
 
-Hi <%= @recipient.email.split('@').first.titleize %>,
+Hi <%= @recipient.first_name.presence.titleize || @recipient.full_name&.split(' ')&.first.titleize || @recipient.email.split('@').first.titleize %>,
 
 You received a new message from <%= @sender_name %> about the offer for <%= @offer.place.name %>.
 

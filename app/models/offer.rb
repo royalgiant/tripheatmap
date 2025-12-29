@@ -27,6 +27,7 @@ class Offer < ApplicationRecord
   validates :expires_at, presence: true
   validates :status, presence: true, inclusion: { in: statuses.keys }
   validates :personal_message, length: { maximum: 500 }, allow_blank: true
+  validates :saved_search_id, uniqueness: { scope: :place_id, message: "already has an offer from this property" }
   validate :price_within_budget
   validate :expiration_in_future, on: :create
 

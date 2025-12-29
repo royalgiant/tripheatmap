@@ -197,16 +197,16 @@ class OfferFlowTest < ActionDispatch::IntegrationTest
   end
 
   # ========== ACCESS CONTROL: LIFETIME VS RECURRING ==========
-  test "lifetime user sees blurred leads" do
+  test "lifetime user sees leads but with upgrade button" do
     @host.update(has_lifetime_access: true)
-    # Don't create subscription - lifetime users without recurring subscription see blurred leads
+    # Don't create subscription - lifetime users without recurring subscription see upgrade prompt
 
     sign_in @host
     get offers_path
 
     assert_response :success
-    assert_select ".fa-lock"  # Lock icon for blurred content
-    assert_select "h3", text: /Unlock Lead Details/
+    assert_select ".fa-location-dot"
+    assert_select "a[href='#{pricing_path}']", text: /Upgrade/
   end
 
   test "monthly user sees full lead details" do
@@ -253,8 +253,8 @@ class OfferFlowTest < ActionDispatch::IntegrationTest
       expires_at: 48.hours.from_now
     )
 
-    # Try to create duplicate
-    assert_raises(ActiveRecord::RecordNotUnique) do
+    # Try to create duplicate - model validation catches it first
+    assert_raises(ActiveRecord::RecordInvalid) do
       Offer.create!(
         place: @property,
         saved_search: @saved_search,

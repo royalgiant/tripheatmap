@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
+class WeeklyLeadAndOfferDigestJobTest < ActiveJob::TestCase
   setup do
     # Clear any existing data
     Offer.destroy_all
@@ -17,6 +17,13 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
     # Create guests
     @guest1 = FactoryBot.create(:user, email: "guest1@test.com")
     @guest2 = FactoryBot.create(:user, email: "guest2@test.com")
+
+    # Set default email preferences to weekly_digest for all users
+    @host1.email_preference.update!(new_lead_email_frequency: :weekly_digest, new_offer_email_frequency: :weekly_digest)
+    @host2.email_preference.update!(new_lead_email_frequency: :weekly_digest, new_offer_email_frequency: :weekly_digest)
+    @lifetime_host.email_preference.update!(new_lead_email_frequency: :weekly_digest, new_offer_email_frequency: :weekly_digest)
+    @guest1.email_preference.update!(new_lead_email_frequency: :weekly_digest, new_offer_email_frequency: :weekly_digest)
+    @guest2.email_preference.update!(new_lead_email_frequency: :weekly_digest, new_offer_email_frequency: :weekly_digest)
 
     # Create neighborhoods
     @austin_neighborhood = Neighborhood.create!(
@@ -97,7 +104,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
 
   # ========== HOST LEAD NOTIFICATION TESTS ==========
 
-  test "notifies hosts of new matching searches created in last 24 hours" do
+  test "notifies hosts of new matching searches created in last 7 days" do
     # Create a new search that matches host1 ($150) and lifetime_host ($120) but not host2 ($180)
     new_search = SavedSearch.create!(
       user: @guest1,
@@ -105,12 +112,12 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       max_price_cents: 16000, # $160 - matches host1 ($150) and lifetime_host ($120) but not host2 ($180)
       min_rating: 4.5,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     assert_difference("ActionMailer::Base.deliveries.size", 2) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
 
@@ -122,17 +129,17 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
   end
 
   test "does not notify hosts of old searches" do
-    # Create an old search (> 24 hours)
+    # Create an old search (> 7 days)
     old_search = SavedSearch.create!(
       user: @guest1,
       location: "austin",
       max_price_cents: 20000,
       status: 'active',
-      created_at: 25.hours.ago
+      created_at: 8.days.ago
     )
 
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -143,11 +150,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 20000,
       status: 'paused',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -159,11 +166,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       max_price_cents: 30000, # Matches all properties
       min_rating: 4.0,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Should notify host1, host2, and lifetime_host (as teaser)
@@ -182,7 +189,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 20000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     search2 = SavedSearch.create!(
@@ -190,12 +197,12 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 18000,
       status: 'active',
-      created_at: 1.hour.ago
+      created_at: 1.day.ago
     )
 
     # Should send emails to hosts, but batched
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Verify the mailer was called with multiple searches
@@ -211,11 +218,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 25000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # host1 and host2 should be notified (both have Austin properties)
@@ -233,11 +240,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 16000, # $160
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Should notify host1 ($150 property) and lifetime_host ($120 property)
@@ -258,11 +265,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       max_price_cents: 30000,
       min_rating: 4.5,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # All Austin properties match (host1: 4.8, host2: 4.5, lifetime: 4.9)
@@ -278,7 +285,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
   test "does not send digest if no new searches" do
     # Don't create any searches
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -289,17 +296,17 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "new york",
       max_price_cents: 20000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
   # ========== GUEST OFFER NOTIFICATION TESTS ==========
 
-  test "notifies guests of new offers created in last 24 hours" do
+  test "notifies guests of new offers created in last 7 days" do
     search = SavedSearch.create!(
       user: @guest1,
       location: "austin",
@@ -315,12 +322,12 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     assert_difference("ActionMailer::Base.deliveries.size", 1) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
 
@@ -337,18 +344,18 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       status: 'active'
     )
 
-    # Create an old offer (> 24 hours)
+    # Create an old offer (> 7 days)
     offer = Offer.create!(
       place: @host1_austin_property,
       saved_search: search,
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 25.hours.ago
+      created_at: 8.days.ago
     )
 
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -368,7 +375,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     search2 = SavedSearch.create!(user: @guest1, location: "chicago", max_price_cents: 25000, status: 'active', created_at: 30.days.ago)
@@ -378,7 +385,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 18000,
       expires_at: 48.hours.from_now,
       status: 'accepted',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     search3 = SavedSearch.create!(user: @guest1, location: "austin", max_price_cents: 22000, status: 'active', created_at: 30.days.ago)
@@ -388,13 +395,13 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 17000,
       expires_at: 48.hours.from_now,
       status: 'declined',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     # Should only notify about sent_offer
     assert_difference("ActionMailer::Base.deliveries.size", 1) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
   end
@@ -423,7 +430,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     offer2 = Offer.create!(
@@ -432,13 +439,13 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 18000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 1.hour.ago
+      created_at: 1.day.ago
     )
 
     # Should send only 1 email to guest1 with both offers
     assert_difference("ActionMailer::Base.deliveries.size", 1) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
 
@@ -470,7 +477,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     offer2 = Offer.create!(
@@ -479,13 +486,13 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 17000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 1.hour.ago
+      created_at: 1.day.ago
     )
 
     # Should send 2 emails (one per guest)
     assert_difference("ActionMailer::Base.deliveries.size", 2) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
 
@@ -497,7 +504,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
   test "does not send digest if no new offers" do
     # Don't create any offers
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -510,7 +517,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 20000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     # Create new offer for guest notification
@@ -520,7 +527,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 1.hour.ago
+      created_at: 1.day.ago
     )
 
     # Should send emails for both hosts and guests
@@ -530,7 +537,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
     initial_count = ActionMailer::Base.deliveries.size
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Verify both types of emails were sent
@@ -551,11 +558,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 25000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Only host2 should receive email
@@ -576,11 +583,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 25000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Only host2 should receive email
@@ -591,11 +598,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
     assert_includes recipients, @host2.email
   end
 
-  test "does not notify hosts with new_lead_email_frequency set to weekly" do
+  test "does not notify hosts with new_lead_email_frequency set to daily" do
     # Set host1 to never
     @host1.email_preference.update!(new_lead_email_frequency: :never)
-    # Set host2 to weekly
-    @host2.email_preference.update!(new_lead_email_frequency: :weekly_digest)
+    # Set host2 to daily
+    @host2.email_preference.update!(new_lead_email_frequency: :daily_digest)
 
     # Create search that matches both hosts
     search = SavedSearch.create!(
@@ -603,18 +610,18 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 25000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
-    # Daily job should not send to either host
+    # Weekly job should not send to either host
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
-  test "only notifies hosts with new_lead_email_frequency set to daily_digest" do
-    # Set host1 to daily_digest (default)
-    @host1.email_preference.update!(new_lead_email_frequency: :daily_digest)
+  test "only notifies hosts with new_lead_email_frequency set to weekly_digest" do
+    # Set host1 to weekly_digest
+    @host1.email_preference.update!(new_lead_email_frequency: :weekly_digest)
     # Set host2 to never
     @host2.email_preference.update!(new_lead_email_frequency: :never)
 
@@ -624,11 +631,11 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       location: "austin",
       max_price_cents: 25000,
       status: 'active',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     perform_enqueued_jobs do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
 
     # Only host1 should receive email
@@ -658,12 +665,12 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     # Should not send email to guest1
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
@@ -686,18 +693,18 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     # Should not send email to guest1
     assert_no_difference("ActionMailer::Base.deliveries.size") do
-      DailyLeadAndOfferDigestJob.perform_now
+      WeeklyLeadAndOfferDigestJob.perform_now
     end
   end
 
-  test "only notifies guests with new_offer_email_frequency set to daily_digest" do
-    # Set guest1 to daily_digest (default)
-    @guest1.email_preference.update!(new_offer_email_frequency: :daily_digest)
+  test "only notifies guests with new_offer_email_frequency set to weekly_digest" do
+    # Set guest1 to weekly_digest
+    @guest1.email_preference.update!(new_offer_email_frequency: :weekly_digest)
     # Set guest2 to never
     @guest2.email_preference.update!(new_offer_email_frequency: :never)
 
@@ -724,7 +731,7 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 15000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 2.hours.ago
+      created_at: 2.days.ago
     )
 
     offer2 = Offer.create!(
@@ -733,13 +740,13 @@ class DailyLeadAndOfferDigestJobTest < ActiveJob::TestCase
       offered_price_cents: 17000,
       expires_at: 48.hours.from_now,
       status: 'sent',
-      created_at: 1.hour.ago
+      created_at: 1.day.ago
     )
 
     # Should only send email to guest1
     assert_difference("ActionMailer::Base.deliveries.size", 1) do
       perform_enqueued_jobs do
-        DailyLeadAndOfferDigestJob.perform_now
+        WeeklyLeadAndOfferDigestJob.perform_now
       end
     end
 
