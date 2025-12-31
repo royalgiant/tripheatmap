@@ -1222,7 +1222,7 @@ aspen:
   population_source: census
 portland me:
   name: Portland (Maine)
-  city: Portland
+  city: Portland ME
   state: ME
   state_fips: '23'
   county: Cumberland
