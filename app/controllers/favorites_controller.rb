@@ -16,7 +16,10 @@ class FavoritesController < ApplicationController
       respond_to do |format|
         format.html { redirect_back fallback_location: root_path, notice: 'Place added to favorites.' }
         format.json { render json: { favorited: true, message: 'Place added to favorites' }, status: :created }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("favorite_#{@place.id}", partial: "favorites/button", locals: { place: @place, favorited: true }) }
+        format.turbo_stream do
+          @favorites_by_place_id = { @place.id => @favorite.id }
+          render turbo_stream: turbo_stream.replace("favorite_#{@place.id}", partial: "favorites/button", locals: { place: @place, favorited: true })
+        end
       end
     else
       respond_to do |format|
@@ -35,7 +38,10 @@ class FavoritesController < ApplicationController
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path, notice: 'Place removed from favorites.' }
       format.json { render json: { favorited: false, message: 'Place removed from favorites' }, status: :ok }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("favorite_#{@place.id}", partial: "favorites/button", locals: { place: @place, favorited: false }) }
+      format.turbo_stream do
+        @favorites_by_place_id = {}
+        render turbo_stream: turbo_stream.replace("favorite_#{@place.id}", partial: "favorites/button", locals: { place: @place, favorited: false })
+      end
     end
   end
 

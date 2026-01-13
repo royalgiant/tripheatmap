@@ -456,15 +456,15 @@ psql tripheatmap_development -c "COPY (
 
 #### Step 3: Upload and apply to production
 ```bash
-scp agoda_updates.sql root@95.216.161.144:/tmp/
+scp agoda_updates.sql root@138.199.147.110:/tmp/
 
-ssh root@95.216.161.144 "docker exec -i \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production < /tmp/agoda_updates.sql && rm /tmp/agoda_updates.sql"
+ssh root@138.199.147.110 "docker exec -i \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production < /tmp/agoda_updates.sql && rm /tmp/agoda_updates.sql"
 
 ```
 
 #### Step 4: Verify (optional)
 ```bash
-ssh root@95.216.161.144 "docker exec \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production -c \"SELECT COUNT(*) FROM places WHERE agoda_metadata IS NOT NULL;\""
+ssh root@138.199.147.110 "docker exec \$(docker ps --filter label=service=tripheatmap-db --format '{{.Names}}' | head -1) psql -U postgres -d tripheatmap_production -c \"SELECT COUNT(*) FROM places WHERE agoda_metadata IS NOT NULL;\""
 ```
 
 #### Step 5: Cleanup

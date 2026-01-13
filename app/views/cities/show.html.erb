@@ -1,0 +1,232 @@
+<%= render 'shared/deals_banner' %>
+
+<% content_for :head do %>
+  <title><%= @seo_title %></title>
+  <meta name="description" content="<%= @seo_description %>">
+  <meta property="og:title" content="<%= @seo_title %>">
+  <meta property="og:description" content="<%= @seo_description %>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @seo_title %>">
+  <meta name="twitter:description" content="<%= @seo_description %>">
+<% end %>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      <%= @city_display_name %>
+    </h1>
+    <p class="text-xl text-gray-600">
+      Complete travel guide with hotels, accommodations, and attractions
+    </p>
+  </div>
+
+  <!-- Unified Map -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Map of All Accommodations</h2>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap gap-3 mb-4 justify-center">
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-purple-500 text-white border-2 border-purple-500 hover:bg-purple-600" data-category="luxury">
+        Luxury Hotels
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-pink-500 text-white border-2 border-pink-500 hover:bg-pink-600" data-category="boutique">
+        Boutique Hotels
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-green-500 text-white border-2 border-green-500 hover:bg-green-600" data-category="cheap">
+        Budget Hotels
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-orange-500 text-white border-2 border-orange-500 hover:bg-orange-600" data-category="bnb">
+        Bed & Breakfast
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-blue-500 text-white border-2 border-blue-500 hover:bg-blue-600" data-category="hotel">
+        All Hotels
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-indigo-500 text-white border-2 border-indigo-500 hover:bg-indigo-600" data-category="airport">
+        Airports
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-teal-500 text-white border-2 border-teal-500 hover:bg-teal-600" data-category="university">
+        Universities
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-red-500 text-white border-2 border-red-500 hover:bg-red-600" data-category="landmark">
+        Landmarks
+      </button>
+      <button class="city-map-filter px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-yellow-500 text-white border-2 border-yellow-500 hover:bg-yellow-600" data-category="convention_center">
+        Convention Centers
+      </button>
+    </div>
+
+    <div class="relative w-full rounded-lg overflow-hidden shadow-lg border border-gray-200" style="height: 600px;">
+      <div id="city-map"
+        data-mapbox-token="<%= @mapbox_token %>"
+        data-places="<%= @all_map_places.to_json %>"
+        data-pois="<%= @poi_markers.to_json %>"
+        style="width: 100%; height: 100%;">
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 border-l-4 border-yellow-400 p-4 mb-6">
+    <p class="text-xs text-gray-600">
+      <strong>Pro Tip:</strong> If not redirected directly to the property, backspace a few characters in Trip.com's prefilled search box to populate the property you're looking for.
+    </p>
+  </div>
+
+  <!-- Luxury Hotels Section -->
+  <% if @luxury_hotels.any? %>
+    <div class="mb-12" id="luxury-hotels">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Luxury Hotels</h2>
+      <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @luxury_hotels.each do |hotel| %>
+            <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Boutique Hotels Section -->
+  <% if @boutique_hotels.any? %>
+    <div class="mb-12" id="boutique-hotels">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Boutique Hotels</h2>
+      <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @boutique_hotels.each do |hotel| %>
+            <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Budget Hotels Section -->
+  <% if @cheap_hotels.any? %>
+    <div class="mb-12" id="budget-hotels">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Budget Hotels</h2>
+      <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @cheap_hotels.each do |hotel| %>
+            <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Bed & Breakfast Section -->
+  <% if @bed_and_breakfasts.any? %>
+    <div class="mb-12" id="bed-and-breakfast">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Bed & Breakfast</h2>
+      <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @bed_and_breakfasts.each do |bnb| %>
+            <%= render 'shared/hotel_list_item', hotel: bnb, city_display_name: @city_display_name %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- All Other Hotels Section -->
+  <% if @all_hotels.any? %>
+    <div class="mb-12" id="all-hotels">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">All Hotels</h2>
+      <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+        <ul role="list" class="divide-y divide-gray-200">
+          <% @all_hotels.each do |hotel| %>
+            <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Hotels Near Airports Section -->
+  <% if @airports.any? %>
+    <div class="mb-12" id="hotels-near-airports">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Hotels Near Airports</h2>
+      <% @airports.each do |airport| %>
+        <% hotels = @hotels_near_airports[airport.id] %>
+        <% if hotels.any? %>
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4"><%= airport.name %></h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+              <ul role="list" class="divide-y divide-gray-200">
+                <% hotels.each do |hotel| %>
+                  <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Hotels Near Universities Section -->
+  <% if @universities.any? %>
+    <div class="mb-12" id="hotels-near-universities">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Hotels Near Universities</h2>
+      <% @universities.each do |university| %>
+        <% hotels = @hotels_near_universities[university.id] %>
+        <% if hotels.any? %>
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4"><%= university.name %></h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+              <ul role="list" class="divide-y divide-gray-200">
+                <% hotels.each do |hotel| %>
+                  <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Hotels Near Landmarks Section -->
+  <% if @landmarks.any? %>
+    <div class="mb-12" id="hotels-near-landmarks">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Hotels Near Landmarks</h2>
+      <% @landmarks.each do |landmark| %>
+        <% hotels = @hotels_near_landmarks[landmark.id] %>
+        <% if hotels.any? %>
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4"><%= landmark.name %></h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+              <ul role="list" class="divide-y divide-gray-200">
+                <% hotels.each do |hotel| %>
+                  <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Hotels Near Convention Centers Section -->
+  <% if @convention_centers.any? %>
+    <div class="mb-12" id="hotels-near-convention-centers">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Hotels Near Convention Centers</h2>
+      <% @convention_centers.each do |convention_center| %>
+        <% hotels = @hotels_near_convention_centers[convention_center.id] %>
+        <% if hotels.any? %>
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4"><%= convention_center.name %></h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-md border border-gray-200">
+              <ul role="list" class="divide-y divide-gray-200">
+                <% hotels.each do |hotel| %>
+                  <%= render 'shared/hotel_list_item', hotel: hotel, city_display_name: @city_display_name %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

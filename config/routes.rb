@@ -89,6 +89,19 @@ Rails.application.routes.draw do
   get 'maps/places', to: 'maps#places'
   get 'where-to-stay', to: 'where_to_stay#index', as: 'where_to_stay_index'
   get 'where-to-stay/:city', to: 'where_to_stay#show', as: 'where_to_stay'
+
+  # Health check - must come before catch-all routes
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # Consolidated city pages
+  get 'cities', to: 'cities#index', as: 'cities'
+  get ':city/:state/:country', to: 'cities#show', as: 'city',
+      constraints: { city: /[a-z][a-z-]*/, state: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
+  get ':city/:country', to: 'cities#show', as: 'city_short',
+      constraints: { city: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
+  get ':city', to: 'cities#show', as: 'city_simple',
+      constraints: { city: /[a-z][a-z-]*/ }
+
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
   get 'pricing', to: 'pricing#index'
@@ -147,5 +160,4 @@ Rails.application.routes.draw do
   end
 
   mount Sidekiq::Web => '/sidekiq'
-  get "up" => "rails/health#show", as: :rails_health_check
 end

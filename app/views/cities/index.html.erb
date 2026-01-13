@@ -1,0 +1,153 @@
+<%= render 'shared/deals_banner' %>
+
+<% content_for :head do %>
+  <title><%= @seo_title %></title>
+  <meta name="description" content="<%= @seo_description %>">
+  <meta property="og:title" content="<%= @seo_title %>">
+  <meta property="og:description" content="<%= @seo_description %>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= @seo_title %>">
+  <meta name="twitter:description" content="<%= @seo_description %>">
+<% end %>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
+  <header class="space-y-6 py-8">
+    <p class="text-sm uppercase tracking-wide text-blue-600 font-semibold">TripHeatmap · City Guides</p>
+    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900">Complete City Travel Guides</h1>
+    <p class="text-xl text-gray-700">
+      Explore comprehensive travel guides for <%= @total_cities %> cities worldwide.
+      Find luxury hotels, boutique stays, budget accommodations, and top attractions all in one place.
+    </p>
+  </header>
+
+  <section class="space-y-8">
+    <% @cities_grouped.each do |country, cities| %>
+      <% country_id = "country-#{country.parameterize}" %>
+      <% visible_cities = cities.first(12) %>
+      <% hidden_cities = cities[12..-1] || [] %>
+      <% has_more = hidden_cities.any? %>
+      <% is_us = country == "United States" %>
+
+      <div class="space-y-4 country-section <%= 'is-us' if is_us %>">
+        <button
+          type="button"
+          onclick="toggleCountry('<%= country_id %>')"
+          class="flex items-center justify-between w-full text-left pl-4 pr-4 py-3 hover:bg-gray-100 rounded-lg transition-colors group"
+        >
+          <h2 class="text-2xl font-bold text-gray-800 group-hover:text-gray-900">
+            <%= country %> (<%= cities.size %>)
+          </h2>
+          <svg
+            id="<%= country_id %>-icon"
+            class="w-6 h-6 text-gray-500 transform transition-transform duration-200 <%= 'rotate-180' if is_us %>"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div id="<%= country_id %>" class="<%= 'hidden' unless is_us %> space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <% visible_cities.each do |city| %>
+              <%= link_to city_simple_path(city[:slug]), class: "group" do %>
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-400 transition-all duration-200">
+                  <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      <%= city[:name] %>
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      Complete travel guide with hotels, accommodations & attractions
+                    </p>
+                    <div class="pt-2">
+                      <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                        View Guide
+                        <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <% if has_more %>
+            <div id="<%= country_id %>-more" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <% hidden_cities.each do |city| %>
+                <%= link_to city_simple_path(city[:slug]), class: "group" do %>
+                  <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-400 transition-all duration-200">
+                    <div class="space-y-3">
+                      <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        <%= city[:name] %>
+                      </h3>
+                      <p class="text-sm text-gray-600">
+                        Complete travel guide with hotels, accommodations & attractions
+                      </p>
+                      <div class="pt-2">
+                        <span class="inline-flex items-center text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                          View Guide
+                          <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <button
+              type="button"
+              onclick="toggleMoreCities('<%= country_id %>')"
+              id="<%= country_id %>-more-btn"
+              class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              <span id="<%= country_id %>-more-text">See <%= hidden_cities.size %> More Cities</span>
+              <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>
+
+<script>
+  function toggleCountry(countryId) {
+    const content = document.getElementById(countryId);
+    const icon = document.getElementById(countryId + '-icon');
+
+    if (content.classList.contains('hidden')) {
+      content.classList.remove('hidden');
+      icon.classList.add('rotate-180');
+    } else {
+      content.classList.add('hidden');
+      icon.classList.remove('rotate-180');
+    }
+  }
+
+  function toggleMoreCities(countryId) {
+    const moreContent = document.getElementById(countryId + '-more');
+    const moreText = document.getElementById(countryId + '-more-text');
+    const originalText = moreText.dataset.originalText || moreText.textContent;
+
+    if (!moreText.dataset.originalText) {
+      moreText.dataset.originalText = originalText;
+    }
+
+    if (moreContent.classList.contains('hidden')) {
+      moreContent.classList.remove('hidden');
+      moreText.textContent = 'Show Less';
+    } else {
+      moreContent.classList.add('hidden');
+      moreText.textContent = originalText;
+    }
+  }
+</script>
