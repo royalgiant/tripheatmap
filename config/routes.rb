@@ -93,19 +93,11 @@ Rails.application.routes.draw do
   # Health check - must come before catch-all routes
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Consolidated city pages
-  get 'cities', to: 'cities#index', as: 'cities'
-  get ':city/:state/:country', to: 'cities#show', as: 'city',
-      constraints: { city: /[a-z][a-z-]*/, state: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
-  get ':city/:country', to: 'cities#show', as: 'city_short',
-      constraints: { city: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
-  get ':city', to: 'cities#show', as: 'city_simple',
-      constraints: { city: /[a-z][a-z-]*/ }
+  root "best_neighborhood#index"
 
   devise_for :users, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks', confirmations: 'users/confirmations' }
   get 'auth/failure', to: 'users/omniauth_callbacks#failure'
-  get 'pricing', to: 'pricing#index'
-  
+
   devise_scope :user do
     # authentication logic routes
     get "signup", to: "devise/registrations#new"
@@ -117,8 +109,7 @@ Rails.application.routes.draw do
     get "logout", to: "devise/sessions#destroy"
   end
 
-  root "best_neighborhood#index"
-
+  get 'pricing', to: 'pricing#index'
   scope controller: :static do
     get :terms
     get :privacy
@@ -145,7 +136,7 @@ Rails.application.routes.draw do
   resources :billings, only: :create
   resources :rentals
 
-  # For sidekiq dashboard
+  # Sidekiq dashboard - must come before catch-all city routes
   sidekiq_creds = Rails.application.credentials.dig(Rails.env.to_sym, :sidekiqweb)
 
   Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
@@ -160,4 +151,13 @@ Rails.application.routes.draw do
   end
 
   mount Sidekiq::Web => '/sidekiq'
+
+  # Consolidated city pages - MUST come last as they are catch-all routes
+  get 'cities', to: 'cities#index', as: 'cities'
+  get ':city/:state/:country', to: 'cities#show', as: 'city',
+      constraints: { city: /[a-z][a-z-]*/, state: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
+  get ':city/:country', to: 'cities#show', as: 'city_short',
+      constraints: { city: /[a-z][a-z-]*/, country: /[a-z][a-z-]*/ }
+  get ':city', to: 'cities#show', as: 'city_simple',
+      constraints: { city: /[a-z][a-z-]*/ }
 end

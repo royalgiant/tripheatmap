@@ -7,14 +7,14 @@ image: donaldlee50/tripheatmap
 # Deploy to these servers.
 servers:
   web:
-    - 138.199.147.110
+    - 91.98.155.120
   # job:
   #   hosts:
-  #     - 138.199.147.110
+  #     - 91.98.155.120
   #   cmd: bin/jobs
   cron:
     hosts:
-      - 138.199.147.110
+      - 91.98.155.120
     cmd:
       bash -c "bundle exec sidekiq"
     env:
@@ -95,7 +95,7 @@ accessories:
   # Separate database for tripheatmap (port 5433 to avoid conflict with keepviews-db on 5432)
   db:
     image: postgis/postgis:16-3.4
-    host: 138.199.147.110
+    host: 91.98.155.120
     port: "5433:5432"  # Map host port 5433 to container's PostgreSQL port 5432
     env:
       clear:
@@ -110,7 +110,7 @@ accessories:
       - data:/var/lib/postgresql/data
   postgres-backups:
     image: eeshugerman/postgres-backup-s3:16
-    host: 138.199.147.110
+    host: 91.98.155.120
     env:
       clear:
         SCHEDULE: "05 00 * * *"
@@ -118,7 +118,7 @@ accessories:
         S3_REGION: us-east-2
         S3_BUCKET: tripheatmap
         S3_PREFIX: postgres-backups
-        POSTGRES_HOST: 138.199.147.110
+        POSTGRES_HOST: 91.98.155.120
         POSTGRES_PORT: 5433
         POSTGRES_USER: "postgres"
         POSTGRES_DATABASE: "tripheatmap_production"
@@ -128,7 +128,7 @@ accessories:
         - S3_SECRET_ACCESS_KEY
   # redis:
   #   image: redis:7.2
-  #   host: 138.199.147.110
+  #   host: 91.98.155.120
   #   env:
   #     clear:
   #       RAILS_ENV: production
